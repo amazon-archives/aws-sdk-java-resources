@@ -1,0 +1,12 @@
+{
+  "FormatVersion": {
+    "Major": 1,
+    "Minor": 0
+  },
+  "Service": {
+    "Name": "Foo",
+    "Abbreviation": "foo",
+    "ClientInterface": "com.amazonaws.resources.foo.AmazonFoo",
+    "ClientImplementation": "com.amazonaws.resources.foo.AmazonFooClient"
+  }
+}
