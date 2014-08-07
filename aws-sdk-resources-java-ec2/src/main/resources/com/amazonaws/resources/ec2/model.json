@@ -1,0 +1,1293 @@
+{
+  "FormatVersion" : {
+    "Major" : 1,
+    "Minor" : 0
+  },
+  "Service" : {
+    "Name" : "EC2",
+    "Abbreviation" : "ec2",
+    "ClientInterface" : "com.amazonaws.services.ec2.AmazonEC2",
+    "ClientImplementation" : "com.amazonaws.services.ec2.AmazonEC2Client",
+    "Resources" : {
+      "Vpc" : {
+        "Identifiers" : {
+          "Id" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "Tags" : {
+            "Type" : "java.util.List<com.amazonaws.services.ec2.model.Tag>"
+          },
+          "DhcpOptionsId" : {
+            "Type" : "java.lang.String"
+          },
+          "CidrBlock" : {
+            "Type" : "java.lang.String"
+          },
+          "State" : {
+            "Type" : "java.lang.String"
+          },
+          "IsDefault" : {
+            "Type" : "java.lang.Boolean"
+          },
+          "InstanceTenancy" : {
+            "Type" : "java.lang.String"
+          },
+          "VpcId" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "References" : { },
+        "SubResourceGetters" : { },
+        "Collections" : {
+          "Subnets" : {
+            "Type" : "Subnet",
+            "ListAction" : {
+              "Request" : {
+                "Method" : "describeSubnets",
+                "ClientRequestType" : "com.amazonaws.services.ec2.model.DescribeSubnetsRequest",
+                "IdentifierMappings" : [ {
+                  "Source" : "Id",
+                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "*" ]
+                } ],
+                "AttributeMappings" : [ ],
+                "ParameterMappings" : [ {
+                  "Type" : "java.util.List<String>",
+                  "Name" : "SubnetIds"
+                } ],
+                "ConstantMappings" : [ {
+                  "Source" : "vpc-id",
+                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Name" ]
+                } ],
+                "TokenPath" : null,
+                "LimitPath" : null
+              },
+              "Response" : {
+                "ResourceMapping" : {
+                  "Type" : "Subnet",
+                  "ParentIdentifierMappings" : [ ],
+                  "RequestParamMappings" : [ ],
+                  "ResponseIdentifierMappings" : [ {
+                    "Source" : [ "Subnets", "*:com.amazonaws.services.ec2.model.Subnet", "SubnetId" ],
+                    "Target" : "Id"
+                  } ],
+                  "Path" : [ "Subnets", "*:com.amazonaws.services.ec2.model.Subnet" ]
+                },
+                "DataMapping" : null,
+                "NextTokenPath" : null
+              }
+            }
+          },
+          "Instances" : {
+            "Type" : "Instance",
+            "ListAction" : {
+              "Request" : {
+                "Method" : "describeInstances",
+                "ClientRequestType" : "com.amazonaws.services.ec2.model.DescribeInstancesRequest",
+                "IdentifierMappings" : [ {
+                  "Source" : "Id",
+                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "*" ]
+                } ],
+                "AttributeMappings" : [ ],
+                "ParameterMappings" : [ {
+                  "Type" : "java.util.List<String>",
+                  "Name" : "InstanceIds"
+                }, {
+                  "Type" : "java.lang.String",
+                  "Name" : "NextToken"
+                }, {
+                  "Type" : "java.lang.Integer",
+                  "Name" : "MaxResults"
+                } ],
+                "ConstantMappings" : [ {
+                  "Source" : "vpc-id",
+                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Name" ]
+                } ],
+                "TokenPath" : null,
+                "LimitPath" : null
+              },
+              "Response" : {
+                "ResourceMapping" : {
+                  "Type" : "Instance",
+                  "ParentIdentifierMappings" : [ ],
+                  "RequestParamMappings" : [ ],
+                  "ResponseIdentifierMappings" : [ {
+                    "Source" : [ "Reservations", "*:com.amazonaws.services.ec2.model.Reservation", "Instances", "*:com.amazonaws.services.ec2.model.Instance", "InstanceId" ],
+                    "Target" : "Id"
+                  } ],
+                  "Path" : [ "Reservations", "*:com.amazonaws.services.ec2.model.Reservation", "Instances", "*:com.amazonaws.services.ec2.model.Instance" ]
+                },
+                "DataMapping" : null,
+                "NextTokenPath" : null
+              }
+            }
+          }
+        },
+        "LoadAction" : {
+          "Request" : {
+            "Method" : "describeVpcs",
+            "ClientRequestType" : "com.amazonaws.services.ec2.model.DescribeVpcsRequest",
+            "IdentifierMappings" : [ {
+              "Source" : "Id",
+              "Target" : [ "VpcIds", "*" ]
+            } ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : null,
+            "DataMapping" : {
+              "Type" : "Vpc",
+              "Source" : [ "Vpcs", "0:com.amazonaws.services.ec2.model.Vpc" ]
+            },
+            "NextTokenPath" : null
+          }
+        },
+        "Actions" : {
+          "CreateSubnet" : {
+            "Request" : {
+              "Method" : "createSubnet",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.CreateSubnetRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "VpcId" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "CidrBlock"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "AvailabilityZone"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : {
+                "Type" : "Subnet",
+                "ParentIdentifierMappings" : [ ],
+                "RequestParamMappings" : [ ],
+                "ResponseIdentifierMappings" : [ {
+                  "Source" : [ "Subnet", "SubnetId" ],
+                  "Target" : "Id"
+                } ],
+                "Path" : [ "Subnet" ]
+              },
+              "DataMapping" : null,
+              "NextTokenPath" : null
+            }
+          },
+          "ModifyAttribute" : {
+            "Request" : {
+              "Method" : "modifyVpcAttribute",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.ModifyVpcAttributeRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "VpcId" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.Boolean",
+                "Name" : "EnableDnsSupport"
+              }, {
+                "Type" : "java.lang.Boolean",
+                "Name" : "EnableDnsHostnames"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "DescribeAttribute" : {
+            "Request" : {
+              "Method" : "describeVpcAttribute",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.DescribeVpcAttributeRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "VpcId" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "Attribute"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : null,
+              "DataMapping" : {
+                "Type" : "com.amazonaws.services.ec2.model.DescribeVpcAttributeResult",
+                "Source" : [ ]
+              },
+              "NextTokenPath" : null
+            }
+          },
+          "Delete" : {
+            "Request" : {
+              "Method" : "deleteVpc",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.DeleteVpcRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "VpcId" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      },
+      "Instance" : {
+        "Identifiers" : {
+          "Id" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "IamInstanceProfile" : {
+            "Type" : "com.amazonaws.services.ec2.model.IamInstanceProfile"
+          },
+          "ClientToken" : {
+            "Type" : "java.lang.String"
+          },
+          "ImageId" : {
+            "Type" : "java.lang.String"
+          },
+          "KernelId" : {
+            "Type" : "java.lang.String"
+          },
+          "NetworkInterfaces" : {
+            "Type" : "java.util.List<com.amazonaws.services.ec2.model.InstanceNetworkInterface>"
+          },
+          "ProductCodes" : {
+            "Type" : "java.util.List<com.amazonaws.services.ec2.model.ProductCode>"
+          },
+          "AmiLaunchIndex" : {
+            "Type" : "java.lang.Integer"
+          },
+          "InstanceId" : {
+            "Type" : "java.lang.String"
+          },
+          "SriovNetSupport" : {
+            "Type" : "java.lang.String"
+          },
+          "Architecture" : {
+            "Type" : "java.lang.String"
+          },
+          "SecurityGroups" : {
+            "Type" : "java.util.List<com.amazonaws.services.ec2.model.GroupIdentifier>"
+          },
+          "EbsOptimized" : {
+            "Type" : "java.lang.Boolean"
+          },
+          "Placement" : {
+            "Type" : "com.amazonaws.services.ec2.model.Placement"
+          },
+          "PublicDnsName" : {
+            "Type" : "java.lang.String"
+          },
+          "VpcId" : {
+            "Type" : "java.lang.String"
+          },
+          "PrivateDnsName" : {
+            "Type" : "java.lang.String"
+          },
+          "RootDeviceName" : {
+            "Type" : "java.lang.String"
+          },
+          "RamdiskId" : {
+            "Type" : "java.lang.String"
+          },
+          "PrivateIpAddress" : {
+            "Type" : "java.lang.String"
+          },
+          "Hypervisor" : {
+            "Type" : "java.lang.String"
+          },
+          "Platform" : {
+            "Type" : "java.lang.String"
+          },
+          "BlockDeviceMappings" : {
+            "Type" : "java.util.List<com.amazonaws.services.ec2.model.InstanceBlockDeviceMapping>"
+          },
+          "RootDeviceType" : {
+            "Type" : "java.lang.String"
+          },
+          "SourceDestCheck" : {
+            "Type" : "java.lang.Boolean"
+          },
+          "SpotInstanceRequestId" : {
+            "Type" : "java.lang.String"
+          },
+          "StateReason" : {
+            "Type" : "com.amazonaws.services.ec2.model.StateReason"
+          },
+          "PublicIpAddress" : {
+            "Type" : "java.lang.String"
+          },
+          "InstanceType" : {
+            "Type" : "java.lang.String"
+          },
+          "Tags" : {
+            "Type" : "java.util.List<com.amazonaws.services.ec2.model.Tag>"
+          },
+          "StateTransitionReason" : {
+            "Type" : "java.lang.String"
+          },
+          "State" : {
+            "Type" : "com.amazonaws.services.ec2.model.InstanceState"
+          },
+          "SubnetId" : {
+            "Type" : "java.lang.String"
+          },
+          "LaunchTime" : {
+            "Type" : "java.util.Date"
+          },
+          "InstanceLifecycle" : {
+            "Type" : "java.lang.String"
+          },
+          "Monitoring" : {
+            "Type" : "com.amazonaws.services.ec2.model.Monitoring"
+          },
+          "VirtualizationType" : {
+            "Type" : "java.lang.String"
+          },
+          "KeyName" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "References" : {
+          "Vpc" : {
+            "Type" : "Vpc",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ {
+              "Source" : "VpcId",
+              "Target" : "Id",
+              "multiValued" : false
+            } ]
+          },
+          "Subnet" : {
+            "Type" : "Subnet",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ {
+              "Source" : "SubnetId",
+              "Target" : "Id",
+              "multiValued" : false
+            } ]
+          }
+        },
+        "SubResourceGetters" : { },
+        "Collections" : { },
+        "LoadAction" : {
+          "Request" : {
+            "Method" : "describeInstances",
+            "ClientRequestType" : "com.amazonaws.services.ec2.model.DescribeInstancesRequest",
+            "IdentifierMappings" : [ {
+              "Source" : "Id",
+              "Target" : [ "InstanceIds", "*" ]
+            } ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : null,
+            "DataMapping" : {
+              "Type" : "Instance",
+              "Source" : [ "Reservations", "0:com.amazonaws.services.ec2.model.Reservation", "Instances", "0:com.amazonaws.services.ec2.model.Instance" ]
+            },
+            "NextTokenPath" : null
+          }
+        },
+        "Actions" : {
+          "Terminate" : {
+            "Request" : {
+              "Method" : "terminateInstances",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.TerminateInstancesRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "InstanceIds", "*" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : null,
+              "DataMapping" : {
+                "Type" : "com.amazonaws.services.ec2.model.TerminateInstancesResult",
+                "Source" : [ ]
+              },
+              "NextTokenPath" : null
+            }
+          },
+          "ResetRamdisk" : {
+            "Request" : {
+              "Method" : "resetInstanceAttribute",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.ResetInstanceAttributeRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "InstanceId" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ {
+                "Source" : "ramdisk",
+                "Target" : [ "Attribute" ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Start" : {
+            "Request" : {
+              "Method" : "startInstances",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.StartInstancesRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "InstanceIds", "*" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "AdditionalInfo"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : null,
+              "DataMapping" : {
+                "Type" : "com.amazonaws.services.ec2.model.StartInstancesResult",
+                "Source" : [ ]
+              },
+              "NextTokenPath" : null
+            }
+          },
+          "ConsoleOutput" : {
+            "Request" : {
+              "Method" : "getConsoleOutput",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.GetConsoleOutputRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "InstanceId" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : null,
+              "DataMapping" : {
+                "Type" : "com.amazonaws.services.ec2.model.GetConsoleOutputResult",
+                "Source" : [ ]
+              },
+              "NextTokenPath" : null
+            }
+          },
+          "ReportStatus" : {
+            "Request" : {
+              "Method" : "reportInstanceStatus",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.ReportInstanceStatusRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "Instances", "*" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "Status"
+              }, {
+                "Type" : "java.util.Date",
+                "Name" : "StartTime"
+              }, {
+                "Type" : "java.util.Date",
+                "Name" : "EndTime"
+              }, {
+                "Type" : "java.util.List<String>",
+                "Name" : "ReasonCodes"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "Description"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Stop" : {
+            "Request" : {
+              "Method" : "stopInstances",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.StopInstancesRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "InstanceIds", "*" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.Boolean",
+                "Name" : "Force"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : null,
+              "DataMapping" : {
+                "Type" : "com.amazonaws.services.ec2.model.StopInstancesResult",
+                "Source" : [ ]
+              },
+              "NextTokenPath" : null
+            }
+          },
+          "PasswordData" : {
+            "Request" : {
+              "Method" : "getPasswordData",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.GetPasswordDataRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "InstanceId" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : null,
+              "DataMapping" : {
+                "Type" : "com.amazonaws.services.ec2.model.GetPasswordDataResult",
+                "Source" : [ ]
+              },
+              "NextTokenPath" : null
+            }
+          },
+          "ResetAttribute" : {
+            "Request" : {
+              "Method" : "resetInstanceAttribute",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.ResetInstanceAttributeRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "InstanceId" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "Attribute"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Monitor" : {
+            "Request" : {
+              "Method" : "monitorInstances",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.MonitorInstancesRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "InstanceIds", "*" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : null,
+              "DataMapping" : {
+                "Type" : "com.amazonaws.services.ec2.model.MonitorInstancesResult",
+                "Source" : [ ]
+              },
+              "NextTokenPath" : null
+            }
+          },
+          "ResetSourceDestCheck" : {
+            "Request" : {
+              "Method" : "resetInstanceAttribute",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.ResetInstanceAttributeRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "InstanceId" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ {
+                "Source" : "sourceDestCheck",
+                "Target" : [ "Attribute" ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Reboot" : {
+            "Request" : {
+              "Method" : "rebootInstances",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.RebootInstancesRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "InstanceIds", "*" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Unmonitor" : {
+            "Request" : {
+              "Method" : "unmonitorInstances",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.UnmonitorInstancesRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "InstanceIds", "*" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : null,
+              "DataMapping" : {
+                "Type" : "com.amazonaws.services.ec2.model.UnmonitorInstancesResult",
+                "Source" : [ ]
+              },
+              "NextTokenPath" : null
+            }
+          },
+          "ModifyAttribute" : {
+            "Request" : {
+              "Method" : "modifyInstanceAttribute",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.ModifyInstanceAttributeRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "InstanceId" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "Attribute"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "Value"
+              }, {
+                "Type" : "java.util.List<com.amazonaws.services.ec2.model.InstanceBlockDeviceMappingSpecification>",
+                "Name" : "BlockDeviceMappings"
+              }, {
+                "Type" : "java.lang.Boolean",
+                "Name" : "SourceDestCheck"
+              }, {
+                "Type" : "java.lang.Boolean",
+                "Name" : "DisableApiTermination"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "InstanceType"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "Kernel"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "Ramdisk"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "UserData"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "InstanceInitiatedShutdownBehavior"
+              }, {
+                "Type" : "java.util.List<String>",
+                "Name" : "Groups"
+              }, {
+                "Type" : "java.lang.Boolean",
+                "Name" : "EbsOptimized"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "SriovNetSupport"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "ResetKernel" : {
+            "Request" : {
+              "Method" : "resetInstanceAttribute",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.ResetInstanceAttributeRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "InstanceId" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ {
+                "Source" : "kernel",
+                "Target" : [ "Attribute" ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      },
+      "Subnet" : {
+        "Identifiers" : {
+          "Id" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "Tags" : {
+            "Type" : "java.util.List<com.amazonaws.services.ec2.model.Tag>"
+          },
+          "CidrBlock" : {
+            "Type" : "java.lang.String"
+          },
+          "MapPublicIpOnLaunch" : {
+            "Type" : "java.lang.Boolean"
+          },
+          "State" : {
+            "Type" : "java.lang.String"
+          },
+          "SubnetId" : {
+            "Type" : "java.lang.String"
+          },
+          "DefaultForAz" : {
+            "Type" : "java.lang.Boolean"
+          },
+          "AvailableIpAddressCount" : {
+            "Type" : "java.lang.Integer"
+          },
+          "AvailabilityZone" : {
+            "Type" : "java.lang.String"
+          },
+          "VpcId" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "References" : {
+          "Vpc" : {
+            "Type" : "Vpc",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ {
+              "Source" : "VpcId",
+              "Target" : "Id",
+              "multiValued" : false
+            } ]
+          }
+        },
+        "SubResourceGetters" : { },
+        "Collections" : {
+          "Instances" : {
+            "Type" : "Instance",
+            "ListAction" : {
+              "Request" : {
+                "Method" : "describeInstances",
+                "ClientRequestType" : "com.amazonaws.services.ec2.model.DescribeInstancesRequest",
+                "IdentifierMappings" : [ {
+                  "Source" : "Id",
+                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "*" ]
+                } ],
+                "AttributeMappings" : [ ],
+                "ParameterMappings" : [ {
+                  "Type" : "java.util.List<String>",
+                  "Name" : "InstanceIds"
+                }, {
+                  "Type" : "java.lang.String",
+                  "Name" : "NextToken"
+                }, {
+                  "Type" : "java.lang.Integer",
+                  "Name" : "MaxResults"
+                } ],
+                "ConstantMappings" : [ {
+                  "Source" : "subnet-id",
+                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Name" ]
+                } ],
+                "TokenPath" : null,
+                "LimitPath" : null
+              },
+              "Response" : {
+                "ResourceMapping" : {
+                  "Type" : "Instance",
+                  "ParentIdentifierMappings" : [ ],
+                  "RequestParamMappings" : [ ],
+                  "ResponseIdentifierMappings" : [ {
+                    "Source" : [ "Reservations", "*:com.amazonaws.services.ec2.model.Reservation", "Instances", "*:com.amazonaws.services.ec2.model.Instance", "InstanceId" ],
+                    "Target" : "Id"
+                  } ],
+                  "Path" : [ "Reservations", "*:com.amazonaws.services.ec2.model.Reservation", "Instances", "*:com.amazonaws.services.ec2.model.Instance" ]
+                },
+                "DataMapping" : null,
+                "NextTokenPath" : null
+              }
+            }
+          }
+        },
+        "LoadAction" : {
+          "Request" : {
+            "Method" : "describeSubnets",
+            "ClientRequestType" : "com.amazonaws.services.ec2.model.DescribeSubnetsRequest",
+            "IdentifierMappings" : [ {
+              "Source" : "Id",
+              "Target" : [ "SubnetIds", "*" ]
+            } ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : null,
+            "DataMapping" : {
+              "Type" : "Subnet",
+              "Source" : [ "Subnets", "0:com.amazonaws.services.ec2.model.Subnet" ]
+            },
+            "NextTokenPath" : null
+          }
+        },
+        "Actions" : {
+          "Delete" : {
+            "Request" : {
+              "Method" : "deleteSubnet",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.DeleteSubnetRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "SubnetId" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "CreateInstances" : {
+            "Request" : {
+              "Method" : "runInstances",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.RunInstancesRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "SubnetId" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "ImageId"
+              }, {
+                "Type" : "java.lang.Integer",
+                "Name" : "MinCount"
+              }, {
+                "Type" : "java.lang.Integer",
+                "Name" : "MaxCount"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "KeyName"
+              }, {
+                "Type" : "java.util.List<String>",
+                "Name" : "SecurityGroups"
+              }, {
+                "Type" : "java.util.List<String>",
+                "Name" : "SecurityGroupIds"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "UserData"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "InstanceType"
+              }, {
+                "Type" : "com.amazonaws.services.ec2.model.Placement",
+                "Name" : "Placement"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "KernelId"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "RamdiskId"
+              }, {
+                "Type" : "java.util.List<com.amazonaws.services.ec2.model.BlockDeviceMapping>",
+                "Name" : "BlockDeviceMappings"
+              }, {
+                "Type" : "java.lang.Boolean",
+                "Name" : "Monitoring"
+              }, {
+                "Type" : "java.lang.Boolean",
+                "Name" : "DisableApiTermination"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "InstanceInitiatedShutdownBehavior"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "PrivateIpAddress"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "ClientToken"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "AdditionalInfo"
+              }, {
+                "Type" : "java.util.List<com.amazonaws.services.ec2.model.InstanceNetworkInterfaceSpecification>",
+                "Name" : "NetworkInterfaces"
+              }, {
+                "Type" : "com.amazonaws.services.ec2.model.IamInstanceProfileSpecification",
+                "Name" : "IamInstanceProfile"
+              }, {
+                "Type" : "java.lang.Boolean",
+                "Name" : "EbsOptimized"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : {
+                "Type" : "Instance",
+                "ParentIdentifierMappings" : [ ],
+                "RequestParamMappings" : [ ],
+                "ResponseIdentifierMappings" : [ {
+                  "Source" : [ "Reservation", "Instances", "*:com.amazonaws.services.ec2.model.Instance", "InstanceId" ],
+                  "Target" : "Id"
+                } ],
+                "Path" : [ "Reservation", "Instances", "*:com.amazonaws.services.ec2.model.Instance" ]
+              },
+              "DataMapping" : null,
+              "NextTokenPath" : null
+            }
+          }
+        }
+      }
+    },
+    "SubResourceGetters" : {
+      "Vpc" : {
+        "ParameterType" : "java.lang.String",
+        "ParameterMapping" : {
+          "Source" : "Id",
+          "Target" : "Id"
+        },
+        "IdentifierMappings" : [ ]
+      },
+      "Instance" : {
+        "ParameterType" : "java.lang.String",
+        "ParameterMapping" : {
+          "Source" : "Id",
+          "Target" : "Id"
+        },
+        "IdentifierMappings" : [ ]
+      },
+      "Subnet" : {
+        "ParameterType" : "java.lang.String",
+        "ParameterMapping" : {
+          "Source" : "Id",
+          "Target" : "Id"
+        },
+        "IdentifierMappings" : [ ]
+      }
+    },
+    "Collections" : {
+      "Vpcs" : {
+        "Type" : "Vpc",
+        "ListAction" : {
+          "Request" : {
+            "Method" : "describeVpcs",
+            "ClientRequestType" : "com.amazonaws.services.ec2.model.DescribeVpcsRequest",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ {
+              "Type" : "java.util.List<String>",
+              "Name" : "VpcIds"
+            }, {
+              "Type" : "java.util.List<com.amazonaws.services.ec2.model.Filter>",
+              "Name" : "Filters"
+            } ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : {
+              "Type" : "Vpc",
+              "ParentIdentifierMappings" : [ ],
+              "RequestParamMappings" : [ ],
+              "ResponseIdentifierMappings" : [ {
+                "Source" : [ "Vpcs", "*:com.amazonaws.services.ec2.model.Vpc", "VpcId" ],
+                "Target" : "Id"
+              } ],
+              "Path" : [ "Vpcs", "*:com.amazonaws.services.ec2.model.Vpc" ]
+            },
+            "DataMapping" : null,
+            "NextTokenPath" : null
+          }
+        }
+      },
+      "Subnets" : {
+        "Type" : "Subnet",
+        "ListAction" : {
+          "Request" : {
+            "Method" : "describeSubnets",
+            "ClientRequestType" : "com.amazonaws.services.ec2.model.DescribeSubnetsRequest",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ {
+              "Type" : "java.util.List<String>",
+              "Name" : "SubnetIds"
+            }, {
+              "Type" : "java.util.List<com.amazonaws.services.ec2.model.Filter>",
+              "Name" : "Filters"
+            } ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : {
+              "Type" : "Subnet",
+              "ParentIdentifierMappings" : [ ],
+              "RequestParamMappings" : [ ],
+              "ResponseIdentifierMappings" : [ {
+                "Source" : [ "Subnets", "*:com.amazonaws.services.ec2.model.Subnet", "SubnetId" ],
+                "Target" : "Id"
+              } ],
+              "Path" : [ "Subnets", "*:com.amazonaws.services.ec2.model.Subnet" ]
+            },
+            "DataMapping" : null,
+            "NextTokenPath" : null
+          }
+        }
+      },
+      "Instances" : {
+        "Type" : "Instance",
+        "ListAction" : {
+          "Request" : {
+            "Method" : "describeInstances",
+            "ClientRequestType" : "com.amazonaws.services.ec2.model.DescribeInstancesRequest",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ {
+              "Type" : "java.util.List<String>",
+              "Name" : "InstanceIds"
+            }, {
+              "Type" : "java.util.List<com.amazonaws.services.ec2.model.Filter>",
+              "Name" : "Filters"
+            }, {
+              "Type" : "java.lang.String",
+              "Name" : "NextToken"
+            }, {
+              "Type" : "java.lang.Integer",
+              "Name" : "MaxResults"
+            } ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : {
+              "Type" : "Instance",
+              "ParentIdentifierMappings" : [ ],
+              "RequestParamMappings" : [ ],
+              "ResponseIdentifierMappings" : [ {
+                "Source" : [ "Reservations", "*:com.amazonaws.services.ec2.model.Reservation", "Instances", "*:com.amazonaws.services.ec2.model.Instance", "InstanceId" ],
+                "Target" : "Id"
+              } ],
+              "Path" : [ "Reservations", "*:com.amazonaws.services.ec2.model.Reservation", "Instances", "*:com.amazonaws.services.ec2.model.Instance" ]
+            },
+            "DataMapping" : null,
+            "NextTokenPath" : null
+          }
+        }
+      }
+    },
+    "Actions" : {
+      "CreateVpc" : {
+        "Request" : {
+          "Method" : "createVpc",
+          "ClientRequestType" : "com.amazonaws.services.ec2.model.CreateVpcRequest",
+          "IdentifierMappings" : [ ],
+          "AttributeMappings" : [ ],
+          "ParameterMappings" : [ {
+            "Type" : "java.lang.String",
+            "Name" : "CidrBlock"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "InstanceTenancy"
+          } ],
+          "ConstantMappings" : [ ],
+          "TokenPath" : null,
+          "LimitPath" : null
+        },
+        "Response" : {
+          "ResourceMapping" : {
+            "Type" : "Vpc",
+            "ParentIdentifierMappings" : [ ],
+            "RequestParamMappings" : [ ],
+            "ResponseIdentifierMappings" : [ {
+              "Source" : [ "Vpc", "VpcId" ],
+              "Target" : "Id"
+            } ],
+            "Path" : [ "Vpc" ]
+          },
+          "DataMapping" : null,
+          "NextTokenPath" : null
+        }
+      },
+      "CreateSubnet" : {
+        "Request" : {
+          "Method" : "createSubnet",
+          "ClientRequestType" : "com.amazonaws.services.ec2.model.CreateSubnetRequest",
+          "IdentifierMappings" : [ ],
+          "AttributeMappings" : [ ],
+          "ParameterMappings" : [ {
+            "Type" : "java.lang.String",
+            "Name" : "VpcId"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "CidrBlock"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "AvailabilityZone"
+          } ],
+          "ConstantMappings" : [ ],
+          "TokenPath" : null,
+          "LimitPath" : null
+        },
+        "Response" : {
+          "ResourceMapping" : {
+            "Type" : "Subnet",
+            "ParentIdentifierMappings" : [ ],
+            "RequestParamMappings" : [ ],
+            "ResponseIdentifierMappings" : [ {
+              "Source" : [ "Subnet", "SubnetId" ],
+              "Target" : "Id"
+            } ],
+            "Path" : [ "Subnet" ]
+          },
+          "DataMapping" : null,
+          "NextTokenPath" : null
+        }
+      },
+      "CreateInstances" : {
+        "Request" : {
+          "Method" : "runInstances",
+          "ClientRequestType" : "com.amazonaws.services.ec2.model.RunInstancesRequest",
+          "IdentifierMappings" : [ ],
+          "AttributeMappings" : [ ],
+          "ParameterMappings" : [ {
+            "Type" : "java.lang.String",
+            "Name" : "ImageId"
+          }, {
+            "Type" : "java.lang.Integer",
+            "Name" : "MinCount"
+          }, {
+            "Type" : "java.lang.Integer",
+            "Name" : "MaxCount"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "KeyName"
+          }, {
+            "Type" : "java.util.List<String>",
+            "Name" : "SecurityGroups"
+          }, {
+            "Type" : "java.util.List<String>",
+            "Name" : "SecurityGroupIds"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "UserData"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "InstanceType"
+          }, {
+            "Type" : "com.amazonaws.services.ec2.model.Placement",
+            "Name" : "Placement"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "KernelId"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "RamdiskId"
+          }, {
+            "Type" : "java.util.List<com.amazonaws.services.ec2.model.BlockDeviceMapping>",
+            "Name" : "BlockDeviceMappings"
+          }, {
+            "Type" : "java.lang.Boolean",
+            "Name" : "Monitoring"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "SubnetId"
+          }, {
+            "Type" : "java.lang.Boolean",
+            "Name" : "DisableApiTermination"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "InstanceInitiatedShutdownBehavior"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "PrivateIpAddress"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "ClientToken"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "AdditionalInfo"
+          }, {
+            "Type" : "java.util.List<com.amazonaws.services.ec2.model.InstanceNetworkInterfaceSpecification>",
+            "Name" : "NetworkInterfaces"
+          }, {
+            "Type" : "com.amazonaws.services.ec2.model.IamInstanceProfileSpecification",
+            "Name" : "IamInstanceProfile"
+          }, {
+            "Type" : "java.lang.Boolean",
+            "Name" : "EbsOptimized"
+          } ],
+          "ConstantMappings" : [ ],
+          "TokenPath" : null,
+          "LimitPath" : null
+        },
+        "Response" : {
+          "ResourceMapping" : {
+            "Type" : "Instance",
+            "ParentIdentifierMappings" : [ ],
+            "RequestParamMappings" : [ ],
+            "ResponseIdentifierMappings" : [ {
+              "Source" : [ "Reservation", "Instances", "*:com.amazonaws.services.ec2.model.Instance", "InstanceId" ],
+              "Target" : "Id"
+            } ],
+            "Path" : [ "Reservation", "Instances", "*:com.amazonaws.services.ec2.model.Instance" ]
+          },
+          "DataMapping" : null,
+          "NextTokenPath" : null
+        }
+      }
+    }
+  }
+}

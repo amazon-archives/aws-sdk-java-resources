@@ -35,6 +35,10 @@
   
   <modules>
   	<module>aws-sdk-resources-java-core</module>
+  	<module>aws-sdk-resources-iam</module>
+  	<module>aws-sdk-resources-java-iam</module>
+  	<module>aws-sdk-resources-java-glacier</module>
+  	<module>aws-sdk-resources-java-ec2</module>
   </modules>
   
   <dependencyManagement>

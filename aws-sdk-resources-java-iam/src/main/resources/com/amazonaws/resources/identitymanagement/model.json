@@ -1,0 +1,2810 @@
+{
+  "FormatVersion" : {
+    "Major" : 1,
+    "Minor" : 0
+  },
+  "Service" : {
+    "Name" : "IdentityManagement",
+    "Abbreviation" : "identitymanagement",
+    "ClientInterface" : "com.amazonaws.services.identitymanagement.AmazonIdentityManagement",
+    "ClientImplementation" : "com.amazonaws.services.identitymanagement.AmazonIdentityManagementClient",
+    "Resources" : {
+      "User" : {
+        "Identifiers" : {
+          "Name" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "Arn" : {
+            "Type" : "java.lang.String"
+          },
+          "UserId" : {
+            "Type" : "java.lang.String"
+          },
+          "CreateDate" : {
+            "Type" : "java.util.Date"
+          },
+          "Path" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "References" : { },
+        "SubResourceGetters" : {
+          "MfaDevice" : {
+            "ParameterType" : "java.lang.String",
+            "ParameterMapping" : {
+              "Source" : "SerialNumber",
+              "Target" : "SerialNumber"
+            },
+            "IdentifierMappings" : [ {
+              "Source" : "Name",
+              "Target" : "UserName"
+            } ]
+          },
+          "AccessKey" : {
+            "ParameterType" : "java.lang.String",
+            "ParameterMapping" : {
+              "Source" : "Id",
+              "Target" : "Id"
+            },
+            "IdentifierMappings" : [ {
+              "Source" : "Name",
+              "Target" : "UserName"
+            } ]
+          },
+          "LoginProfile" : {
+            "ParameterType" : null,
+            "ParameterMapping" : null,
+            "IdentifierMappings" : [ {
+              "Source" : "Name",
+              "Target" : "UserName"
+            } ]
+          },
+          "UserPolicy" : {
+            "ParameterType" : "java.lang.String",
+            "ParameterMapping" : {
+              "Source" : "Name",
+              "Target" : "Name"
+            },
+            "IdentifierMappings" : [ {
+              "Source" : "Name",
+              "Target" : "UserName"
+            } ]
+          }
+        },
+        "Collections" : {
+          "Groups" : {
+            "Type" : "Group",
+            "ListAction" : {
+              "Request" : {
+                "Method" : "listGroupsForUser",
+                "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListGroupsForUserRequest",
+                "IdentifierMappings" : [ {
+                  "Source" : "Name",
+                  "Target" : [ "UserName" ]
+                } ],
+                "AttributeMappings" : [ ],
+                "ParameterMappings" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "Marker"
+                }, {
+                  "Type" : "java.lang.Integer",
+                  "Name" : "MaxItems"
+                } ],
+                "ConstantMappings" : [ ],
+                "TokenPath" : [ "Marker" ],
+                "LimitPath" : [ "MaxItems" ]
+              },
+              "Response" : {
+                "ResourceMapping" : {
+                  "Type" : "Group",
+                  "ParentIdentifierMappings" : [ ],
+                  "RequestParamMappings" : [ ],
+                  "ResponseIdentifierMappings" : [ {
+                    "Source" : [ "Groups", "*:com.amazonaws.services.identitymanagement.model.Group", "GroupName" ],
+                    "Target" : "Name"
+                  } ],
+                  "Path" : [ "Groups", "*:com.amazonaws.services.identitymanagement.model.Group" ]
+                },
+                "DataMapping" : null,
+                "NextTokenPath" : [ "Marker" ]
+              }
+            }
+          },
+          "Policies" : {
+            "Type" : "UserPolicy",
+            "ListAction" : {
+              "Request" : {
+                "Method" : "listUserPolicies",
+                "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListUserPoliciesRequest",
+                "IdentifierMappings" : [ {
+                  "Source" : "Name",
+                  "Target" : [ "UserName" ]
+                } ],
+                "AttributeMappings" : [ ],
+                "ParameterMappings" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "Marker"
+                }, {
+                  "Type" : "java.lang.Integer",
+                  "Name" : "MaxItems"
+                } ],
+                "ConstantMappings" : [ ],
+                "TokenPath" : [ "Marker" ],
+                "LimitPath" : [ "MaxItems" ]
+              },
+              "Response" : {
+                "ResourceMapping" : {
+                  "Type" : "UserPolicy",
+                  "ParentIdentifierMappings" : [ {
+                    "Source" : "Name",
+                    "Target" : "UserName"
+                  } ],
+                  "RequestParamMappings" : [ ],
+                  "ResponseIdentifierMappings" : [ {
+                    "Source" : [ "PolicyNames", "*" ],
+                    "Target" : "Name"
+                  } ],
+                  "Path" : null
+                },
+                "DataMapping" : null,
+                "NextTokenPath" : [ "Marker" ]
+              }
+            }
+          },
+          "MfaDevices" : {
+            "Type" : "MfaDevice",
+            "ListAction" : {
+              "Request" : {
+                "Method" : "listMFADevices",
+                "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListMFADevicesRequest",
+                "IdentifierMappings" : [ {
+                  "Source" : "Name",
+                  "Target" : [ "UserName" ]
+                } ],
+                "AttributeMappings" : [ ],
+                "ParameterMappings" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "Marker"
+                }, {
+                  "Type" : "java.lang.Integer",
+                  "Name" : "MaxItems"
+                } ],
+                "ConstantMappings" : [ ],
+                "TokenPath" : [ "Marker" ],
+                "LimitPath" : [ "MaxItems" ]
+              },
+              "Response" : {
+                "ResourceMapping" : {
+                  "Type" : "MfaDevice",
+                  "ParentIdentifierMappings" : [ {
+                    "Source" : "Name",
+                    "Target" : "UserName"
+                  } ],
+                  "RequestParamMappings" : [ ],
+                  "ResponseIdentifierMappings" : [ {
+                    "Source" : [ "MFADevices", "*:com.amazonaws.services.identitymanagement.model.MFADevice", "SerialNumber" ],
+                    "Target" : "SerialNumber"
+                  } ],
+                  "Path" : [ "MFADevices", "*:com.amazonaws.services.identitymanagement.model.MFADevice" ]
+                },
+                "DataMapping" : null,
+                "NextTokenPath" : [ "Marker" ]
+              }
+            }
+          },
+          "AccessKeys" : {
+            "Type" : "AccessKey",
+            "ListAction" : {
+              "Request" : {
+                "Method" : "listAccessKeys",
+                "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListAccessKeysRequest",
+                "IdentifierMappings" : [ {
+                  "Source" : "Name",
+                  "Target" : [ "UserName" ]
+                } ],
+                "AttributeMappings" : [ ],
+                "ParameterMappings" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "Marker"
+                }, {
+                  "Type" : "java.lang.Integer",
+                  "Name" : "MaxItems"
+                } ],
+                "ConstantMappings" : [ ],
+                "TokenPath" : [ "Marker" ],
+                "LimitPath" : [ "MaxItems" ]
+              },
+              "Response" : {
+                "ResourceMapping" : {
+                  "Type" : "AccessKey",
+                  "ParentIdentifierMappings" : [ {
+                    "Source" : "Name",
+                    "Target" : "UserName"
+                  } ],
+                  "RequestParamMappings" : [ ],
+                  "ResponseIdentifierMappings" : [ {
+                    "Source" : [ "AccessKeyMetadata", "*:com.amazonaws.services.identitymanagement.model.AccessKeyMetadata", "AccessKeyId" ],
+                    "Target" : "Id"
+                  } ],
+                  "Path" : [ "AccessKeyMetadata", "*:com.amazonaws.services.identitymanagement.model.AccessKeyMetadata" ]
+                },
+                "DataMapping" : null,
+                "NextTokenPath" : [ "Marker" ]
+              }
+            }
+          }
+        },
+        "LoadAction" : {
+          "Request" : {
+            "Method" : "getUser",
+            "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetUserRequest",
+            "IdentifierMappings" : [ {
+              "Source" : "Name",
+              "Target" : [ "UserName" ]
+            } ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : null,
+            "DataMapping" : {
+              "Type" : "User",
+              "Source" : [ "User" ]
+            },
+            "NextTokenPath" : null
+          }
+        },
+        "Actions" : {
+          "AddGroup" : {
+            "Request" : {
+              "Method" : "addUserToGroup",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.AddUserToGroupRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Name",
+                "Target" : [ "UserName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "GroupName"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Update" : {
+            "Request" : {
+              "Method" : "updateUser",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UpdateUserRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Name",
+                "Target" : [ "UserName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "NewPath"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "NewUserName"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "EnableMfa" : {
+            "Request" : {
+              "Method" : "enableMFADevice",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.EnableMFADeviceRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Name",
+                "Target" : [ "UserName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "SerialNumber"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "AuthenticationCode1"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "AuthenticationCode2"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "RemoveGroup" : {
+            "Request" : {
+              "Method" : "removeUserFromGroup",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.RemoveUserFromGroupRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Name",
+                "Target" : [ "UserName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "GroupName"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "CreateAccessKey" : {
+            "Request" : {
+              "Method" : "createAccessKey",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.CreateAccessKeyRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Name",
+                "Target" : [ "UserName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : {
+                "Type" : "AccessKey",
+                "ParentIdentifierMappings" : [ {
+                  "Source" : "Name",
+                  "Target" : "UserName"
+                } ],
+                "RequestParamMappings" : [ ],
+                "ResponseIdentifierMappings" : [ {
+                  "Source" : [ "AccessKey", "AccessKeyId" ],
+                  "Target" : "Id"
+                } ],
+                "Path" : [ "AccessKey" ]
+              },
+              "DataMapping" : null,
+              "NextTokenPath" : null
+            }
+          },
+          "Delete" : {
+            "Request" : {
+              "Method" : "deleteUser",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteUserRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Name",
+                "Target" : [ "UserName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "CreatePolicy" : {
+            "Request" : {
+              "Method" : "putUserPolicy",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.PutUserPolicyRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Name",
+                "Target" : [ "UserName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "PolicyName"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "PolicyDocument"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      },
+      "AccountPasswordPolicy" : {
+        "Identifiers" : { },
+        "Attributes" : {
+          "MaxPasswordAge" : {
+            "Type" : "java.lang.Integer"
+          },
+          "RequireUppercaseCharacters" : {
+            "Type" : "java.lang.Boolean"
+          },
+          "HardExpiry" : {
+            "Type" : "java.lang.Boolean"
+          },
+          "RequireNumbers" : {
+            "Type" : "java.lang.Boolean"
+          },
+          "ExpirePasswords" : {
+            "Type" : "java.lang.Boolean"
+          },
+          "RequireSymbols" : {
+            "Type" : "java.lang.Boolean"
+          },
+          "AllowUsersToChangePassword" : {
+            "Type" : "java.lang.Boolean"
+          },
+          "PasswordReusePrevention" : {
+            "Type" : "java.lang.Integer"
+          },
+          "RequireLowercaseCharacters" : {
+            "Type" : "java.lang.Boolean"
+          },
+          "MinimumPasswordLength" : {
+            "Type" : "java.lang.Integer"
+          }
+        },
+        "References" : { },
+        "SubResourceGetters" : { },
+        "Collections" : { },
+        "LoadAction" : {
+          "Request" : {
+            "Method" : "getAccountPasswordPolicy",
+            "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetAccountPasswordPolicyRequest",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : null,
+            "DataMapping" : {
+              "Type" : "PasswordPolicy",
+              "Source" : [ "PasswordPolicy" ]
+            },
+            "NextTokenPath" : null
+          }
+        },
+        "Actions" : {
+          "Update" : {
+            "Request" : {
+              "Method" : "updateAccountPasswordPolicy",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UpdateAccountPasswordPolicyRequest",
+              "IdentifierMappings" : [ ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.Integer",
+                "Name" : "MinimumPasswordLength"
+              }, {
+                "Type" : "java.lang.Boolean",
+                "Name" : "RequireSymbols"
+              }, {
+                "Type" : "java.lang.Boolean",
+                "Name" : "RequireNumbers"
+              }, {
+                "Type" : "java.lang.Boolean",
+                "Name" : "RequireUppercaseCharacters"
+              }, {
+                "Type" : "java.lang.Boolean",
+                "Name" : "RequireLowercaseCharacters"
+              }, {
+                "Type" : "java.lang.Boolean",
+                "Name" : "AllowUsersToChangePassword"
+              }, {
+                "Type" : "java.lang.Integer",
+                "Name" : "MaxPasswordAge"
+              }, {
+                "Type" : "java.lang.Integer",
+                "Name" : "PasswordReusePrevention"
+              }, {
+                "Type" : "java.lang.Boolean",
+                "Name" : "HardExpiry"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Delete" : {
+            "Request" : {
+              "Method" : "deleteAccountPasswordPolicy",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteAccountPasswordPolicyRequest",
+              "IdentifierMappings" : [ ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      },
+      "AccessKey" : {
+        "Identifiers" : {
+          "Id" : {
+            "Type" : "java.lang.String"
+          },
+          "UserName" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "SecretAccessKey" : {
+            "Type" : "java.lang.String"
+          },
+          "Status" : {
+            "Type" : "java.lang.String"
+          },
+          "CreateDate" : {
+            "Type" : "java.util.Date"
+          }
+        },
+        "References" : {
+          "User" : {
+            "Type" : "User",
+            "IdentifierMappings" : [ {
+              "Source" : "UserName",
+              "Target" : "Name"
+            } ],
+            "AttributeMappings" : [ ]
+          }
+        },
+        "SubResourceGetters" : { },
+        "Collections" : { },
+        "LoadAction" : null,
+        "Actions" : {
+          "Deactivate" : {
+            "Request" : {
+              "Method" : "updateAccessKey",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UpdateAccessKeyRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "UserName",
+                "Target" : [ "UserName" ]
+              }, {
+                "Source" : "Id",
+                "Target" : [ "AccessKeyId" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ {
+                "Source" : "Inactive",
+                "Target" : [ "Status" ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Activate" : {
+            "Request" : {
+              "Method" : "updateAccessKey",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UpdateAccessKeyRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "UserName",
+                "Target" : [ "UserName" ]
+              }, {
+                "Source" : "Id",
+                "Target" : [ "AccessKeyId" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ {
+                "Source" : "Active",
+                "Target" : [ "Status" ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Delete" : {
+            "Request" : {
+              "Method" : "deleteAccessKey",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteAccessKeyRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "UserName",
+                "Target" : [ "UserName" ]
+              }, {
+                "Source" : "Id",
+                "Target" : [ "AccessKeyId" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      },
+      "SamlProvider" : {
+        "Identifiers" : {
+          "Arn" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "ValidUntil" : {
+            "Type" : "java.util.Date"
+          },
+          "SAMLMetadataDocument" : {
+            "Type" : "java.lang.String"
+          },
+          "CreateDate" : {
+            "Type" : "java.util.Date"
+          }
+        },
+        "References" : { },
+        "SubResourceGetters" : { },
+        "Collections" : { },
+        "LoadAction" : {
+          "Request" : {
+            "Method" : "getSAMLProvider",
+            "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetSAMLProviderRequest",
+            "IdentifierMappings" : [ {
+              "Source" : "Arn",
+              "Target" : [ "SAMLProviderArn" ]
+            } ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : null,
+            "DataMapping" : {
+              "Type" : "GetSAMLProviderResponse",
+              "Source" : [ ]
+            },
+            "NextTokenPath" : null
+          }
+        },
+        "Actions" : {
+          "Update" : {
+            "Request" : {
+              "Method" : "updateSAMLProvider",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UpdateSAMLProviderRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Arn",
+                "Target" : [ "SAMLProviderArn" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "SAMLMetadataDocument"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : null,
+              "DataMapping" : {
+                "Type" : "com.amazonaws.services.identitymanagement.model.UpdateSAMLProviderResult",
+                "Source" : [ ]
+              },
+              "NextTokenPath" : null
+            }
+          },
+          "Delete" : {
+            "Request" : {
+              "Method" : "deleteSAMLProvider",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteSAMLProviderRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Arn",
+                "Target" : [ "SAMLProviderArn" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      },
+      "LoginProfile" : {
+        "Identifiers" : {
+          "UserName" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "PasswordResetRequired" : {
+            "Type" : "java.lang.Boolean"
+          },
+          "CreateDate" : {
+            "Type" : "java.util.Date"
+          }
+        },
+        "References" : {
+          "User" : {
+            "Type" : "User",
+            "IdentifierMappings" : [ {
+              "Source" : "UserName",
+              "Target" : "Name"
+            } ],
+            "AttributeMappings" : [ ]
+          }
+        },
+        "SubResourceGetters" : { },
+        "Collections" : { },
+        "LoadAction" : {
+          "Request" : {
+            "Method" : "getLoginProfile",
+            "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetLoginProfileRequest",
+            "IdentifierMappings" : [ {
+              "Source" : "UserName",
+              "Target" : [ "UserName" ]
+            } ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : null,
+            "DataMapping" : {
+              "Type" : "LoginProfile",
+              "Source" : [ "LoginProfile" ]
+            },
+            "NextTokenPath" : null
+          }
+        },
+        "Actions" : {
+          "Update" : {
+            "Request" : {
+              "Method" : "updateLoginProfile",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UpdateLoginProfileRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "UserName",
+                "Target" : [ "UserName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "Password"
+              }, {
+                "Type" : "java.lang.Boolean",
+                "Name" : "PasswordResetRequired"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Create" : {
+            "Request" : {
+              "Method" : "createLoginProfile",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.CreateLoginProfileRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "UserName",
+                "Target" : [ "UserName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "Password"
+              }, {
+                "Type" : "java.lang.Boolean",
+                "Name" : "PasswordResetRequired"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : null,
+              "DataMapping" : {
+                "Type" : "com.amazonaws.services.identitymanagement.model.CreateLoginProfileResult",
+                "Source" : [ ]
+              },
+              "NextTokenPath" : null
+            }
+          },
+          "Delete" : {
+            "Request" : {
+              "Method" : "deleteLoginProfile",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteLoginProfileRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "UserName",
+                "Target" : [ "UserName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      },
+      "InstanceProfile" : {
+        "Identifiers" : {
+          "Name" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "Arn" : {
+            "Type" : "java.lang.String"
+          },
+          "CreateDate" : {
+            "Type" : "java.util.Date"
+          },
+          "InstanceProfileId" : {
+            "Type" : "java.lang.String"
+          },
+          "Path" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "References" : {
+          "Roles" : {
+            "Type" : "Role",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ {
+              "Source" : "Roles[].RoleName",
+              "Target" : "Name",
+              "multiValued" : false
+            } ]
+          }
+        },
+        "SubResourceGetters" : { },
+        "Collections" : { },
+        "LoadAction" : {
+          "Request" : {
+            "Method" : "getInstanceProfile",
+            "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetInstanceProfileRequest",
+            "IdentifierMappings" : [ {
+              "Source" : "Name",
+              "Target" : [ "InstanceProfileName" ]
+            } ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : null,
+            "DataMapping" : {
+              "Type" : "InstanceProfile",
+              "Source" : [ "InstanceProfile" ]
+            },
+            "NextTokenPath" : null
+          }
+        },
+        "Actions" : {
+          "RemoveRole" : {
+            "Request" : {
+              "Method" : "removeRoleFromInstanceProfile",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.RemoveRoleFromInstanceProfileRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Name",
+                "Target" : [ "InstanceProfileName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "RoleName"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "AddRole" : {
+            "Request" : {
+              "Method" : "addRoleToInstanceProfile",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.AddRoleToInstanceProfileRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Name",
+                "Target" : [ "InstanceProfileName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "RoleName"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Delete" : {
+            "Request" : {
+              "Method" : "deleteInstanceProfile",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteInstanceProfileRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Name",
+                "Target" : [ "InstanceProfileName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      },
+      "Group" : {
+        "Identifiers" : {
+          "Name" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "Arn" : {
+            "Type" : "java.lang.String"
+          },
+          "CreateDate" : {
+            "Type" : "java.util.Date"
+          },
+          "GroupId" : {
+            "Type" : "java.lang.String"
+          },
+          "Path" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "References" : { },
+        "SubResourceGetters" : {
+          "GroupPolicy" : {
+            "ParameterType" : "java.lang.String",
+            "ParameterMapping" : {
+              "Source" : "Name",
+              "Target" : "Name"
+            },
+            "IdentifierMappings" : [ {
+              "Source" : "Name",
+              "Target" : "GroupName"
+            } ]
+          }
+        },
+        "Collections" : {
+          "Users" : {
+            "Type" : "User",
+            "ListAction" : {
+              "Request" : {
+                "Method" : "getGroup",
+                "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetGroupRequest",
+                "IdentifierMappings" : [ {
+                  "Source" : "Name",
+                  "Target" : [ "GroupName" ]
+                } ],
+                "AttributeMappings" : [ ],
+                "ParameterMappings" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "Marker"
+                }, {
+                  "Type" : "java.lang.Integer",
+                  "Name" : "MaxItems"
+                } ],
+                "ConstantMappings" : [ ],
+                "TokenPath" : [ "Marker" ],
+                "LimitPath" : [ "MaxItems" ]
+              },
+              "Response" : {
+                "ResourceMapping" : {
+                  "Type" : "User",
+                  "ParentIdentifierMappings" : [ ],
+                  "RequestParamMappings" : [ ],
+                  "ResponseIdentifierMappings" : [ {
+                    "Source" : [ "Users", "*:com.amazonaws.services.identitymanagement.model.User", "UserName" ],
+                    "Target" : "Name"
+                  } ],
+                  "Path" : [ "Users", "*:com.amazonaws.services.identitymanagement.model.User" ]
+                },
+                "DataMapping" : null,
+                "NextTokenPath" : [ "Marker" ]
+              }
+            }
+          },
+          "Policies" : {
+            "Type" : "GroupPolicy",
+            "ListAction" : {
+              "Request" : {
+                "Method" : "listGroupPolicies",
+                "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListGroupPoliciesRequest",
+                "IdentifierMappings" : [ {
+                  "Source" : "Name",
+                  "Target" : [ "GroupName" ]
+                } ],
+                "AttributeMappings" : [ ],
+                "ParameterMappings" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "Marker"
+                }, {
+                  "Type" : "java.lang.Integer",
+                  "Name" : "MaxItems"
+                } ],
+                "ConstantMappings" : [ ],
+                "TokenPath" : [ "Marker" ],
+                "LimitPath" : [ "MaxItems" ]
+              },
+              "Response" : {
+                "ResourceMapping" : {
+                  "Type" : "GroupPolicy",
+                  "ParentIdentifierMappings" : [ {
+                    "Source" : "Name",
+                    "Target" : "GroupName"
+                  } ],
+                  "RequestParamMappings" : [ ],
+                  "ResponseIdentifierMappings" : [ {
+                    "Source" : [ "PolicyNames", "*" ],
+                    "Target" : "Name"
+                  } ],
+                  "Path" : null
+                },
+                "DataMapping" : null,
+                "NextTokenPath" : [ "Marker" ]
+              }
+            }
+          }
+        },
+        "LoadAction" : {
+          "Request" : {
+            "Method" : "getGroup",
+            "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetGroupRequest",
+            "IdentifierMappings" : [ {
+              "Source" : "Name",
+              "Target" : [ "GroupName" ]
+            } ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : null,
+            "DataMapping" : {
+              "Type" : "Group",
+              "Source" : [ "Group" ]
+            },
+            "NextTokenPath" : null
+          }
+        },
+        "Actions" : {
+          "AddUser" : {
+            "Request" : {
+              "Method" : "addUserToGroup",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.AddUserToGroupRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Name",
+                "Target" : [ "GroupName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "UserName"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Update" : {
+            "Request" : {
+              "Method" : "updateGroup",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UpdateGroupRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Name",
+                "Target" : [ "GroupName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "NewPath"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "NewGroupName"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Create" : {
+            "Request" : {
+              "Method" : "createGroup",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.CreateGroupRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Name",
+                "Target" : [ "GroupName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "Path"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : null,
+              "DataMapping" : {
+                "Type" : "com.amazonaws.services.identitymanagement.model.CreateGroupResult",
+                "Source" : [ ]
+              },
+              "NextTokenPath" : null
+            }
+          },
+          "RemoveUser" : {
+            "Request" : {
+              "Method" : "removeUserFromGroup",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.RemoveUserFromGroupRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Name",
+                "Target" : [ "GroupName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "UserName"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Delete" : {
+            "Request" : {
+              "Method" : "deleteGroup",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteGroupRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Name",
+                "Target" : [ "GroupName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "CreatePolicy" : {
+            "Request" : {
+              "Method" : "putGroupPolicy",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.PutGroupPolicyRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Name",
+                "Target" : [ "GroupName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "PolicyName"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "PolicyDocument"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      },
+      "UserPolicy" : {
+        "Identifiers" : {
+          "Name" : {
+            "Type" : "java.lang.String"
+          },
+          "UserName" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "PolicyDocument" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "References" : {
+          "User" : {
+            "Type" : "User",
+            "IdentifierMappings" : [ {
+              "Source" : "UserName",
+              "Target" : "Name"
+            } ],
+            "AttributeMappings" : [ ]
+          }
+        },
+        "SubResourceGetters" : { },
+        "Collections" : { },
+        "LoadAction" : {
+          "Request" : {
+            "Method" : "getUserPolicy",
+            "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetUserPolicyRequest",
+            "IdentifierMappings" : [ {
+              "Source" : "UserName",
+              "Target" : [ "UserName" ]
+            }, {
+              "Source" : "Name",
+              "Target" : [ "PolicyName" ]
+            } ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : null,
+            "DataMapping" : {
+              "Type" : "GetUserPolicyResponse",
+              "Source" : [ ]
+            },
+            "NextTokenPath" : null
+          }
+        },
+        "Actions" : {
+          "Put" : {
+            "Request" : {
+              "Method" : "putUserPolicy",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.PutUserPolicyRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "UserName",
+                "Target" : [ "UserName" ]
+              }, {
+                "Source" : "Name",
+                "Target" : [ "PolicyName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "PolicyDocument"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Delete" : {
+            "Request" : {
+              "Method" : "deleteUserPolicy",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteUserPolicyRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "UserName",
+                "Target" : [ "UserName" ]
+              }, {
+                "Source" : "Name",
+                "Target" : [ "PolicyName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      },
+      "MfaDevice" : {
+        "Identifiers" : {
+          "SerialNumber" : {
+            "Type" : "java.lang.String"
+          },
+          "UserName" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "EnableDate" : {
+            "Type" : "java.util.Date"
+          }
+        },
+        "References" : {
+          "User" : {
+            "Type" : "User",
+            "IdentifierMappings" : [ {
+              "Source" : "UserName",
+              "Target" : "Name"
+            } ],
+            "AttributeMappings" : [ ]
+          }
+        },
+        "SubResourceGetters" : { },
+        "Collections" : { },
+        "LoadAction" : null,
+        "Actions" : {
+          "Enable" : {
+            "Request" : {
+              "Method" : "enableMFADevice",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.EnableMFADeviceRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "UserName",
+                "Target" : [ "UserName" ]
+              }, {
+                "Source" : "SerialNumber",
+                "Target" : [ "SerialNumber" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "AuthenticationCode1"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "AuthenticationCode2"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Deactivate" : {
+            "Request" : {
+              "Method" : "deactivateMFADevice",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeactivateMFADeviceRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "UserName",
+                "Target" : [ "UserName" ]
+              }, {
+                "Source" : "SerialNumber",
+                "Target" : [ "SerialNumber" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Resync" : {
+            "Request" : {
+              "Method" : "resyncMFADevice",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ResyncMFADeviceRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "UserName",
+                "Target" : [ "UserName" ]
+              }, {
+                "Source" : "SerialNumber",
+                "Target" : [ "SerialNumber" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "AuthenticationCode1"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "AuthenticationCode2"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      },
+      "SigningCertificate" : {
+        "Identifiers" : {
+          "Id" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "UploadDate" : {
+            "Type" : "java.util.Date"
+          },
+          "Status" : {
+            "Type" : "java.lang.String"
+          },
+          "CertificateBody" : {
+            "Type" : "java.lang.String"
+          },
+          "UserName" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "References" : { },
+        "SubResourceGetters" : { },
+        "Collections" : { },
+        "LoadAction" : null,
+        "Actions" : {
+          "Deactivate" : {
+            "Request" : {
+              "Method" : "updateSigningCertificate",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UpdateSigningCertificateRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "CertificateId" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "UserName"
+              } ],
+              "ConstantMappings" : [ {
+                "Source" : "Inactive",
+                "Target" : [ "Status" ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Activate" : {
+            "Request" : {
+              "Method" : "updateSigningCertificate",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UpdateSigningCertificateRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "CertificateId" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "UserName"
+              } ],
+              "ConstantMappings" : [ {
+                "Source" : "Active",
+                "Target" : [ "Status" ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Delete" : {
+            "Request" : {
+              "Method" : "deleteSigningCertificate",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteSigningCertificateRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "CertificateId" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "UserName"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      },
+      "VirtualMfaDevice" : {
+        "Identifiers" : {
+          "SerialNumber" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "EnableDate" : {
+            "Type" : "java.util.Date"
+          },
+          "QRCodePNG" : {
+            "Type" : "java.nio.ByteBuffer"
+          },
+          "Base32StringSeed" : {
+            "Type" : "java.nio.ByteBuffer"
+          }
+        },
+        "References" : {
+          "User" : {
+            "Type" : "User",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ {
+              "Source" : "User.UserName",
+              "Target" : "Name",
+              "multiValued" : false
+            } ]
+          }
+        },
+        "SubResourceGetters" : { },
+        "Collections" : { },
+        "LoadAction" : null,
+        "Actions" : {
+          "Delete" : {
+            "Request" : {
+              "Method" : "deleteVirtualMFADevice",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteVirtualMFADeviceRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "SerialNumber",
+                "Target" : [ "SerialNumber" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      },
+      "RolePolicy" : {
+        "Identifiers" : {
+          "Name" : {
+            "Type" : "java.lang.String"
+          },
+          "RoleName" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "PolicyDocument" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "References" : {
+          "Role" : {
+            "Type" : "Role",
+            "IdentifierMappings" : [ {
+              "Source" : "RoleName",
+              "Target" : "Name"
+            } ],
+            "AttributeMappings" : [ ]
+          }
+        },
+        "SubResourceGetters" : { },
+        "Collections" : { },
+        "LoadAction" : {
+          "Request" : {
+            "Method" : "getRolePolicy",
+            "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetRolePolicyRequest",
+            "IdentifierMappings" : [ {
+              "Source" : "RoleName",
+              "Target" : [ "RoleName" ]
+            }, {
+              "Source" : "Name",
+              "Target" : [ "PolicyName" ]
+            } ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : null,
+            "DataMapping" : {
+              "Type" : "GetRolePolicyResponse",
+              "Source" : [ ]
+            },
+            "NextTokenPath" : null
+          }
+        },
+        "Actions" : {
+          "Put" : {
+            "Request" : {
+              "Method" : "putRolePolicy",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.PutRolePolicyRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "RoleName",
+                "Target" : [ "RoleName" ]
+              }, {
+                "Source" : "Name",
+                "Target" : [ "PolicyName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "PolicyDocument"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Delete" : {
+            "Request" : {
+              "Method" : "deleteRolePolicy",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteRolePolicyRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "RoleName",
+                "Target" : [ "RoleName" ]
+              }, {
+                "Source" : "Name",
+                "Target" : [ "PolicyName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      },
+      "Role" : {
+        "Identifiers" : {
+          "Name" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "AssumeRolePolicyDocument" : {
+            "Type" : "java.lang.String"
+          },
+          "Arn" : {
+            "Type" : "java.lang.String"
+          },
+          "CreateDate" : {
+            "Type" : "java.util.Date"
+          },
+          "RoleId" : {
+            "Type" : "java.lang.String"
+          },
+          "Path" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "References" : { },
+        "SubResourceGetters" : {
+          "RolePolicy" : {
+            "ParameterType" : "java.lang.String",
+            "ParameterMapping" : {
+              "Source" : "Name",
+              "Target" : "Name"
+            },
+            "IdentifierMappings" : [ {
+              "Source" : "Name",
+              "Target" : "RoleName"
+            } ]
+          }
+        },
+        "Collections" : {
+          "Policies" : {
+            "Type" : "RolePolicy",
+            "ListAction" : {
+              "Request" : {
+                "Method" : "listRolePolicies",
+                "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListRolePoliciesRequest",
+                "IdentifierMappings" : [ {
+                  "Source" : "Name",
+                  "Target" : [ "RoleName" ]
+                } ],
+                "AttributeMappings" : [ ],
+                "ParameterMappings" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "Marker"
+                }, {
+                  "Type" : "java.lang.Integer",
+                  "Name" : "MaxItems"
+                } ],
+                "ConstantMappings" : [ ],
+                "TokenPath" : [ "Marker" ],
+                "LimitPath" : [ "MaxItems" ]
+              },
+              "Response" : {
+                "ResourceMapping" : {
+                  "Type" : "RolePolicy",
+                  "ParentIdentifierMappings" : [ {
+                    "Source" : "Name",
+                    "Target" : "RoleName"
+                  } ],
+                  "RequestParamMappings" : [ ],
+                  "ResponseIdentifierMappings" : [ {
+                    "Source" : [ "PolicyNames", "*" ],
+                    "Target" : "Name"
+                  } ],
+                  "Path" : null
+                },
+                "DataMapping" : null,
+                "NextTokenPath" : [ "Marker" ]
+              }
+            }
+          },
+          "InstanceProfiles" : {
+            "Type" : "InstanceProfile",
+            "ListAction" : {
+              "Request" : {
+                "Method" : "listInstanceProfilesForRole",
+                "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListInstanceProfilesForRoleRequest",
+                "IdentifierMappings" : [ {
+                  "Source" : "Name",
+                  "Target" : [ "RoleName" ]
+                } ],
+                "AttributeMappings" : [ ],
+                "ParameterMappings" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "Marker"
+                }, {
+                  "Type" : "java.lang.Integer",
+                  "Name" : "MaxItems"
+                } ],
+                "ConstantMappings" : [ ],
+                "TokenPath" : [ "Marker" ],
+                "LimitPath" : [ "MaxItems" ]
+              },
+              "Response" : {
+                "ResourceMapping" : {
+                  "Type" : "InstanceProfile",
+                  "ParentIdentifierMappings" : [ ],
+                  "RequestParamMappings" : [ ],
+                  "ResponseIdentifierMappings" : [ {
+                    "Source" : [ "InstanceProfiles", "*:com.amazonaws.services.identitymanagement.model.InstanceProfile", "InstanceProfileName" ],
+                    "Target" : "Name"
+                  } ],
+                  "Path" : [ "InstanceProfiles", "*:com.amazonaws.services.identitymanagement.model.InstanceProfile" ]
+                },
+                "DataMapping" : null,
+                "NextTokenPath" : [ "Marker" ]
+              }
+            }
+          }
+        },
+        "LoadAction" : {
+          "Request" : {
+            "Method" : "getRole",
+            "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetRoleRequest",
+            "IdentifierMappings" : [ {
+              "Source" : "Name",
+              "Target" : [ "RoleName" ]
+            } ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : null,
+            "DataMapping" : {
+              "Type" : "Role",
+              "Source" : [ "Role" ]
+            },
+            "NextTokenPath" : null
+          }
+        },
+        "Actions" : {
+          "Delete" : {
+            "Request" : {
+              "Method" : "deleteRole",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteRoleRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Name",
+                "Target" : [ "RoleName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "UpdateAssumeRolePolicy" : {
+            "Request" : {
+              "Method" : "updateAssumeRolePolicy",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UpdateAssumeRolePolicyRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Name",
+                "Target" : [ "RoleName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "PolicyDocument"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      },
+      "AccountAlias" : {
+        "Identifiers" : {
+          "Name" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : { },
+        "References" : { },
+        "SubResourceGetters" : { },
+        "Collections" : { },
+        "LoadAction" : null,
+        "Actions" : {
+          "Delete" : {
+            "Request" : {
+              "Method" : "deleteAccountAlias",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteAccountAliasRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Name",
+                "Target" : [ "AccountAlias" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      },
+      "GroupPolicy" : {
+        "Identifiers" : {
+          "Name" : {
+            "Type" : "java.lang.String"
+          },
+          "GroupName" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "PolicyDocument" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "References" : {
+          "Group" : {
+            "Type" : "Group",
+            "IdentifierMappings" : [ {
+              "Source" : "GroupName",
+              "Target" : "Name"
+            } ],
+            "AttributeMappings" : [ ]
+          }
+        },
+        "SubResourceGetters" : { },
+        "Collections" : { },
+        "LoadAction" : {
+          "Request" : {
+            "Method" : "getGroupPolicy",
+            "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetGroupPolicyRequest",
+            "IdentifierMappings" : [ {
+              "Source" : "GroupName",
+              "Target" : [ "GroupName" ]
+            }, {
+              "Source" : "Name",
+              "Target" : [ "PolicyName" ]
+            } ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : null,
+            "DataMapping" : {
+              "Type" : "GetGroupPolicyResponse",
+              "Source" : [ ]
+            },
+            "NextTokenPath" : null
+          }
+        },
+        "Actions" : {
+          "Put" : {
+            "Request" : {
+              "Method" : "putGroupPolicy",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.PutGroupPolicyRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "GroupName",
+                "Target" : [ "GroupName" ]
+              }, {
+                "Source" : "Name",
+                "Target" : [ "PolicyName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "PolicyDocument"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Delete" : {
+            "Request" : {
+              "Method" : "deleteGroupPolicy",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteGroupPolicyRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "GroupName",
+                "Target" : [ "GroupName" ]
+              }, {
+                "Source" : "Name",
+                "Target" : [ "PolicyName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      },
+      "ServerCertificate" : {
+        "Identifiers" : {
+          "Name" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "ServerCertificateMetadata" : {
+            "Type" : "com.amazonaws.services.identitymanagement.model.ServerCertificateMetadata"
+          },
+          "CertificateBody" : {
+            "Type" : "java.lang.String"
+          },
+          "CertificateChain" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "References" : { },
+        "SubResourceGetters" : { },
+        "Collections" : { },
+        "LoadAction" : {
+          "Request" : {
+            "Method" : "getServerCertificate",
+            "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetServerCertificateRequest",
+            "IdentifierMappings" : [ {
+              "Source" : "Name",
+              "Target" : [ "ServerCertificateName" ]
+            } ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : null,
+            "DataMapping" : {
+              "Type" : "ServerCertificate",
+              "Source" : [ "ServerCertificate" ]
+            },
+            "NextTokenPath" : null
+          }
+        },
+        "Actions" : {
+          "Update" : {
+            "Request" : {
+              "Method" : "updateServerCertificate",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UpdateServerCertificateRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Name",
+                "Target" : [ "ServerCertificateName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "NewPath"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "NewServerCertificateName"
+              } ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Delete" : {
+            "Request" : {
+              "Method" : "deleteServerCertificate",
+              "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteServerCertificateRequest",
+              "IdentifierMappings" : [ {
+                "Source" : "Name",
+                "Target" : [ "ServerCertificateName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      }
+    },
+    "SubResourceGetters" : {
+      "User" : {
+        "ParameterType" : "java.lang.String",
+        "ParameterMapping" : {
+          "Source" : "Name",
+          "Target" : "Name"
+        },
+        "IdentifierMappings" : [ ]
+      },
+      "SigningCertificate" : {
+        "ParameterType" : "java.lang.String",
+        "ParameterMapping" : {
+          "Source" : "Id",
+          "Target" : "Id"
+        },
+        "IdentifierMappings" : [ ]
+      },
+      "VirtualMfaDevice" : {
+        "ParameterType" : "java.lang.String",
+        "ParameterMapping" : {
+          "Source" : "SerialNumber",
+          "Target" : "SerialNumber"
+        },
+        "IdentifierMappings" : [ ]
+      },
+      "Role" : {
+        "ParameterType" : "java.lang.String",
+        "ParameterMapping" : {
+          "Source" : "Name",
+          "Target" : "Name"
+        },
+        "IdentifierMappings" : [ ]
+      },
+      "AccountAlias" : {
+        "ParameterType" : "java.lang.String",
+        "ParameterMapping" : {
+          "Source" : "Name",
+          "Target" : "Name"
+        },
+        "IdentifierMappings" : [ ]
+      },
+      "SamlProvider" : {
+        "ParameterType" : "java.lang.String",
+        "ParameterMapping" : {
+          "Source" : "Arn",
+          "Target" : "Arn"
+        },
+        "IdentifierMappings" : [ ]
+      },
+      "InstanceProfile" : {
+        "ParameterType" : "java.lang.String",
+        "ParameterMapping" : {
+          "Source" : "Name",
+          "Target" : "Name"
+        },
+        "IdentifierMappings" : [ ]
+      },
+      "ServerCertificate" : {
+        "ParameterType" : "java.lang.String",
+        "ParameterMapping" : {
+          "Source" : "Name",
+          "Target" : "Name"
+        },
+        "IdentifierMappings" : [ ]
+      },
+      "Group" : {
+        "ParameterType" : "java.lang.String",
+        "ParameterMapping" : {
+          "Source" : "Name",
+          "Target" : "Name"
+        },
+        "IdentifierMappings" : [ ]
+      }
+    },
+    "Collections" : {
+      "Groups" : {
+        "Type" : "Group",
+        "ListAction" : {
+          "Request" : {
+            "Method" : "listGroups",
+            "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListGroupsRequest",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ {
+              "Type" : "java.lang.String",
+              "Name" : "PathPrefix"
+            }, {
+              "Type" : "java.lang.String",
+              "Name" : "Marker"
+            }, {
+              "Type" : "java.lang.Integer",
+              "Name" : "MaxItems"
+            } ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : [ "Marker" ],
+            "LimitPath" : [ "MaxItems" ]
+          },
+          "Response" : {
+            "ResourceMapping" : {
+              "Type" : "Group",
+              "ParentIdentifierMappings" : [ ],
+              "RequestParamMappings" : [ ],
+              "ResponseIdentifierMappings" : [ {
+                "Source" : [ "Groups", "*:com.amazonaws.services.identitymanagement.model.Group", "GroupName" ],
+                "Target" : "Name"
+              } ],
+              "Path" : [ "Groups", "*:com.amazonaws.services.identitymanagement.model.Group" ]
+            },
+            "DataMapping" : null,
+            "NextTokenPath" : [ "Marker" ]
+          }
+        }
+      },
+      "Users" : {
+        "Type" : "User",
+        "ListAction" : {
+          "Request" : {
+            "Method" : "listUsers",
+            "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListUsersRequest",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ {
+              "Type" : "java.lang.String",
+              "Name" : "PathPrefix"
+            }, {
+              "Type" : "java.lang.String",
+              "Name" : "Marker"
+            }, {
+              "Type" : "java.lang.Integer",
+              "Name" : "MaxItems"
+            } ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : [ "Marker" ],
+            "LimitPath" : [ "MaxItems" ]
+          },
+          "Response" : {
+            "ResourceMapping" : {
+              "Type" : "User",
+              "ParentIdentifierMappings" : [ ],
+              "RequestParamMappings" : [ ],
+              "ResponseIdentifierMappings" : [ {
+                "Source" : [ "Users", "*:com.amazonaws.services.identitymanagement.model.User", "UserName" ],
+                "Target" : "Name"
+              } ],
+              "Path" : [ "Users", "*:com.amazonaws.services.identitymanagement.model.User" ]
+            },
+            "DataMapping" : null,
+            "NextTokenPath" : [ "Marker" ]
+          }
+        }
+      },
+      "SamlProviders" : {
+        "Type" : "SamlProvider",
+        "ListAction" : {
+          "Request" : {
+            "Method" : "listSAMLProviders",
+            "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListSAMLProvidersRequest",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : {
+              "Type" : "SamlProvider",
+              "ParentIdentifierMappings" : [ ],
+              "RequestParamMappings" : [ ],
+              "ResponseIdentifierMappings" : [ {
+                "Source" : [ "SAMLProviderList", "*:com.amazonaws.services.identitymanagement.model.SAMLProviderListEntry", "Arn" ],
+                "Target" : "Arn"
+              } ],
+              "Path" : null
+            },
+            "DataMapping" : null,
+            "NextTokenPath" : null
+          }
+        }
+      },
+      "SigningCertificates" : {
+        "Type" : "SigningCertificate",
+        "ListAction" : {
+          "Request" : {
+            "Method" : "listSigningCertificates",
+            "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListSigningCertificatesRequest",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ {
+              "Type" : "java.lang.String",
+              "Name" : "UserName"
+            }, {
+              "Type" : "java.lang.String",
+              "Name" : "Marker"
+            }, {
+              "Type" : "java.lang.Integer",
+              "Name" : "MaxItems"
+            } ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : [ "Marker" ],
+            "LimitPath" : [ "MaxItems" ]
+          },
+          "Response" : {
+            "ResourceMapping" : {
+              "Type" : "SigningCertificate",
+              "ParentIdentifierMappings" : [ ],
+              "RequestParamMappings" : [ ],
+              "ResponseIdentifierMappings" : [ {
+                "Source" : [ "Certificates", "*:com.amazonaws.services.identitymanagement.model.SigningCertificate", "CertificateId" ],
+                "Target" : "Id"
+              } ],
+              "Path" : [ "Certificates", "*:com.amazonaws.services.identitymanagement.model.SigningCertificate" ]
+            },
+            "DataMapping" : null,
+            "NextTokenPath" : [ "Marker" ]
+          }
+        }
+      },
+      "ServerCertificates" : {
+        "Type" : "ServerCertificate",
+        "ListAction" : {
+          "Request" : {
+            "Method" : "listServerCertificates",
+            "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListServerCertificatesRequest",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ {
+              "Type" : "java.lang.String",
+              "Name" : "PathPrefix"
+            }, {
+              "Type" : "java.lang.String",
+              "Name" : "Marker"
+            }, {
+              "Type" : "java.lang.Integer",
+              "Name" : "MaxItems"
+            } ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : [ "Marker" ],
+            "LimitPath" : [ "MaxItems" ]
+          },
+          "Response" : {
+            "ResourceMapping" : {
+              "Type" : "ServerCertificate",
+              "ParentIdentifierMappings" : [ ],
+              "RequestParamMappings" : [ ],
+              "ResponseIdentifierMappings" : [ {
+                "Source" : [ "ServerCertificateMetadataList", "*:com.amazonaws.services.identitymanagement.model.ServerCertificateMetadata", "ServerCertificateName" ],
+                "Target" : "Name"
+              } ],
+              "Path" : null
+            },
+            "DataMapping" : null,
+            "NextTokenPath" : [ "Marker" ]
+          }
+        }
+      },
+      "InstanceProfiles" : {
+        "Type" : "InstanceProfile",
+        "ListAction" : {
+          "Request" : {
+            "Method" : "listInstanceProfiles",
+            "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListInstanceProfilesRequest",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ {
+              "Type" : "java.lang.String",
+              "Name" : "PathPrefix"
+            }, {
+              "Type" : "java.lang.String",
+              "Name" : "Marker"
+            }, {
+              "Type" : "java.lang.Integer",
+              "Name" : "MaxItems"
+            } ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : [ "Marker" ],
+            "LimitPath" : [ "MaxItems" ]
+          },
+          "Response" : {
+            "ResourceMapping" : {
+              "Type" : "InstanceProfile",
+              "ParentIdentifierMappings" : [ ],
+              "RequestParamMappings" : [ ],
+              "ResponseIdentifierMappings" : [ {
+                "Source" : [ "InstanceProfiles", "*:com.amazonaws.services.identitymanagement.model.InstanceProfile", "InstanceProfileName" ],
+                "Target" : "Name"
+              } ],
+              "Path" : [ "InstanceProfiles", "*:com.amazonaws.services.identitymanagement.model.InstanceProfile" ]
+            },
+            "DataMapping" : null,
+            "NextTokenPath" : [ "Marker" ]
+          }
+        }
+      },
+      "Roles" : {
+        "Type" : "Role",
+        "ListAction" : {
+          "Request" : {
+            "Method" : "listRoles",
+            "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListRolesRequest",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ {
+              "Type" : "java.lang.String",
+              "Name" : "PathPrefix"
+            }, {
+              "Type" : "java.lang.String",
+              "Name" : "Marker"
+            }, {
+              "Type" : "java.lang.Integer",
+              "Name" : "MaxItems"
+            } ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : [ "Marker" ],
+            "LimitPath" : [ "MaxItems" ]
+          },
+          "Response" : {
+            "ResourceMapping" : {
+              "Type" : "Role",
+              "ParentIdentifierMappings" : [ ],
+              "RequestParamMappings" : [ ],
+              "ResponseIdentifierMappings" : [ {
+                "Source" : [ "Roles", "*:com.amazonaws.services.identitymanagement.model.Role", "RoleName" ],
+                "Target" : "Name"
+              } ],
+              "Path" : [ "Roles", "*:com.amazonaws.services.identitymanagement.model.Role" ]
+            },
+            "DataMapping" : null,
+            "NextTokenPath" : [ "Marker" ]
+          }
+        }
+      },
+      "AccountAliases" : {
+        "Type" : "AccountAlias",
+        "ListAction" : {
+          "Request" : {
+            "Method" : "listAccountAliases",
+            "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListAccountAliasesRequest",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ {
+              "Type" : "java.lang.String",
+              "Name" : "Marker"
+            }, {
+              "Type" : "java.lang.Integer",
+              "Name" : "MaxItems"
+            } ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : [ "Marker" ],
+            "LimitPath" : [ "MaxItems" ]
+          },
+          "Response" : {
+            "ResourceMapping" : {
+              "Type" : "AccountAlias",
+              "ParentIdentifierMappings" : [ ],
+              "RequestParamMappings" : [ ],
+              "ResponseIdentifierMappings" : [ {
+                "Source" : [ "AccountAliases", "*" ],
+                "Target" : "Name"
+              } ],
+              "Path" : null
+            },
+            "DataMapping" : null,
+            "NextTokenPath" : [ "Marker" ]
+          }
+        }
+      },
+      "VirtualMfaDevices" : {
+        "Type" : "VirtualMfaDevice",
+        "ListAction" : {
+          "Request" : {
+            "Method" : "listVirtualMFADevices",
+            "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListVirtualMFADevicesRequest",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ {
+              "Type" : "java.lang.String",
+              "Name" : "AssignmentStatus"
+            }, {
+              "Type" : "java.lang.String",
+              "Name" : "Marker"
+            }, {
+              "Type" : "java.lang.Integer",
+              "Name" : "MaxItems"
+            } ],
+            "ConstantMappings" : [ ],
+            "TokenPath" : [ "Marker" ],
+            "LimitPath" : [ "MaxItems" ]
+          },
+          "Response" : {
+            "ResourceMapping" : {
+              "Type" : "VirtualMfaDevice",
+              "ParentIdentifierMappings" : [ ],
+              "RequestParamMappings" : [ ],
+              "ResponseIdentifierMappings" : [ {
+                "Source" : [ "VirtualMFADevices", "*:com.amazonaws.services.identitymanagement.model.VirtualMFADevice", "SerialNumber" ],
+                "Target" : "SerialNumber"
+              } ],
+              "Path" : [ "VirtualMFADevices", "*:com.amazonaws.services.identitymanagement.model.VirtualMFADevice" ]
+            },
+            "DataMapping" : null,
+            "NextTokenPath" : [ "Marker" ]
+          }
+        }
+      }
+    },
+    "Actions" : {
+      "CreateRole" : {
+        "Request" : {
+          "Method" : "createRole",
+          "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.CreateRoleRequest",
+          "IdentifierMappings" : [ ],
+          "AttributeMappings" : [ ],
+          "ParameterMappings" : [ {
+            "Type" : "java.lang.String",
+            "Name" : "Path"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "RoleName"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "AssumeRolePolicyDocument"
+          } ],
+          "ConstantMappings" : [ ],
+          "TokenPath" : null,
+          "LimitPath" : null
+        },
+        "Response" : {
+          "ResourceMapping" : {
+            "Type" : "Role",
+            "ParentIdentifierMappings" : [ ],
+            "RequestParamMappings" : [ {
+              "Source" : [ "RoleName" ],
+              "Target" : "Name"
+            } ],
+            "ResponseIdentifierMappings" : [ ],
+            "Path" : [ "Role" ]
+          },
+          "DataMapping" : null,
+          "NextTokenPath" : null
+        }
+      },
+      "ChangePassword" : {
+        "Request" : {
+          "Method" : "changePassword",
+          "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ChangePasswordRequest",
+          "IdentifierMappings" : [ ],
+          "AttributeMappings" : [ ],
+          "ParameterMappings" : [ {
+            "Type" : "java.lang.String",
+            "Name" : "OldPassword"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "NewPassword"
+          } ],
+          "ConstantMappings" : [ ],
+          "TokenPath" : null,
+          "LimitPath" : null
+        },
+        "Response" : null
+      },
+      "CreateUser" : {
+        "Request" : {
+          "Method" : "createUser",
+          "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.CreateUserRequest",
+          "IdentifierMappings" : [ ],
+          "AttributeMappings" : [ ],
+          "ParameterMappings" : [ {
+            "Type" : "java.lang.String",
+            "Name" : "Path"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "UserName"
+          } ],
+          "ConstantMappings" : [ ],
+          "TokenPath" : null,
+          "LimitPath" : null
+        },
+        "Response" : {
+          "ResourceMapping" : {
+            "Type" : "User",
+            "ParentIdentifierMappings" : [ ],
+            "RequestParamMappings" : [ {
+              "Source" : [ "UserName" ],
+              "Target" : "Name"
+            } ],
+            "ResponseIdentifierMappings" : [ ],
+            "Path" : [ "User" ]
+          },
+          "DataMapping" : null,
+          "NextTokenPath" : null
+        }
+      },
+      "CreateVirtualMfaDevice" : {
+        "Request" : {
+          "Method" : "createVirtualMFADevice",
+          "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.CreateVirtualMFADeviceRequest",
+          "IdentifierMappings" : [ ],
+          "AttributeMappings" : [ ],
+          "ParameterMappings" : [ {
+            "Type" : "java.lang.String",
+            "Name" : "Path"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "VirtualMFADeviceName"
+          } ],
+          "ConstantMappings" : [ ],
+          "TokenPath" : null,
+          "LimitPath" : null
+        },
+        "Response" : {
+          "ResourceMapping" : {
+            "Type" : "VirtualMfaDevice",
+            "ParentIdentifierMappings" : [ ],
+            "RequestParamMappings" : [ ],
+            "ResponseIdentifierMappings" : [ {
+              "Source" : [ "VirtualMFADevice", "SerialNumber" ],
+              "Target" : "SerialNumber"
+            } ],
+            "Path" : [ "VirtualMFADevice" ]
+          },
+          "DataMapping" : null,
+          "NextTokenPath" : null
+        }
+      },
+      "CreateGroup" : {
+        "Request" : {
+          "Method" : "createGroup",
+          "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.CreateGroupRequest",
+          "IdentifierMappings" : [ ],
+          "AttributeMappings" : [ ],
+          "ParameterMappings" : [ {
+            "Type" : "java.lang.String",
+            "Name" : "Path"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "GroupName"
+          } ],
+          "ConstantMappings" : [ ],
+          "TokenPath" : null,
+          "LimitPath" : null
+        },
+        "Response" : {
+          "ResourceMapping" : {
+            "Type" : "Group",
+            "ParentIdentifierMappings" : [ ],
+            "RequestParamMappings" : [ {
+              "Source" : [ "GroupName" ],
+              "Target" : "Name"
+            } ],
+            "ResponseIdentifierMappings" : [ ],
+            "Path" : [ "Group" ]
+          },
+          "DataMapping" : null,
+          "NextTokenPath" : null
+        }
+      },
+      "AccountSummary" : {
+        "Request" : {
+          "Method" : "getAccountSummary",
+          "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetAccountSummaryRequest",
+          "IdentifierMappings" : [ ],
+          "AttributeMappings" : [ ],
+          "ParameterMappings" : [ ],
+          "ConstantMappings" : [ ],
+          "TokenPath" : null,
+          "LimitPath" : null
+        },
+        "Response" : {
+          "ResourceMapping" : null,
+          "DataMapping" : {
+            "Type" : "java.util.Map<String, Integer>",
+            "Source" : [ "SummaryMap" ]
+          },
+          "NextTokenPath" : null
+        }
+      },
+      "CreateInstanceProfile" : {
+        "Request" : {
+          "Method" : "createInstanceProfile",
+          "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.CreateInstanceProfileRequest",
+          "IdentifierMappings" : [ ],
+          "AttributeMappings" : [ ],
+          "ParameterMappings" : [ {
+            "Type" : "java.lang.String",
+            "Name" : "InstanceProfileName"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "Path"
+          } ],
+          "ConstantMappings" : [ ],
+          "TokenPath" : null,
+          "LimitPath" : null
+        },
+        "Response" : {
+          "ResourceMapping" : {
+            "Type" : "InstanceProfile",
+            "ParentIdentifierMappings" : [ ],
+            "RequestParamMappings" : [ {
+              "Source" : [ "InstanceProfileName" ],
+              "Target" : "Name"
+            } ],
+            "ResponseIdentifierMappings" : [ ],
+            "Path" : [ "InstanceProfile" ]
+          },
+          "DataMapping" : null,
+          "NextTokenPath" : null
+        }
+      },
+      "CreateSamlProvider" : {
+        "Request" : {
+          "Method" : "createSAMLProvider",
+          "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.CreateSAMLProviderRequest",
+          "IdentifierMappings" : [ ],
+          "AttributeMappings" : [ ],
+          "ParameterMappings" : [ {
+            "Type" : "java.lang.String",
+            "Name" : "SAMLMetadataDocument"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "Name"
+          } ],
+          "ConstantMappings" : [ ],
+          "TokenPath" : null,
+          "LimitPath" : null
+        },
+        "Response" : {
+          "ResourceMapping" : {
+            "Type" : "SamlProvider",
+            "ParentIdentifierMappings" : [ ],
+            "RequestParamMappings" : [ ],
+            "ResponseIdentifierMappings" : [ {
+              "Source" : [ "SAMLProviderArn" ],
+              "Target" : "Arn"
+            } ],
+            "Path" : null
+          },
+          "DataMapping" : null,
+          "NextTokenPath" : null
+        }
+      },
+      "CreateAccountPasswordPolicy" : {
+        "Request" : {
+          "Method" : "updateAccountPasswordPolicy",
+          "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UpdateAccountPasswordPolicyRequest",
+          "IdentifierMappings" : [ ],
+          "AttributeMappings" : [ ],
+          "ParameterMappings" : [ {
+            "Type" : "java.lang.Integer",
+            "Name" : "MinimumPasswordLength"
+          }, {
+            "Type" : "java.lang.Boolean",
+            "Name" : "RequireSymbols"
+          }, {
+            "Type" : "java.lang.Boolean",
+            "Name" : "RequireNumbers"
+          }, {
+            "Type" : "java.lang.Boolean",
+            "Name" : "RequireUppercaseCharacters"
+          }, {
+            "Type" : "java.lang.Boolean",
+            "Name" : "RequireLowercaseCharacters"
+          }, {
+            "Type" : "java.lang.Boolean",
+            "Name" : "AllowUsersToChangePassword"
+          }, {
+            "Type" : "java.lang.Integer",
+            "Name" : "MaxPasswordAge"
+          }, {
+            "Type" : "java.lang.Integer",
+            "Name" : "PasswordReusePrevention"
+          }, {
+            "Type" : "java.lang.Boolean",
+            "Name" : "HardExpiry"
+          } ],
+          "ConstantMappings" : [ ],
+          "TokenPath" : null,
+          "LimitPath" : null
+        },
+        "Response" : null
+      },
+      "CreateAccountAlias" : {
+        "Request" : {
+          "Method" : "createAccountAlias",
+          "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.CreateAccountAliasRequest",
+          "IdentifierMappings" : [ ],
+          "AttributeMappings" : [ ],
+          "ParameterMappings" : [ {
+            "Type" : "java.lang.String",
+            "Name" : "AccountAlias"
+          } ],
+          "ConstantMappings" : [ ],
+          "TokenPath" : null,
+          "LimitPath" : null
+        },
+        "Response" : null
+      },
+      "CreateServerCertificate" : {
+        "Request" : {
+          "Method" : "uploadServerCertificate",
+          "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UploadServerCertificateRequest",
+          "IdentifierMappings" : [ ],
+          "AttributeMappings" : [ ],
+          "ParameterMappings" : [ {
+            "Type" : "java.lang.String",
+            "Name" : "Path"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "ServerCertificateName"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "CertificateBody"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "PrivateKey"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "CertificateChain"
+          } ],
+          "ConstantMappings" : [ ],
+          "TokenPath" : null,
+          "LimitPath" : null
+        },
+        "Response" : {
+          "ResourceMapping" : {
+            "Type" : "ServerCertificate",
+            "ParentIdentifierMappings" : [ ],
+            "RequestParamMappings" : [ {
+              "Source" : [ "ServerCertificateName" ],
+              "Target" : "Name"
+            } ],
+            "ResponseIdentifierMappings" : [ ],
+            "Path" : null
+          },
+          "DataMapping" : null,
+          "NextTokenPath" : null
+        }
+      },
+      "CreateSigningCertificate" : {
+        "Request" : {
+          "Method" : "uploadSigningCertificate",
+          "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UploadSigningCertificateRequest",
+          "IdentifierMappings" : [ ],
+          "AttributeMappings" : [ ],
+          "ParameterMappings" : [ {
+            "Type" : "java.lang.String",
+            "Name" : "UserName"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "CertificateBody"
+          } ],
+          "ConstantMappings" : [ ],
+          "TokenPath" : null,
+          "LimitPath" : null
+        },
+        "Response" : {
+          "ResourceMapping" : {
+            "Type" : "SigningCertificate",
+            "ParentIdentifierMappings" : [ ],
+            "RequestParamMappings" : [ ],
+            "ResponseIdentifierMappings" : [ {
+              "Source" : [ "Certificate", "CertificateId" ],
+              "Target" : "Id"
+            } ],
+            "Path" : [ "Certificate" ]
+          },
+          "DataMapping" : null,
+          "NextTokenPath" : null
+        }
+      }
+    }
+  }
+}
