@@ -19,7 +19,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -319,9 +318,9 @@ final class ActionUtils {
 
         int listSize = -1;
 
-        for (PathSourceMapping m : mapping.getRequestParamMappings()) {
+        for (PathSourceMapping m : mapping.getResponseIdentifierMappings()) {
             List<Object> values =
-                    ReflectionUtils.getAllByPath(request, m.getSource());
+                    ReflectionUtils.getAllByPath(result, m.getSource());
 
             if (listSize == -1) {
                 listSize = values.size();
@@ -334,16 +333,40 @@ final class ActionUtils {
             ids.put(m.getTarget(), values);
         }
 
-        for (PathSourceMapping m : mapping.getResponseIdentifierMappings()) {
-            List<Object> values =
-                    ReflectionUtils.getAllByPath(result, m.getSource());
+        for (PathSourceMapping m : mapping.getRequestParamMappings()) {
+            List<Object> values;
 
-            if (listSize == -1) {
-                listSize = values.size();
-            } else if (values.size() != listSize) {
-                throw new IllegalStateException(
-                        "List size mismatch! " + listSize + " vs "
-                        + values.size());
+            /*
+             * When the response contains multiple resources, the source of a
+             * request param mapping could be either single-valued (e.g. in
+             * Glacier.getVaults() action, the single-valued "AccountId" param
+             * is mapped to the "AccountId"s of all the returned vaults), or
+             * multi-valued (e.g. in EC2.Instance.createTags() action, multiple
+             * "Tag[].Key" parameters are mapped to the "Key"s of all the
+             * returned Tag resources.
+             */
+            if (m.isMultiValued()) {
+                values =
+                        ReflectionUtils.getAllByPath(request, m.getSource());
+
+                if (listSize == -1) {
+                    listSize = values.size();
+                } else if (values.size() != listSize) {
+                    throw new IllegalStateException(
+                            "List size mismatch! " + listSize + " vs "
+                            + values.size());
+                }
+            }
+            else {
+                // If single valued, augment the value into a list of ids, which
+                // match the length of the ids extracted from response.
+                Object singleValue =
+                        ReflectionUtils.getByPath(request, m.getSource());
+
+                values = new ArrayList<Object>(listSize);
+                for (int i = 0; i < listSize; i++ ) {
+                    values.add(singleValue);
+                }
             }
 
             ids.put(m.getTarget(), values);
