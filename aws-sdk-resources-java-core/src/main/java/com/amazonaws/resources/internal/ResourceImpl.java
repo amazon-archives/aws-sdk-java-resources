@@ -24,13 +24,14 @@ import com.amazonaws.AmazonWebServiceRequest;
 import com.amazonaws.resources.ResultCapture;
 import com.amazonaws.resources.internal.model.ActionModel;
 import com.amazonaws.resources.internal.model.CollectionModel;
-import com.amazonaws.resources.internal.model.EmbeddedIdentifierMapping;
 import com.amazonaws.resources.internal.model.FlatMapping;
 import com.amazonaws.resources.internal.model.IdentifierModel;
+import com.amazonaws.resources.internal.model.PathSourceMapping;
 import com.amazonaws.resources.internal.model.ReferenceModel;
 import com.amazonaws.resources.internal.model.ResourceModel;
 import com.amazonaws.resources.internal.model.ServiceModel;
 import com.amazonaws.resources.internal.model.SubResourceGetterModel;
+import com.amazonaws.resources.internal.model.Utils;
 
 /**
  * A generic implementation of an arbitrary resource type. Wraps a set of
@@ -125,6 +126,17 @@ public final class ResourceImpl implements ActionContext {
             load(null, null);
         }
         return attributes.get(name);
+    }
+
+    private Object getAttributeDataByPath(List<String> path) {
+        Object attrObj = getAttribute(path.get(0));
+
+        List<String> pathInAttr = path.subList(1, path.size());
+        if (Utils.isMultiValuedPath(path)) {
+            return ReflectionUtils.getAllByPath(attrObj, pathInAttr);
+        } else {
+            return ReflectionUtils.getByPath(attrObj, pathInAttr);
+        }
     }
 
     /**
@@ -225,10 +237,19 @@ public final class ResourceImpl implements ActionContext {
         }
 
         if (reference.getAttributeMappings() != null) {
-            for (EmbeddedIdentifierMapping mapping
+            for (PathSourceMapping mapping
                     : reference.getAttributeMappings()) {
 
-                Object value = getAttribute(mapping.getSource());
+                // AttributeMapping inside a resource reference has to be
+                // single-valued
+                if (mapping.isMultiValued()) {
+                    throw new IllegalStateException(
+                            "The " + name + " reference model has an invalid "
+                            + "attribute-mapping where the attribute source "
+                            + mapping.getSource() + " is multi-valued.");
+                }
+
+                Object value = getAttributeDataByPath(mapping.getSource());
                 if (value == null) {
                     // TODO: Check whether the identifier is nullable; if so
                     // it may be fine for this to be null...
@@ -282,12 +303,12 @@ public final class ResourceImpl implements ActionContext {
         int listSize = -1;
 
         if (reference.getAttributeMappings() != null) {
-            for (EmbeddedIdentifierMapping mapping
+            for (PathSourceMapping mapping
                     : reference.getAttributeMappings()) {
 
                 if (mapping.isMultiValued()) {
                     List<?> value =
-                            (List<?>) getAttribute(mapping.getSource());
+                            (List<?>) getAttributeDataByPath(mapping.getSource());
                     if (listSize < 0) {
                         listSize = value.size();
                     } else {
@@ -299,7 +320,7 @@ public final class ResourceImpl implements ActionContext {
                     }
                     ids.put(mapping.getTarget(), value);
                 } else {
-                    Object value = getAttribute(mapping.getSource());
+                    Object value = getAttributeDataByPath(mapping.getSource());
                     sharedIds.put(mapping.getTarget(), value);
                 }
             }

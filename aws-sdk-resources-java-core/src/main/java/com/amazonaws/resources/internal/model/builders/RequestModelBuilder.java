@@ -19,17 +19,20 @@ import java.util.List;
 
 import com.amazonaws.resources.internal.model.ParameterModel;
 import com.amazonaws.resources.internal.model.PathTargetMapping;
+import com.amazonaws.resources.internal.model.ConvenientMethod;
 import com.amazonaws.resources.internal.model.RequestModel;
 
 public class RequestModelBuilder implements Builder<RequestModel> {
 
     private String method;
     private String clientRequestType;
+    private String clientResponseType;
 
     private List<PathTargetMapping> identifierMappings;
     private List<PathTargetMapping> attributeMappings;
     private List<ParameterModel> parameterMappings;
     private List<PathTargetMapping> constantMappings;
+    private List<ConvenientMethod> convenientMethods;
     private List<String> tokenPath;
     private List<String> limitPath;
 
@@ -47,6 +50,10 @@ public class RequestModelBuilder implements Builder<RequestModel> {
 
     public void setClientRequestType(String clientRequestType) {
         this.clientRequestType = clientRequestType;
+    }
+
+    public void setClientResponseType(String clientResponseType) {
+        this.clientResponseType = clientResponseType;
     }
 
     public List<PathTargetMapping> getIdentifierMappings() {
@@ -71,6 +78,14 @@ public class RequestModelBuilder implements Builder<RequestModel> {
 
     public void setParameterMappings(List<ParameterModel> parameterMappings) {
         this.parameterMappings = parameterMappings;
+    }
+
+    public List<ConvenientMethod> getConvenientMethods() {
+        return convenientMethods;
+    }
+
+    public void setConvenientMethods(List<ConvenientMethod> convenientMethods) {
+        this.convenientMethods = convenientMethods;
     }
 
     public List<PathTargetMapping> getConstantMappings() {
@@ -125,11 +140,18 @@ public class RequestModelBuilder implements Builder<RequestModel> {
         constantMappings.add(pathTargetMapping);
     }
 
+    public void addConvenientMethod(ConvenientMethod convenientMethod) {
+        if (convenientMethods == null) {
+            convenientMethods = new ArrayList<ConvenientMethod>();
+        }
+        convenientMethods.add(convenientMethod);
+    }
+
     @Override
     public RequestModel build() {
-        return new RequestModel(method, clientRequestType, identifierMappings,
-                attributeMappings, parameterMappings, constantMappings,
-                tokenPath, limitPath);
+        return new RequestModel(method, clientRequestType, clientResponseType,
+                identifierMappings, attributeMappings, parameterMappings,
+                constantMappings, convenientMethods, tokenPath, limitPath);
     }
 
 }

@@ -72,26 +72,23 @@ public class ResourceMapping {
 
         // If we've got a data path, just check if that is multi-valued.
         if (path != null) {
-            return isMultiValued(path);
+            return Utils.isMultiValuedPath(path);
         }
 
-        // Otherwise check whether any of the response identifier mappings
-        // are multi-valued.
+        // Otherwise check whether any of the request parameter mappings and
+        // response identifier mappings are multi-valued.
+        for (PathSourceMapping mapping : requestParamMappings) {
+            if (mapping.isMultiValued()) {
+                return true;
+            }
+        }
+
         for (PathSourceMapping mapping : responseIdentifierMappings) {
-            if (isMultiValued(mapping.getSource())) {
+            if (mapping.isMultiValued()) {
                 return true;
             }
         }
 
-        return false;
-    }
-
-    private static boolean isMultiValued(List<String> expression) {
-        for (String element : expression) {
-            if ("*".equals(element) || element.startsWith("*:")) {
-                return true;
-            }
-        }
         return false;
     }
 

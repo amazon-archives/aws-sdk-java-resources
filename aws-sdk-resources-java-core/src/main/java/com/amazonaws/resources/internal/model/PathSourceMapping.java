@@ -17,6 +17,7 @@ package com.amazonaws.resources.internal.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -44,6 +45,11 @@ public class PathSourceMapping {
     @JsonProperty(value="Target")
     public String getTarget() {
         return target;
+    }
+
+    @JsonIgnore
+    public boolean isMultiValued() {
+        return Utils.isMultiValuedPath(source);
     }
 
     @Override

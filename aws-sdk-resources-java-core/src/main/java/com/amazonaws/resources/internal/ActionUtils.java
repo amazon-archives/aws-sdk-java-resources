@@ -19,6 +19,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -250,11 +251,15 @@ final class ActionUtils {
             AmazonWebServiceRequest request,
             Object result) {
 
+        // Identifier sourced from the parent's resource id can only have one
+        // value.
         Map<String, Object> ids =
-                extractSharedIdentifiers(context, mapping, request);
+                extractParentIdentifiers(context, mapping, request);
 
+        // Identifier extracted from the request or response data could be
+        // multi-valued.
         Map<String, List<Object>> multiIds =
-                extractResponseIdentifiers(mapping, result);
+                extractMultiValuedIdentifiers(mapping, request, result);
 
         if (multiIds.isEmpty()) {
             return Collections.singletonList(ids);
@@ -283,7 +288,7 @@ final class ActionUtils {
         return rval;
     }
 
-    private static Map<String, Object> extractSharedIdentifiers(
+    private static Map<String, Object> extractParentIdentifiers(
             ActionContext context,
             ResourceMapping mapping,
             AmazonWebServiceRequest request) {
@@ -302,28 +307,33 @@ final class ActionUtils {
             ids.put(m.getTarget(), value);
         }
 
-        for (PathSourceMapping m : mapping.getRequestParamMappings()) {
-            Object value = ReflectionUtils.getByPath(request, m.getSource());
-            if (value == null) {
-                throw new IllegalStateException(
-                        "This action has a mapping for the " + m.getSource()
-                        + " request parameter, but you somehow managed to "
-                        + "sneak through a request without that parameter "
-                        + "specified!");
-            }
-            ids.put(m.getTarget(), value);
-        }
-
         return ids;
     }
 
-    private static Map<String, List<Object>> extractResponseIdentifiers(
+    private static Map<String, List<Object>> extractMultiValuedIdentifiers(
             ResourceMapping mapping,
+            AmazonWebServiceRequest request,
             Object result) {
 
         Map<String, List<Object>> ids = new HashMap<>();
 
         int listSize = -1;
+
+        for (PathSourceMapping m : mapping.getRequestParamMappings()) {
+            List<Object> values =
+                    ReflectionUtils.getAllByPath(request, m.getSource());
+
+            if (listSize == -1) {
+                listSize = values.size();
+            } else if (values.size() != listSize) {
+                throw new IllegalStateException(
+                        "List size mismatch! " + listSize + " vs "
+                        + values.size());
+            }
+
+            ids.put(m.getTarget(), values);
+        }
+
         for (PathSourceMapping m : mapping.getResponseIdentifierMappings()) {
             List<Object> values =
                     ReflectionUtils.getAllByPath(result, m.getSource());

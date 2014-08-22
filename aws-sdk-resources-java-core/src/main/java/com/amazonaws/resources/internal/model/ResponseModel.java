@@ -20,8 +20,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * The model definition of a response. A response describes how to parse a
- * raw client-level response to get the resource-level result of an action.
+ * The model definition of an action result. An action result describes how to
+ * collect data (from either the low-level client response, or the request
+ * parameters, or the parent resource object) to create the resource-level
+ * result of an action.
  */
 public class ResponseModel {
 
