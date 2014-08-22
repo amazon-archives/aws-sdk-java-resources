@@ -19,6 +19,8 @@ import java.util.List;
 import com.amazonaws.resources.ResultCapture;
 import com.amazonaws.resources.ec2.Instance;
 import com.amazonaws.resources.ec2.InstanceCollection;
+import com.amazonaws.resources.ec2.NetworkInterface;
+import com.amazonaws.resources.ec2.NetworkInterfaceCollection;
 import com.amazonaws.resources.ec2.Subnet;
 import com.amazonaws.resources.ec2.Vpc;
 import com.amazonaws.resources.internal.ActionResult;
@@ -26,8 +28,12 @@ import com.amazonaws.resources.internal.CodecUtils;
 import com.amazonaws.resources.internal.ResourceCodec;
 import com.amazonaws.resources.internal.ResourceCollectionImpl;
 import com.amazonaws.resources.internal.ResourceImpl;
+import com.amazonaws.services.ec2.model.CreateNetworkInterfaceRequest;
+import com.amazonaws.services.ec2.model.CreateNetworkInterfaceResult;
+import com.amazonaws.services.ec2.model.CreateTagsRequest;
 import com.amazonaws.services.ec2.model.DeleteSubnetRequest;
 import com.amazonaws.services.ec2.model.DescribeInstancesRequest;
+import com.amazonaws.services.ec2.model.DescribeNetworkInterfacesRequest;
 import com.amazonaws.services.ec2.model.DescribeSubnetsRequest;
 import com.amazonaws.services.ec2.model.DescribeSubnetsResult;
 import com.amazonaws.services.ec2.model.RunInstancesRequest;
@@ -91,11 +97,6 @@ class SubnetImpl implements Subnet {
     }
 
     @Override
-    public String getSubnetId() {
-        return (String) resource.getAttribute("SubnetId");
-    }
-
-    @Override
     public Boolean getDefaultForAz() {
         return (Boolean) resource.getAttribute("DefaultForAz");
     }
@@ -123,6 +124,22 @@ class SubnetImpl implements Subnet {
     }
 
     @Override
+    public NetworkInterfaceCollection getNetworkInterfaces() {
+        return getNetworkInterfaces(null);
+    }
+
+    @Override
+    public NetworkInterfaceCollection getNetworkInterfaces(
+            DescribeNetworkInterfacesRequest request) {
+
+        ResourceCollectionImpl result =
+                resource.getCollection("NetworkInterfaces", request);
+
+        if (result == null) return null;
+        return new NetworkInterfaceCollectionImpl(result);
+    }
+
+    @Override
     public InstanceCollection getInstances() {
         return getInstances(null);
     }
@@ -137,6 +154,24 @@ class SubnetImpl implements Subnet {
     }
 
     @Override
+    public NetworkInterface createNetworkInterface(CreateNetworkInterfaceRequest
+            request) {
+
+        return createNetworkInterface(request, null);
+    }
+
+    @Override
+    public NetworkInterface createNetworkInterface(CreateNetworkInterfaceRequest
+            request, ResultCapture<CreateNetworkInterfaceResult> extractor) {
+
+        ActionResult result = resource.performAction("CreateNetworkInterface",
+                request, extractor);
+
+        if (result == null) return null;
+        return new NetworkInterfaceImpl(result.getResource());
+    }
+
+    @Override
     public void delete(DeleteSubnetRequest request) {
         delete(request, null);
     }
@@ -146,6 +181,49 @@ class SubnetImpl implements Subnet {
             extractor) {
 
         resource.performAction("Delete", request, extractor);
+    }
+
+    @Override
+    public void delete() {
+        delete((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void delete(ResultCapture<Void> extractor) {
+        DeleteSubnetRequest request = new DeleteSubnetRequest();
+        delete(request, extractor);
+    }
+
+    @Override
+    public List<com.amazonaws.resources.ec2.Tag> createTags(CreateTagsRequest
+            request) {
+
+        return createTags(request, null);
+    }
+
+    @Override
+    public List<com.amazonaws.resources.ec2.Tag> createTags(CreateTagsRequest
+            request, ResultCapture<Void> extractor) {
+
+        ActionResult result = resource.performAction("CreateTags", request,
+                extractor);
+
+        if (result == null) return null;
+        return CodecUtils.transform(result.getResources(), TagImpl.CODEC);
+    }
+
+    @Override
+    public List<com.amazonaws.resources.ec2.Tag> createTags(List<Tag> tags) {
+        return createTags(tags, (ResultCapture<Void>)null);
+    }
+
+    @Override
+    public List<com.amazonaws.resources.ec2.Tag> createTags(List<Tag> tags,
+            ResultCapture<Void> extractor) {
+
+        CreateTagsRequest request = new CreateTagsRequest()
+            .withTags(tags);
+        return createTags(request, extractor);
     }
 
     @Override

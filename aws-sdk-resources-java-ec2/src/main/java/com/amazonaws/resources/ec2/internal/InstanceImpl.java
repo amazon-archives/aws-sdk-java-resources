@@ -18,14 +18,30 @@ import java.util.Date;
 import java.util.List;
 
 import com.amazonaws.resources.ResultCapture;
+import com.amazonaws.resources.ec2.Image;
 import com.amazonaws.resources.ec2.Instance;
+import com.amazonaws.resources.ec2.KeyPair;
+import com.amazonaws.resources.ec2.PlacementGroup;
 import com.amazonaws.resources.ec2.Subnet;
+import com.amazonaws.resources.ec2.VolumeCollection;
 import com.amazonaws.resources.ec2.Vpc;
 import com.amazonaws.resources.internal.ActionResult;
+import com.amazonaws.resources.internal.CodecUtils;
 import com.amazonaws.resources.internal.ResourceCodec;
+import com.amazonaws.resources.internal.ResourceCollectionImpl;
 import com.amazonaws.resources.internal.ResourceImpl;
+import com.amazonaws.services.ec2.model.AttachVolumeRequest;
+import com.amazonaws.services.ec2.model.AttachVolumeResult;
+import com.amazonaws.services.ec2.model.CreateImageRequest;
+import com.amazonaws.services.ec2.model.CreateImageResult;
+import com.amazonaws.services.ec2.model.CreateTagsRequest;
+import com.amazonaws.services.ec2.model.DescribeInstanceAttributeRequest;
+import com.amazonaws.services.ec2.model.DescribeInstanceAttributeResult;
 import com.amazonaws.services.ec2.model.DescribeInstancesRequest;
 import com.amazonaws.services.ec2.model.DescribeInstancesResult;
+import com.amazonaws.services.ec2.model.DescribeVolumesRequest;
+import com.amazonaws.services.ec2.model.DetachVolumeRequest;
+import com.amazonaws.services.ec2.model.DetachVolumeResult;
 import com.amazonaws.services.ec2.model.GetConsoleOutputRequest;
 import com.amazonaws.services.ec2.model.GetConsoleOutputResult;
 import com.amazonaws.services.ec2.model.GetPasswordDataRequest;
@@ -125,11 +141,6 @@ class InstanceImpl implements Instance {
     @Override
     public Integer getAmiLaunchIndex() {
         return (Integer) resource.getAttribute("AmiLaunchIndex");
-    }
-
-    @Override
-    public String getInstanceId() {
-        return (String) resource.getAttribute("InstanceId");
     }
 
     @Override
@@ -286,10 +297,45 @@ class InstanceImpl implements Instance {
     }
 
     @Override
+    public KeyPair getKeyPair() {
+        ResourceImpl result = resource.getReference("KeyPair");
+        if (result == null) return null;
+        return new KeyPairImpl(result);
+    }
+
+    @Override
+    public Image getImage() {
+        ResourceImpl result = resource.getReference("Image");
+        if (result == null) return null;
+        return new ImageImpl(result);
+    }
+
+    @Override
+    public PlacementGroup getPlacementGroup() {
+        ResourceImpl result = resource.getReference("PlacementGroup");
+        if (result == null) return null;
+        return new PlacementGroupImpl(result);
+    }
+
+    @Override
     public Subnet getSubnet() {
         ResourceImpl result = resource.getReference("Subnet");
         if (result == null) return null;
         return new SubnetImpl(result);
+    }
+
+    @Override
+    public VolumeCollection getVolumes() {
+        return getVolumes(null);
+    }
+
+    @Override
+    public VolumeCollection getVolumes(DescribeVolumesRequest request) {
+        ResourceCollectionImpl result = resource.getCollection("Volumes",
+                request);
+
+        if (result == null) return null;
+        return new VolumeCollectionImpl(result);
     }
 
     @Override
@@ -311,6 +357,19 @@ class InstanceImpl implements Instance {
     }
 
     @Override
+    public TerminateInstancesResult terminate() {
+        return terminate((ResultCapture<TerminateInstancesResult>)null);
+    }
+
+    @Override
+    public TerminateInstancesResult terminate(
+            ResultCapture<TerminateInstancesResult> extractor) {
+
+        TerminateInstancesRequest request = new TerminateInstancesRequest();
+        return terminate(request, extractor);
+    }
+
+    @Override
     public void resetRamdisk(ResetInstanceAttributeRequest request) {
         resetRamdisk(request, null);
     }
@@ -320,6 +379,19 @@ class InstanceImpl implements Instance {
             ResultCapture<Void> extractor) {
 
         resource.performAction("ResetRamdisk", request, extractor);
+    }
+
+    @Override
+    public void resetRamdisk() {
+        resetRamdisk((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void resetRamdisk(ResultCapture<Void> extractor) {
+        ResetInstanceAttributeRequest request = new
+                ResetInstanceAttributeRequest();
+
+        resetRamdisk(request, extractor);
     }
 
     @Override
@@ -336,6 +408,19 @@ class InstanceImpl implements Instance {
 
         if (result == null) return null;
         return (StartInstancesResult) result.getData();
+    }
+
+    @Override
+    public StartInstancesResult start() {
+        return start((ResultCapture<StartInstancesResult>)null);
+    }
+
+    @Override
+    public StartInstancesResult start(ResultCapture<StartInstancesResult>
+            extractor) {
+
+        StartInstancesRequest request = new StartInstancesRequest();
+        return start(request, extractor);
     }
 
     @Override
@@ -357,6 +442,19 @@ class InstanceImpl implements Instance {
     }
 
     @Override
+    public GetConsoleOutputResult consoleOutput() {
+        return consoleOutput((ResultCapture<GetConsoleOutputResult>)null);
+    }
+
+    @Override
+    public GetConsoleOutputResult consoleOutput(
+            ResultCapture<GetConsoleOutputResult> extractor) {
+
+        GetConsoleOutputRequest request = new GetConsoleOutputRequest();
+        return consoleOutput(request, extractor);
+    }
+
+    @Override
     public void reportStatus(ReportInstanceStatusRequest request) {
         reportStatus(request, null);
     }
@@ -366,6 +464,84 @@ class InstanceImpl implements Instance {
             ResultCapture<Void> extractor) {
 
         resource.performAction("ReportStatus", request, extractor);
+    }
+
+    @Override
+    public DetachVolumeResult detachVolume(DetachVolumeRequest request) {
+        return detachVolume(request, null);
+    }
+
+    @Override
+    public DetachVolumeResult detachVolume(DetachVolumeRequest request,
+            ResultCapture<DetachVolumeResult> extractor) {
+
+        ActionResult result = resource.performAction("DetachVolume", request,
+                extractor);
+
+        if (result == null) return null;
+        return (DetachVolumeResult) result.getData();
+    }
+
+    @Override
+    public AttachVolumeResult attachVolume(AttachVolumeRequest request) {
+        return attachVolume(request, null);
+    }
+
+    @Override
+    public AttachVolumeResult attachVolume(AttachVolumeRequest request,
+            ResultCapture<AttachVolumeResult> extractor) {
+
+        ActionResult result = resource.performAction("AttachVolume", request,
+                extractor);
+
+        if (result == null) return null;
+        return (AttachVolumeResult) result.getData();
+    }
+
+    @Override
+    public AttachVolumeResult attachVolume(String device, String volumeId) {
+        return attachVolume(device, volumeId,
+                (ResultCapture<AttachVolumeResult>)null);
+    }
+
+    @Override
+    public AttachVolumeResult attachVolume(String device, String volumeId,
+            ResultCapture<AttachVolumeResult> extractor) {
+
+        AttachVolumeRequest request = new AttachVolumeRequest()
+            .withDevice(device)
+            .withVolumeId(volumeId);
+        return attachVolume(request, extractor);
+    }
+
+    @Override
+    public Image createImage(CreateImageRequest request) {
+        return createImage(request, null);
+    }
+
+    @Override
+    public Image createImage(CreateImageRequest request,
+            ResultCapture<CreateImageResult> extractor) {
+
+        ActionResult result = resource.performAction("CreateImage", request,
+                extractor);
+
+        if (result == null) return null;
+        return new ImageImpl(result.getResource());
+    }
+
+    @Override
+    public Image createImage(String name) {
+        return createImage(name, (ResultCapture<CreateImageResult>)null);
+    }
+
+    @Override
+    public Image createImage(String name, ResultCapture<CreateImageResult>
+            extractor) {
+
+        CreateImageRequest request = new CreateImageRequest()
+            .withName(name);
+        return createImage(request, extractor);
     }
 
     @Override
@@ -385,6 +561,19 @@ class InstanceImpl implements Instance {
     }
 
     @Override
+    public StopInstancesResult stop() {
+        return stop((ResultCapture<StopInstancesResult>)null);
+    }
+
+    @Override
+    public StopInstancesResult stop(ResultCapture<StopInstancesResult> extractor
+            ) {
+
+        StopInstancesRequest request = new StopInstancesRequest();
+        return stop(request, extractor);
+    }
+
+    @Override
     public GetPasswordDataResult passwordData(GetPasswordDataRequest request) {
         return passwordData(request, null);
     }
@@ -401,6 +590,19 @@ class InstanceImpl implements Instance {
     }
 
     @Override
+    public GetPasswordDataResult passwordData() {
+        return passwordData((ResultCapture<GetPasswordDataResult>)null);
+    }
+
+    @Override
+    public GetPasswordDataResult passwordData(
+            ResultCapture<GetPasswordDataResult> extractor) {
+
+        GetPasswordDataRequest request = new GetPasswordDataRequest();
+        return passwordData(request, extractor);
+    }
+
+    @Override
     public void resetAttribute(ResetInstanceAttributeRequest request) {
         resetAttribute(request, null);
     }
@@ -410,6 +612,22 @@ class InstanceImpl implements Instance {
             ResultCapture<Void> extractor) {
 
         resource.performAction("ResetAttribute", request, extractor);
+    }
+
+    @Override
+    public void resetAttribute(String attribute) {
+        resetAttribute(attribute, (ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void resetAttribute(String attribute, ResultCapture<Void> extractor)
+            {
+
+        ResetInstanceAttributeRequest request = new
+                ResetInstanceAttributeRequest()
+
+            .withAttribute(attribute);
+        resetAttribute(request, extractor);
     }
 
     @Override
@@ -429,15 +647,16 @@ class InstanceImpl implements Instance {
     }
 
     @Override
-    public void resetSourceDestCheck(ResetInstanceAttributeRequest request) {
-        resetSourceDestCheck(request, null);
+    public MonitorInstancesResult monitor() {
+        return monitor((ResultCapture<MonitorInstancesResult>)null);
     }
 
     @Override
-    public void resetSourceDestCheck(ResetInstanceAttributeRequest request,
-            ResultCapture<Void> extractor) {
+    public MonitorInstancesResult monitor(ResultCapture<MonitorInstancesResult>
+            extractor) {
 
-        resource.performAction("ResetSourceDestCheck", request, extractor);
+        MonitorInstancesRequest request = new MonitorInstancesRequest();
+        return monitor(request, extractor);
     }
 
     @Override
@@ -450,6 +669,42 @@ class InstanceImpl implements Instance {
             extractor) {
 
         resource.performAction("Reboot", request, extractor);
+    }
+
+    @Override
+    public void reboot() {
+        reboot((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void reboot(ResultCapture<Void> extractor) {
+        RebootInstancesRequest request = new RebootInstancesRequest();
+        reboot(request, extractor);
+    }
+
+    @Override
+    public void resetSourceDestCheck(ResetInstanceAttributeRequest request) {
+        resetSourceDestCheck(request, null);
+    }
+
+    @Override
+    public void resetSourceDestCheck(ResetInstanceAttributeRequest request,
+            ResultCapture<Void> extractor) {
+
+        resource.performAction("ResetSourceDestCheck", request, extractor);
+    }
+
+    @Override
+    public void resetSourceDestCheck() {
+        resetSourceDestCheck((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void resetSourceDestCheck(ResultCapture<Void> extractor) {
+        ResetInstanceAttributeRequest request = new
+                ResetInstanceAttributeRequest();
+
+        resetSourceDestCheck(request, extractor);
     }
 
     @Override
@@ -471,6 +726,19 @@ class InstanceImpl implements Instance {
     }
 
     @Override
+    public UnmonitorInstancesResult unmonitor() {
+        return unmonitor((ResultCapture<UnmonitorInstancesResult>)null);
+    }
+
+    @Override
+    public UnmonitorInstancesResult unmonitor(
+            ResultCapture<UnmonitorInstancesResult> extractor) {
+
+        UnmonitorInstancesRequest request = new UnmonitorInstancesRequest();
+        return unmonitor(request, extractor);
+    }
+
+    @Override
     public void modifyAttribute(ModifyInstanceAttributeRequest request) {
         modifyAttribute(request, null);
     }
@@ -483,6 +751,90 @@ class InstanceImpl implements Instance {
     }
 
     @Override
+    public void modifyAttribute(String attribute) {
+        modifyAttribute(attribute, (ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void modifyAttribute(String attribute, ResultCapture<Void> extractor)
+            {
+
+        ModifyInstanceAttributeRequest request = new
+                ModifyInstanceAttributeRequest()
+
+            .withAttribute(attribute);
+        modifyAttribute(request, extractor);
+    }
+
+    @Override
+    public DescribeInstanceAttributeResult describeAttribute(
+            DescribeInstanceAttributeRequest request) {
+
+        return describeAttribute(request, null);
+    }
+
+    @Override
+    public DescribeInstanceAttributeResult describeAttribute(
+            DescribeInstanceAttributeRequest request,
+            ResultCapture<DescribeInstanceAttributeResult> extractor) {
+
+        ActionResult result = resource.performAction("DescribeAttribute",
+                request, extractor);
+
+        if (result == null) return null;
+        return (DescribeInstanceAttributeResult) result.getData();
+    }
+
+    @Override
+    public DescribeInstanceAttributeResult describeAttribute(String attribute) {
+        return describeAttribute(attribute,
+                (ResultCapture<DescribeInstanceAttributeResult>)null);
+    }
+
+    @Override
+    public DescribeInstanceAttributeResult describeAttribute(String attribute,
+            ResultCapture<DescribeInstanceAttributeResult> extractor) {
+
+        DescribeInstanceAttributeRequest request = new
+                DescribeInstanceAttributeRequest()
+
+            .withAttribute(attribute);
+        return describeAttribute(request, extractor);
+    }
+
+    @Override
+    public List<com.amazonaws.resources.ec2.Tag> createTags(CreateTagsRequest
+            request) {
+
+        return createTags(request, null);
+    }
+
+    @Override
+    public List<com.amazonaws.resources.ec2.Tag> createTags(CreateTagsRequest
+            request, ResultCapture<Void> extractor) {
+
+        ActionResult result = resource.performAction("CreateTags", request,
+                extractor);
+
+        if (result == null) return null;
+        return CodecUtils.transform(result.getResources(), TagImpl.CODEC);
+    }
+
+    @Override
+    public List<com.amazonaws.resources.ec2.Tag> createTags(List<Tag> tags) {
+        return createTags(tags, (ResultCapture<Void>)null);
+    }
+
+    @Override
+    public List<com.amazonaws.resources.ec2.Tag> createTags(List<Tag> tags,
+            ResultCapture<Void> extractor) {
+
+        CreateTagsRequest request = new CreateTagsRequest()
+            .withTags(tags);
+        return createTags(request, extractor);
+    }
+
+    @Override
     public void resetKernel(ResetInstanceAttributeRequest request) {
         resetKernel(request, null);
     }
@@ -492,6 +844,19 @@ class InstanceImpl implements Instance {
             ResultCapture<Void> extractor) {
 
         resource.performAction("ResetKernel", request, extractor);
+    }
+
+    @Override
+    public void resetKernel() {
+        resetKernel((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void resetKernel(ResultCapture<Void> extractor) {
+        ResetInstanceAttributeRequest request = new
+                ResetInstanceAttributeRequest();
+
+        resetKernel(request, extractor);
     }
 
     private static class Codec implements ResourceCodec<Instance> {
