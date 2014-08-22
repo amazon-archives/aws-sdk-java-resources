@@ -14,6 +14,8 @@
  */
 package com.amazonaws.resources.glacier.internal;
 
+import java.io.InputStream;
+
 import com.amazonaws.resources.ResultCapture;
 import com.amazonaws.resources.glacier.Account;
 import com.amazonaws.resources.glacier.Archive;
@@ -244,6 +246,20 @@ class VaultImpl implements Vault {
     }
 
     @Override
+    public Job initiateInventoryRetrieval() {
+        return
+                initiateInventoryRetrieval((ResultCapture<InitiateJobResult>)null);
+    }
+
+    @Override
+    public Job initiateInventoryRetrieval(ResultCapture<InitiateJobResult>
+            extractor) {
+
+        InitiateJobRequest request = new InitiateJobRequest();
+        return initiateInventoryRetrieval(request, extractor);
+    }
+
+    @Override
     public Archive uploadArchive(UploadArchiveRequest request) {
         return uploadArchive(request, null);
     }
@@ -260,6 +276,25 @@ class VaultImpl implements Vault {
     }
 
     @Override
+    public Archive uploadArchive(String checksum, InputStream body, String
+            archiveDescription) {
+
+        return uploadArchive(checksum, body, archiveDescription,
+                (ResultCapture<UploadArchiveResult>)null);
+    }
+
+    @Override
+    public Archive uploadArchive(String checksum, InputStream body, String
+            archiveDescription, ResultCapture<UploadArchiveResult> extractor) {
+
+        UploadArchiveRequest request = new UploadArchiveRequest()
+            .withChecksum(checksum)
+            .withBody(body)
+            .withArchiveDescription(archiveDescription);
+        return uploadArchive(request, extractor);
+    }
+
+    @Override
     public CreateVaultResult create(CreateVaultRequest request) {
         return create(request, null);
     }
@@ -273,6 +308,19 @@ class VaultImpl implements Vault {
 
         if (result == null) return null;
         return (CreateVaultResult) result.getData();
+    }
+
+    @Override
+    public CreateVaultResult create() {
+        return create((ResultCapture<CreateVaultResult>)null);
+    }
+
+    @Override
+    public CreateVaultResult create(ResultCapture<CreateVaultResult> extractor)
+            {
+
+        CreateVaultRequest request = new CreateVaultRequest();
+        return create(request, extractor);
     }
 
     @Override
@@ -295,6 +343,27 @@ class VaultImpl implements Vault {
     }
 
     @Override
+    public MultipartUpload initiateMultipartUpload(String partSize, String
+            archiveDescription) {
+
+        return initiateMultipartUpload(partSize, archiveDescription,
+                (ResultCapture<InitiateMultipartUploadResult>)null);
+    }
+
+    @Override
+    public MultipartUpload initiateMultipartUpload(String partSize, String
+            archiveDescription, ResultCapture<InitiateMultipartUploadResult>
+            extractor) {
+
+        InitiateMultipartUploadRequest request = new
+                InitiateMultipartUploadRequest()
+
+            .withPartSize(partSize)
+            .withArchiveDescription(archiveDescription);
+        return initiateMultipartUpload(request, extractor);
+    }
+
+    @Override
     public void delete(DeleteVaultRequest request) {
         delete(request, null);
     }
@@ -304,6 +373,17 @@ class VaultImpl implements Vault {
             ) {
 
         resource.performAction("Delete", request, extractor);
+    }
+
+    @Override
+    public void delete() {
+        delete((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void delete(ResultCapture<Void> extractor) {
+        DeleteVaultRequest request = new DeleteVaultRequest();
+        delete(request, extractor);
     }
 
     private static class Codec implements ResourceCodec<Vault> {

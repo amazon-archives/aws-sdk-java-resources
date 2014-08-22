@@ -74,6 +74,17 @@ class ArchiveImpl implements Archive {
     }
 
     @Override
+    public void delete() {
+        delete((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void delete(ResultCapture<Void> extractor) {
+        DeleteArchiveRequest request = new DeleteArchiveRequest();
+        delete(request, extractor);
+    }
+
+    @Override
     public Job initiateArchiveRetreival(InitiateJobRequest request) {
         return initiateArchiveRetreival(request, null);
     }
@@ -87,6 +98,19 @@ class ArchiveImpl implements Archive {
 
         if (result == null) return null;
         return new JobImpl(result.getResource());
+    }
+
+    @Override
+    public Job initiateArchiveRetreival() {
+        return initiateArchiveRetreival((ResultCapture<InitiateJobResult>)null);
+    }
+
+    @Override
+    public Job initiateArchiveRetreival(ResultCapture<InitiateJobResult>
+            extractor) {
+
+        InitiateJobRequest request = new InitiateJobRequest();
+        return initiateArchiveRetreival(request, extractor);
     }
 
     private static class Codec implements ResourceCodec<Archive> {

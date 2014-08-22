@@ -38,23 +38,65 @@ public interface SamlProvider {
     boolean isLoaded();
 
     /**
-     * Makes a call to the service to load this resource's attributes.
+     * Makes a call to the service to load this resource's attributes if they
+     * are not loaded yet.
+     *
+     * @return Returns {@code true} if the resource is not yet loaded when this
+     *         method is invoked, which indicates that a service call has been
+     *         made to retrieve the attributes.
+     * @see #load(GetSAMLProviderRequest)
      */
     boolean load();
 
     /**
-     * TODO: Make better javadocs.
+     * Makes a call to the service to load this resource's attributes if they
+     * are not loaded yet.
+     * The following request parameters will be populated from the data of this
+     * <code>SamlProvider</code> resource, and any conflicting parameter value
+     * set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>SAMLProviderArn</code></b>
+     *         - mapped from the <code>Arn</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return Returns {@code true} if the resource is not yet loaded when this
+     *         method is invoked, which indicates that a service call has been
+     *         made to retrieve the attributes.
+     * @see GetSAMLProviderRequest
      */
     boolean load(GetSAMLProviderRequest request);
 
     /**
-     * TODO: Make better javadocs.
+     * Makes a call to the service to load this resource's attributes if they
+     * are not loaded yet, and use a ResultCapture to retrieve the low-level
+     * client response
+     * The following request parameters will be populated from the data of this
+     * <code>SamlProvider</code> resource, and any conflicting parameter value
+     * set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>SAMLProviderArn</code></b>
+     *         - mapped from the <code>Arn</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return Returns {@code true} if the resource is not yet loaded when this
+     *         method is invoked, which indicates that a service call has been
+     *         made to retrieve the attributes.
+     * @see GetSAMLProviderRequest
      */
     boolean load(GetSAMLProviderRequest request,
             ResultCapture<GetSAMLProviderResult> extractor);
 
     /**
-     * Gets the value of the Arn identifier.
+     * Gets the value of the Arn identifier. This method always directly returns
+     * the identifier and never involves a service call.
      */
     String getArn();
 
@@ -80,23 +122,89 @@ public interface SamlProvider {
     Date getCreateDate();
 
     /**
-     * Performs an action.
+     * Performs the <code>Update</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>SamlProvider</code> resource, and any conflicting parameter value
+     * set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>SAMLProviderArn</code></b>
+     *         - mapped from the <code>Arn</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see UpdateSAMLProviderRequest
      */
     UpdateSAMLProviderResult update(UpdateSAMLProviderRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Update</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>SamlProvider</code> resource, and any conflicting parameter value
+     * set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>SAMLProviderArn</code></b>
+     *         - mapped from the <code>Arn</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see UpdateSAMLProviderRequest
      */
     UpdateSAMLProviderResult update(UpdateSAMLProviderRequest request,
             ResultCapture<UpdateSAMLProviderResult> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>Delete</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>SamlProvider</code> resource, and any conflicting parameter value
+     * set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>SAMLProviderArn</code></b>
+     *         - mapped from the <code>Arn</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see DeleteSAMLProviderRequest
      */
     void delete(DeleteSAMLProviderRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Delete</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>SamlProvider</code> resource, and any conflicting parameter value
+     * set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>SAMLProviderArn</code></b>
+     *         - mapped from the <code>Arn</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see DeleteSAMLProviderRequest
      */
     void delete(DeleteSAMLProviderRequest request, ResultCapture<Void> extractor
             );

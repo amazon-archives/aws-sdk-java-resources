@@ -176,6 +176,20 @@ class JobImpl implements Job {
         return (GetJobOutputResult) result.getData();
     }
 
+    @Override
+    public GetJobOutputResult getOutput(String range) {
+        return getOutput(range, (ResultCapture<GetJobOutputResult>)null);
+    }
+
+    @Override
+    public GetJobOutputResult getOutput(String range,
+            ResultCapture<GetJobOutputResult> extractor) {
+
+        GetJobOutputRequest request = new GetJobOutputRequest()
+            .withRange(range);
+        return getOutput(request, extractor);
+    }
+
     private static class Codec implements ResourceCodec<Job> {
         @Override
         public Job transform(ResourceImpl resource) {

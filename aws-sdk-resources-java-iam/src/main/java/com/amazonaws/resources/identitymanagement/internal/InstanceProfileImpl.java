@@ -14,7 +14,9 @@
  */
 package com.amazonaws.resources.identitymanagement.internal;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.amazonaws.resources.ResultCapture;
 import com.amazonaws.resources.identitymanagement.InstanceProfile;
@@ -89,10 +91,15 @@ class InstanceProfileImpl implements InstanceProfile {
     }
 
     @Override
-    public Role getRoles() {
-        ResourceImpl result = resource.getReference("Roles");
+    public List<Role> getRoles() {
+        List<ResourceImpl> result = resource.getMultiReference("Roles");
         if (result == null) return null;
-        return new RoleImpl(result);
+
+        List<Role> transformed = new ArrayList<>(result.size());
+        for (ResourceImpl item : result) {
+            transformed.add(new RoleImpl(item));
+        }
+        return transformed;
     }
 
     @Override

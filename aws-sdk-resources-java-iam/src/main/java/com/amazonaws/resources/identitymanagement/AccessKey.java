@@ -33,12 +33,14 @@ public interface AccessKey {
     boolean isLoaded();
 
     /**
-     * Gets the value of the Id identifier.
+     * Gets the value of the Id identifier. This method always directly returns
+     * the identifier and never involves a service call.
      */
     String getId();
 
     /**
-     * Gets the value of the UserName identifier.
+     * Gets the value of the UserName identifier. This method always directly
+     * returns the identifier and never involves a service call.
      */
     String getUserName();
 
@@ -64,39 +66,172 @@ public interface AccessKey {
     Date getCreateDate();
 
     /**
-     * Retrieves the User referenced by this resource.
+     * Retrieves the <code>User</code> resource referenced by this resource.
      */
     User getUser();
 
     /**
-     * Performs an action.
+     * Performs the <code>Deactivate</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>AccessKey</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>UserName</code></b>
+     *         - mapped from the <code>UserName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>AccessKeyId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>Status</code></b>
+     *         - constant value <code>Inactive</code>.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see UpdateAccessKeyRequest
      */
     void deactivate(UpdateAccessKeyRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Deactivate</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>AccessKey</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>UserName</code></b>
+     *         - mapped from the <code>UserName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>AccessKeyId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>Status</code></b>
+     *         - constant value <code>Inactive</code>.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see UpdateAccessKeyRequest
      */
     void deactivate(UpdateAccessKeyRequest request, ResultCapture<Void>
             extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>Activate</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>AccessKey</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>UserName</code></b>
+     *         - mapped from the <code>UserName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>AccessKeyId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>Status</code></b>
+     *         - constant value <code>Active</code>.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see UpdateAccessKeyRequest
      */
     void activate(UpdateAccessKeyRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Activate</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>AccessKey</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>UserName</code></b>
+     *         - mapped from the <code>UserName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>AccessKeyId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>Status</code></b>
+     *         - constant value <code>Active</code>.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see UpdateAccessKeyRequest
      */
     void activate(UpdateAccessKeyRequest request, ResultCapture<Void> extractor)
             ;
 
     /**
-     * Performs an action.
+     * Performs the <code>Delete</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>AccessKey</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>UserName</code></b>
+     *         - mapped from the <code>UserName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>AccessKeyId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see DeleteAccessKeyRequest
      */
     void delete(DeleteAccessKeyRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Delete</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>AccessKey</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>UserName</code></b>
+     *         - mapped from the <code>UserName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>AccessKeyId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see DeleteAccessKeyRequest
      */
     void delete(DeleteAccessKeyRequest request, ResultCapture<Void> extractor);
 }

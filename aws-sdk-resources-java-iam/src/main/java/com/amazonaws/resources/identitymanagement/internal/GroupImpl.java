@@ -141,15 +141,42 @@ class GroupImpl implements Group {
     }
 
     @Override
-    public void update(UpdateGroupRequest request) {
-        update(request, null);
+    public void addUser(String userName) {
+        addUser(userName, (ResultCapture<Void>)null);
     }
 
     @Override
-    public void update(UpdateGroupRequest request, ResultCapture<Void> extractor
-            ) {
+    public void addUser(String userName, ResultCapture<Void> extractor) {
+        AddUserToGroupRequest request = new AddUserToGroupRequest()
+            .withUserName(userName);
+        addUser(request, extractor);
+    }
 
-        resource.performAction("Update", request, extractor);
+    @Override
+    public Group update(UpdateGroupRequest request) {
+        return update(request, null);
+    }
+
+    @Override
+    public Group update(UpdateGroupRequest request, ResultCapture<Void>
+            extractor) {
+
+        ActionResult result = resource.performAction("Update", request,
+                extractor);
+
+        if (result == null) return null;
+        return new GroupImpl(result.getResource());
+    }
+
+    @Override
+    public Group update() {
+        return update((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public Group update(ResultCapture<Void> extractor) {
+        UpdateGroupRequest request = new UpdateGroupRequest();
+        return update(request, extractor);
     }
 
     @Override
@@ -169,6 +196,19 @@ class GroupImpl implements Group {
     }
 
     @Override
+    public CreateGroupResult create() {
+        return create((ResultCapture<CreateGroupResult>)null);
+    }
+
+    @Override
+    public CreateGroupResult create(ResultCapture<CreateGroupResult> extractor)
+            {
+
+        CreateGroupRequest request = new CreateGroupRequest();
+        return create(request, extractor);
+    }
+
+    @Override
     public void removeUser(RemoveUserFromGroupRequest request) {
         removeUser(request, null);
     }
@@ -178,6 +218,18 @@ class GroupImpl implements Group {
             ResultCapture<Void> extractor) {
 
         resource.performAction("RemoveUser", request, extractor);
+    }
+
+    @Override
+    public void removeUser(String userName) {
+        removeUser(userName, (ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void removeUser(String userName, ResultCapture<Void> extractor) {
+        RemoveUserFromGroupRequest request = new RemoveUserFromGroupRequest()
+            .withUserName(userName);
+        removeUser(request, extractor);
     }
 
     @Override
@@ -193,15 +245,46 @@ class GroupImpl implements Group {
     }
 
     @Override
-    public void createPolicy(PutGroupPolicyRequest request) {
-        createPolicy(request, null);
+    public void delete() {
+        delete((ResultCapture<Void>)null);
     }
 
     @Override
-    public void createPolicy(PutGroupPolicyRequest request, ResultCapture<Void>
-            extractor) {
+    public void delete(ResultCapture<Void> extractor) {
+        DeleteGroupRequest request = new DeleteGroupRequest();
+        delete(request, extractor);
+    }
 
-        resource.performAction("CreatePolicy", request, extractor);
+    @Override
+    public GroupPolicy createPolicy(PutGroupPolicyRequest request) {
+        return createPolicy(request, null);
+    }
+
+    @Override
+    public GroupPolicy createPolicy(PutGroupPolicyRequest request,
+            ResultCapture<Void> extractor) {
+
+        ActionResult result = resource.performAction("CreatePolicy", request,
+                extractor);
+
+        if (result == null) return null;
+        return new GroupPolicyImpl(result.getResource());
+    }
+
+    @Override
+    public GroupPolicy createPolicy(String policyName, String policyDocument) {
+        return createPolicy(policyName, policyDocument,
+                (ResultCapture<Void>)null);
+    }
+
+    @Override
+    public GroupPolicy createPolicy(String policyName, String policyDocument,
+            ResultCapture<Void> extractor) {
+
+        PutGroupPolicyRequest request = new PutGroupPolicyRequest()
+            .withPolicyName(policyName)
+            .withPolicyDocument(policyDocument);
+        return createPolicy(request, extractor);
     }
 
     private static class Codec implements ResourceCodec<Group> {

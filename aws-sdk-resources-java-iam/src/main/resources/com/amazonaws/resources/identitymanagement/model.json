@@ -80,6 +80,7 @@
               "Request" : {
                 "Method" : "listGroupsForUser",
                 "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListGroupsForUserRequest",
+                "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.ListGroupsForUserResult",
                 "IdentifierMappings" : [ {
                   "Source" : "Name",
                   "Target" : [ "UserName" ]
@@ -93,6 +94,9 @@
                   "Name" : "MaxItems"
                 } ],
                 "ConstantMappings" : [ ],
+                "ConvenientMethods" : [ {
+                  "Arguments" : [ ]
+                } ],
                 "TokenPath" : [ "Marker" ],
                 "LimitPath" : [ "MaxItems" ]
               },
@@ -118,6 +122,7 @@
               "Request" : {
                 "Method" : "listUserPolicies",
                 "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListUserPoliciesRequest",
+                "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.ListUserPoliciesResult",
                 "IdentifierMappings" : [ {
                   "Source" : "Name",
                   "Target" : [ "UserName" ]
@@ -131,6 +136,9 @@
                   "Name" : "MaxItems"
                 } ],
                 "ConstantMappings" : [ ],
+                "ConvenientMethods" : [ {
+                  "Arguments" : [ ]
+                } ],
                 "TokenPath" : [ "Marker" ],
                 "LimitPath" : [ "MaxItems" ]
               },
@@ -159,6 +167,7 @@
               "Request" : {
                 "Method" : "listMFADevices",
                 "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListMFADevicesRequest",
+                "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.ListMFADevicesResult",
                 "IdentifierMappings" : [ {
                   "Source" : "Name",
                   "Target" : [ "UserName" ]
@@ -172,6 +181,9 @@
                   "Name" : "MaxItems"
                 } ],
                 "ConstantMappings" : [ ],
+                "ConvenientMethods" : [ {
+                  "Arguments" : [ ]
+                } ],
                 "TokenPath" : [ "Marker" ],
                 "LimitPath" : [ "MaxItems" ]
               },
@@ -200,6 +212,7 @@
               "Request" : {
                 "Method" : "listAccessKeys",
                 "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListAccessKeysRequest",
+                "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.ListAccessKeysResult",
                 "IdentifierMappings" : [ {
                   "Source" : "Name",
                   "Target" : [ "UserName" ]
@@ -213,6 +226,7 @@
                   "Name" : "MaxItems"
                 } ],
                 "ConstantMappings" : [ ],
+                "ConvenientMethods" : [ ],
                 "TokenPath" : [ "Marker" ],
                 "LimitPath" : [ "MaxItems" ]
               },
@@ -240,6 +254,7 @@
           "Request" : {
             "Method" : "getUser",
             "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetUserRequest",
+            "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.GetUserResult",
             "IdentifierMappings" : [ {
               "Source" : "Name",
               "Target" : [ "UserName" ]
@@ -247,6 +262,7 @@
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
             "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ ],
             "TokenPath" : null,
             "LimitPath" : null
           },
@@ -264,6 +280,7 @@
             "Request" : {
               "Method" : "addUserToGroup",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.AddUserToGroupRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "UserName" ]
@@ -274,6 +291,12 @@
                 "Name" : "GroupName"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "GroupName"
+                } ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -283,6 +306,7 @@
             "Request" : {
               "Method" : "updateUser",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UpdateUserRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "UserName" ]
@@ -296,15 +320,32 @@
                 "Name" : "NewUserName"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
-            "Response" : null
+            "Response" : {
+              "ResourceMapping" : {
+                "Type" : "User",
+                "ParentIdentifierMappings" : [ ],
+                "RequestParamMappings" : [ {
+                  "Source" : [ "NewUserName" ],
+                  "Target" : "Name"
+                } ],
+                "ResponseIdentifierMappings" : [ ],
+                "Path" : null
+              },
+              "DataMapping" : null,
+              "NextTokenPath" : null
+            }
           },
           "EnableMfa" : {
             "Request" : {
               "Method" : "enableMFADevice",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.EnableMFADeviceRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "UserName" ]
@@ -321,15 +362,44 @@
                 "Name" : "AuthenticationCode2"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "SerialNumber"
+                }, {
+                  "Type" : "java.lang.String",
+                  "Name" : "AuthenticationCode1"
+                }, {
+                  "Type" : "java.lang.String",
+                  "Name" : "AuthenticationCode2"
+                } ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
-            "Response" : null
+            "Response" : {
+              "ResourceMapping" : {
+                "Type" : "MfaDevice",
+                "ParentIdentifierMappings" : [ {
+                  "Source" : "Name",
+                  "Target" : "UserName"
+                } ],
+                "RequestParamMappings" : [ {
+                  "Source" : [ "SerialNumber" ],
+                  "Target" : "SerialNumber"
+                } ],
+                "ResponseIdentifierMappings" : [ ],
+                "Path" : null
+              },
+              "DataMapping" : null,
+              "NextTokenPath" : null
+            }
           },
           "RemoveGroup" : {
             "Request" : {
               "Method" : "removeUserFromGroup",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.RemoveUserFromGroupRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "UserName" ]
@@ -340,6 +410,12 @@
                 "Name" : "GroupName"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "GroupName"
+                } ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -349,6 +425,7 @@
             "Request" : {
               "Method" : "createAccessKey",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.CreateAccessKeyRequest",
+              "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.CreateAccessKeyResult",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "UserName" ]
@@ -356,6 +433,7 @@
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -381,6 +459,7 @@
             "Request" : {
               "Method" : "deleteUser",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteUserRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "UserName" ]
@@ -388,6 +467,9 @@
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -397,6 +479,7 @@
             "Request" : {
               "Method" : "putUserPolicy",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.PutUserPolicyRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "UserName" ]
@@ -410,10 +493,35 @@
                 "Name" : "PolicyDocument"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "PolicyName"
+                }, {
+                  "Type" : "java.lang.String",
+                  "Name" : "PolicyDocument"
+                } ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
-            "Response" : null
+            "Response" : {
+              "ResourceMapping" : {
+                "Type" : "UserPolicy",
+                "ParentIdentifierMappings" : [ {
+                  "Source" : "Name",
+                  "Target" : "UserName"
+                } ],
+                "RequestParamMappings" : [ {
+                  "Source" : [ "PolicyName" ],
+                  "Target" : "Name"
+                } ],
+                "ResponseIdentifierMappings" : [ ],
+                "Path" : null
+              },
+              "DataMapping" : null,
+              "NextTokenPath" : null
+            }
           }
         }
       },
@@ -458,10 +566,12 @@
           "Request" : {
             "Method" : "getAccountPasswordPolicy",
             "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetAccountPasswordPolicyRequest",
+            "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.GetAccountPasswordPolicyResult",
             "IdentifierMappings" : [ ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
             "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ ],
             "TokenPath" : null,
             "LimitPath" : null
           },
@@ -479,6 +589,7 @@
             "Request" : {
               "Method" : "updateAccountPasswordPolicy",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UpdateAccountPasswordPolicyRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ ],
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ {
@@ -510,6 +621,7 @@
                 "Name" : "HardExpiry"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -519,10 +631,12 @@
             "Request" : {
               "Method" : "deleteAccountPasswordPolicy",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteAccountPasswordPolicyRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ ],
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -568,6 +682,7 @@
             "Request" : {
               "Method" : "updateAccessKey",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UpdateAccessKeyRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "UserName",
                 "Target" : [ "UserName" ]
@@ -581,6 +696,7 @@
                 "Source" : "Inactive",
                 "Target" : [ "Status" ]
               } ],
+              "ConvenientMethods" : [ ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -590,6 +706,7 @@
             "Request" : {
               "Method" : "updateAccessKey",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UpdateAccessKeyRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "UserName",
                 "Target" : [ "UserName" ]
@@ -603,6 +720,7 @@
                 "Source" : "Active",
                 "Target" : [ "Status" ]
               } ],
+              "ConvenientMethods" : [ ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -612,6 +730,7 @@
             "Request" : {
               "Method" : "deleteAccessKey",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteAccessKeyRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "UserName",
                 "Target" : [ "UserName" ]
@@ -622,6 +741,7 @@
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -653,6 +773,7 @@
           "Request" : {
             "Method" : "getSAMLProvider",
             "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetSAMLProviderRequest",
+            "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.GetSAMLProviderResult",
             "IdentifierMappings" : [ {
               "Source" : "Arn",
               "Target" : [ "SAMLProviderArn" ]
@@ -660,6 +781,7 @@
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
             "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ ],
             "TokenPath" : null,
             "LimitPath" : null
           },
@@ -677,6 +799,7 @@
             "Request" : {
               "Method" : "updateSAMLProvider",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UpdateSAMLProviderRequest",
+              "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.UpdateSAMLProviderResult",
               "IdentifierMappings" : [ {
                 "Source" : "Arn",
                 "Target" : [ "SAMLProviderArn" ]
@@ -687,6 +810,7 @@
                 "Name" : "SAMLMetadataDocument"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -703,6 +827,7 @@
             "Request" : {
               "Method" : "deleteSAMLProvider",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteSAMLProviderRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Arn",
                 "Target" : [ "SAMLProviderArn" ]
@@ -710,6 +835,7 @@
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -747,6 +873,7 @@
           "Request" : {
             "Method" : "getLoginProfile",
             "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetLoginProfileRequest",
+            "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.GetLoginProfileResult",
             "IdentifierMappings" : [ {
               "Source" : "UserName",
               "Target" : [ "UserName" ]
@@ -754,6 +881,9 @@
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
             "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ {
+              "Arguments" : [ ]
+            } ],
             "TokenPath" : null,
             "LimitPath" : null
           },
@@ -771,6 +901,7 @@
             "Request" : {
               "Method" : "updateLoginProfile",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UpdateLoginProfileRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "UserName",
                 "Target" : [ "UserName" ]
@@ -784,6 +915,9 @@
                 "Name" : "PasswordResetRequired"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -793,6 +927,7 @@
             "Request" : {
               "Method" : "createLoginProfile",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.CreateLoginProfileRequest",
+              "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.CreateLoginProfileResult",
               "IdentifierMappings" : [ {
                 "Source" : "UserName",
                 "Target" : [ "UserName" ]
@@ -806,6 +941,12 @@
                 "Name" : "PasswordResetRequired"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "Password"
+                } ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -822,6 +963,7 @@
             "Request" : {
               "Method" : "deleteLoginProfile",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteLoginProfileRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "UserName",
                 "Target" : [ "UserName" ]
@@ -829,6 +971,9 @@
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -861,9 +1006,8 @@
             "Type" : "Role",
             "IdentifierMappings" : [ ],
             "AttributeMappings" : [ {
-              "Source" : "Roles[].RoleName",
-              "Target" : "Name",
-              "multiValued" : false
+              "Source" : [ "Roles", "*", "RoleName" ],
+              "Target" : "Name"
             } ]
           }
         },
@@ -873,6 +1017,7 @@
           "Request" : {
             "Method" : "getInstanceProfile",
             "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetInstanceProfileRequest",
+            "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.GetInstanceProfileResult",
             "IdentifierMappings" : [ {
               "Source" : "Name",
               "Target" : [ "InstanceProfileName" ]
@@ -880,6 +1025,7 @@
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
             "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ ],
             "TokenPath" : null,
             "LimitPath" : null
           },
@@ -897,6 +1043,7 @@
             "Request" : {
               "Method" : "removeRoleFromInstanceProfile",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.RemoveRoleFromInstanceProfileRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "InstanceProfileName" ]
@@ -907,6 +1054,7 @@
                 "Name" : "RoleName"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -916,6 +1064,7 @@
             "Request" : {
               "Method" : "addRoleToInstanceProfile",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.AddRoleToInstanceProfileRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "InstanceProfileName" ]
@@ -926,6 +1075,7 @@
                 "Name" : "RoleName"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -935,6 +1085,7 @@
             "Request" : {
               "Method" : "deleteInstanceProfile",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteInstanceProfileRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "InstanceProfileName" ]
@@ -942,6 +1093,7 @@
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -990,6 +1142,7 @@
               "Request" : {
                 "Method" : "getGroup",
                 "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetGroupRequest",
+                "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.GetGroupResult",
                 "IdentifierMappings" : [ {
                   "Source" : "Name",
                   "Target" : [ "GroupName" ]
@@ -1003,6 +1156,9 @@
                   "Name" : "MaxItems"
                 } ],
                 "ConstantMappings" : [ ],
+                "ConvenientMethods" : [ {
+                  "Arguments" : [ ]
+                } ],
                 "TokenPath" : [ "Marker" ],
                 "LimitPath" : [ "MaxItems" ]
               },
@@ -1028,6 +1184,7 @@
               "Request" : {
                 "Method" : "listGroupPolicies",
                 "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListGroupPoliciesRequest",
+                "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.ListGroupPoliciesResult",
                 "IdentifierMappings" : [ {
                   "Source" : "Name",
                   "Target" : [ "GroupName" ]
@@ -1041,6 +1198,9 @@
                   "Name" : "MaxItems"
                 } ],
                 "ConstantMappings" : [ ],
+                "ConvenientMethods" : [ {
+                  "Arguments" : [ ]
+                } ],
                 "TokenPath" : [ "Marker" ],
                 "LimitPath" : [ "MaxItems" ]
               },
@@ -1068,6 +1228,7 @@
           "Request" : {
             "Method" : "getGroup",
             "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetGroupRequest",
+            "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.GetGroupResult",
             "IdentifierMappings" : [ {
               "Source" : "Name",
               "Target" : [ "GroupName" ]
@@ -1075,6 +1236,9 @@
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
             "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ {
+              "Arguments" : [ ]
+            } ],
             "TokenPath" : null,
             "LimitPath" : null
           },
@@ -1092,6 +1256,7 @@
             "Request" : {
               "Method" : "addUserToGroup",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.AddUserToGroupRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "GroupName" ]
@@ -1102,6 +1267,12 @@
                 "Name" : "UserName"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "UserName"
+                } ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1111,6 +1282,7 @@
             "Request" : {
               "Method" : "updateGroup",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UpdateGroupRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "GroupName" ]
@@ -1124,15 +1296,32 @@
                 "Name" : "NewGroupName"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
-            "Response" : null
+            "Response" : {
+              "ResourceMapping" : {
+                "Type" : "Group",
+                "ParentIdentifierMappings" : [ ],
+                "RequestParamMappings" : [ {
+                  "Source" : [ "NewGroupName" ],
+                  "Target" : "Name"
+                } ],
+                "ResponseIdentifierMappings" : [ ],
+                "Path" : null
+              },
+              "DataMapping" : null,
+              "NextTokenPath" : null
+            }
           },
           "Create" : {
             "Request" : {
               "Method" : "createGroup",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.CreateGroupRequest",
+              "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.CreateGroupResult",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "GroupName" ]
@@ -1143,6 +1332,9 @@
                 "Name" : "Path"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1159,6 +1351,7 @@
             "Request" : {
               "Method" : "removeUserFromGroup",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.RemoveUserFromGroupRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "GroupName" ]
@@ -1169,6 +1362,12 @@
                 "Name" : "UserName"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "UserName"
+                } ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1178,6 +1377,7 @@
             "Request" : {
               "Method" : "deleteGroup",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteGroupRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "GroupName" ]
@@ -1185,6 +1385,9 @@
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1194,6 +1397,7 @@
             "Request" : {
               "Method" : "putGroupPolicy",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.PutGroupPolicyRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "GroupName" ]
@@ -1207,10 +1411,35 @@
                 "Name" : "PolicyDocument"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "PolicyName"
+                }, {
+                  "Type" : "java.lang.String",
+                  "Name" : "PolicyDocument"
+                } ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
-            "Response" : null
+            "Response" : {
+              "ResourceMapping" : {
+                "Type" : "GroupPolicy",
+                "ParentIdentifierMappings" : [ {
+                  "Source" : "Name",
+                  "Target" : "GroupName"
+                } ],
+                "RequestParamMappings" : [ {
+                  "Source" : [ "PolicyName" ],
+                  "Target" : "Name"
+                } ],
+                "ResponseIdentifierMappings" : [ ],
+                "Path" : null
+              },
+              "DataMapping" : null,
+              "NextTokenPath" : null
+            }
           }
         }
       },
@@ -1244,6 +1473,7 @@
           "Request" : {
             "Method" : "getUserPolicy",
             "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetUserPolicyRequest",
+            "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.GetUserPolicyResult",
             "IdentifierMappings" : [ {
               "Source" : "UserName",
               "Target" : [ "UserName" ]
@@ -1254,6 +1484,9 @@
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
             "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ {
+              "Arguments" : [ ]
+            } ],
             "TokenPath" : null,
             "LimitPath" : null
           },
@@ -1271,6 +1504,7 @@
             "Request" : {
               "Method" : "putUserPolicy",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.PutUserPolicyRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "UserName",
                 "Target" : [ "UserName" ]
@@ -1284,6 +1518,12 @@
                 "Name" : "PolicyDocument"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "PolicyDocument"
+                } ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1293,6 +1533,7 @@
             "Request" : {
               "Method" : "deleteUserPolicy",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteUserPolicyRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "UserName",
                 "Target" : [ "UserName" ]
@@ -1303,6 +1544,9 @@
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1342,6 +1586,7 @@
             "Request" : {
               "Method" : "enableMFADevice",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.EnableMFADeviceRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "UserName",
                 "Target" : [ "UserName" ]
@@ -1358,6 +1603,15 @@
                 "Name" : "AuthenticationCode2"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "AuthenticationCode1"
+                }, {
+                  "Type" : "java.lang.String",
+                  "Name" : "AuthenticationCode2"
+                } ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1367,6 +1621,7 @@
             "Request" : {
               "Method" : "deactivateMFADevice",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeactivateMFADeviceRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "UserName",
                 "Target" : [ "UserName" ]
@@ -1377,6 +1632,9 @@
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1386,6 +1644,7 @@
             "Request" : {
               "Method" : "resyncMFADevice",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ResyncMFADeviceRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "UserName",
                 "Target" : [ "UserName" ]
@@ -1402,6 +1661,15 @@
                 "Name" : "AuthenticationCode2"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "AuthenticationCode1"
+                }, {
+                  "Type" : "java.lang.String",
+                  "Name" : "AuthenticationCode2"
+                } ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1438,6 +1706,7 @@
             "Request" : {
               "Method" : "updateSigningCertificate",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UpdateSigningCertificateRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Id",
                 "Target" : [ "CertificateId" ]
@@ -1451,6 +1720,9 @@
                 "Source" : "Inactive",
                 "Target" : [ "Status" ]
               } ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1460,6 +1732,7 @@
             "Request" : {
               "Method" : "updateSigningCertificate",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UpdateSigningCertificateRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Id",
                 "Target" : [ "CertificateId" ]
@@ -1473,6 +1746,9 @@
                 "Source" : "Active",
                 "Target" : [ "Status" ]
               } ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1482,6 +1758,7 @@
             "Request" : {
               "Method" : "deleteSigningCertificate",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteSigningCertificateRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Id",
                 "Target" : [ "CertificateId" ]
@@ -1492,6 +1769,9 @@
                 "Name" : "UserName"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1521,9 +1801,8 @@
             "Type" : "User",
             "IdentifierMappings" : [ ],
             "AttributeMappings" : [ {
-              "Source" : "User.UserName",
-              "Target" : "Name",
-              "multiValued" : false
+              "Source" : [ "User", "UserName" ],
+              "Target" : "Name"
             } ]
           }
         },
@@ -1535,6 +1814,7 @@
             "Request" : {
               "Method" : "deleteVirtualMFADevice",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteVirtualMFADeviceRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "SerialNumber",
                 "Target" : [ "SerialNumber" ]
@@ -1542,6 +1822,7 @@
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1579,6 +1860,7 @@
           "Request" : {
             "Method" : "getRolePolicy",
             "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetRolePolicyRequest",
+            "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.GetRolePolicyResult",
             "IdentifierMappings" : [ {
               "Source" : "RoleName",
               "Target" : [ "RoleName" ]
@@ -1589,6 +1871,7 @@
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
             "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ ],
             "TokenPath" : null,
             "LimitPath" : null
           },
@@ -1606,6 +1889,7 @@
             "Request" : {
               "Method" : "putRolePolicy",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.PutRolePolicyRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "RoleName",
                 "Target" : [ "RoleName" ]
@@ -1619,6 +1903,7 @@
                 "Name" : "PolicyDocument"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1628,6 +1913,7 @@
             "Request" : {
               "Method" : "deleteRolePolicy",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteRolePolicyRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "RoleName",
                 "Target" : [ "RoleName" ]
@@ -1638,6 +1924,7 @@
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1689,6 +1976,7 @@
               "Request" : {
                 "Method" : "listRolePolicies",
                 "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListRolePoliciesRequest",
+                "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.ListRolePoliciesResult",
                 "IdentifierMappings" : [ {
                   "Source" : "Name",
                   "Target" : [ "RoleName" ]
@@ -1702,6 +1990,7 @@
                   "Name" : "MaxItems"
                 } ],
                 "ConstantMappings" : [ ],
+                "ConvenientMethods" : [ ],
                 "TokenPath" : [ "Marker" ],
                 "LimitPath" : [ "MaxItems" ]
               },
@@ -1730,6 +2019,7 @@
               "Request" : {
                 "Method" : "listInstanceProfilesForRole",
                 "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListInstanceProfilesForRoleRequest",
+                "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.ListInstanceProfilesForRoleResult",
                 "IdentifierMappings" : [ {
                   "Source" : "Name",
                   "Target" : [ "RoleName" ]
@@ -1743,6 +2033,7 @@
                   "Name" : "MaxItems"
                 } ],
                 "ConstantMappings" : [ ],
+                "ConvenientMethods" : [ ],
                 "TokenPath" : [ "Marker" ],
                 "LimitPath" : [ "MaxItems" ]
               },
@@ -1767,6 +2058,7 @@
           "Request" : {
             "Method" : "getRole",
             "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetRoleRequest",
+            "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.GetRoleResult",
             "IdentifierMappings" : [ {
               "Source" : "Name",
               "Target" : [ "RoleName" ]
@@ -1774,6 +2066,7 @@
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
             "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ ],
             "TokenPath" : null,
             "LimitPath" : null
           },
@@ -1791,6 +2084,7 @@
             "Request" : {
               "Method" : "deleteRole",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteRoleRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "RoleName" ]
@@ -1798,6 +2092,7 @@
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1807,6 +2102,7 @@
             "Request" : {
               "Method" : "updateAssumeRolePolicy",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UpdateAssumeRolePolicyRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "RoleName" ]
@@ -1817,6 +2113,7 @@
                 "Name" : "PolicyDocument"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1840,6 +2137,7 @@
             "Request" : {
               "Method" : "deleteAccountAlias",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteAccountAliasRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "AccountAlias" ]
@@ -1847,6 +2145,9 @@
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1884,6 +2185,7 @@
           "Request" : {
             "Method" : "getGroupPolicy",
             "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetGroupPolicyRequest",
+            "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.GetGroupPolicyResult",
             "IdentifierMappings" : [ {
               "Source" : "GroupName",
               "Target" : [ "GroupName" ]
@@ -1894,6 +2196,9 @@
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
             "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ {
+              "Arguments" : [ ]
+            } ],
             "TokenPath" : null,
             "LimitPath" : null
           },
@@ -1911,6 +2216,7 @@
             "Request" : {
               "Method" : "putGroupPolicy",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.PutGroupPolicyRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "GroupName",
                 "Target" : [ "GroupName" ]
@@ -1924,6 +2230,12 @@
                 "Name" : "PolicyDocument"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "PolicyDocument"
+                } ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1933,6 +2245,7 @@
             "Request" : {
               "Method" : "deleteGroupPolicy",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteGroupPolicyRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "GroupName",
                 "Target" : [ "GroupName" ]
@@ -1943,6 +2256,9 @@
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1974,6 +2290,7 @@
           "Request" : {
             "Method" : "getServerCertificate",
             "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetServerCertificateRequest",
+            "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.GetServerCertificateResult",
             "IdentifierMappings" : [ {
               "Source" : "Name",
               "Target" : [ "ServerCertificateName" ]
@@ -1981,6 +2298,9 @@
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
             "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ {
+              "Arguments" : [ ]
+            } ],
             "TokenPath" : null,
             "LimitPath" : null
           },
@@ -1998,6 +2318,7 @@
             "Request" : {
               "Method" : "updateServerCertificate",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UpdateServerCertificateRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "ServerCertificateName" ]
@@ -2011,15 +2332,32 @@
                 "Name" : "NewServerCertificateName"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
-            "Response" : null
+            "Response" : {
+              "ResourceMapping" : {
+                "Type" : "ServerCertificate",
+                "ParentIdentifierMappings" : [ ],
+                "RequestParamMappings" : [ {
+                  "Source" : [ "NewServerCertificateName" ],
+                  "Target" : "Name"
+                } ],
+                "ResponseIdentifierMappings" : [ ],
+                "Path" : null
+              },
+              "DataMapping" : null,
+              "NextTokenPath" : null
+            }
           },
           "Delete" : {
             "Request" : {
               "Method" : "deleteServerCertificate",
               "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.DeleteServerCertificateRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "ServerCertificateName" ]
@@ -2027,6 +2365,9 @@
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -2116,6 +2457,7 @@
           "Request" : {
             "Method" : "listGroups",
             "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListGroupsRequest",
+            "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.ListGroupsResult",
             "IdentifierMappings" : [ ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ {
@@ -2129,6 +2471,9 @@
               "Name" : "MaxItems"
             } ],
             "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ {
+              "Arguments" : [ ]
+            } ],
             "TokenPath" : [ "Marker" ],
             "LimitPath" : [ "MaxItems" ]
           },
@@ -2154,6 +2499,7 @@
           "Request" : {
             "Method" : "listUsers",
             "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListUsersRequest",
+            "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.ListUsersResult",
             "IdentifierMappings" : [ ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ {
@@ -2167,6 +2513,9 @@
               "Name" : "MaxItems"
             } ],
             "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ {
+              "Arguments" : [ ]
+            } ],
             "TokenPath" : [ "Marker" ],
             "LimitPath" : [ "MaxItems" ]
           },
@@ -2192,10 +2541,12 @@
           "Request" : {
             "Method" : "listSAMLProviders",
             "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListSAMLProvidersRequest",
+            "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.ListSAMLProvidersResult",
             "IdentifierMappings" : [ ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
             "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ ],
             "TokenPath" : null,
             "LimitPath" : null
           },
@@ -2221,6 +2572,7 @@
           "Request" : {
             "Method" : "listSigningCertificates",
             "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListSigningCertificatesRequest",
+            "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.ListSigningCertificatesResult",
             "IdentifierMappings" : [ ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ {
@@ -2234,6 +2586,9 @@
               "Name" : "MaxItems"
             } ],
             "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ {
+              "Arguments" : [ ]
+            } ],
             "TokenPath" : [ "Marker" ],
             "LimitPath" : [ "MaxItems" ]
           },
@@ -2259,6 +2614,7 @@
           "Request" : {
             "Method" : "listServerCertificates",
             "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListServerCertificatesRequest",
+            "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.ListServerCertificatesResult",
             "IdentifierMappings" : [ ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ {
@@ -2272,6 +2628,9 @@
               "Name" : "MaxItems"
             } ],
             "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ {
+              "Arguments" : [ ]
+            } ],
             "TokenPath" : [ "Marker" ],
             "LimitPath" : [ "MaxItems" ]
           },
@@ -2297,6 +2656,7 @@
           "Request" : {
             "Method" : "listInstanceProfiles",
             "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListInstanceProfilesRequest",
+            "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.ListInstanceProfilesResult",
             "IdentifierMappings" : [ ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ {
@@ -2310,6 +2670,7 @@
               "Name" : "MaxItems"
             } ],
             "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ ],
             "TokenPath" : [ "Marker" ],
             "LimitPath" : [ "MaxItems" ]
           },
@@ -2335,6 +2696,7 @@
           "Request" : {
             "Method" : "listRoles",
             "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListRolesRequest",
+            "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.ListRolesResult",
             "IdentifierMappings" : [ ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ {
@@ -2348,6 +2710,7 @@
               "Name" : "MaxItems"
             } ],
             "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ ],
             "TokenPath" : [ "Marker" ],
             "LimitPath" : [ "MaxItems" ]
           },
@@ -2373,6 +2736,7 @@
           "Request" : {
             "Method" : "listAccountAliases",
             "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListAccountAliasesRequest",
+            "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.ListAccountAliasesResult",
             "IdentifierMappings" : [ ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ {
@@ -2383,6 +2747,9 @@
               "Name" : "MaxItems"
             } ],
             "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ {
+              "Arguments" : [ ]
+            } ],
             "TokenPath" : [ "Marker" ],
             "LimitPath" : [ "MaxItems" ]
           },
@@ -2408,6 +2775,7 @@
           "Request" : {
             "Method" : "listVirtualMFADevices",
             "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ListVirtualMFADevicesRequest",
+            "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.ListVirtualMFADevicesResult",
             "IdentifierMappings" : [ ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ {
@@ -2421,6 +2789,7 @@
               "Name" : "MaxItems"
             } ],
             "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ ],
             "TokenPath" : [ "Marker" ],
             "LimitPath" : [ "MaxItems" ]
           },
@@ -2446,6 +2815,7 @@
         "Request" : {
           "Method" : "createRole",
           "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.CreateRoleRequest",
+          "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.CreateRoleResult",
           "IdentifierMappings" : [ ],
           "AttributeMappings" : [ ],
           "ParameterMappings" : [ {
@@ -2459,6 +2829,7 @@
             "Name" : "AssumeRolePolicyDocument"
           } ],
           "ConstantMappings" : [ ],
+          "ConvenientMethods" : [ ],
           "TokenPath" : null,
           "LimitPath" : null
         },
@@ -2481,6 +2852,7 @@
         "Request" : {
           "Method" : "changePassword",
           "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.ChangePasswordRequest",
+          "ClientResponseType" : "Void",
           "IdentifierMappings" : [ ],
           "AttributeMappings" : [ ],
           "ParameterMappings" : [ {
@@ -2491,6 +2863,7 @@
             "Name" : "NewPassword"
           } ],
           "ConstantMappings" : [ ],
+          "ConvenientMethods" : [ ],
           "TokenPath" : null,
           "LimitPath" : null
         },
@@ -2500,6 +2873,7 @@
         "Request" : {
           "Method" : "createUser",
           "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.CreateUserRequest",
+          "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.CreateUserResult",
           "IdentifierMappings" : [ ],
           "AttributeMappings" : [ ],
           "ParameterMappings" : [ {
@@ -2510,6 +2884,14 @@
             "Name" : "UserName"
           } ],
           "ConstantMappings" : [ ],
+          "ConvenientMethods" : [ {
+            "Arguments" : [ ]
+          }, {
+            "Arguments" : [ {
+              "Type" : "java.lang.String",
+              "Name" : "UserName"
+            } ]
+          } ],
           "TokenPath" : null,
           "LimitPath" : null
         },
@@ -2532,6 +2914,7 @@
         "Request" : {
           "Method" : "createVirtualMFADevice",
           "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.CreateVirtualMFADeviceRequest",
+          "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.CreateVirtualMFADeviceResult",
           "IdentifierMappings" : [ ],
           "AttributeMappings" : [ ],
           "ParameterMappings" : [ {
@@ -2542,6 +2925,7 @@
             "Name" : "VirtualMFADeviceName"
           } ],
           "ConstantMappings" : [ ],
+          "ConvenientMethods" : [ ],
           "TokenPath" : null,
           "LimitPath" : null
         },
@@ -2564,6 +2948,7 @@
         "Request" : {
           "Method" : "createGroup",
           "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.CreateGroupRequest",
+          "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.CreateGroupResult",
           "IdentifierMappings" : [ ],
           "AttributeMappings" : [ ],
           "ParameterMappings" : [ {
@@ -2574,6 +2959,14 @@
             "Name" : "GroupName"
           } ],
           "ConstantMappings" : [ ],
+          "ConvenientMethods" : [ {
+            "Arguments" : [ ]
+          }, {
+            "Arguments" : [ {
+              "Type" : "java.lang.String",
+              "Name" : "GroupName"
+            } ]
+          } ],
           "TokenPath" : null,
           "LimitPath" : null
         },
@@ -2596,10 +2989,12 @@
         "Request" : {
           "Method" : "getAccountSummary",
           "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetAccountSummaryRequest",
+          "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.GetAccountSummaryResult",
           "IdentifierMappings" : [ ],
           "AttributeMappings" : [ ],
           "ParameterMappings" : [ ],
           "ConstantMappings" : [ ],
+          "ConvenientMethods" : [ ],
           "TokenPath" : null,
           "LimitPath" : null
         },
@@ -2616,6 +3011,7 @@
         "Request" : {
           "Method" : "createInstanceProfile",
           "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.CreateInstanceProfileRequest",
+          "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.CreateInstanceProfileResult",
           "IdentifierMappings" : [ ],
           "AttributeMappings" : [ ],
           "ParameterMappings" : [ {
@@ -2626,6 +3022,7 @@
             "Name" : "Path"
           } ],
           "ConstantMappings" : [ ],
+          "ConvenientMethods" : [ ],
           "TokenPath" : null,
           "LimitPath" : null
         },
@@ -2648,6 +3045,7 @@
         "Request" : {
           "Method" : "createSAMLProvider",
           "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.CreateSAMLProviderRequest",
+          "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.CreateSAMLProviderResult",
           "IdentifierMappings" : [ ],
           "AttributeMappings" : [ ],
           "ParameterMappings" : [ {
@@ -2658,6 +3056,7 @@
             "Name" : "Name"
           } ],
           "ConstantMappings" : [ ],
+          "ConvenientMethods" : [ ],
           "TokenPath" : null,
           "LimitPath" : null
         },
@@ -2680,6 +3079,7 @@
         "Request" : {
           "Method" : "updateAccountPasswordPolicy",
           "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UpdateAccountPasswordPolicyRequest",
+          "ClientResponseType" : "Void",
           "IdentifierMappings" : [ ],
           "AttributeMappings" : [ ],
           "ParameterMappings" : [ {
@@ -2711,15 +3111,27 @@
             "Name" : "HardExpiry"
           } ],
           "ConstantMappings" : [ ],
+          "ConvenientMethods" : [ ],
           "TokenPath" : null,
           "LimitPath" : null
         },
-        "Response" : null
+        "Response" : {
+          "ResourceMapping" : {
+            "Type" : "AccountPasswordPolicy",
+            "ParentIdentifierMappings" : [ ],
+            "RequestParamMappings" : [ ],
+            "ResponseIdentifierMappings" : [ ],
+            "Path" : null
+          },
+          "DataMapping" : null,
+          "NextTokenPath" : null
+        }
       },
       "CreateAccountAlias" : {
         "Request" : {
           "Method" : "createAccountAlias",
           "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.CreateAccountAliasRequest",
+          "ClientResponseType" : "Void",
           "IdentifierMappings" : [ ],
           "AttributeMappings" : [ ],
           "ParameterMappings" : [ {
@@ -2727,15 +3139,37 @@
             "Name" : "AccountAlias"
           } ],
           "ConstantMappings" : [ ],
+          "ConvenientMethods" : [ {
+            "Arguments" : [ ]
+          }, {
+            "Arguments" : [ {
+              "Type" : "java.lang.String",
+              "Name" : "AccountAlias"
+            } ]
+          } ],
           "TokenPath" : null,
           "LimitPath" : null
         },
-        "Response" : null
+        "Response" : {
+          "ResourceMapping" : {
+            "Type" : "AccountAlias",
+            "ParentIdentifierMappings" : [ ],
+            "RequestParamMappings" : [ {
+              "Source" : [ "AccountAlias" ],
+              "Target" : "Name"
+            } ],
+            "ResponseIdentifierMappings" : [ ],
+            "Path" : null
+          },
+          "DataMapping" : null,
+          "NextTokenPath" : null
+        }
       },
       "CreateServerCertificate" : {
         "Request" : {
           "Method" : "uploadServerCertificate",
           "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UploadServerCertificateRequest",
+          "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.UploadServerCertificateResult",
           "IdentifierMappings" : [ ],
           "AttributeMappings" : [ ],
           "ParameterMappings" : [ {
@@ -2755,6 +3189,20 @@
             "Name" : "CertificateChain"
           } ],
           "ConstantMappings" : [ ],
+          "ConvenientMethods" : [ {
+            "Arguments" : [ ]
+          }, {
+            "Arguments" : [ {
+              "Type" : "java.lang.String",
+              "Name" : "CertificateBody"
+            }, {
+              "Type" : "java.lang.String",
+              "Name" : "ServerCertificateName"
+            }, {
+              "Type" : "java.lang.String",
+              "Name" : "PrivateKey"
+            } ]
+          } ],
           "TokenPath" : null,
           "LimitPath" : null
         },
@@ -2777,6 +3225,7 @@
         "Request" : {
           "Method" : "uploadSigningCertificate",
           "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.UploadSigningCertificateRequest",
+          "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.UploadSigningCertificateResult",
           "IdentifierMappings" : [ ],
           "AttributeMappings" : [ ],
           "ParameterMappings" : [ {
@@ -2787,6 +3236,14 @@
             "Name" : "CertificateBody"
           } ],
           "ConstantMappings" : [ ],
+          "ConvenientMethods" : [ {
+            "Arguments" : [ ]
+          }, {
+            "Arguments" : [ {
+              "Type" : "java.lang.String",
+              "Name" : "CertificateBody"
+            } ]
+          } ],
           "TokenPath" : null,
           "LimitPath" : null
         },

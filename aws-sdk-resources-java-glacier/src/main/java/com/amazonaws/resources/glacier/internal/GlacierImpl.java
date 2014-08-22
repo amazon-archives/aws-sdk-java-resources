@@ -50,7 +50,7 @@ public class GlacierImpl implements Glacier {
 
     @Override
     public VaultCollection getVaults() {
-        return getVaults(null);
+        return getVaults((ListVaultsRequest)null);
     }
 
     @Override

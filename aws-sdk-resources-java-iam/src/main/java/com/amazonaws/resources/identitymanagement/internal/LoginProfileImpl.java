@@ -98,6 +98,17 @@ class LoginProfileImpl implements LoginProfile {
     }
 
     @Override
+    public void update() {
+        update((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void update(ResultCapture<Void> extractor) {
+        UpdateLoginProfileRequest request = new UpdateLoginProfileRequest();
+        update(request, extractor);
+    }
+
+    @Override
     public CreateLoginProfileResult create(CreateLoginProfileRequest request) {
         return create(request, null);
     }
@@ -114,6 +125,20 @@ class LoginProfileImpl implements LoginProfile {
     }
 
     @Override
+    public CreateLoginProfileResult create(String password) {
+        return create(password, (ResultCapture<CreateLoginProfileResult>)null);
+    }
+
+    @Override
+    public CreateLoginProfileResult create(String password,
+            ResultCapture<CreateLoginProfileResult> extractor) {
+
+        CreateLoginProfileRequest request = new CreateLoginProfileRequest()
+            .withPassword(password);
+        return create(request, extractor);
+    }
+
+    @Override
     public void delete(DeleteLoginProfileRequest request) {
         delete(request, null);
     }
@@ -123,6 +148,17 @@ class LoginProfileImpl implements LoginProfile {
             extractor) {
 
         resource.performAction("Delete", request, extractor);
+    }
+
+    @Override
+    public void delete() {
+        delete((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void delete(ResultCapture<Void> extractor) {
+        DeleteLoginProfileRequest request = new DeleteLoginProfileRequest();
+        delete(request, extractor);
     }
 
     private static class Codec implements ResourceCodec<LoginProfile> {

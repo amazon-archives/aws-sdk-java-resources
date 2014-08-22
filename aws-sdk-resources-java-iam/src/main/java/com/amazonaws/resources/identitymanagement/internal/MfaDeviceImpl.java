@@ -75,6 +75,22 @@ class MfaDeviceImpl implements MfaDevice {
     }
 
     @Override
+    public void enable(String authenticationCode1, String authenticationCode2) {
+        enable(authenticationCode1, authenticationCode2,
+                (ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void enable(String authenticationCode1, String authenticationCode2,
+            ResultCapture<Void> extractor) {
+
+        EnableMFADeviceRequest request = new EnableMFADeviceRequest()
+            .withAuthenticationCode1(authenticationCode1)
+            .withAuthenticationCode2(authenticationCode2);
+        enable(request, extractor);
+    }
+
+    @Override
     public void deactivate(DeactivateMFADeviceRequest request) {
         deactivate(request, null);
     }
@@ -87,6 +103,17 @@ class MfaDeviceImpl implements MfaDevice {
     }
 
     @Override
+    public void deactivate() {
+        deactivate((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void deactivate(ResultCapture<Void> extractor) {
+        DeactivateMFADeviceRequest request = new DeactivateMFADeviceRequest();
+        deactivate(request, extractor);
+    }
+
+    @Override
     public void resync(ResyncMFADeviceRequest request) {
         resync(request, null);
     }
@@ -96,6 +123,22 @@ class MfaDeviceImpl implements MfaDevice {
             extractor) {
 
         resource.performAction("Resync", request, extractor);
+    }
+
+    @Override
+    public void resync(String authenticationCode1, String authenticationCode2) {
+        resync(authenticationCode1, authenticationCode2,
+                (ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void resync(String authenticationCode1, String authenticationCode2,
+            ResultCapture<Void> extractor) {
+
+        ResyncMFADeviceRequest request = new ResyncMFADeviceRequest()
+            .withAuthenticationCode1(authenticationCode1)
+            .withAuthenticationCode2(authenticationCode2);
+        resync(request, extractor);
     }
 
     private static class Codec implements ResourceCodec<MfaDevice> {

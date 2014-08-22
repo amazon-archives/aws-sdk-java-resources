@@ -14,6 +14,8 @@
  */
 package com.amazonaws.resources.glacier.internal;
 
+import java.io.InputStream;
+
 import com.amazonaws.resources.ResultCapture;
 import com.amazonaws.resources.glacier.MultipartUpload;
 import com.amazonaws.resources.glacier.Vault;
@@ -101,6 +103,17 @@ class MultipartUploadImpl implements MultipartUpload {
     }
 
     @Override
+    public ListPartsResult parts() {
+        return parts((ResultCapture<ListPartsResult>)null);
+    }
+
+    @Override
+    public ListPartsResult parts(ResultCapture<ListPartsResult> extractor) {
+        ListPartsRequest request = new ListPartsRequest();
+        return parts(request, extractor);
+    }
+
+    @Override
     public void abort(AbortMultipartUploadRequest request) {
         abort(request, null);
     }
@@ -110,6 +123,17 @@ class MultipartUploadImpl implements MultipartUpload {
             extractor) {
 
         resource.performAction("Abort", request, extractor);
+    }
+
+    @Override
+    public void abort() {
+        abort((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void abort(ResultCapture<Void> extractor) {
+        AbortMultipartUploadRequest request = new AbortMultipartUploadRequest();
+        abort(request, extractor);
     }
 
     @Override
@@ -131,6 +155,26 @@ class MultipartUploadImpl implements MultipartUpload {
     }
 
     @Override
+    public UploadMultipartPartResult uploadPart(String checksum, InputStream
+            body, String range) {
+
+        return uploadPart(checksum, body, range,
+                (ResultCapture<UploadMultipartPartResult>)null);
+    }
+
+    @Override
+    public UploadMultipartPartResult uploadPart(String checksum, InputStream
+            body, String range, ResultCapture<UploadMultipartPartResult>
+            extractor) {
+
+        UploadMultipartPartRequest request = new UploadMultipartPartRequest()
+            .withChecksum(checksum)
+            .withBody(body)
+            .withRange(range);
+        return uploadPart(request, extractor);
+    }
+
+    @Override
     public CompleteMultipartUploadResult complete(CompleteMultipartUploadRequest
             request) {
 
@@ -146,6 +190,27 @@ class MultipartUploadImpl implements MultipartUpload {
 
         if (result == null) return null;
         return (CompleteMultipartUploadResult) result.getData();
+    }
+
+    @Override
+    public CompleteMultipartUploadResult complete(String checksum, String
+            archiveSize) {
+
+        return complete(checksum, archiveSize,
+                (ResultCapture<CompleteMultipartUploadResult>)null);
+    }
+
+    @Override
+    public CompleteMultipartUploadResult complete(String checksum, String
+            archiveSize, ResultCapture<CompleteMultipartUploadResult> extractor)
+            {
+
+        CompleteMultipartUploadRequest request = new
+                CompleteMultipartUploadRequest()
+
+            .withChecksum(checksum)
+            .withArchiveSize(archiveSize);
+        return complete(request, extractor);
     }
 
     private static class Codec implements ResourceCodec<MultipartUpload> {

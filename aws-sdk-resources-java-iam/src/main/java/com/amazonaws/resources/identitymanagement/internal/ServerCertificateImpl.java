@@ -16,6 +16,7 @@ package com.amazonaws.resources.identitymanagement.internal;
 
 import com.amazonaws.resources.ResultCapture;
 import com.amazonaws.resources.identitymanagement.ServerCertificate;
+import com.amazonaws.resources.internal.ActionResult;
 import com.amazonaws.resources.internal.ResourceCodec;
 import com.amazonaws.resources.internal.ResourceImpl;
 import
@@ -82,15 +83,32 @@ class ServerCertificateImpl implements ServerCertificate {
     }
 
     @Override
-    public void update(UpdateServerCertificateRequest request) {
-        update(request, null);
+    public ServerCertificate update(UpdateServerCertificateRequest request) {
+        return update(request, null);
     }
 
     @Override
-    public void update(UpdateServerCertificateRequest request,
+    public ServerCertificate update(UpdateServerCertificateRequest request,
             ResultCapture<Void> extractor) {
 
-        resource.performAction("Update", request, extractor);
+        ActionResult result = resource.performAction("Update", request,
+                extractor);
+
+        if (result == null) return null;
+        return new ServerCertificateImpl(result.getResource());
+    }
+
+    @Override
+    public ServerCertificate update() {
+        return update((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public ServerCertificate update(ResultCapture<Void> extractor) {
+        UpdateServerCertificateRequest request = new
+                UpdateServerCertificateRequest();
+
+        return update(request, extractor);
     }
 
     @Override
@@ -103,6 +121,19 @@ class ServerCertificateImpl implements ServerCertificate {
             ResultCapture<Void> extractor) {
 
         resource.performAction("Delete", request, extractor);
+    }
+
+    @Override
+    public void delete() {
+        delete((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void delete(ResultCapture<Void> extractor) {
+        DeleteServerCertificateRequest request = new
+                DeleteServerCertificateRequest();
+
+        delete(request, extractor);
     }
 
     private static class Codec implements ResourceCodec<ServerCertificate> {

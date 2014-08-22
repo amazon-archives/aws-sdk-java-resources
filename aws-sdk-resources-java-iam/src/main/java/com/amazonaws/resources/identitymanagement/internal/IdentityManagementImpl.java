@@ -19,6 +19,7 @@ import java.util.Map;
 import com.amazonaws.resources.ResultCapture;
 import com.amazonaws.resources.identitymanagement.AccountAlias;
 import com.amazonaws.resources.identitymanagement.AccountAliasCollection;
+import com.amazonaws.resources.identitymanagement.AccountPasswordPolicy;
 import com.amazonaws.resources.identitymanagement.Group;
 import com.amazonaws.resources.identitymanagement.GroupCollection;
 import com.amazonaws.resources.identitymanagement.IdentityManagement;
@@ -171,7 +172,7 @@ public class IdentityManagementImpl implements IdentityManagement {
 
     @Override
     public GroupCollection getGroups() {
-        return getGroups(null);
+        return getGroups((ListGroupsRequest)null);
     }
 
     @Override
@@ -185,7 +186,7 @@ public class IdentityManagementImpl implements IdentityManagement {
 
     @Override
     public UserCollection getUsers() {
-        return getUsers(null);
+        return getUsers((ListUsersRequest)null);
     }
 
     @Override
@@ -197,7 +198,7 @@ public class IdentityManagementImpl implements IdentityManagement {
 
     @Override
     public SamlProviderCollection getSamlProviders() {
-        return getSamlProviders(null);
+        return getSamlProviders((ListSAMLProvidersRequest)null);
     }
 
     @Override
@@ -213,7 +214,7 @@ public class IdentityManagementImpl implements IdentityManagement {
 
     @Override
     public SigningCertificateCollection getSigningCertificates() {
-        return getSigningCertificates(null);
+        return getSigningCertificates((ListSigningCertificatesRequest)null);
     }
 
     @Override
@@ -229,7 +230,7 @@ public class IdentityManagementImpl implements IdentityManagement {
 
     @Override
     public ServerCertificateCollection getServerCertificates() {
-        return getServerCertificates(null);
+        return getServerCertificates((ListServerCertificatesRequest)null);
     }
 
     @Override
@@ -245,7 +246,7 @@ public class IdentityManagementImpl implements IdentityManagement {
 
     @Override
     public InstanceProfileCollection getInstanceProfiles() {
-        return getInstanceProfiles(null);
+        return getInstanceProfiles((ListInstanceProfilesRequest)null);
     }
 
     @Override
@@ -261,7 +262,7 @@ public class IdentityManagementImpl implements IdentityManagement {
 
     @Override
     public RoleCollection getRoles() {
-        return getRoles(null);
+        return getRoles((ListRolesRequest)null);
     }
 
     @Override
@@ -273,7 +274,7 @@ public class IdentityManagementImpl implements IdentityManagement {
 
     @Override
     public AccountAliasCollection getAccountAliases() {
-        return getAccountAliases(null);
+        return getAccountAliases((ListAccountAliasesRequest)null);
     }
 
     @Override
@@ -289,7 +290,7 @@ public class IdentityManagementImpl implements IdentityManagement {
 
     @Override
     public VirtualMfaDeviceCollection getVirtualMfaDevices() {
-        return getVirtualMfaDevices(null);
+        return getVirtualMfaDevices((ListVirtualMFADevicesRequest)null);
     }
 
     @Override
@@ -434,30 +435,39 @@ public class IdentityManagementImpl implements IdentityManagement {
     }
 
     @Override
-    public void createAccountPasswordPolicy(UpdateAccountPasswordPolicyRequest
-            request) {
+    public AccountPasswordPolicy createAccountPasswordPolicy(
+            UpdateAccountPasswordPolicyRequest request) {
 
-        createAccountPasswordPolicy(request, null);
+        return createAccountPasswordPolicy(request, null);
     }
 
     @Override
-    public void createAccountPasswordPolicy(UpdateAccountPasswordPolicyRequest
-            request, ResultCapture<Void> extractor) {
+    public AccountPasswordPolicy createAccountPasswordPolicy(
+            UpdateAccountPasswordPolicyRequest request, ResultCapture<Void>
+            extractor) {
 
-        service.performAction("CreateAccountPasswordPolicy", request,
+        ActionResult result =
+                service.performAction("CreateAccountPasswordPolicy", request,
                 extractor);
+
+        if (result == null) return null;
+        return new AccountPasswordPolicyImpl(result.getResource());
     }
 
     @Override
-    public void createAccountAlias(CreateAccountAliasRequest request) {
-        createAccountAlias(request, null);
+    public AccountAlias createAccountAlias(CreateAccountAliasRequest request) {
+        return createAccountAlias(request, null);
     }
 
     @Override
-    public void createAccountAlias(CreateAccountAliasRequest request,
+    public AccountAlias createAccountAlias(CreateAccountAliasRequest request,
             ResultCapture<Void> extractor) {
 
-        service.performAction("CreateAccountAlias", request, extractor);
+        ActionResult result = service.performAction("CreateAccountAlias",
+                request, extractor);
+
+        if (result == null) return null;
+        return new AccountAliasImpl(result.getResource());
     }
 
     @Override

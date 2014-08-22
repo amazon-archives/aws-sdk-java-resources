@@ -31,18 +31,64 @@ public interface AccountAlias {
     boolean isLoaded();
 
     /**
-     * Gets the value of the Name identifier.
+     * Gets the value of the Name identifier. This method always directly
+     * returns the identifier and never involves a service call.
      */
     String getName();
 
     /**
-     * Performs an action.
+     * Performs the <code>Delete</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>AccountAlias</code> resource, and any conflicting parameter value
+     * set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>AccountAlias</code></b>
+     *         - mapped from the <code>Name</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see DeleteAccountAliasRequest
      */
     void delete(DeleteAccountAliasRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Delete</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>AccountAlias</code> resource, and any conflicting parameter value
+     * set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>AccountAlias</code></b>
+     *         - mapped from the <code>Name</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see DeleteAccountAliasRequest
      */
     void delete(DeleteAccountAliasRequest request, ResultCapture<Void> extractor
             );
+
+    /**
+     * The convenient method form for the <code>Delete</code> action.
+     *
+     * @see #delete(DeleteAccountAliasRequest)
+     */
+    void delete();
+
+    /**
+     * The convenient method form for the <code>Delete</code> action.
+     *
+     * @see #delete(DeleteAccountAliasRequest, ResultCapture)
+     */
+    void delete(ResultCapture<Void> extractor);
 }

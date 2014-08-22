@@ -90,6 +90,7 @@
           "Request" : {
             "Method" : "describeJob",
             "ClientRequestType" : "com.amazonaws.services.glacier.model.DescribeJobRequest",
+            "ClientResponseType" : "com.amazonaws.services.glacier.model.DescribeJobResult",
             "IdentifierMappings" : [ {
               "Source" : "AccountId",
               "Target" : [ "AccountId" ]
@@ -103,6 +104,9 @@
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
             "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ {
+              "Arguments" : [ ]
+            } ],
             "TokenPath" : null,
             "LimitPath" : null
           },
@@ -120,6 +124,7 @@
             "Request" : {
               "Method" : "getJobOutput",
               "ClientRequestType" : "com.amazonaws.services.glacier.model.GetJobOutputRequest",
+              "ClientResponseType" : "com.amazonaws.services.glacier.model.GetJobOutputResult",
               "IdentifierMappings" : [ {
                 "Source" : "AccountId",
                 "Target" : [ "AccountId" ]
@@ -136,6 +141,12 @@
                 "Name" : "Range"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "Range"
+                } ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -184,6 +195,7 @@
             "Request" : {
               "Method" : "deleteArchive",
               "ClientRequestType" : "com.amazonaws.services.glacier.model.DeleteArchiveRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "AccountId",
                 "Target" : [ "AccountId" ]
@@ -197,6 +209,9 @@
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -206,6 +221,7 @@
             "Request" : {
               "Method" : "initiateJob",
               "ClientRequestType" : "com.amazonaws.services.glacier.model.InitiateJobRequest",
+              "ClientResponseType" : "com.amazonaws.services.glacier.model.InitiateJobResult",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "VaultName" ]
@@ -221,6 +237,9 @@
               "ConstantMappings" : [ {
                 "Source" : "archive-retrieval",
                 "Target" : [ "JobParameters", "Type" ]
+              } ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
               } ],
               "TokenPath" : null,
               "LimitPath" : null
@@ -346,6 +365,7 @@
               "Request" : {
                 "Method" : "listJobs",
                 "ClientRequestType" : "com.amazonaws.services.glacier.model.ListJobsRequest",
+                "ClientResponseType" : "com.amazonaws.services.glacier.model.ListJobsResult",
                 "IdentifierMappings" : [ {
                   "Source" : "AccountId",
                   "Target" : [ "AccountId" ]
@@ -368,6 +388,7 @@
                   "Source" : "InProgress",
                   "Target" : [ "Statuscode" ]
                 } ],
+                "ConvenientMethods" : [ ],
                 "TokenPath" : [ "Marker" ],
                 "LimitPath" : [ "Limit" ]
               },
@@ -399,6 +420,7 @@
               "Request" : {
                 "Method" : "listJobs",
                 "ClientRequestType" : "com.amazonaws.services.glacier.model.ListJobsRequest",
+                "ClientResponseType" : "com.amazonaws.services.glacier.model.ListJobsResult",
                 "IdentifierMappings" : [ {
                   "Source" : "AccountId",
                   "Target" : [ "AccountId" ]
@@ -421,6 +443,9 @@
                   "Name" : "Completed"
                 } ],
                 "ConstantMappings" : [ ],
+                "ConvenientMethods" : [ {
+                  "Arguments" : [ ]
+                } ],
                 "TokenPath" : [ "Marker" ],
                 "LimitPath" : [ "Limit" ]
               },
@@ -452,6 +477,7 @@
               "Request" : {
                 "Method" : "listJobs",
                 "ClientRequestType" : "com.amazonaws.services.glacier.model.ListJobsRequest",
+                "ClientResponseType" : "com.amazonaws.services.glacier.model.ListJobsResult",
                 "IdentifierMappings" : [ {
                   "Source" : "AccountId",
                   "Target" : [ "AccountId" ]
@@ -474,6 +500,7 @@
                   "Source" : "Succeeded",
                   "Target" : [ "Statuscode" ]
                 } ],
+                "ConvenientMethods" : [ ],
                 "TokenPath" : [ "Marker" ],
                 "LimitPath" : [ "Limit" ]
               },
@@ -505,6 +532,7 @@
               "Request" : {
                 "Method" : "listJobs",
                 "ClientRequestType" : "com.amazonaws.services.glacier.model.ListJobsRequest",
+                "ClientResponseType" : "com.amazonaws.services.glacier.model.ListJobsResult",
                 "IdentifierMappings" : [ {
                   "Source" : "AccountId",
                   "Target" : [ "AccountId" ]
@@ -527,6 +555,7 @@
                   "Source" : "true",
                   "Target" : [ "Completed" ]
                 } ],
+                "ConvenientMethods" : [ ],
                 "TokenPath" : [ "Marker" ],
                 "LimitPath" : [ "Limit" ]
               },
@@ -558,6 +587,7 @@
               "Request" : {
                 "Method" : "listJobs",
                 "ClientRequestType" : "com.amazonaws.services.glacier.model.ListJobsRequest",
+                "ClientResponseType" : "com.amazonaws.services.glacier.model.ListJobsResult",
                 "IdentifierMappings" : [ {
                   "Source" : "AccountId",
                   "Target" : [ "AccountId" ]
@@ -580,6 +610,7 @@
                   "Source" : "Failed",
                   "Target" : [ "Statuscode" ]
                 } ],
+                "ConvenientMethods" : [ ],
                 "TokenPath" : [ "Marker" ],
                 "LimitPath" : [ "Limit" ]
               },
@@ -611,6 +642,7 @@
               "Request" : {
                 "Method" : "listMultipartUploads",
                 "ClientRequestType" : "com.amazonaws.services.glacier.model.ListMultipartUploadsRequest",
+                "ClientResponseType" : "com.amazonaws.services.glacier.model.ListMultipartUploadsResult",
                 "IdentifierMappings" : [ {
                   "Source" : "Name",
                   "Target" : [ "VaultName" ]
@@ -627,6 +659,9 @@
                   "Name" : "Limit"
                 } ],
                 "ConstantMappings" : [ ],
+                "ConvenientMethods" : [ {
+                  "Arguments" : [ ]
+                } ],
                 "TokenPath" : [ "UploadIdMarker" ],
                 "LimitPath" : [ "Limit" ]
               },
@@ -657,6 +692,7 @@
           "Request" : {
             "Method" : "describeVault",
             "ClientRequestType" : "com.amazonaws.services.glacier.model.DescribeVaultRequest",
+            "ClientResponseType" : "com.amazonaws.services.glacier.model.DescribeVaultResult",
             "IdentifierMappings" : [ {
               "Source" : "Name",
               "Target" : [ "VaultName" ]
@@ -667,6 +703,9 @@
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
             "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ {
+              "Arguments" : [ ]
+            } ],
             "TokenPath" : null,
             "LimitPath" : null
           },
@@ -684,6 +723,7 @@
             "Request" : {
               "Method" : "initiateJob",
               "ClientRequestType" : "com.amazonaws.services.glacier.model.InitiateJobRequest",
+              "ClientResponseType" : "com.amazonaws.services.glacier.model.InitiateJobResult",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "VaultName" ]
@@ -696,6 +736,9 @@
               "ConstantMappings" : [ {
                 "Source" : "inventory-retrieval",
                 "Target" : [ "JobParameters", "Type" ]
+              } ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
               } ],
               "TokenPath" : null,
               "LimitPath" : null
@@ -725,6 +768,7 @@
             "Request" : {
               "Method" : "uploadArchive",
               "ClientRequestType" : "com.amazonaws.services.glacier.model.UploadArchiveRequest",
+              "ClientResponseType" : "com.amazonaws.services.glacier.model.UploadArchiveResult",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "VaultName" ]
@@ -747,6 +791,18 @@
                 "Name" : "Body"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "Checksum"
+                }, {
+                  "Type" : "java.io.InputStream",
+                  "Name" : "Body"
+                }, {
+                  "Type" : "java.lang.String",
+                  "Name" : "ArchiveDescription"
+                } ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -775,6 +831,7 @@
             "Request" : {
               "Method" : "createVault",
               "ClientRequestType" : "com.amazonaws.services.glacier.model.CreateVaultRequest",
+              "ClientResponseType" : "com.amazonaws.services.glacier.model.CreateVaultResult",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "VaultName" ]
@@ -785,6 +842,9 @@
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -801,6 +861,7 @@
             "Request" : {
               "Method" : "initiateMultipartUpload",
               "ClientRequestType" : "com.amazonaws.services.glacier.model.InitiateMultipartUploadRequest",
+              "ClientResponseType" : "com.amazonaws.services.glacier.model.InitiateMultipartUploadResult",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "VaultName" ]
@@ -817,6 +878,15 @@
                 "Name" : "PartSize"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "PartSize"
+                }, {
+                  "Type" : "java.lang.String",
+                  "Name" : "ArchiveDescription"
+                } ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -845,6 +915,7 @@
             "Request" : {
               "Method" : "deleteVault",
               "ClientRequestType" : "com.amazonaws.services.glacier.model.DeleteVaultRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Name",
                 "Target" : [ "VaultName" ]
@@ -855,6 +926,9 @@
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -890,6 +964,7 @@
               "Request" : {
                 "Method" : "listVaults",
                 "ClientRequestType" : "com.amazonaws.services.glacier.model.ListVaultsRequest",
+                "ClientResponseType" : "com.amazonaws.services.glacier.model.ListVaultsResult",
                 "IdentifierMappings" : [ ],
                 "AttributeMappings" : [ ],
                 "ParameterMappings" : [ {
@@ -903,6 +978,25 @@
                   "Name" : "Limit"
                 } ],
                 "ConstantMappings" : [ ],
+                "ConvenientMethods" : [ {
+                  "Arguments" : [ ]
+                }, {
+                  "Arguments" : [ {
+                    "Type" : "java.lang.String",
+                    "Name" : "AccountId"
+                  } ]
+                }, {
+                  "Arguments" : [ {
+                    "Type" : "java.lang.String",
+                    "Name" : "AccountId"
+                  }, {
+                    "Type" : "java.lang.String",
+                    "Name" : "Limit"
+                  }, {
+                    "Type" : "java.lang.String",
+                    "Name" : "Marker"
+                  } ]
+                } ],
                 "TokenPath" : [ "Marker" ],
                 "LimitPath" : [ "Limit" ]
               },
@@ -932,6 +1026,7 @@
             "Request" : {
               "Method" : "createVault",
               "ClientRequestType" : "com.amazonaws.services.glacier.model.CreateVaultRequest",
+              "ClientResponseType" : "com.amazonaws.services.glacier.model.CreateVaultResult",
               "IdentifierMappings" : [ ],
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ {
@@ -942,6 +1037,22 @@
                 "Name" : "VaultName"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              }, {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "VaultName"
+                } ]
+              }, {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "AccountId"
+                }, {
+                  "Type" : "java.lang.String",
+                  "Name" : "VaultName"
+                } ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1012,6 +1123,7 @@
             "Request" : {
               "Method" : "listParts",
               "ClientRequestType" : "com.amazonaws.services.glacier.model.ListPartsRequest",
+              "ClientResponseType" : "com.amazonaws.services.glacier.model.ListPartsResult",
               "IdentifierMappings" : [ {
                 "Source" : "AccountId",
                 "Target" : [ "AccountId" ]
@@ -1031,6 +1143,9 @@
                 "Name" : "Limit"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : [ "Marker" ],
               "LimitPath" : [ "Limit" ]
             },
@@ -1047,6 +1162,7 @@
             "Request" : {
               "Method" : "abortMultipartUpload",
               "ClientRequestType" : "com.amazonaws.services.glacier.model.AbortMultipartUploadRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "AccountId",
                 "Target" : [ "AccountId" ]
@@ -1060,6 +1176,9 @@
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1069,6 +1188,7 @@
             "Request" : {
               "Method" : "uploadMultipartPart",
               "ClientRequestType" : "com.amazonaws.services.glacier.model.UploadMultipartPartRequest",
+              "ClientResponseType" : "com.amazonaws.services.glacier.model.UploadMultipartPartResult",
               "IdentifierMappings" : [ {
                 "Source" : "AccountId",
                 "Target" : [ "AccountId" ]
@@ -1091,6 +1211,18 @@
                 "Name" : "Body"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "Checksum"
+                }, {
+                  "Type" : "java.io.InputStream",
+                  "Name" : "Body"
+                }, {
+                  "Type" : "java.lang.String",
+                  "Name" : "Range"
+                } ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1107,6 +1239,7 @@
             "Request" : {
               "Method" : "completeMultipartUpload",
               "ClientRequestType" : "com.amazonaws.services.glacier.model.CompleteMultipartUploadRequest",
+              "ClientResponseType" : "com.amazonaws.services.glacier.model.CompleteMultipartUploadResult",
               "IdentifierMappings" : [ {
                 "Source" : "AccountId",
                 "Target" : [ "AccountId" ]
@@ -1126,6 +1259,15 @@
                 "Name" : "Checksum"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "Checksum"
+                }, {
+                  "Type" : "java.lang.String",
+                  "Name" : "ArchiveSize"
+                } ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1176,6 +1318,7 @@
           "Request" : {
             "Method" : "getVaultNotifications",
             "ClientRequestType" : "com.amazonaws.services.glacier.model.GetVaultNotificationsRequest",
+            "ClientResponseType" : "com.amazonaws.services.glacier.model.GetVaultNotificationsResult",
             "IdentifierMappings" : [ {
               "Source" : "AccountId",
               "Target" : [ "AccountId" ]
@@ -1186,6 +1329,9 @@
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
             "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ {
+              "Arguments" : [ ]
+            } ],
             "TokenPath" : null,
             "LimitPath" : null
           },
@@ -1203,6 +1349,7 @@
             "Request" : {
               "Method" : "deleteVaultNotifications",
               "ClientRequestType" : "com.amazonaws.services.glacier.model.DeleteVaultNotificationsRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "AccountId",
                 "Target" : [ "AccountId" ]
@@ -1213,6 +1360,9 @@
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1222,6 +1372,7 @@
             "Request" : {
               "Method" : "setVaultNotifications",
               "ClientRequestType" : "com.amazonaws.services.glacier.model.SetVaultNotificationsRequest",
+              "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "AccountId",
                 "Target" : [ "AccountId" ]
@@ -1235,6 +1386,12 @@
                 "Name" : "VaultNotificationConfig"
               } ],
               "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "com.amazonaws.services.glacier.model.VaultNotificationConfig",
+                  "Name" : "VaultNotificationConfig"
+                } ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -1260,6 +1417,7 @@
           "Request" : {
             "Method" : "listVaults",
             "ClientRequestType" : "com.amazonaws.services.glacier.model.ListVaultsRequest",
+            "ClientResponseType" : "com.amazonaws.services.glacier.model.ListVaultsResult",
             "IdentifierMappings" : [ ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ {
@@ -1272,6 +1430,17 @@
             "ConstantMappings" : [ {
               "Source" : "-",
               "Target" : [ "AccountId" ]
+            } ],
+            "ConvenientMethods" : [ {
+              "Arguments" : [ ]
+            }, {
+              "Arguments" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "Limit"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "Marker"
+              } ]
             } ],
             "TokenPath" : [ "Marker" ],
             "LimitPath" : [ "Limit" ]
@@ -1301,6 +1470,7 @@
         "Request" : {
           "Method" : "createVault",
           "ClientRequestType" : "com.amazonaws.services.glacier.model.CreateVaultRequest",
+          "ClientResponseType" : "com.amazonaws.services.glacier.model.CreateVaultResult",
           "IdentifierMappings" : [ ],
           "AttributeMappings" : [ ],
           "ParameterMappings" : [ {
@@ -1310,6 +1480,12 @@
           "ConstantMappings" : [ {
             "Source" : "-",
             "Target" : [ "AccountId" ]
+          } ],
+          "ConvenientMethods" : [ {
+            "Arguments" : [ {
+              "Type" : "java.lang.String",
+              "Name" : "VaultName"
+            } ]
           } ],
           "TokenPath" : null,
           "LimitPath" : null

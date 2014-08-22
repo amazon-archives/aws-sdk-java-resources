@@ -14,6 +14,8 @@
  */
 package com.amazonaws.resources.glacier;
 
+import java.io.InputStream;
+
 import com.amazonaws.resources.ResultCapture;
 import com.amazonaws.services.glacier.model.CreateVaultRequest;
 import com.amazonaws.services.glacier.model.CreateVaultResult;
@@ -42,28 +44,79 @@ public interface Vault {
     boolean isLoaded();
 
     /**
-     * Makes a call to the service to load this resource's attributes.
+     * Makes a call to the service to load this resource's attributes if they
+     * are not loaded yet.
+     *
+     * @return Returns {@code true} if the resource is not yet loaded when this
+     *         method is invoked, which indicates that a service call has been
+     *         made to retrieve the attributes.
+     * @see #load(DescribeVaultRequest)
      */
     boolean load();
 
     /**
-     * TODO: Make better javadocs.
+     * Makes a call to the service to load this resource's attributes if they
+     * are not loaded yet.
+     * The following request parameters will be populated from the data of this
+     * <code>Vault</code> resource, and any conflicting parameter value set in
+     * the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>Name</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return Returns {@code true} if the resource is not yet loaded when this
+     *         method is invoked, which indicates that a service call has been
+     *         made to retrieve the attributes.
+     * @see DescribeVaultRequest
      */
     boolean load(DescribeVaultRequest request);
 
     /**
-     * TODO: Make better javadocs.
+     * Makes a call to the service to load this resource's attributes if they
+     * are not loaded yet, and use a ResultCapture to retrieve the low-level
+     * client response
+     * The following request parameters will be populated from the data of this
+     * <code>Vault</code> resource, and any conflicting parameter value set in
+     * the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>Name</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return Returns {@code true} if the resource is not yet loaded when this
+     *         method is invoked, which indicates that a service call has been
+     *         made to retrieve the attributes.
+     * @see DescribeVaultRequest
      */
     boolean load(DescribeVaultRequest request,
             ResultCapture<DescribeVaultResult> extractor);
 
     /**
-     * Gets the value of the Name identifier.
+     * Gets the value of the Name identifier. This method always directly
+     * returns the identifier and never involves a service call.
      */
     String getName();
 
     /**
-     * Gets the value of the AccountId identifier.
+     * Gets the value of the AccountId identifier. This method always directly
+     * returns the identifier and never involves a service call.
      */
     String getAccountId();
 
@@ -103,7 +156,7 @@ public interface Vault {
     Long getSizeInBytes();
 
     /**
-     * Retrieves the Account referenced by this resource.
+     * Retrieves the <code>Account</code> resource referenced by this resource.
      */
     Account getAccount();
 
@@ -189,57 +242,362 @@ public interface Vault {
             request);
 
     /**
-     * Performs an action.
+     * Performs the <code>InitiateInventoryRetrieval</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Vault</code> resource, and any conflicting parameter value set in
+     * the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>Name</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>JobParameters.Type</code></b>
+     *         - constant value <code>inventory-retrieval</code>.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The <code>Job</code> resource object associated with the result
+     *         of this action.
+     * @see InitiateJobRequest
      */
-    Job initiateInventoryRetrieval(InitiateJobRequest request);
+    com.amazonaws.resources.glacier.Job initiateInventoryRetrieval(
+            InitiateJobRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>InitiateInventoryRetrieval</code> action and use a
+     * ResultCapture to retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Vault</code> resource, and any conflicting parameter value set in
+     * the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>Name</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>JobParameters.Type</code></b>
+     *         - constant value <code>inventory-retrieval</code>.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The <code>Job</code> resource object associated with the result
+     *         of this action.
+     * @see InitiateJobRequest
      */
-    Job initiateInventoryRetrieval(InitiateJobRequest request,
+    com.amazonaws.resources.glacier.Job initiateInventoryRetrieval(
+            InitiateJobRequest request, ResultCapture<InitiateJobResult>
+            extractor);
+
+    /**
+     * The convenient method form for the
+     * <code>InitiateInventoryRetrieval</code> action.
+     *
+     * @see #initiateInventoryRetrieval(InitiateJobRequest)
+     */
+    com.amazonaws.resources.glacier.Job initiateInventoryRetrieval();
+
+    /**
+     * The convenient method form for the
+     * <code>InitiateInventoryRetrieval</code> action.
+     *
+     * @see #initiateInventoryRetrieval(InitiateJobRequest, ResultCapture)
+     */
+    com.amazonaws.resources.glacier.Job initiateInventoryRetrieval(
             ResultCapture<InitiateJobResult> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>UploadArchive</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Vault</code> resource, and any conflicting parameter value set in
+     * the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>Name</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The <code>Archive</code> resource object associated with the
+     *         result of this action.
+     * @see UploadArchiveRequest
      */
-    Archive uploadArchive(UploadArchiveRequest request);
+    com.amazonaws.resources.glacier.Archive uploadArchive(UploadArchiveRequest
+            request);
 
     /**
-     * Performs an action.
+     * Performs the <code>UploadArchive</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Vault</code> resource, and any conflicting parameter value set in
+     * the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>Name</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The <code>Archive</code> resource object associated with the
+     *         result of this action.
+     * @see UploadArchiveRequest
      */
-    Archive uploadArchive(UploadArchiveRequest request,
+    com.amazonaws.resources.glacier.Archive uploadArchive(UploadArchiveRequest
+            request, ResultCapture<UploadArchiveResult> extractor);
+
+    /**
+     * The convenient method form for the <code>UploadArchive</code> action.
+     *
+     * @see #uploadArchive(UploadArchiveRequest)
+     */
+    com.amazonaws.resources.glacier.Archive uploadArchive(String checksum,
+            InputStream body, String archiveDescription);
+
+    /**
+     * The convenient method form for the <code>UploadArchive</code> action.
+     *
+     * @see #uploadArchive(UploadArchiveRequest, ResultCapture)
+     */
+    com.amazonaws.resources.glacier.Archive uploadArchive(String checksum,
+            InputStream body, String archiveDescription,
             ResultCapture<UploadArchiveResult> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>Create</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Vault</code> resource, and any conflicting parameter value set in
+     * the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>Name</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see CreateVaultRequest
      */
     CreateVaultResult create(CreateVaultRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Create</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Vault</code> resource, and any conflicting parameter value set in
+     * the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>Name</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see CreateVaultRequest
      */
     CreateVaultResult create(CreateVaultRequest request,
             ResultCapture<CreateVaultResult> extractor);
 
     /**
-     * Performs an action.
+     * The convenient method form for the <code>Create</code> action.
+     *
+     * @see #create(CreateVaultRequest)
      */
-    MultipartUpload initiateMultipartUpload(InitiateMultipartUploadRequest
-            request);
+    CreateVaultResult create();
 
     /**
-     * Performs an action.
+     * The convenient method form for the <code>Create</code> action.
+     *
+     * @see #create(CreateVaultRequest, ResultCapture)
      */
-    MultipartUpload initiateMultipartUpload(InitiateMultipartUploadRequest
-            request, ResultCapture<InitiateMultipartUploadResult> extractor);
+    CreateVaultResult create(ResultCapture<CreateVaultResult> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>InitiateMultipartUpload</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Vault</code> resource, and any conflicting parameter value set in
+     * the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>Name</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The <code>MultipartUpload</code> resource object associated with
+     *         the result of this action.
+     * @see InitiateMultipartUploadRequest
+     */
+    com.amazonaws.resources.glacier.MultipartUpload initiateMultipartUpload(
+            InitiateMultipartUploadRequest request);
+
+    /**
+     * Performs the <code>InitiateMultipartUpload</code> action and use a
+     * ResultCapture to retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Vault</code> resource, and any conflicting parameter value set in
+     * the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>Name</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The <code>MultipartUpload</code> resource object associated with
+     *         the result of this action.
+     * @see InitiateMultipartUploadRequest
+     */
+    com.amazonaws.resources.glacier.MultipartUpload initiateMultipartUpload(
+            InitiateMultipartUploadRequest request,
+            ResultCapture<InitiateMultipartUploadResult> extractor);
+
+    /**
+     * The convenient method form for the <code>InitiateMultipartUpload</code>
+     * action.
+     *
+     * @see #initiateMultipartUpload(InitiateMultipartUploadRequest)
+     */
+    com.amazonaws.resources.glacier.MultipartUpload initiateMultipartUpload(
+            String partSize, String archiveDescription);
+
+    /**
+     * The convenient method form for the <code>InitiateMultipartUpload</code>
+     * action.
+     *
+     * @see #initiateMultipartUpload(InitiateMultipartUploadRequest,
+     *         ResultCapture)
+     */
+    com.amazonaws.resources.glacier.MultipartUpload initiateMultipartUpload(
+            String partSize, String archiveDescription,
+            ResultCapture<InitiateMultipartUploadResult> extractor);
+
+    /**
+     * Performs the <code>Delete</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Vault</code> resource, and any conflicting parameter value set in
+     * the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>Name</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see DeleteVaultRequest
      */
     void delete(DeleteVaultRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Delete</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Vault</code> resource, and any conflicting parameter value set in
+     * the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>Name</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see DeleteVaultRequest
      */
     void delete(DeleteVaultRequest request, ResultCapture<Void> extractor);
+
+    /**
+     * The convenient method form for the <code>Delete</code> action.
+     *
+     * @see #delete(DeleteVaultRequest)
+     */
+    void delete();
+
+    /**
+     * The convenient method form for the <code>Delete</code> action.
+     *
+     * @see #delete(DeleteVaultRequest, ResultCapture)
+     */
+    void delete(ResultCapture<Void> extractor);
 }
