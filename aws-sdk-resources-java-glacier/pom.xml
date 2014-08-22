@@ -8,7 +8,10 @@
   </parent>
   
   <artifactId>aws-sdk-resources-java-glacier</artifactId>
-  
+
+  <name>AWS SDK Resources for Glacier</name>
+  <description>AWS SDK Resources for Amazon Glacier.</description>
+
   <dependencies>
     
     <dependency>
