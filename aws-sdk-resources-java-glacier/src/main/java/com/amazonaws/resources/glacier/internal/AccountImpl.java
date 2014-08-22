@@ -82,6 +82,47 @@ class AccountImpl implements Account {
         return new VaultImpl(result.getResource());
     }
 
+    @Override
+    public Vault createVault() {
+        return createVault((ResultCapture<CreateVaultResult>)null);
+    }
+
+    @Override
+    public Vault createVault(ResultCapture<CreateVaultResult> extractor) {
+        CreateVaultRequest request = new CreateVaultRequest();
+        return createVault(request, extractor);
+    }
+
+    @Override
+    public Vault createVault(String vaultName) {
+        return createVault(vaultName, (ResultCapture<CreateVaultResult>)null);
+    }
+
+    @Override
+    public Vault createVault(String vaultName, ResultCapture<CreateVaultResult>
+            extractor) {
+
+        CreateVaultRequest request = new CreateVaultRequest()
+            .withVaultName(vaultName);
+        return createVault(request, extractor);
+    }
+
+    @Override
+    public Vault createVault(String accountId, String vaultName) {
+        return createVault(accountId, vaultName,
+                (ResultCapture<CreateVaultResult>)null);
+    }
+
+    @Override
+    public Vault createVault(String accountId, String vaultName,
+            ResultCapture<CreateVaultResult> extractor) {
+
+        CreateVaultRequest request = new CreateVaultRequest()
+            .withAccountId(accountId)
+            .withVaultName(vaultName);
+        return createVault(request, extractor);
+    }
+
     private static class Codec implements ResourceCodec<Account> {
         @Override
         public Account transform(ResourceImpl resource) {

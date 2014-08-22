@@ -32,43 +32,182 @@ public interface Archive {
     boolean isLoaded();
 
     /**
-     * Gets the value of the AccountId identifier.
+     * Gets the value of the AccountId identifier. This method always directly
+     * returns the identifier and never involves a service call.
      */
     String getAccountId();
 
     /**
-     * Gets the value of the Id identifier.
+     * Gets the value of the Id identifier. This method always directly returns
+     * the identifier and never involves a service call.
      */
     String getId();
 
     /**
-     * Gets the value of the VaultName identifier.
+     * Gets the value of the VaultName identifier. This method always directly
+     * returns the identifier and never involves a service call.
      */
     String getVaultName();
 
     /**
-     * Retrieves the Vault referenced by this resource.
+     * Retrieves the <code>Vault</code> resource referenced by this resource.
      */
     Vault getVault();
 
     /**
-     * Performs an action.
+     * Performs the <code>Delete</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Archive</code> resource, and any conflicting parameter value set in
+     * the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>VaultName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>ArchiveId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see DeleteArchiveRequest
      */
     void delete(DeleteArchiveRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Delete</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Archive</code> resource, and any conflicting parameter value set in
+     * the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>VaultName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>ArchiveId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see DeleteArchiveRequest
      */
     void delete(DeleteArchiveRequest request, ResultCapture<Void> extractor);
 
     /**
-     * Performs an action.
+     * The convenient method form for the <code>Delete</code> action.
+     *
+     * @see #delete(DeleteArchiveRequest)
+     */
+    void delete();
+
+    /**
+     * The convenient method form for the <code>Delete</code> action.
+     *
+     * @see #delete(DeleteArchiveRequest, ResultCapture)
+     */
+    void delete(ResultCapture<Void> extractor);
+
+    /**
+     * Performs the <code>InitiateArchiveRetreival</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Archive</code> resource, and any conflicting parameter value set in
+     * the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>Name</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>JobParameters.ArchiveId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>JobParameters.Type</code></b>
+     *         - constant value <code>archive-retrieval</code>.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The <code>Job</code> resource object associated with the result
+     *         of this action.
+     * @see InitiateJobRequest
      */
     Job initiateArchiveRetreival(InitiateJobRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>InitiateArchiveRetreival</code> action and use a
+     * ResultCapture to retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Archive</code> resource, and any conflicting parameter value set in
+     * the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>Name</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>JobParameters.ArchiveId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>JobParameters.Type</code></b>
+     *         - constant value <code>archive-retrieval</code>.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The <code>Job</code> resource object associated with the result
+     *         of this action.
+     * @see InitiateJobRequest
      */
     Job initiateArchiveRetreival(InitiateJobRequest request,
             ResultCapture<InitiateJobResult> extractor);
+
+    /**
+     * The convenient method form for the <code>InitiateArchiveRetreival</code>
+     * action.
+     *
+     * @see #initiateArchiveRetreival(InitiateJobRequest)
+     */
+    Job initiateArchiveRetreival();
+
+    /**
+     * The convenient method form for the <code>InitiateArchiveRetreival</code>
+     * action.
+     *
+     * @see #initiateArchiveRetreival(InitiateJobRequest, ResultCapture)
+     */
+    Job initiateArchiveRetreival(ResultCapture<InitiateJobResult> extractor);
 }

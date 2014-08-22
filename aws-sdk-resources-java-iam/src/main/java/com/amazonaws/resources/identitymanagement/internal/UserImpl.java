@@ -201,27 +201,77 @@ class UserImpl implements User {
     }
 
     @Override
-    public void update(UpdateUserRequest request) {
-        update(request, null);
+    public void addGroup(String groupName) {
+        addGroup(groupName, (ResultCapture<Void>)null);
     }
 
     @Override
-    public void update(UpdateUserRequest request, ResultCapture<Void> extractor)
+    public void addGroup(String groupName, ResultCapture<Void> extractor) {
+        AddUserToGroupRequest request = new AddUserToGroupRequest()
+            .withGroupName(groupName);
+        addGroup(request, extractor);
+    }
+
+    @Override
+    public User update(UpdateUserRequest request) {
+        return update(request, null);
+    }
+
+    @Override
+    public User update(UpdateUserRequest request, ResultCapture<Void> extractor)
             {
 
-        resource.performAction("Update", request, extractor);
+        ActionResult result = resource.performAction("Update", request,
+                extractor);
+
+        if (result == null) return null;
+        return new UserImpl(result.getResource());
     }
 
     @Override
-    public void enableMfa(EnableMFADeviceRequest request) {
-        enableMfa(request, null);
+    public User update() {
+        return update((ResultCapture<Void>)null);
     }
 
     @Override
-    public void enableMfa(EnableMFADeviceRequest request, ResultCapture<Void>
-            extractor) {
+    public User update(ResultCapture<Void> extractor) {
+        UpdateUserRequest request = new UpdateUserRequest();
+        return update(request, extractor);
+    }
 
-        resource.performAction("EnableMfa", request, extractor);
+    @Override
+    public MfaDevice enableMfa(EnableMFADeviceRequest request) {
+        return enableMfa(request, null);
+    }
+
+    @Override
+    public MfaDevice enableMfa(EnableMFADeviceRequest request,
+            ResultCapture<Void> extractor) {
+
+        ActionResult result = resource.performAction("EnableMfa", request,
+                extractor);
+
+        if (result == null) return null;
+        return new MfaDeviceImpl(result.getResource());
+    }
+
+    @Override
+    public MfaDevice enableMfa(String serialNumber, String authenticationCode1,
+            String authenticationCode2) {
+
+        return enableMfa(serialNumber, authenticationCode1, authenticationCode2,
+                (ResultCapture<Void>)null);
+    }
+
+    @Override
+    public MfaDevice enableMfa(String serialNumber, String authenticationCode1,
+            String authenticationCode2, ResultCapture<Void> extractor) {
+
+        EnableMFADeviceRequest request = new EnableMFADeviceRequest()
+            .withSerialNumber(serialNumber)
+            .withAuthenticationCode1(authenticationCode1)
+            .withAuthenticationCode2(authenticationCode2);
+        return enableMfa(request, extractor);
     }
 
     @Override
@@ -234,6 +284,18 @@ class UserImpl implements User {
             ResultCapture<Void> extractor) {
 
         resource.performAction("RemoveGroup", request, extractor);
+    }
+
+    @Override
+    public void removeGroup(String groupName) {
+        removeGroup(groupName, (ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void removeGroup(String groupName, ResultCapture<Void> extractor) {
+        RemoveUserFromGroupRequest request = new RemoveUserFromGroupRequest()
+            .withGroupName(groupName);
+        removeGroup(request, extractor);
     }
 
     @Override
@@ -265,15 +327,46 @@ class UserImpl implements User {
     }
 
     @Override
-    public void createPolicy(PutUserPolicyRequest request) {
-        createPolicy(request, null);
+    public void delete() {
+        delete((ResultCapture<Void>)null);
     }
 
     @Override
-    public void createPolicy(PutUserPolicyRequest request, ResultCapture<Void>
-            extractor) {
+    public void delete(ResultCapture<Void> extractor) {
+        DeleteUserRequest request = new DeleteUserRequest();
+        delete(request, extractor);
+    }
 
-        resource.performAction("CreatePolicy", request, extractor);
+    @Override
+    public UserPolicy createPolicy(PutUserPolicyRequest request) {
+        return createPolicy(request, null);
+    }
+
+    @Override
+    public UserPolicy createPolicy(PutUserPolicyRequest request,
+            ResultCapture<Void> extractor) {
+
+        ActionResult result = resource.performAction("CreatePolicy", request,
+                extractor);
+
+        if (result == null) return null;
+        return new UserPolicyImpl(result.getResource());
+    }
+
+    @Override
+    public UserPolicy createPolicy(String policyName, String policyDocument) {
+        return createPolicy(policyName, policyDocument,
+                (ResultCapture<Void>)null);
+    }
+
+    @Override
+    public UserPolicy createPolicy(String policyName, String policyDocument,
+            ResultCapture<Void> extractor) {
+
+        PutUserPolicyRequest request = new PutUserPolicyRequest()
+            .withPolicyName(policyName)
+            .withPolicyDocument(policyDocument);
+        return createPolicy(request, extractor);
     }
 
     private static class Codec implements ResourceCodec<User> {

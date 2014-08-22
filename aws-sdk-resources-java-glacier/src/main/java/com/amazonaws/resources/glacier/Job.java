@@ -34,33 +34,93 @@ public interface Job {
     boolean isLoaded();
 
     /**
-     * Makes a call to the service to load this resource's attributes.
+     * Makes a call to the service to load this resource's attributes if they
+     * are not loaded yet.
+     *
+     * @return Returns {@code true} if the resource is not yet loaded when this
+     *         method is invoked, which indicates that a service call has been
+     *         made to retrieve the attributes.
+     * @see #load(DescribeJobRequest)
      */
     boolean load();
 
     /**
-     * TODO: Make better javadocs.
+     * Makes a call to the service to load this resource's attributes if they
+     * are not loaded yet.
+     * The following request parameters will be populated from the data of this
+     * <code>Job</code> resource, and any conflicting parameter value set in the
+     * request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>VaultName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>JobId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return Returns {@code true} if the resource is not yet loaded when this
+     *         method is invoked, which indicates that a service call has been
+     *         made to retrieve the attributes.
+     * @see DescribeJobRequest
      */
     boolean load(DescribeJobRequest request);
 
     /**
-     * TODO: Make better javadocs.
+     * Makes a call to the service to load this resource's attributes if they
+     * are not loaded yet, and use a ResultCapture to retrieve the low-level
+     * client response
+     * The following request parameters will be populated from the data of this
+     * <code>Job</code> resource, and any conflicting parameter value set in the
+     * request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>VaultName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>JobId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return Returns {@code true} if the resource is not yet loaded when this
+     *         method is invoked, which indicates that a service call has been
+     *         made to retrieve the attributes.
+     * @see DescribeJobRequest
      */
     boolean load(DescribeJobRequest request, ResultCapture<DescribeJobResult>
             extractor);
 
     /**
-     * Gets the value of the AccountId identifier.
+     * Gets the value of the AccountId identifier. This method always directly
+     * returns the identifier and never involves a service call.
      */
     String getAccountId();
 
     /**
-     * Gets the value of the Id identifier.
+     * Gets the value of the Id identifier. This method always directly returns
+     * the identifier and never involves a service call.
      */
     String getId();
 
     /**
-     * Gets the value of the VaultName identifier.
+     * Gets the value of the VaultName identifier. This method always directly
+     * returns the identifier and never involves a service call.
      */
     String getVaultName();
 
@@ -177,18 +237,84 @@ public interface Job {
     InventoryRetrievalJobDescription getInventoryRetrievalParameters();
 
     /**
-     * Retrieves the Vault referenced by this resource.
+     * Retrieves the <code>Vault</code> resource referenced by this resource.
      */
     Vault getVault();
 
     /**
-     * Performs an action.
+     * Performs the <code>GetOutput</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Job</code> resource, and any conflicting parameter value set in the
+     * request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>VaultName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>JobId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see GetJobOutputRequest
      */
     GetJobOutputResult getOutput(GetJobOutputRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>GetOutput</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Job</code> resource, and any conflicting parameter value set in the
+     * request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>VaultName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>JobId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see GetJobOutputRequest
      */
     GetJobOutputResult getOutput(GetJobOutputRequest request,
             ResultCapture<GetJobOutputResult> extractor);
+
+    /**
+     * The convenient method form for the <code>GetOutput</code> action.
+     *
+     * @see #getOutput(GetJobOutputRequest)
+     */
+    GetJobOutputResult getOutput(String range);
+
+    /**
+     * The convenient method form for the <code>GetOutput</code> action.
+     *
+     * @see #getOutput(GetJobOutputRequest, ResultCapture)
+     */
+    GetJobOutputResult getOutput(String range, ResultCapture<GetJobOutputResult>
+            extractor);
 }

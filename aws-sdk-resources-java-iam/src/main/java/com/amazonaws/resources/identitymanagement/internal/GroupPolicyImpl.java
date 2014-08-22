@@ -90,6 +90,18 @@ class GroupPolicyImpl implements GroupPolicy {
     }
 
     @Override
+    public void put(String policyDocument) {
+        put(policyDocument, (ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void put(String policyDocument, ResultCapture<Void> extractor) {
+        PutGroupPolicyRequest request = new PutGroupPolicyRequest()
+            .withPolicyDocument(policyDocument);
+        put(request, extractor);
+    }
+
+    @Override
     public void delete(DeleteGroupPolicyRequest request) {
         delete(request, null);
     }
@@ -99,6 +111,17 @@ class GroupPolicyImpl implements GroupPolicy {
             extractor) {
 
         resource.performAction("Delete", request, extractor);
+    }
+
+    @Override
+    public void delete() {
+        delete((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void delete(ResultCapture<Void> extractor) {
+        DeleteGroupPolicyRequest request = new DeleteGroupPolicyRequest();
+        delete(request, extractor);
     }
 
     private static class Codec implements ResourceCodec<GroupPolicy> {

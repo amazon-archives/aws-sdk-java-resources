@@ -17,23 +17,53 @@ package com.amazonaws.resources.ec2.internal;
 import java.util.List;
 
 import com.amazonaws.resources.ResultCapture;
+import com.amazonaws.resources.ec2.DhcpOptions;
 import com.amazonaws.resources.ec2.InstanceCollection;
+import com.amazonaws.resources.ec2.InternetGatewayCollection;
+import com.amazonaws.resources.ec2.NetworkAcl;
+import com.amazonaws.resources.ec2.NetworkAclCollection;
+import com.amazonaws.resources.ec2.NetworkInterfaceCollection;
+import com.amazonaws.resources.ec2.RouteTable;
+import com.amazonaws.resources.ec2.RouteTableCollection;
+import com.amazonaws.resources.ec2.SecurityGroup;
+import com.amazonaws.resources.ec2.SecurityGroupCollection;
 import com.amazonaws.resources.ec2.Subnet;
 import com.amazonaws.resources.ec2.SubnetCollection;
 import com.amazonaws.resources.ec2.Vpc;
+import com.amazonaws.resources.ec2.VpcPeeringConnection;
+import com.amazonaws.resources.ec2.VpcPeeringConnectionCollection;
 import com.amazonaws.resources.internal.ActionResult;
+import com.amazonaws.resources.internal.CodecUtils;
 import com.amazonaws.resources.internal.ResourceCodec;
 import com.amazonaws.resources.internal.ResourceCollectionImpl;
 import com.amazonaws.resources.internal.ResourceImpl;
+import com.amazonaws.services.ec2.model.AssociateDhcpOptionsRequest;
+import com.amazonaws.services.ec2.model.AttachInternetGatewayRequest;
+import com.amazonaws.services.ec2.model.CreateNetworkAclRequest;
+import com.amazonaws.services.ec2.model.CreateNetworkAclResult;
+import com.amazonaws.services.ec2.model.CreateRouteTableRequest;
+import com.amazonaws.services.ec2.model.CreateRouteTableResult;
+import com.amazonaws.services.ec2.model.CreateSecurityGroupRequest;
+import com.amazonaws.services.ec2.model.CreateSecurityGroupResult;
 import com.amazonaws.services.ec2.model.CreateSubnetRequest;
 import com.amazonaws.services.ec2.model.CreateSubnetResult;
+import com.amazonaws.services.ec2.model.CreateTagsRequest;
+import com.amazonaws.services.ec2.model.CreateVpcPeeringConnectionRequest;
+import com.amazonaws.services.ec2.model.CreateVpcPeeringConnectionResult;
 import com.amazonaws.services.ec2.model.DeleteVpcRequest;
 import com.amazonaws.services.ec2.model.DescribeInstancesRequest;
+import com.amazonaws.services.ec2.model.DescribeInternetGatewaysRequest;
+import com.amazonaws.services.ec2.model.DescribeNetworkAclsRequest;
+import com.amazonaws.services.ec2.model.DescribeNetworkInterfacesRequest;
+import com.amazonaws.services.ec2.model.DescribeRouteTablesRequest;
+import com.amazonaws.services.ec2.model.DescribeSecurityGroupsRequest;
 import com.amazonaws.services.ec2.model.DescribeSubnetsRequest;
 import com.amazonaws.services.ec2.model.DescribeVpcAttributeRequest;
 import com.amazonaws.services.ec2.model.DescribeVpcAttributeResult;
+import com.amazonaws.services.ec2.model.DescribeVpcPeeringConnectionsRequest;
 import com.amazonaws.services.ec2.model.DescribeVpcsRequest;
 import com.amazonaws.services.ec2.model.DescribeVpcsResult;
+import com.amazonaws.services.ec2.model.DetachInternetGatewayRequest;
 import com.amazonaws.services.ec2.model.ModifyVpcAttributeRequest;
 import com.amazonaws.services.ec2.model.Tag;
 
@@ -104,8 +134,59 @@ class VpcImpl implements Vpc {
     }
 
     @Override
-    public String getVpcId() {
-        return (String) resource.getAttribute("VpcId");
+    public DhcpOptions getDhcpOptions() {
+        ResourceImpl result = resource.getReference("DhcpOptions");
+        if (result == null) return null;
+        return new DhcpOptionsImpl(result);
+    }
+
+    @Override
+    public VpcPeeringConnectionCollection getAcceptedVpcPeeringConnections() {
+        return getAcceptedVpcPeeringConnections(null);
+    }
+
+    @Override
+    public VpcPeeringConnectionCollection getAcceptedVpcPeeringConnections(
+            DescribeVpcPeeringConnectionsRequest request) {
+
+        ResourceCollectionImpl result =
+                resource.getCollection("AcceptedVpcPeeringConnections",
+                request);
+
+        if (result == null) return null;
+        return new VpcPeeringConnectionCollectionImpl(result);
+    }
+
+    @Override
+    public InternetGatewayCollection getInternetGateways() {
+        return getInternetGateways(null);
+    }
+
+    @Override
+    public InternetGatewayCollection getInternetGateways(
+            DescribeInternetGatewaysRequest request) {
+
+        ResourceCollectionImpl result =
+                resource.getCollection("InternetGateways", request);
+
+        if (result == null) return null;
+        return new InternetGatewayCollectionImpl(result);
+    }
+
+    @Override
+    public NetworkInterfaceCollection getNetworkInterfaces() {
+        return getNetworkInterfaces(null);
+    }
+
+    @Override
+    public NetworkInterfaceCollection getNetworkInterfaces(
+            DescribeNetworkInterfacesRequest request) {
+
+        ResourceCollectionImpl result =
+                resource.getCollection("NetworkInterfaces", request);
+
+        if (result == null) return null;
+        return new NetworkInterfaceCollectionImpl(result);
     }
 
     @Override
@@ -137,6 +218,132 @@ class VpcImpl implements Vpc {
     }
 
     @Override
+    public SecurityGroupCollection getSecurityGroups() {
+        return getSecurityGroups(null);
+    }
+
+    @Override
+    public SecurityGroupCollection getSecurityGroups(
+            DescribeSecurityGroupsRequest request) {
+
+        ResourceCollectionImpl result = resource.getCollection("SecurityGroups",
+                request);
+
+        if (result == null) return null;
+        return new SecurityGroupCollectionImpl(result);
+    }
+
+    @Override
+    public RouteTableCollection getRouteTables() {
+        return getRouteTables(null);
+    }
+
+    @Override
+    public RouteTableCollection getRouteTables(DescribeRouteTablesRequest
+            request) {
+
+        ResourceCollectionImpl result = resource.getCollection("RouteTables",
+                request);
+
+        if (result == null) return null;
+        return new RouteTableCollectionImpl(result);
+    }
+
+    @Override
+    public NetworkAclCollection getNetworkAcls() {
+        return getNetworkAcls(null);
+    }
+
+    @Override
+    public NetworkAclCollection getNetworkAcls(DescribeNetworkAclsRequest
+            request) {
+
+        ResourceCollectionImpl result = resource.getCollection("NetworkAcls",
+                request);
+
+        if (result == null) return null;
+        return new NetworkAclCollectionImpl(result);
+    }
+
+    @Override
+    public VpcPeeringConnectionCollection getRequestedVpcPeeringConnections() {
+        return getRequestedVpcPeeringConnections(null);
+    }
+
+    @Override
+    public VpcPeeringConnectionCollection getRequestedVpcPeeringConnections(
+            DescribeVpcPeeringConnectionsRequest request) {
+
+        ResourceCollectionImpl result =
+                resource.getCollection("RequestedVpcPeeringConnections",
+                request);
+
+        if (result == null) return null;
+        return new VpcPeeringConnectionCollectionImpl(result);
+    }
+
+    @Override
+    public void associateDhcpOptions(AssociateDhcpOptionsRequest request) {
+        associateDhcpOptions(request, null);
+    }
+
+    @Override
+    public void associateDhcpOptions(AssociateDhcpOptionsRequest request,
+            ResultCapture<Void> extractor) {
+
+        resource.performAction("AssociateDhcpOptions", request, extractor);
+    }
+
+    @Override
+    public void associateDhcpOptions() {
+        associateDhcpOptions((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void associateDhcpOptions(ResultCapture<Void> extractor) {
+        AssociateDhcpOptionsRequest request = new AssociateDhcpOptionsRequest();
+        associateDhcpOptions(request, extractor);
+    }
+
+    @Override
+    public SecurityGroup createSecurityGroup(CreateSecurityGroupRequest request)
+            {
+
+        return createSecurityGroup(request, null);
+    }
+
+    @Override
+    public SecurityGroup createSecurityGroup(CreateSecurityGroupRequest request,
+            ResultCapture<CreateSecurityGroupResult> extractor) {
+
+        ActionResult result = resource.performAction("CreateSecurityGroup",
+                request, extractor);
+
+        if (result == null) return null;
+        return new SecurityGroupImpl(result.getResource());
+    }
+
+    @Override
+    public VpcPeeringConnection requestVpcPeeringConnection(
+            CreateVpcPeeringConnectionRequest request) {
+
+        return requestVpcPeeringConnection(request, null);
+    }
+
+    @Override
+    public VpcPeeringConnection requestVpcPeeringConnection(
+            CreateVpcPeeringConnectionRequest request,
+            ResultCapture<CreateVpcPeeringConnectionResult> extractor) {
+
+        ActionResult result =
+                resource.performAction("RequestVpcPeeringConnection", request,
+                extractor);
+
+        if (result == null) return null;
+        return new VpcPeeringConnectionImpl(result.getResource());
+    }
+
+    @Override
     public Subnet createSubnet(CreateSubnetRequest request) {
         return createSubnet(request, null);
     }
@@ -150,6 +357,36 @@ class VpcImpl implements Vpc {
 
         if (result == null) return null;
         return new SubnetImpl(result.getResource());
+    }
+
+    @Override
+    public Subnet createSubnet(String cidrBlock) {
+        return createSubnet(cidrBlock, (ResultCapture<CreateSubnetResult>)null);
+    }
+
+    @Override
+    public Subnet createSubnet(String cidrBlock,
+            ResultCapture<CreateSubnetResult> extractor) {
+
+        CreateSubnetRequest request = new CreateSubnetRequest()
+            .withCidrBlock(cidrBlock);
+        return createSubnet(request, extractor);
+    }
+
+    @Override
+    public NetworkAcl createNetworkAcl(CreateNetworkAclRequest request) {
+        return createNetworkAcl(request, null);
+    }
+
+    @Override
+    public NetworkAcl createNetworkAcl(CreateNetworkAclRequest request,
+            ResultCapture<CreateNetworkAclResult> extractor) {
+
+        ActionResult result = resource.performAction("CreateNetworkAcl",
+                request, extractor);
+
+        if (result == null) return null;
+        return new NetworkAclImpl(result.getResource());
     }
 
     @Override
@@ -184,6 +421,30 @@ class VpcImpl implements Vpc {
     }
 
     @Override
+    public void detachInternetGateway(DetachInternetGatewayRequest request) {
+        detachInternetGateway(request, null);
+    }
+
+    @Override
+    public void detachInternetGateway(DetachInternetGatewayRequest request,
+            ResultCapture<Void> extractor) {
+
+        resource.performAction("DetachInternetGateway", request, extractor);
+    }
+
+    @Override
+    public void attachInternetGateway(AttachInternetGatewayRequest request) {
+        attachInternetGateway(request, null);
+    }
+
+    @Override
+    public void attachInternetGateway(AttachInternetGatewayRequest request,
+            ResultCapture<Void> extractor) {
+
+        resource.performAction("AttachInternetGateway", request, extractor);
+    }
+
+    @Override
     public void delete(DeleteVpcRequest request) {
         delete(request, null);
     }
@@ -193,6 +454,65 @@ class VpcImpl implements Vpc {
             {
 
         resource.performAction("Delete", request, extractor);
+    }
+
+    @Override
+    public void delete() {
+        delete((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void delete(ResultCapture<Void> extractor) {
+        DeleteVpcRequest request = new DeleteVpcRequest();
+        delete(request, extractor);
+    }
+
+    @Override
+    public RouteTable createRouteTable(CreateRouteTableRequest request) {
+        return createRouteTable(request, null);
+    }
+
+    @Override
+    public RouteTable createRouteTable(CreateRouteTableRequest request,
+            ResultCapture<CreateRouteTableResult> extractor) {
+
+        ActionResult result = resource.performAction("CreateRouteTable",
+                request, extractor);
+
+        if (result == null) return null;
+        return new RouteTableImpl(result.getResource());
+    }
+
+    @Override
+    public List<com.amazonaws.resources.ec2.Tag> createTags(CreateTagsRequest
+            request) {
+
+        return createTags(request, null);
+    }
+
+    @Override
+    public List<com.amazonaws.resources.ec2.Tag> createTags(CreateTagsRequest
+            request, ResultCapture<Void> extractor) {
+
+        ActionResult result = resource.performAction("CreateTags", request,
+                extractor);
+
+        if (result == null) return null;
+        return CodecUtils.transform(result.getResources(), TagImpl.CODEC);
+    }
+
+    @Override
+    public List<com.amazonaws.resources.ec2.Tag> createTags(List<Tag> tags) {
+        return createTags(tags, (ResultCapture<Void>)null);
+    }
+
+    @Override
+    public List<com.amazonaws.resources.ec2.Tag> createTags(List<Tag> tags,
+            ResultCapture<Void> extractor) {
+
+        CreateTagsRequest request = new CreateTagsRequest()
+            .withTags(tags);
+        return createTags(request, extractor);
     }
 
     private static class Codec implements ResourceCodec<Vpc> {

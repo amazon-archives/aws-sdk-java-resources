@@ -27,11 +27,13 @@ public class RequestModel {
 
     private final String method;
     private final String clientRequestType;
+    private final String clientResponseType;
 
     private final List<PathTargetMapping> identifierMappings;
     private final List<PathTargetMapping> attributeMappings;
     private final List<ParameterModel> parameterMappings;
     private final List<PathTargetMapping> constantMappings;
+    private final List<ConvenientMethod> convenientMethods;
     private final List<String> tokenPath;
     private final List<String> limitPath;
 
@@ -41,6 +43,8 @@ public class RequestModel {
             String method,
             @JsonProperty(value="ClientRequestType", required=true)
             String clientRequestType,
+            @JsonProperty(value="ClientResponseType", required=true)
+            String clientResponseType,
             @JsonProperty(value="IdentifierMappings", required=false)
             List<PathTargetMapping> identifierMappings,
             @JsonProperty(value="AttributeMappings", required=false)
@@ -49,6 +53,8 @@ public class RequestModel {
             List<ParameterModel> parameterMappings,
             @JsonProperty(value="ConstantMappings", required=false)
             List<PathTargetMapping> constantMappings,
+            @JsonProperty(value="ConvenientMethods", required=false)
+            List<ConvenientMethod> convenientMethods,
             @JsonProperty(value="TokenPath", required=false)
             List<String> tokenPath,
             @JsonProperty(value="LimitPath", required=false)
@@ -56,10 +62,12 @@ public class RequestModel {
 
         this.method = method;
         this.clientRequestType = clientRequestType;
+        this.clientResponseType = clientResponseType;
         this.identifierMappings = Utils.makeImmutable(identifierMappings);
         this.attributeMappings = Utils.makeImmutable(attributeMappings);
         this.parameterMappings = Utils.makeImmutable(parameterMappings);
         this.constantMappings = Utils.makeImmutable(constantMappings);
+        this.convenientMethods = Utils.makeImmutable(convenientMethods);
         this.tokenPath = Utils.makeImmutableOrNull(tokenPath);
         this.limitPath = Utils.makeImmutableOrNull(limitPath);
     }
@@ -78,6 +86,14 @@ public class RequestModel {
     @JsonProperty(value="ClientRequestType")
     public String getClientRequestType() {
         return clientRequestType;
+    }
+
+    /**
+     * @return the type of the corresponding client response object
+     */
+    @JsonProperty(value="ClientResponseType")
+    public String getClientResponseType() {
+        return clientResponseType;
     }
 
     /**
@@ -117,6 +133,14 @@ public class RequestModel {
     }
 
     /**
+     * @return All the convenient method overloads of this request
+     */
+    @JsonProperty(value="ConvenientMethods")
+    public List<ConvenientMethod> getConvenientMethods() {
+        return convenientMethods;
+    }
+
+    /**
      * @return a path to the place to inject the 'next page' token in the
      *         client-level request when enumerating a collection
      */
@@ -141,6 +165,7 @@ public class RequestModel {
                 + ", attributeMappings=" + attributeMappings
                 + ", parameterMappings=" + parameterMappings
                 + ", constantMappings=" + constantMappings
+                + ", convenientMethods=" + convenientMethods
                 + ", tokenPath=" + tokenPath
                 + ", limitPath=" + limitPath
                 + "}";

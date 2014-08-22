@@ -33,28 +33,79 @@ public interface UserPolicy {
     boolean isLoaded();
 
     /**
-     * Makes a call to the service to load this resource's attributes.
+     * Makes a call to the service to load this resource's attributes if they
+     * are not loaded yet.
+     *
+     * @return Returns {@code true} if the resource is not yet loaded when this
+     *         method is invoked, which indicates that a service call has been
+     *         made to retrieve the attributes.
+     * @see #load(GetUserPolicyRequest)
      */
     boolean load();
 
     /**
-     * TODO: Make better javadocs.
+     * Makes a call to the service to load this resource's attributes if they
+     * are not loaded yet.
+     * The following request parameters will be populated from the data of this
+     * <code>UserPolicy</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>UserName</code></b>
+     *         - mapped from the <code>UserName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>PolicyName</code></b>
+     *         - mapped from the <code>Name</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return Returns {@code true} if the resource is not yet loaded when this
+     *         method is invoked, which indicates that a service call has been
+     *         made to retrieve the attributes.
+     * @see GetUserPolicyRequest
      */
     boolean load(GetUserPolicyRequest request);
 
     /**
-     * TODO: Make better javadocs.
+     * Makes a call to the service to load this resource's attributes if they
+     * are not loaded yet, and use a ResultCapture to retrieve the low-level
+     * client response
+     * The following request parameters will be populated from the data of this
+     * <code>UserPolicy</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>UserName</code></b>
+     *         - mapped from the <code>UserName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>PolicyName</code></b>
+     *         - mapped from the <code>Name</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return Returns {@code true} if the resource is not yet loaded when this
+     *         method is invoked, which indicates that a service call has been
+     *         made to retrieve the attributes.
+     * @see GetUserPolicyRequest
      */
     boolean load(GetUserPolicyRequest request,
             ResultCapture<GetUserPolicyResult> extractor);
 
     /**
-     * Gets the value of the Name identifier.
+     * Gets the value of the Name identifier. This method always directly
+     * returns the identifier and never involves a service call.
      */
     String getName();
 
     /**
-     * Gets the value of the UserName identifier.
+     * Gets the value of the UserName identifier. This method always directly
+     * returns the identifier and never involves a service call.
      */
     String getUserName();
 
@@ -66,27 +117,133 @@ public interface UserPolicy {
     String getPolicyDocument();
 
     /**
-     * Retrieves the User referenced by this resource.
+     * Retrieves the <code>User</code> resource referenced by this resource.
      */
     User getUser();
 
     /**
-     * Performs an action.
+     * Performs the <code>Put</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>UserPolicy</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>UserName</code></b>
+     *         - mapped from the <code>UserName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>PolicyName</code></b>
+     *         - mapped from the <code>Name</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see PutUserPolicyRequest
      */
     void put(PutUserPolicyRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Put</code> action and use a ResultCapture to retrieve
+     * the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>UserPolicy</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>UserName</code></b>
+     *         - mapped from the <code>UserName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>PolicyName</code></b>
+     *         - mapped from the <code>Name</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see PutUserPolicyRequest
      */
     void put(PutUserPolicyRequest request, ResultCapture<Void> extractor);
 
     /**
-     * Performs an action.
+     * The convenient method form for the <code>Put</code> action.
+     *
+     * @see #put(PutUserPolicyRequest)
+     */
+    void put(String policyDocument);
+
+    /**
+     * The convenient method form for the <code>Put</code> action.
+     *
+     * @see #put(PutUserPolicyRequest, ResultCapture)
+     */
+    void put(String policyDocument, ResultCapture<Void> extractor);
+
+    /**
+     * Performs the <code>Delete</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>UserPolicy</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>UserName</code></b>
+     *         - mapped from the <code>UserName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>PolicyName</code></b>
+     *         - mapped from the <code>Name</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see DeleteUserPolicyRequest
      */
     void delete(DeleteUserPolicyRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Delete</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>UserPolicy</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>UserName</code></b>
+     *         - mapped from the <code>UserName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>PolicyName</code></b>
+     *         - mapped from the <code>Name</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see DeleteUserPolicyRequest
      */
     void delete(DeleteUserPolicyRequest request, ResultCapture<Void> extractor);
+
+    /**
+     * The convenient method form for the <code>Delete</code> action.
+     *
+     * @see #delete(DeleteUserPolicyRequest)
+     */
+    void delete();
+
+    /**
+     * The convenient method form for the <code>Delete</code> action.
+     *
+     * @see #delete(DeleteUserPolicyRequest, ResultCapture)
+     */
+    void delete(ResultCapture<Void> extractor);
 }

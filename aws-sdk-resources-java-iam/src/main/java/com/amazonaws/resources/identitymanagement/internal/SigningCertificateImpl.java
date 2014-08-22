@@ -77,6 +77,19 @@ class SigningCertificateImpl implements SigningCertificate {
     }
 
     @Override
+    public void deactivate() {
+        deactivate((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void deactivate(ResultCapture<Void> extractor) {
+        UpdateSigningCertificateRequest request = new
+                UpdateSigningCertificateRequest();
+
+        deactivate(request, extractor);
+    }
+
+    @Override
     public void activate(UpdateSigningCertificateRequest request) {
         activate(request, null);
     }
@@ -89,6 +102,19 @@ class SigningCertificateImpl implements SigningCertificate {
     }
 
     @Override
+    public void activate() {
+        activate((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void activate(ResultCapture<Void> extractor) {
+        UpdateSigningCertificateRequest request = new
+                UpdateSigningCertificateRequest();
+
+        activate(request, extractor);
+    }
+
+    @Override
     public void delete(DeleteSigningCertificateRequest request) {
         delete(request, null);
     }
@@ -98,6 +124,19 @@ class SigningCertificateImpl implements SigningCertificate {
             ResultCapture<Void> extractor) {
 
         resource.performAction("Delete", request, extractor);
+    }
+
+    @Override
+    public void delete() {
+        delete((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void delete(ResultCapture<Void> extractor) {
+        DeleteSigningCertificateRequest request = new
+                DeleteSigningCertificateRequest();
+
+        delete(request, extractor);
     }
 
     private static class Codec implements ResourceCodec<SigningCertificate> {

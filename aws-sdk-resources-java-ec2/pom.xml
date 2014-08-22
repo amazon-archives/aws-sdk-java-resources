@@ -9,6 +9,9 @@
   
   <artifactId>aws-sdk-resources-java-ec2</artifactId>
   
+  <name>AWS SDK Resources for EC2</name>
+  <description>AWS SDK Resources for Amazon EC2.</description>
+
   <dependencies>
     
     <dependency>

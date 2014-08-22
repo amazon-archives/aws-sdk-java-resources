@@ -30,7 +30,7 @@ public class ReferenceModel {
 
     private final String type;
     private final List<FlatMapping> identifierMappings;
-    private final List<EmbeddedIdentifierMapping> attributeMappings;
+    private final List<PathSourceMapping> attributeMappings;
 
     @JsonCreator
     public ReferenceModel(
@@ -39,7 +39,7 @@ public class ReferenceModel {
             @JsonProperty(value="IdentifierMappings", required=false)
             List<FlatMapping> identifierMappings,
             @JsonProperty(value="AttributeMappings", required=false)
-            List<EmbeddedIdentifierMapping> attributeMappings) {
+            List<PathSourceMapping> attributeMappings) {
 
         this.type = type;
         this.identifierMappings = Utils.makeImmutable(identifierMappings);
@@ -70,7 +70,7 @@ public class ReferenceModel {
      *         resource
      */
     @JsonProperty(value="AttributeMappings")
-    public List<EmbeddedIdentifierMapping> getAttributeMappings() {
+    public List<PathSourceMapping> getAttributeMappings() {
         return attributeMappings;
     }
 
@@ -79,7 +79,7 @@ public class ReferenceModel {
      */
     @JsonIgnore
     public boolean isMultiValued() {
-        for (EmbeddedIdentifierMapping mapping : attributeMappings) {
+        for (PathSourceMapping mapping : attributeMappings) {
             if (mapping.isMultiValued()) {
                 return true;
             }

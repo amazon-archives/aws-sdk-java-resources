@@ -14,6 +14,8 @@
  */
 package com.amazonaws.resources.glacier;
 
+import java.io.InputStream;
+
 import com.amazonaws.resources.ResultCapture;
 import com.amazonaws.services.glacier.model.AbortMultipartUploadRequest;
 import com.amazonaws.services.glacier.model.CompleteMultipartUploadRequest;
@@ -36,17 +38,20 @@ public interface MultipartUpload {
     boolean isLoaded();
 
     /**
-     * Gets the value of the AccountId identifier.
+     * Gets the value of the AccountId identifier. This method always directly
+     * returns the identifier and never involves a service call.
      */
     String getAccountId();
 
     /**
-     * Gets the value of the Id identifier.
+     * Gets the value of the Id identifier. This method always directly returns
+     * the identifier and never involves a service call.
      */
     String getId();
 
     /**
-     * Gets the value of the VaultName identifier.
+     * Gets the value of the VaultName identifier. This method always directly
+     * returns the identifier and never involves a service call.
      */
     String getVaultName();
 
@@ -79,52 +84,311 @@ public interface MultipartUpload {
     String getArchiveDescription();
 
     /**
-     * Retrieves the Vault referenced by this resource.
+     * Retrieves the <code>Vault</code> resource referenced by this resource.
      */
     Vault getVault();
 
     /**
-     * Performs an action.
+     * Performs the <code>Parts</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>MultipartUpload</code> resource, and any conflicting parameter
+     * value set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>VaultName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>UploadId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see ListPartsRequest
      */
     ListPartsResult parts(ListPartsRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Parts</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>MultipartUpload</code> resource, and any conflicting parameter
+     * value set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>VaultName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>UploadId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see ListPartsRequest
      */
     ListPartsResult parts(ListPartsRequest request,
             ResultCapture<ListPartsResult> extractor);
 
     /**
-     * Performs an action.
+     * The convenient method form for the <code>Parts</code> action.
+     *
+     * @see #parts(ListPartsRequest)
+     */
+    ListPartsResult parts();
+
+    /**
+     * The convenient method form for the <code>Parts</code> action.
+     *
+     * @see #parts(ListPartsRequest, ResultCapture)
+     */
+    ListPartsResult parts(ResultCapture<ListPartsResult> extractor);
+
+    /**
+     * Performs the <code>Abort</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>MultipartUpload</code> resource, and any conflicting parameter
+     * value set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>VaultName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>UploadId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see AbortMultipartUploadRequest
      */
     void abort(AbortMultipartUploadRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Abort</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>MultipartUpload</code> resource, and any conflicting parameter
+     * value set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>VaultName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>UploadId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see AbortMultipartUploadRequest
      */
     void abort(AbortMultipartUploadRequest request, ResultCapture<Void>
             extractor);
 
     /**
-     * Performs an action.
+     * The convenient method form for the <code>Abort</code> action.
+     *
+     * @see #abort(AbortMultipartUploadRequest)
+     */
+    void abort();
+
+    /**
+     * The convenient method form for the <code>Abort</code> action.
+     *
+     * @see #abort(AbortMultipartUploadRequest, ResultCapture)
+     */
+    void abort(ResultCapture<Void> extractor);
+
+    /**
+     * Performs the <code>UploadPart</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>MultipartUpload</code> resource, and any conflicting parameter
+     * value set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>VaultName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>UploadId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see UploadMultipartPartRequest
      */
     UploadMultipartPartResult uploadPart(UploadMultipartPartRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>UploadPart</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>MultipartUpload</code> resource, and any conflicting parameter
+     * value set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>VaultName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>UploadId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see UploadMultipartPartRequest
      */
     UploadMultipartPartResult uploadPart(UploadMultipartPartRequest request,
             ResultCapture<UploadMultipartPartResult> extractor);
 
     /**
-     * Performs an action.
+     * The convenient method form for the <code>UploadPart</code> action.
+     *
+     * @see #uploadPart(UploadMultipartPartRequest)
+     */
+    UploadMultipartPartResult uploadPart(String checksum, InputStream body,
+            String range);
+
+    /**
+     * The convenient method form for the <code>UploadPart</code> action.
+     *
+     * @see #uploadPart(UploadMultipartPartRequest, ResultCapture)
+     */
+    UploadMultipartPartResult uploadPart(String checksum, InputStream body,
+            String range, ResultCapture<UploadMultipartPartResult> extractor);
+
+    /**
+     * Performs the <code>Complete</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>MultipartUpload</code> resource, and any conflicting parameter
+     * value set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>VaultName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>UploadId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see CompleteMultipartUploadRequest
      */
     CompleteMultipartUploadResult complete(CompleteMultipartUploadRequest
             request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Complete</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>MultipartUpload</code> resource, and any conflicting parameter
+     * value set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>VaultName</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>UploadId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see CompleteMultipartUploadRequest
      */
     CompleteMultipartUploadResult complete(CompleteMultipartUploadRequest
             request, ResultCapture<CompleteMultipartUploadResult> extractor);
+
+    /**
+     * The convenient method form for the <code>Complete</code> action.
+     *
+     * @see #complete(CompleteMultipartUploadRequest)
+     */
+    CompleteMultipartUploadResult complete(String checksum, String archiveSize);
+
+    /**
+     * The convenient method form for the <code>Complete</code> action.
+     *
+     * @see #complete(CompleteMultipartUploadRequest, ResultCapture)
+     */
+    CompleteMultipartUploadResult complete(String checksum, String archiveSize,
+            ResultCapture<CompleteMultipartUploadResult> extractor);
 }

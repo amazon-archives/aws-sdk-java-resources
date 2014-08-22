@@ -218,13 +218,14 @@ public interface IdentityManagement extends Service<AmazonIdentityManagement> {
     /**
      * Performs an action.
      */
-    Role createRole(CreateRoleRequest request);
+    com.amazonaws.resources.identitymanagement.Role createRole(CreateRoleRequest
+            request);
 
     /**
      * Performs an action.
      */
-    Role createRole(CreateRoleRequest request, ResultCapture<CreateRoleResult>
-            extractor);
+    com.amazonaws.resources.identitymanagement.Role createRole(CreateRoleRequest
+            request, ResultCapture<CreateRoleResult> extractor);
 
     /**
      * Performs an action.
@@ -240,36 +241,40 @@ public interface IdentityManagement extends Service<AmazonIdentityManagement> {
     /**
      * Performs an action.
      */
-    User createUser(CreateUserRequest request);
-
-    /**
-     * Performs an action.
-     */
-    User createUser(CreateUserRequest request, ResultCapture<CreateUserResult>
-            extractor);
-
-    /**
-     * Performs an action.
-     */
-    VirtualMfaDevice createVirtualMfaDevice(CreateVirtualMFADeviceRequest
+    com.amazonaws.resources.identitymanagement.User createUser(CreateUserRequest
             request);
 
     /**
      * Performs an action.
      */
-    VirtualMfaDevice createVirtualMfaDevice(CreateVirtualMFADeviceRequest
-            request, ResultCapture<CreateVirtualMFADeviceResult> extractor);
+    com.amazonaws.resources.identitymanagement.User createUser(CreateUserRequest
+            request, ResultCapture<CreateUserResult> extractor);
 
     /**
      * Performs an action.
      */
-    Group createGroup(CreateGroupRequest request);
+    com.amazonaws.resources.identitymanagement.VirtualMfaDevice
+            createVirtualMfaDevice(CreateVirtualMFADeviceRequest request);
 
     /**
      * Performs an action.
      */
-    Group createGroup(CreateGroupRequest request,
-            ResultCapture<CreateGroupResult> extractor);
+    com.amazonaws.resources.identitymanagement.VirtualMfaDevice
+            createVirtualMfaDevice(CreateVirtualMFADeviceRequest request,
+            ResultCapture<CreateVirtualMFADeviceResult> extractor);
+
+    /**
+     * Performs an action.
+     */
+    com.amazonaws.resources.identitymanagement.Group createGroup(
+            CreateGroupRequest request);
+
+    /**
+     * Performs an action.
+     */
+    com.amazonaws.resources.identitymanagement.Group createGroup(
+            CreateGroupRequest request, ResultCapture<CreateGroupResult>
+            extractor);
 
     /**
      * Performs an action.
@@ -285,69 +290,77 @@ public interface IdentityManagement extends Service<AmazonIdentityManagement> {
     /**
      * Performs an action.
      */
-    InstanceProfile createInstanceProfile(CreateInstanceProfileRequest request);
+    com.amazonaws.resources.identitymanagement.InstanceProfile
+            createInstanceProfile(CreateInstanceProfileRequest request);
 
     /**
      * Performs an action.
      */
-    InstanceProfile createInstanceProfile(CreateInstanceProfileRequest request,
+    com.amazonaws.resources.identitymanagement.InstanceProfile
+            createInstanceProfile(CreateInstanceProfileRequest request,
             ResultCapture<CreateInstanceProfileResult> extractor);
 
     /**
      * Performs an action.
      */
-    SamlProvider createSamlProvider(CreateSAMLProviderRequest request);
+    com.amazonaws.resources.identitymanagement.SamlProvider createSamlProvider(
+            CreateSAMLProviderRequest request);
 
     /**
      * Performs an action.
      */
-    SamlProvider createSamlProvider(CreateSAMLProviderRequest request,
+    com.amazonaws.resources.identitymanagement.SamlProvider createSamlProvider(
+            CreateSAMLProviderRequest request,
             ResultCapture<CreateSAMLProviderResult> extractor);
 
     /**
      * Performs an action.
      */
-    void createAccountPasswordPolicy(UpdateAccountPasswordPolicyRequest request)
-            ;
+    AccountPasswordPolicy createAccountPasswordPolicy(
+            UpdateAccountPasswordPolicyRequest request);
 
     /**
      * Performs an action.
      */
-    void createAccountPasswordPolicy(UpdateAccountPasswordPolicyRequest request,
-            ResultCapture<Void> extractor);
+    AccountPasswordPolicy createAccountPasswordPolicy(
+            UpdateAccountPasswordPolicyRequest request, ResultCapture<Void>
+            extractor);
 
     /**
      * Performs an action.
      */
-    void createAccountAlias(CreateAccountAliasRequest request);
+    com.amazonaws.resources.identitymanagement.AccountAlias createAccountAlias(
+            CreateAccountAliasRequest request);
 
     /**
      * Performs an action.
      */
-    void createAccountAlias(CreateAccountAliasRequest request,
-            ResultCapture<Void> extractor);
+    com.amazonaws.resources.identitymanagement.AccountAlias createAccountAlias(
+            CreateAccountAliasRequest request, ResultCapture<Void> extractor);
 
     /**
      * Performs an action.
      */
-    ServerCertificate createServerCertificate(UploadServerCertificateRequest
-            request);
+    com.amazonaws.resources.identitymanagement.ServerCertificate
+            createServerCertificate(UploadServerCertificateRequest request);
 
     /**
      * Performs an action.
      */
-    ServerCertificate createServerCertificate(UploadServerCertificateRequest
-            request, ResultCapture<UploadServerCertificateResult> extractor);
+    com.amazonaws.resources.identitymanagement.ServerCertificate
+            createServerCertificate(UploadServerCertificateRequest request,
+            ResultCapture<UploadServerCertificateResult> extractor);
 
     /**
      * Performs an action.
      */
-    SigningCertificate createSigningCertificate(UploadSigningCertificateRequest
-            request);
+    com.amazonaws.resources.identitymanagement.SigningCertificate
+            createSigningCertificate(UploadSigningCertificateRequest request);
 
     /**
      * Performs an action.
      */
-    SigningCertificate createSigningCertificate(UploadSigningCertificateRequest
-            request, ResultCapture<UploadSigningCertificateResult> extractor);
+    com.amazonaws.resources.identitymanagement.SigningCertificate
+            createSigningCertificate(UploadSigningCertificateRequest request,
+            ResultCapture<UploadSigningCertificateResult> extractor);
 }

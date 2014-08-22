@@ -52,6 +52,17 @@ class AccountAliasImpl implements AccountAlias {
         resource.performAction("Delete", request, extractor);
     }
 
+    @Override
+    public void delete() {
+        delete((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void delete(ResultCapture<Void> extractor) {
+        DeleteAccountAliasRequest request = new DeleteAccountAliasRequest();
+        delete(request, extractor);
+    }
+
     private static class Codec implements ResourceCodec<AccountAlias> {
         @Override
         public AccountAlias transform(ResourceImpl resource) {

@@ -40,23 +40,65 @@ public interface LoginProfile {
     boolean isLoaded();
 
     /**
-     * Makes a call to the service to load this resource's attributes.
+     * Makes a call to the service to load this resource's attributes if they
+     * are not loaded yet.
+     *
+     * @return Returns {@code true} if the resource is not yet loaded when this
+     *         method is invoked, which indicates that a service call has been
+     *         made to retrieve the attributes.
+     * @see #load(GetLoginProfileRequest)
      */
     boolean load();
 
     /**
-     * TODO: Make better javadocs.
+     * Makes a call to the service to load this resource's attributes if they
+     * are not loaded yet.
+     * The following request parameters will be populated from the data of this
+     * <code>LoginProfile</code> resource, and any conflicting parameter value
+     * set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>UserName</code></b>
+     *         - mapped from the <code>UserName</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return Returns {@code true} if the resource is not yet loaded when this
+     *         method is invoked, which indicates that a service call has been
+     *         made to retrieve the attributes.
+     * @see GetLoginProfileRequest
      */
     boolean load(GetLoginProfileRequest request);
 
     /**
-     * TODO: Make better javadocs.
+     * Makes a call to the service to load this resource's attributes if they
+     * are not loaded yet, and use a ResultCapture to retrieve the low-level
+     * client response
+     * The following request parameters will be populated from the data of this
+     * <code>LoginProfile</code> resource, and any conflicting parameter value
+     * set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>UserName</code></b>
+     *         - mapped from the <code>UserName</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return Returns {@code true} if the resource is not yet loaded when this
+     *         method is invoked, which indicates that a service call has been
+     *         made to retrieve the attributes.
+     * @see GetLoginProfileRequest
      */
     boolean load(GetLoginProfileRequest request,
             ResultCapture<GetLoginProfileResult> extractor);
 
     /**
-     * Gets the value of the UserName identifier.
+     * Gets the value of the UserName identifier. This method always directly
+     * returns the identifier and never involves a service call.
      */
     String getUserName();
 
@@ -75,40 +117,180 @@ public interface LoginProfile {
     Date getCreateDate();
 
     /**
-     * Retrieves the User referenced by this resource.
+     * Retrieves the <code>User</code> resource referenced by this resource.
      */
     User getUser();
 
     /**
-     * Performs an action.
+     * Performs the <code>Update</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>LoginProfile</code> resource, and any conflicting parameter value
+     * set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>UserName</code></b>
+     *         - mapped from the <code>UserName</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see UpdateLoginProfileRequest
      */
     void update(UpdateLoginProfileRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Update</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>LoginProfile</code> resource, and any conflicting parameter value
+     * set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>UserName</code></b>
+     *         - mapped from the <code>UserName</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see UpdateLoginProfileRequest
      */
     void update(UpdateLoginProfileRequest request, ResultCapture<Void> extractor
             );
 
     /**
-     * Performs an action.
+     * The convenient method form for the <code>Update</code> action.
+     *
+     * @see #update(UpdateLoginProfileRequest)
+     */
+    void update();
+
+    /**
+     * The convenient method form for the <code>Update</code> action.
+     *
+     * @see #update(UpdateLoginProfileRequest, ResultCapture)
+     */
+    void update(ResultCapture<Void> extractor);
+
+    /**
+     * Performs the <code>Create</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>LoginProfile</code> resource, and any conflicting parameter value
+     * set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>UserName</code></b>
+     *         - mapped from the <code>UserName</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see CreateLoginProfileRequest
      */
     CreateLoginProfileResult create(CreateLoginProfileRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Create</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>LoginProfile</code> resource, and any conflicting parameter value
+     * set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>UserName</code></b>
+     *         - mapped from the <code>UserName</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see CreateLoginProfileRequest
      */
     CreateLoginProfileResult create(CreateLoginProfileRequest request,
             ResultCapture<CreateLoginProfileResult> extractor);
 
     /**
-     * Performs an action.
+     * The convenient method form for the <code>Create</code> action.
+     *
+     * @see #create(CreateLoginProfileRequest)
+     */
+    CreateLoginProfileResult create(String password);
+
+    /**
+     * The convenient method form for the <code>Create</code> action.
+     *
+     * @see #create(CreateLoginProfileRequest, ResultCapture)
+     */
+    CreateLoginProfileResult create(String password,
+            ResultCapture<CreateLoginProfileResult> extractor);
+
+    /**
+     * Performs the <code>Delete</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>LoginProfile</code> resource, and any conflicting parameter value
+     * set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>UserName</code></b>
+     *         - mapped from the <code>UserName</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see DeleteLoginProfileRequest
      */
     void delete(DeleteLoginProfileRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Delete</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>LoginProfile</code> resource, and any conflicting parameter value
+     * set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>UserName</code></b>
+     *         - mapped from the <code>UserName</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see DeleteLoginProfileRequest
      */
     void delete(DeleteLoginProfileRequest request, ResultCapture<Void> extractor
             );
+
+    /**
+     * The convenient method form for the <code>Delete</code> action.
+     *
+     * @see #delete(DeleteLoginProfileRequest)
+     */
+    void delete();
+
+    /**
+     * The convenient method form for the <code>Delete</code> action.
+     *
+     * @see #delete(DeleteLoginProfileRequest, ResultCapture)
+     */
+    void delete(ResultCapture<Void> extractor);
 }

@@ -50,4 +50,46 @@ public class PathTargetMapping {
                 + ", target=" + target
                 + "}";
     }
+
+    /**
+     * E.g. [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Name" ] ==> Filters[0].Name
+     */
+    public String prettyPrintTargetPath() {
+        StringBuilder result = new StringBuilder();
+
+        boolean atHead = true;
+        for (String pathToken : target) {
+
+            String arrayAccessor = extractArrayAccessor(pathToken);
+
+            if ( !atHead && arrayAccessor == null ) {
+                result.append(".");
+            }
+
+            if (arrayAccessor == null) {
+                result.append(pathToken);
+            } else {
+                result.append(arrayAccessor);
+            }
+
+            atHead = false;
+        }
+
+        return result.toString();
+    }
+
+    private static String extractArrayAccessor(String pathToken) {
+        if ("*".equals(pathToken)) {
+            return "[*]";
+        }
+
+        int colon = pathToken.indexOf(':');
+
+        if (colon < 0) {
+            return null;
+        }
+
+        String index = pathToken.substring(0, colon);
+        return "[" + index + "]";
+    }
 }

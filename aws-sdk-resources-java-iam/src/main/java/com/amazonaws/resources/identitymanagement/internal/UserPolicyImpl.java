@@ -90,6 +90,18 @@ class UserPolicyImpl implements UserPolicy {
     }
 
     @Override
+    public void put(String policyDocument) {
+        put(policyDocument, (ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void put(String policyDocument, ResultCapture<Void> extractor) {
+        PutUserPolicyRequest request = new PutUserPolicyRequest()
+            .withPolicyDocument(policyDocument);
+        put(request, extractor);
+    }
+
+    @Override
     public void delete(DeleteUserPolicyRequest request) {
         delete(request, null);
     }
@@ -99,6 +111,17 @@ class UserPolicyImpl implements UserPolicy {
             extractor) {
 
         resource.performAction("Delete", request, extractor);
+    }
+
+    @Override
+    public void delete() {
+        delete((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void delete(ResultCapture<Void> extractor) {
+        DeleteUserPolicyRequest request = new DeleteUserPolicyRequest();
+        delete(request, extractor);
     }
 
     private static class Codec implements ResourceCodec<UserPolicy> {

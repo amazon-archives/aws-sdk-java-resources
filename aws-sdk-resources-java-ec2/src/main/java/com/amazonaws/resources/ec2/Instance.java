@@ -18,8 +18,18 @@ import java.util.Date;
 import java.util.List;
 
 import com.amazonaws.resources.ResultCapture;
+import com.amazonaws.services.ec2.model.AttachVolumeRequest;
+import com.amazonaws.services.ec2.model.AttachVolumeResult;
+import com.amazonaws.services.ec2.model.CreateImageRequest;
+import com.amazonaws.services.ec2.model.CreateImageResult;
+import com.amazonaws.services.ec2.model.CreateTagsRequest;
+import com.amazonaws.services.ec2.model.DescribeInstanceAttributeRequest;
+import com.amazonaws.services.ec2.model.DescribeInstanceAttributeResult;
 import com.amazonaws.services.ec2.model.DescribeInstancesRequest;
 import com.amazonaws.services.ec2.model.DescribeInstancesResult;
+import com.amazonaws.services.ec2.model.DescribeVolumesRequest;
+import com.amazonaws.services.ec2.model.DetachVolumeRequest;
+import com.amazonaws.services.ec2.model.DetachVolumeResult;
 import com.amazonaws.services.ec2.model.GetConsoleOutputRequest;
 import com.amazonaws.services.ec2.model.GetConsoleOutputResult;
 import com.amazonaws.services.ec2.model.GetPasswordDataRequest;
@@ -62,23 +72,65 @@ public interface Instance {
     boolean isLoaded();
 
     /**
-     * Makes a call to the service to load this resource's attributes.
+     * Makes a call to the service to load this resource's attributes if they
+     * are not loaded yet.
+     *
+     * @return Returns {@code true} if the resource is not yet loaded when this
+     *         method is invoked, which indicates that a service call has been
+     *         made to retrieve the attributes.
+     * @see #load(DescribeInstancesRequest)
      */
     boolean load();
 
     /**
-     * TODO: Make better javadocs.
+     * Makes a call to the service to load this resource's attributes if they
+     * are not loaded yet.
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceIds[]</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return Returns {@code true} if the resource is not yet loaded when this
+     *         method is invoked, which indicates that a service call has been
+     *         made to retrieve the attributes.
+     * @see DescribeInstancesRequest
      */
     boolean load(DescribeInstancesRequest request);
 
     /**
-     * TODO: Make better javadocs.
+     * Makes a call to the service to load this resource's attributes if they
+     * are not loaded yet, and use a ResultCapture to retrieve the low-level
+     * client response
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceIds[]</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return Returns {@code true} if the resource is not yet loaded when this
+     *         method is invoked, which indicates that a service call has been
+     *         made to retrieve the attributes.
+     * @see DescribeInstancesRequest
      */
     boolean load(DescribeInstancesRequest request,
             ResultCapture<DescribeInstancesResult> extractor);
 
     /**
-     * Gets the value of the Id identifier.
+     * Gets the value of the Id identifier. This method always directly returns
+     * the identifier and never involves a service call.
      */
     String getId();
 
@@ -130,13 +182,6 @@ public interface Instance {
      * attribute.
      */
     Integer getAmiLaunchIndex();
-
-    /**
-     * Gets the value of the InstanceId attribute. If this resource is not yet
-     * loaded, a call to {@code load()} is made to retrieve the value of the
-     * attribute.
-     */
-    String getInstanceId();
 
     /**
      * Gets the value of the SriovNetSupport attribute. If this resource is not
@@ -341,165 +386,1158 @@ public interface Instance {
     String getKeyName();
 
     /**
-     * Retrieves the Vpc referenced by this resource.
+     * Retrieves the <code>Vpc</code> resource referenced by this resource.
      */
     Vpc getVpc();
 
     /**
-     * Retrieves the Subnet referenced by this resource.
+     * Retrieves the <code>KeyPair</code> resource referenced by this resource.
+     */
+    KeyPair getKeyPair();
+
+    /**
+     * Retrieves the <code>Image</code> resource referenced by this resource.
+     */
+    Image getImage();
+
+    /**
+     * Retrieves the <code>PlacementGroup</code> resource referenced by this
+     * resource.
+     */
+    PlacementGroup getPlacementGroup();
+
+    /**
+     * Retrieves the <code>Subnet</code> resource referenced by this resource.
      */
     Subnet getSubnet();
 
     /**
-     * Performs an action.
+     * Retrieves the Volumes collection referenced by this resource.
+     */
+    VolumeCollection getVolumes();
+
+    /**
+     * Retrieves the Volumes collection referenced by this resource.
+     */
+    VolumeCollection getVolumes(DescribeVolumesRequest request);
+
+    /**
+     * Performs the <code>Terminate</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceIds[]</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see TerminateInstancesRequest
      */
     TerminateInstancesResult terminate(TerminateInstancesRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Terminate</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceIds[]</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see TerminateInstancesRequest
      */
     TerminateInstancesResult terminate(TerminateInstancesRequest request,
             ResultCapture<TerminateInstancesResult> extractor);
 
     /**
-     * Performs an action.
+     * The convenient method form for the <code>Terminate</code> action.
+     *
+     * @see #terminate(TerminateInstancesRequest)
+     */
+    TerminateInstancesResult terminate();
+
+    /**
+     * The convenient method form for the <code>Terminate</code> action.
+     *
+     * @see #terminate(TerminateInstancesRequest, ResultCapture)
+     */
+    TerminateInstancesResult terminate(ResultCapture<TerminateInstancesResult>
+            extractor);
+
+    /**
+     * Performs the <code>ResetRamdisk</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>Attribute</code></b>
+     *         - constant value <code>ramdisk</code>.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see ResetInstanceAttributeRequest
      */
     void resetRamdisk(ResetInstanceAttributeRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>ResetRamdisk</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>Attribute</code></b>
+     *         - constant value <code>ramdisk</code>.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see ResetInstanceAttributeRequest
      */
     void resetRamdisk(ResetInstanceAttributeRequest request, ResultCapture<Void>
             extractor);
 
     /**
-     * Performs an action.
+     * The convenient method form for the <code>ResetRamdisk</code> action.
+     *
+     * @see #resetRamdisk(ResetInstanceAttributeRequest)
+     */
+    void resetRamdisk();
+
+    /**
+     * The convenient method form for the <code>ResetRamdisk</code> action.
+     *
+     * @see #resetRamdisk(ResetInstanceAttributeRequest, ResultCapture)
+     */
+    void resetRamdisk(ResultCapture<Void> extractor);
+
+    /**
+     * Performs the <code>Start</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceIds[]</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see StartInstancesRequest
      */
     StartInstancesResult start(StartInstancesRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Start</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceIds[]</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see StartInstancesRequest
      */
     StartInstancesResult start(StartInstancesRequest request,
             ResultCapture<StartInstancesResult> extractor);
 
     /**
-     * Performs an action.
+     * The convenient method form for the <code>Start</code> action.
+     *
+     * @see #start(StartInstancesRequest)
+     */
+    StartInstancesResult start();
+
+    /**
+     * The convenient method form for the <code>Start</code> action.
+     *
+     * @see #start(StartInstancesRequest, ResultCapture)
+     */
+    StartInstancesResult start(ResultCapture<StartInstancesResult> extractor);
+
+    /**
+     * Performs the <code>ConsoleOutput</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see GetConsoleOutputRequest
      */
     GetConsoleOutputResult consoleOutput(GetConsoleOutputRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>ConsoleOutput</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see GetConsoleOutputRequest
      */
     GetConsoleOutputResult consoleOutput(GetConsoleOutputRequest request,
             ResultCapture<GetConsoleOutputResult> extractor);
 
     /**
-     * Performs an action.
+     * The convenient method form for the <code>ConsoleOutput</code> action.
+     *
+     * @see #consoleOutput(GetConsoleOutputRequest)
+     */
+    GetConsoleOutputResult consoleOutput();
+
+    /**
+     * The convenient method form for the <code>ConsoleOutput</code> action.
+     *
+     * @see #consoleOutput(GetConsoleOutputRequest, ResultCapture)
+     */
+    GetConsoleOutputResult consoleOutput(ResultCapture<GetConsoleOutputResult>
+            extractor);
+
+    /**
+     * Performs the <code>ReportStatus</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>Instances[]</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see ReportInstanceStatusRequest
      */
     void reportStatus(ReportInstanceStatusRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>ReportStatus</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>Instances[]</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see ReportInstanceStatusRequest
      */
     void reportStatus(ReportInstanceStatusRequest request, ResultCapture<Void>
             extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>DetachVolume</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see DetachVolumeRequest
+     */
+    DetachVolumeResult detachVolume(DetachVolumeRequest request);
+
+    /**
+     * Performs the <code>DetachVolume</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see DetachVolumeRequest
+     */
+    DetachVolumeResult detachVolume(DetachVolumeRequest request,
+            ResultCapture<DetachVolumeResult> extractor);
+
+    /**
+     * Performs the <code>AttachVolume</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see AttachVolumeRequest
+     */
+    AttachVolumeResult attachVolume(AttachVolumeRequest request);
+
+    /**
+     * Performs the <code>AttachVolume</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see AttachVolumeRequest
+     */
+    AttachVolumeResult attachVolume(AttachVolumeRequest request,
+            ResultCapture<AttachVolumeResult> extractor);
+
+    /**
+     * The convenient method form for the <code>AttachVolume</code> action.
+     *
+     * @see #attachVolume(AttachVolumeRequest)
+     */
+    AttachVolumeResult attachVolume(String device, String volumeId);
+
+    /**
+     * The convenient method form for the <code>AttachVolume</code> action.
+     *
+     * @see #attachVolume(AttachVolumeRequest, ResultCapture)
+     */
+    AttachVolumeResult attachVolume(String device, String volumeId,
+            ResultCapture<AttachVolumeResult> extractor);
+
+    /**
+     * Performs the <code>CreateImage</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The <code>Image</code> resource object associated with the result
+     *         of this action.
+     * @see CreateImageRequest
+     */
+    com.amazonaws.resources.ec2.Image createImage(CreateImageRequest request);
+
+    /**
+     * Performs the <code>CreateImage</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The <code>Image</code> resource object associated with the result
+     *         of this action.
+     * @see CreateImageRequest
+     */
+    com.amazonaws.resources.ec2.Image createImage(CreateImageRequest request,
+            ResultCapture<CreateImageResult> extractor);
+
+    /**
+     * The convenient method form for the <code>CreateImage</code> action.
+     *
+     * @see #createImage(CreateImageRequest)
+     */
+    com.amazonaws.resources.ec2.Image createImage(String name);
+
+    /**
+     * The convenient method form for the <code>CreateImage</code> action.
+     *
+     * @see #createImage(CreateImageRequest, ResultCapture)
+     */
+    com.amazonaws.resources.ec2.Image createImage(String name,
+            ResultCapture<CreateImageResult> extractor);
+
+    /**
+     * Performs the <code>Stop</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceIds[]</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see StopInstancesRequest
      */
     StopInstancesResult stop(StopInstancesRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Stop</code> action and use a ResultCapture to retrieve
+     * the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceIds[]</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see StopInstancesRequest
      */
     StopInstancesResult stop(StopInstancesRequest request,
             ResultCapture<StopInstancesResult> extractor);
 
     /**
-     * Performs an action.
+     * The convenient method form for the <code>Stop</code> action.
+     *
+     * @see #stop(StopInstancesRequest)
+     */
+    StopInstancesResult stop();
+
+    /**
+     * The convenient method form for the <code>Stop</code> action.
+     *
+     * @see #stop(StopInstancesRequest, ResultCapture)
+     */
+    StopInstancesResult stop(ResultCapture<StopInstancesResult> extractor);
+
+    /**
+     * Performs the <code>PasswordData</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see GetPasswordDataRequest
      */
     GetPasswordDataResult passwordData(GetPasswordDataRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>PasswordData</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see GetPasswordDataRequest
      */
     GetPasswordDataResult passwordData(GetPasswordDataRequest request,
             ResultCapture<GetPasswordDataResult> extractor);
 
     /**
-     * Performs an action.
+     * The convenient method form for the <code>PasswordData</code> action.
+     *
+     * @see #passwordData(GetPasswordDataRequest)
+     */
+    GetPasswordDataResult passwordData();
+
+    /**
+     * The convenient method form for the <code>PasswordData</code> action.
+     *
+     * @see #passwordData(GetPasswordDataRequest, ResultCapture)
+     */
+    GetPasswordDataResult passwordData(ResultCapture<GetPasswordDataResult>
+            extractor);
+
+    /**
+     * Performs the <code>ResetAttribute</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see ResetInstanceAttributeRequest
      */
     void resetAttribute(ResetInstanceAttributeRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>ResetAttribute</code> action and use a ResultCapture
+     * to retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see ResetInstanceAttributeRequest
      */
     void resetAttribute(ResetInstanceAttributeRequest request,
             ResultCapture<Void> extractor);
 
     /**
-     * Performs an action.
+     * The convenient method form for the <code>ResetAttribute</code> action.
+     *
+     * @see #resetAttribute(ResetInstanceAttributeRequest)
+     */
+    void resetAttribute(String attribute);
+
+    /**
+     * The convenient method form for the <code>ResetAttribute</code> action.
+     *
+     * @see #resetAttribute(ResetInstanceAttributeRequest, ResultCapture)
+     */
+    void resetAttribute(String attribute, ResultCapture<Void> extractor);
+
+    /**
+     * Performs the <code>Monitor</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceIds[]</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see MonitorInstancesRequest
      */
     MonitorInstancesResult monitor(MonitorInstancesRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Monitor</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceIds[]</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see MonitorInstancesRequest
      */
     MonitorInstancesResult monitor(MonitorInstancesRequest request,
             ResultCapture<MonitorInstancesResult> extractor);
 
     /**
-     * Performs an action.
+     * The convenient method form for the <code>Monitor</code> action.
+     *
+     * @see #monitor(MonitorInstancesRequest)
+     */
+    MonitorInstancesResult monitor();
+
+    /**
+     * The convenient method form for the <code>Monitor</code> action.
+     *
+     * @see #monitor(MonitorInstancesRequest, ResultCapture)
+     */
+    MonitorInstancesResult monitor(ResultCapture<MonitorInstancesResult>
+            extractor);
+
+    /**
+     * Performs the <code>Reboot</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceIds[]</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see RebootInstancesRequest
+     */
+    void reboot(RebootInstancesRequest request);
+
+    /**
+     * Performs the <code>Reboot</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceIds[]</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see RebootInstancesRequest
+     */
+    void reboot(RebootInstancesRequest request, ResultCapture<Void> extractor);
+
+    /**
+     * The convenient method form for the <code>Reboot</code> action.
+     *
+     * @see #reboot(RebootInstancesRequest)
+     */
+    void reboot();
+
+    /**
+     * The convenient method form for the <code>Reboot</code> action.
+     *
+     * @see #reboot(RebootInstancesRequest, ResultCapture)
+     */
+    void reboot(ResultCapture<Void> extractor);
+
+    /**
+     * Performs the <code>ResetSourceDestCheck</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>Attribute</code></b>
+     *         - constant value <code>sourceDestCheck</code>.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see ResetInstanceAttributeRequest
      */
     void resetSourceDestCheck(ResetInstanceAttributeRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>ResetSourceDestCheck</code> action and use a
+     * ResultCapture to retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>Attribute</code></b>
+     *         - constant value <code>sourceDestCheck</code>.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see ResetInstanceAttributeRequest
      */
     void resetSourceDestCheck(ResetInstanceAttributeRequest request,
             ResultCapture<Void> extractor);
 
     /**
-     * Performs an action.
+     * The convenient method form for the <code>ResetSourceDestCheck</code>
+     * action.
+     *
+     * @see #resetSourceDestCheck(ResetInstanceAttributeRequest)
      */
-    void reboot(RebootInstancesRequest request);
+    void resetSourceDestCheck();
 
     /**
-     * Performs an action.
+     * The convenient method form for the <code>ResetSourceDestCheck</code>
+     * action.
+     *
+     * @see #resetSourceDestCheck(ResetInstanceAttributeRequest, ResultCapture)
      */
-    void reboot(RebootInstancesRequest request, ResultCapture<Void> extractor);
+    void resetSourceDestCheck(ResultCapture<Void> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>Unmonitor</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceIds[]</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see UnmonitorInstancesRequest
      */
     UnmonitorInstancesResult unmonitor(UnmonitorInstancesRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Unmonitor</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceIds[]</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see UnmonitorInstancesRequest
      */
     UnmonitorInstancesResult unmonitor(UnmonitorInstancesRequest request,
             ResultCapture<UnmonitorInstancesResult> extractor);
 
     /**
-     * Performs an action.
+     * The convenient method form for the <code>Unmonitor</code> action.
+     *
+     * @see #unmonitor(UnmonitorInstancesRequest)
+     */
+    UnmonitorInstancesResult unmonitor();
+
+    /**
+     * The convenient method form for the <code>Unmonitor</code> action.
+     *
+     * @see #unmonitor(UnmonitorInstancesRequest, ResultCapture)
+     */
+    UnmonitorInstancesResult unmonitor(ResultCapture<UnmonitorInstancesResult>
+            extractor);
+
+    /**
+     * Performs the <code>ModifyAttribute</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see ModifyInstanceAttributeRequest
      */
     void modifyAttribute(ModifyInstanceAttributeRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>ModifyAttribute</code> action and use a ResultCapture
+     * to retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see ModifyInstanceAttributeRequest
      */
     void modifyAttribute(ModifyInstanceAttributeRequest request,
             ResultCapture<Void> extractor);
 
     /**
-     * Performs an action.
+     * The convenient method form for the <code>ModifyAttribute</code> action.
+     *
+     * @see #modifyAttribute(ModifyInstanceAttributeRequest)
+     */
+    void modifyAttribute(String attribute);
+
+    /**
+     * The convenient method form for the <code>ModifyAttribute</code> action.
+     *
+     * @see #modifyAttribute(ModifyInstanceAttributeRequest, ResultCapture)
+     */
+    void modifyAttribute(String attribute, ResultCapture<Void> extractor);
+
+    /**
+     * Performs the <code>DescribeAttribute</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see DescribeInstanceAttributeRequest
+     */
+    DescribeInstanceAttributeResult describeAttribute(
+            DescribeInstanceAttributeRequest request);
+
+    /**
+     * Performs the <code>DescribeAttribute</code> action and use a
+     * ResultCapture to retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see DescribeInstanceAttributeRequest
+     */
+    DescribeInstanceAttributeResult describeAttribute(
+            DescribeInstanceAttributeRequest request,
+            ResultCapture<DescribeInstanceAttributeResult> extractor);
+
+    /**
+     * The convenient method form for the <code>DescribeAttribute</code> action.
+     *
+     * @see #describeAttribute(DescribeInstanceAttributeRequest)
+     */
+    DescribeInstanceAttributeResult describeAttribute(String attribute);
+
+    /**
+     * The convenient method form for the <code>DescribeAttribute</code> action.
+     *
+     * @see #describeAttribute(DescribeInstanceAttributeRequest, ResultCapture)
+     */
+    DescribeInstanceAttributeResult describeAttribute(String attribute,
+            ResultCapture<DescribeInstanceAttributeResult> extractor);
+
+    /**
+     * Performs the <code>CreateTags</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>Resources[]</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return A list of <code>Tag</code> resource objects associated with the
+     *         result of this action.
+     * @see CreateTagsRequest
+     */
+    List<com.amazonaws.resources.ec2.Tag> createTags(CreateTagsRequest request);
+
+    /**
+     * Performs the <code>CreateTags</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>Resources[]</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return A list of <code>Tag</code> resource objects associated with the
+     *         result of this action.
+     * @see CreateTagsRequest
+     */
+    List<com.amazonaws.resources.ec2.Tag> createTags(CreateTagsRequest request,
+            ResultCapture<Void> extractor);
+
+    /**
+     * The convenient method form for the <code>CreateTags</code> action.
+     *
+     * @see #createTags(CreateTagsRequest)
+     */
+    List<com.amazonaws.resources.ec2.Tag> createTags(List<Tag> tags);
+
+    /**
+     * The convenient method form for the <code>CreateTags</code> action.
+     *
+     * @see #createTags(CreateTagsRequest, ResultCapture)
+     */
+    List<com.amazonaws.resources.ec2.Tag> createTags(List<Tag> tags,
+            ResultCapture<Void> extractor);
+
+    /**
+     * Performs the <code>ResetKernel</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>Attribute</code></b>
+     *         - constant value <code>kernel</code>.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see ResetInstanceAttributeRequest
      */
     void resetKernel(ResetInstanceAttributeRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>ResetKernel</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>Attribute</code></b>
+     *         - constant value <code>kernel</code>.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see ResetInstanceAttributeRequest
      */
     void resetKernel(ResetInstanceAttributeRequest request, ResultCapture<Void>
             extractor);
+
+    /**
+     * The convenient method form for the <code>ResetKernel</code> action.
+     *
+     * @see #resetKernel(ResetInstanceAttributeRequest)
+     */
+    void resetKernel();
+
+    /**
+     * The convenient method form for the <code>ResetKernel</code> action.
+     *
+     * @see #resetKernel(ResetInstanceAttributeRequest, ResultCapture)
+     */
+    void resetKernel(ResultCapture<Void> extractor);
 }

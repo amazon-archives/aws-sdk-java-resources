@@ -25,6 +25,7 @@ import com.amazonaws.services.glacier.model.DeleteVaultNotificationsRequest;
 import com.amazonaws.services.glacier.model.GetVaultNotificationsRequest;
 import com.amazonaws.services.glacier.model.GetVaultNotificationsResult;
 import com.amazonaws.services.glacier.model.SetVaultNotificationsRequest;
+import com.amazonaws.services.glacier.model.VaultNotificationConfig;
 
 class NotificationImpl implements Notification {
     public static final ResourceCodec<Notification> CODEC = new Codec();
@@ -97,6 +98,19 @@ class NotificationImpl implements Notification {
     }
 
     @Override
+    public void delete() {
+        delete((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void delete(ResultCapture<Void> extractor) {
+        DeleteVaultNotificationsRequest request = new
+                DeleteVaultNotificationsRequest();
+
+        delete(request, extractor);
+    }
+
+    @Override
     public void set(SetVaultNotificationsRequest request) {
         set(request, null);
     }
@@ -106,6 +120,22 @@ class NotificationImpl implements Notification {
             extractor) {
 
         resource.performAction("Set", request, extractor);
+    }
+
+    @Override
+    public void set(VaultNotificationConfig vaultNotificationConfig) {
+        set(vaultNotificationConfig, (ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void set(VaultNotificationConfig vaultNotificationConfig,
+            ResultCapture<Void> extractor) {
+
+        SetVaultNotificationsRequest request = new
+                SetVaultNotificationsRequest()
+
+            .withVaultNotificationConfig(vaultNotificationConfig);
+        set(request, extractor);
     }
 
     private static class Codec implements ResourceCodec<Notification> {

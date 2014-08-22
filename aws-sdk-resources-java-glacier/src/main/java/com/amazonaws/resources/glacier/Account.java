@@ -32,7 +32,8 @@ public interface Account {
     boolean isLoaded();
 
     /**
-     * Gets the value of the Id identifier.
+     * Gets the value of the Id identifier. This method always directly returns
+     * the identifier and never involves a service call.
      */
     String getId();
 
@@ -52,13 +53,87 @@ public interface Account {
     VaultCollection getVaults(ListVaultsRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateVault</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Account</code> resource, and any conflicting parameter value set in
+     * the request will be overridden:
+     * <ul>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The <code>Vault</code> resource object associated with the result
+     *         of this action.
+     * @see CreateVaultRequest
      */
-    Vault createVault(CreateVaultRequest request);
+    com.amazonaws.resources.glacier.Vault createVault(CreateVaultRequest request
+            );
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateVault</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Account</code> resource, and any conflicting parameter value set in
+     * the request will be overridden:
+     * <ul>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The <code>Vault</code> resource object associated with the result
+     *         of this action.
+     * @see CreateVaultRequest
      */
-    Vault createVault(CreateVaultRequest request,
+    com.amazonaws.resources.glacier.Vault createVault(CreateVaultRequest request
+            , ResultCapture<CreateVaultResult> extractor);
+
+    /**
+     * The convenient method form for the <code>CreateVault</code> action.
+     *
+     * @see #createVault(CreateVaultRequest)
+     */
+    com.amazonaws.resources.glacier.Vault createVault();
+
+    /**
+     * The convenient method form for the <code>CreateVault</code> action.
+     *
+     * @see #createVault(CreateVaultRequest, ResultCapture)
+     */
+    com.amazonaws.resources.glacier.Vault createVault(
             ResultCapture<CreateVaultResult> extractor);
+
+    /**
+     * The convenient method form for the <code>CreateVault</code> action.
+     *
+     * @see #createVault(CreateVaultRequest)
+     */
+    com.amazonaws.resources.glacier.Vault createVault(String vaultName);
+
+    /**
+     * The convenient method form for the <code>CreateVault</code> action.
+     *
+     * @see #createVault(CreateVaultRequest, ResultCapture)
+     */
+    com.amazonaws.resources.glacier.Vault createVault(String vaultName,
+            ResultCapture<CreateVaultResult> extractor);
+
+    /**
+     * The convenient method form for the <code>CreateVault</code> action.
+     *
+     * @see #createVault(CreateVaultRequest)
+     */
+    com.amazonaws.resources.glacier.Vault createVault(String accountId, String
+            vaultName);
+
+    /**
+     * The convenient method form for the <code>CreateVault</code> action.
+     *
+     * @see #createVault(CreateVaultRequest, ResultCapture)
+     */
+    com.amazonaws.resources.glacier.Vault createVault(String accountId, String
+            vaultName, ResultCapture<CreateVaultResult> extractor);
 }

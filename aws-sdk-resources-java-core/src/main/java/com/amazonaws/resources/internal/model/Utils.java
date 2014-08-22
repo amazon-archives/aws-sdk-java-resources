@@ -18,7 +18,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-final class Utils {
+public final class Utils {
 
     public static <T> List<T> makeImmutable(List<? extends T> list) {
         if (list == null) {
@@ -41,5 +41,18 @@ final class Utils {
             return Collections.emptyMap();
         }
         return Collections.unmodifiableMap(map);
+    }
+
+    /**
+     * Returns true if the given path expression contains wildcards and could be
+     * expanded to match multiple values.
+     */
+    public static boolean isMultiValuedPath(List<String> expression) {
+        for (String element : expression) {
+            if ("*".equals(element) || element.startsWith("*:")) {
+                return true;
+            }
+        }
+        return false;
     }
 }

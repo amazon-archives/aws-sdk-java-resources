@@ -35,7 +35,8 @@ public interface SigningCertificate {
     boolean isLoaded();
 
     /**
-     * Gets the value of the Id identifier.
+     * Gets the value of the Id identifier. This method always directly returns
+     * the identifier and never involves a service call.
      */
     String getId();
 
@@ -68,35 +69,186 @@ public interface SigningCertificate {
     String getUserName();
 
     /**
-     * Performs an action.
+     * Performs the <code>Deactivate</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>SigningCertificate</code> resource, and any conflicting parameter
+     * value set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>CertificateId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>Status</code></b>
+     *         - constant value <code>Inactive</code>.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see UpdateSigningCertificateRequest
      */
     void deactivate(UpdateSigningCertificateRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Deactivate</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>SigningCertificate</code> resource, and any conflicting parameter
+     * value set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>CertificateId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>Status</code></b>
+     *         - constant value <code>Inactive</code>.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see UpdateSigningCertificateRequest
      */
     void deactivate(UpdateSigningCertificateRequest request, ResultCapture<Void>
             extractor);
 
     /**
-     * Performs an action.
+     * The convenient method form for the <code>Deactivate</code> action.
+     *
+     * @see #deactivate(UpdateSigningCertificateRequest)
+     */
+    void deactivate();
+
+    /**
+     * The convenient method form for the <code>Deactivate</code> action.
+     *
+     * @see #deactivate(UpdateSigningCertificateRequest, ResultCapture)
+     */
+    void deactivate(ResultCapture<Void> extractor);
+
+    /**
+     * Performs the <code>Activate</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>SigningCertificate</code> resource, and any conflicting parameter
+     * value set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>CertificateId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>Status</code></b>
+     *         - constant value <code>Active</code>.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see UpdateSigningCertificateRequest
      */
     void activate(UpdateSigningCertificateRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Activate</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>SigningCertificate</code> resource, and any conflicting parameter
+     * value set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>CertificateId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>Status</code></b>
+     *         - constant value <code>Active</code>.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see UpdateSigningCertificateRequest
      */
     void activate(UpdateSigningCertificateRequest request, ResultCapture<Void>
             extractor);
 
     /**
-     * Performs an action.
+     * The convenient method form for the <code>Activate</code> action.
+     *
+     * @see #activate(UpdateSigningCertificateRequest)
+     */
+    void activate();
+
+    /**
+     * The convenient method form for the <code>Activate</code> action.
+     *
+     * @see #activate(UpdateSigningCertificateRequest, ResultCapture)
+     */
+    void activate(ResultCapture<Void> extractor);
+
+    /**
+     * Performs the <code>Delete</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>SigningCertificate</code> resource, and any conflicting parameter
+     * value set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>CertificateId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see DeleteSigningCertificateRequest
      */
     void delete(DeleteSigningCertificateRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Delete</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>SigningCertificate</code> resource, and any conflicting parameter
+     * value set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>CertificateId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see DeleteSigningCertificateRequest
      */
     void delete(DeleteSigningCertificateRequest request, ResultCapture<Void>
             extractor);
+
+    /**
+     * The convenient method form for the <code>Delete</code> action.
+     *
+     * @see #delete(DeleteSigningCertificateRequest)
+     */
+    void delete();
+
+    /**
+     * The convenient method form for the <code>Delete</code> action.
+     *
+     * @see #delete(DeleteSigningCertificateRequest, ResultCapture)
+     */
+    void delete(ResultCapture<Void> extractor);
 }

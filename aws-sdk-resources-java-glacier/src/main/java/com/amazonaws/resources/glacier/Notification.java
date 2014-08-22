@@ -21,6 +21,7 @@ import com.amazonaws.services.glacier.model.DeleteVaultNotificationsRequest;
 import com.amazonaws.services.glacier.model.GetVaultNotificationsRequest;
 import com.amazonaws.services.glacier.model.GetVaultNotificationsResult;
 import com.amazonaws.services.glacier.model.SetVaultNotificationsRequest;
+import com.amazonaws.services.glacier.model.VaultNotificationConfig;
 
 /**
  * The Notification resource.
@@ -35,28 +36,79 @@ public interface Notification {
     boolean isLoaded();
 
     /**
-     * Makes a call to the service to load this resource's attributes.
+     * Makes a call to the service to load this resource's attributes if they
+     * are not loaded yet.
+     *
+     * @return Returns {@code true} if the resource is not yet loaded when this
+     *         method is invoked, which indicates that a service call has been
+     *         made to retrieve the attributes.
+     * @see #load(GetVaultNotificationsRequest)
      */
     boolean load();
 
     /**
-     * TODO: Make better javadocs.
+     * Makes a call to the service to load this resource's attributes if they
+     * are not loaded yet.
+     * The following request parameters will be populated from the data of this
+     * <code>Notification</code> resource, and any conflicting parameter value
+     * set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>VaultName</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return Returns {@code true} if the resource is not yet loaded when this
+     *         method is invoked, which indicates that a service call has been
+     *         made to retrieve the attributes.
+     * @see GetVaultNotificationsRequest
      */
     boolean load(GetVaultNotificationsRequest request);
 
     /**
-     * TODO: Make better javadocs.
+     * Makes a call to the service to load this resource's attributes if they
+     * are not loaded yet, and use a ResultCapture to retrieve the low-level
+     * client response
+     * The following request parameters will be populated from the data of this
+     * <code>Notification</code> resource, and any conflicting parameter value
+     * set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>VaultName</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return Returns {@code true} if the resource is not yet loaded when this
+     *         method is invoked, which indicates that a service call has been
+     *         made to retrieve the attributes.
+     * @see GetVaultNotificationsRequest
      */
     boolean load(GetVaultNotificationsRequest request,
             ResultCapture<GetVaultNotificationsResult> extractor);
 
     /**
-     * Gets the value of the AccountId identifier.
+     * Gets the value of the AccountId identifier. This method always directly
+     * returns the identifier and never involves a service call.
      */
     String getAccountId();
 
     /**
-     * Gets the value of the VaultName identifier.
+     * Gets the value of the VaultName identifier. This method always directly
+     * returns the identifier and never involves a service call.
      */
     String getVaultName();
 
@@ -75,29 +127,136 @@ public interface Notification {
     List<String> getEvents();
 
     /**
-     * Retrieves the Vault referenced by this resource.
+     * Retrieves the <code>Vault</code> resource referenced by this resource.
      */
     Vault getVault();
 
     /**
-     * Performs an action.
+     * Performs the <code>Delete</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Notification</code> resource, and any conflicting parameter value
+     * set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>VaultName</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see DeleteVaultNotificationsRequest
      */
     void delete(DeleteVaultNotificationsRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Delete</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Notification</code> resource, and any conflicting parameter value
+     * set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>VaultName</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see DeleteVaultNotificationsRequest
      */
     void delete(DeleteVaultNotificationsRequest request, ResultCapture<Void>
             extractor);
 
     /**
-     * Performs an action.
+     * The convenient method form for the <code>Delete</code> action.
+     *
+     * @see #delete(DeleteVaultNotificationsRequest)
+     */
+    void delete();
+
+    /**
+     * The convenient method form for the <code>Delete</code> action.
+     *
+     * @see #delete(DeleteVaultNotificationsRequest, ResultCapture)
+     */
+    void delete(ResultCapture<Void> extractor);
+
+    /**
+     * Performs the <code>Set</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Notification</code> resource, and any conflicting parameter value
+     * set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>VaultName</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see SetVaultNotificationsRequest
      */
     void set(SetVaultNotificationsRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>Set</code> action and use a ResultCapture to retrieve
+     * the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Notification</code> resource, and any conflicting parameter value
+     * set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>VaultName</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see SetVaultNotificationsRequest
      */
     void set(SetVaultNotificationsRequest request, ResultCapture<Void> extractor
             );
+
+    /**
+     * The convenient method form for the <code>Set</code> action.
+     *
+     * @see #set(SetVaultNotificationsRequest)
+     */
+    void set(VaultNotificationConfig vaultNotificationConfig);
+
+    /**
+     * The convenient method form for the <code>Set</code> action.
+     *
+     * @see #set(SetVaultNotificationsRequest, ResultCapture)
+     */
+    void set(VaultNotificationConfig vaultNotificationConfig,
+            ResultCapture<Void> extractor);
 }
