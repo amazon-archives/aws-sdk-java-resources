@@ -15,6 +15,7 @@
 package com.amazonaws.resources.glacier;
 
 import org.junit.AfterClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.amazonaws.regions.Region;
@@ -29,6 +30,7 @@ public class GlacierIntegrationTest {
             .build();
 
     @Test
+    @Ignore
     public void testGlacier() {
         for (Vault vault : glacier.getVaults()) {
             System.out.println(vault.getAccountId());

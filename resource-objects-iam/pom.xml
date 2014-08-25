@@ -16,7 +16,7 @@
   
     <dependency>
       <groupId>com.amazonaws.resources</groupId>
-      <artifactId>aws-sdk-resources-java-core</artifactId>
+      <artifactId>resource-objects-core</artifactId>
       <version>${project.version}</version>
     </dependency>
     

@@ -15,6 +15,7 @@
 package com.amazonaws.resources.identitymanagement;
 
 import org.junit.AfterClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.amazonaws.resources.ServiceBuilder;
@@ -27,6 +28,7 @@ public class IamIntegrationTest {
             .build();
 
     @Test
+    @Ignore
     public void testIt() {
         Group badDudes = iam.getGroup("BadDudes");
 

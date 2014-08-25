@@ -6,7 +6,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   
-  <name>AWS Resource Objects for Java</name>
+  <name>AWS Resource Objects for Java Parent POM</name>
   <description>An object-oriented resource object abstraction on top of the AWS SDK for Java.</description>
   <url>https://github.com/awslabs/aws-sdk-resources-java</url>
 

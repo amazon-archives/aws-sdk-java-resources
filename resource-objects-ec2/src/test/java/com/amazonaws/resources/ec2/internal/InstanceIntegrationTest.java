@@ -17,6 +17,7 @@ package com.amazonaws.resources.ec2.internal;
 import java.io.IOException;
 
 import org.junit.AfterClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.amazonaws.regions.Region;
@@ -35,6 +36,7 @@ public class InstanceIntegrationTest {
             .build();
 
     @Test
+    @Ignore
     public void testEC2() throws IOException {
         for (Vpc vpc : ec2.getVpcs()) {
             System.out.println(vpc.getId());
