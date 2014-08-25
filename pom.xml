@@ -2,14 +2,14 @@
   <modelVersion>4.0.0</modelVersion>
   
   <groupId>com.amazonaws.resources</groupId>
-  <artifactId>aws-sdk-resources-java-parent-pom</artifactId>
+  <artifactId>resource-objects-parent-pom</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   
-  <name>AWS SDK Resources for Java</name>
-  <description>An object-oriented resource abstraction on top of the AWS SDK for Java.</description>
+  <name>AWS Resource Objects for Java</name>
+  <description>An object-oriented resource object abstraction on top of the AWS SDK for Java.</description>
   <url>https://github.com/awslabs/aws-sdk-resources-java</url>
-  
+
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -34,12 +34,13 @@
   </properties>
   
   <modules>
-  	<module>aws-sdk-resources-java-core</module>
-  	<module>aws-sdk-resources-java-iam</module>
-  	<module>aws-sdk-resources-java-glacier</module>
-  	<module>aws-sdk-resources-java-ec2</module>
+    <module>resource-objects-core</module>
+    <module>resource-objects-iam</module>
+    <module>resource-objects-glacier</module>
+    <module>resource-objects-ec2</module>
+    <module>resource-objects</module>
   </modules>
-  
+
   <dependencyManagement>
     <dependencies>
 
@@ -48,19 +49,20 @@
         <artifactId>aws-java-sdk</artifactId>
         <version>1.8.7</version>
       </dependency>
-      
+
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
-        <version>[4,5)</version>
+        <version>4.11</version>
         <scope>test</scope>
       </dependency>
-      
+
     </dependencies>
   </dependencyManagement>
   
   <build>
     <plugins>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -70,7 +72,56 @@
           <target>1.7</target>
         </configuration>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.9.1</version>
+        <configuration>
+          <excludePackageNames>*.internal</excludePackageNames>
+          <minmemory>128m</minmemory>
+          <maxmemory>1024m</maxmemory>
+        </configuration>
+      </plugin>
+
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>publishing</id>
+      <build>
+        <plugins>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.5</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.5.1</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>sonatype-nexus-staging</serverId>
+              <nexusUrl>https://oss.sonatype.org</nexusUrl>
+            </configuration>
+          </plugin>
+
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
   
 </project>

@@ -3,27 +3,28 @@
   
   <parent>
     <groupId>com.amazonaws.resources</groupId>
-    <artifactId>aws-sdk-resources-java-parent-pom</artifactId>
+    <artifactId>resource-objects-parent-pom</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   
-  <artifactId>aws-sdk-resources-java-ec2</artifactId>
+  <artifactId>resource-objects-core</artifactId>
   
-  <name>AWS SDK Resources for EC2</name>
-  <description>AWS SDK Resources for Amazon EC2.</description>
+  <name>AWS Resource Objects for Java Core Runtime</name>
+  <description>Core runtime for the AWS Resource Objects library.</description>
 
   <dependencies>
-    
+  
     <dependency>
-      <groupId>com.amazonaws.resources</groupId>
-      <artifactId>aws-sdk-resources-java-core</artifactId>
-      <version>${project.version}</version>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
+      <scope>test</scope>
     </dependency>
-    
+
   </dependencies>
+
 </project>

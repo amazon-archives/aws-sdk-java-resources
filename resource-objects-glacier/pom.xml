@@ -3,14 +3,14 @@
   
   <parent>
     <groupId>com.amazonaws.resources</groupId>
-    <artifactId>aws-sdk-resources-java-parent-pom</artifactId>
+    <artifactId>resource-objects-parent-pom</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   
-  <artifactId>aws-sdk-resources-java-glacier</artifactId>
+  <artifactId>resource-objects-glacier</artifactId>
 
-  <name>AWS SDK Resources for Glacier</name>
-  <description>AWS SDK Resources for Amazon Glacier.</description>
+  <name>AWS Resource Objects for Glacier</name>
+  <description>AWS Resource Objects for Amazon Glacier.</description>
 
   <dependencies>
     
@@ -23,6 +23,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
+      <scope>test</scope>
     </dependency>
     
   </dependencies>
