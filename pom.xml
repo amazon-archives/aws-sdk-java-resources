@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   
   <groupId>com.amazonaws.resources</groupId>
-  <artifactId>resources-parent-pom</artifactId>
+  <artifactId>aws-resources-parent-pom</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   
@@ -34,11 +34,11 @@
   </properties>
   
   <modules>
-    <module>resources-core</module>
-    <module>iam</module>
-    <module>glacier</module>
-    <module>ec2</module>
-    <module>resources</module>
+    <module>aws-resources-core</module>
+    <module>aws-resources-iam</module>
+    <module>aws-resources-glacier</module>
+    <module>aws-resources-ec2</module>
+    <module>aws-resources</module>
   </modules>
 
   <dependencyManagement>
