@@ -24,7 +24,7 @@ public interface Resource<C> {
     /**
      * Returns the low-level SDK client this resource uses.
      *
-     * @returns the low-level SDK client this resource uses
+     * @return the low-level SDK client this resource uses
      */
     C client();
 }

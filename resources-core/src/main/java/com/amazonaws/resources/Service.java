@@ -24,7 +24,7 @@ public interface Service<C> {
     /**
      * Returns the low-level SDK client this service uses.
      *
-     * @returns the low-level SDK client this service uses
+     * @return the low-level SDK client this service uses
      */
     C client();
 }
