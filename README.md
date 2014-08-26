@@ -1,4 +1,4 @@
-# The AWS Resource Objects Library for Java
+# AWS Resource APIs for Java
 
 An object-oriented abstraction over the clients from the [AWS SDK for Java][sdk].
 
@@ -9,10 +9,10 @@ or less works, but there might still be rough edges left until we get closer to
 
 ## Overview
 
-This library provides a set of **Resource Objects** that model the cloud resources you
+This library provides a set of **Resource** objects that model the cloud resources you
 provision through Amazon Web Services. These objects provide a simple, easy-to-use
 interface for interacting with your cloud resources. Instead of a single "client"
-class for each service that directly maps the service's API, Resource Objects
+class for each service that directly maps the service's API, Resource objects
 provide contextual information about what you can do with a particular resource
 object.
 
