@@ -38,6 +38,10 @@ import com.amazonaws.resources.internal.model.ResponseModel;
  * collection.
  */
 final class ActionUtils {
+
+    // TODO: Automate keeping me up to date.
+    private static final String USER_AGENT = "Resources/0.0.1";
+
     /**
      * Performs the given action passing the given parameters.
      *
@@ -151,6 +155,8 @@ final class ActionUtils {
         if (request == null) {
             request = (AmazonWebServiceRequest) type.newInstance();
         }
+
+        request.getRequestClientOptions().appendUserAgent(USER_AGENT);
 
         for (PathTargetMapping mapping : model.getIdentifierMappings()) {
             Object value = context.getIdentifier(mapping.getSource());
