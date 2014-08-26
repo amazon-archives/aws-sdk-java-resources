@@ -3,20 +3,20 @@
   
   <parent>
     <groupId>com.amazonaws.resources</groupId>
-    <artifactId>resource-objects-parent-pom</artifactId>
+    <artifactId>resources-parent-pom</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   
-  <artifactId>resource-objects-ec2</artifactId>
-  
-  <name>AWS Resource Objects for EC2</name>
-  <description>AWS Resource Objects for Amazon EC2.</description>
+  <artifactId>glacier</artifactId>
+
+  <name>AWS Resource API for Glacier</name>
+  <description>AWS Resource API for Amazon Glacier.</description>
 
   <dependencies>
     
     <dependency>
       <groupId>com.amazonaws.resources</groupId>
-      <artifactId>resource-objects-core</artifactId>
+      <artifactId>resources-core</artifactId>
       <version>${project.version}</version>
     </dependency>
     

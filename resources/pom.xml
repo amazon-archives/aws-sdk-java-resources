@@ -3,34 +3,33 @@
 
   <parent>
     <groupId>com.amazonaws.resources</groupId>
-    <artifactId>resource-objects-parent-pom</artifactId>
+    <artifactId>resources-parent-pom</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>resource-objects</artifactId>
+  <artifactId>resources</artifactId>
   <packaging>pom</packaging>
   
-  <name>AWS Resource Objects for Java</name>
+  <name>AWS Resource APIs for Java</name>
   <description>An object-oriented resource object abstraction on top of the AWS SDK for Java.</description>
-  <url>https://github.com/awslabs/aws-sdk-resources-java</url>
 
   <dependencies>
 
     <dependency>
       <groupId>com.amazonaws.resources</groupId>
-      <artifactId>resource-objects-ec2</artifactId>
+      <artifactId>ec2</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
       <groupId>com.amazonaws.resources</groupId>
-      <artifactId>resource-objects-iam</artifactId>
+      <artifactId>iam</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
       <groupId>com.amazonaws.resources</groupId>
-      <artifactId>resource-objects-glacier</artifactId>
+      <artifactId>glacier</artifactId>
       <version>${project.version}</version>
     </dependency>
 

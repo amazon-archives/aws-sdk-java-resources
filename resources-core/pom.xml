@@ -3,28 +3,28 @@
   
   <parent>
     <groupId>com.amazonaws.resources</groupId>
-    <artifactId>resource-objects-parent-pom</artifactId>
+    <artifactId>resources-parent-pom</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   
-  <artifactId>resource-objects-glacier</artifactId>
-
-  <name>AWS Resource Objects for Glacier</name>
-  <description>AWS Resource Objects for Amazon Glacier.</description>
+  <artifactId>resources-core</artifactId>
+  
+  <name>AWS Resource APIs for Java Core Runtime</name>
+  <description>Core runtime for the AWS Resource APIs.</description>
 
   <dependencies>
-    
+  
     <dependency>
-      <groupId>com.amazonaws.resources</groupId>
-      <artifactId>resource-objects-core</artifactId>
-      <version>${project.version}</version>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
-    
+
   </dependencies>
+
 </project>
