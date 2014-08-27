@@ -156,7 +156,7 @@ the `load` method (optionally passing additional arguments for the service call)
     }
 ```
 
-## Acting on resources
+## Acting on Resources
 
 Other methods on a Resource object are *actions* that can be taken on the resource. Each
 action method will always result in a single call to the service. Parameters to the call
