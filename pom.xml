@@ -10,6 +10,12 @@
   <description>An object-oriented resource object abstraction on top of the AWS SDK for Java.</description>
   <url>https://github.com/awslabs/aws-sdk-java-resources</url>
 
+  <scm>
+    <connection>scm:git:ssh://git@github.com/awslabs/aws-sdk-java-resources.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/awslabs/aws-sdk-java-resources.git</developerConnection>
+    <url>https://github.com/awslabs/aws-sdk-java-resources</url>
+  </scm>
+
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
