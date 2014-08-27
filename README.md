@@ -22,13 +22,15 @@ For example, given an EC2 `Vpc` object, you can easily iterate through all of th
 `Instance` objects representing the EC2 Instances you have provisioned in that VPC,
 printing their DNS names and starting them (if they're currently stopped).
 
-    Vpc myVpc = ec2.getVpc("vpc-xxxxxxx");
-    for (Instance instance : vpc.getInstances()) {
-        System.out.println(instance.getPublicDnsName());
-        if (instance.getState().equals("STOPPED")) {
-            instance.start();
-        }
+```java
+Vpc myVpc = ec2.getVpc("vpc-xxxxxxx");
+for (Instance instance : vpc.getInstances()) {
+    System.out.println(instance.getPublicDnsName());
+    if (instance.getState().equals("STOPPED")) {
+        instance.start();
     }
+}
+```
 
 ## Getting Started
 
