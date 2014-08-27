@@ -2,9 +2,9 @@
 
 An object-oriented abstraction over the clients from the [AWS SDK for Java][sdk].
 
-Currently in an early developer preview mode with support for [Amazon EC2][ec2],
-[Amazon Identity and Access Management][iam] and [Amazon Glacier][glacier]. It more
-or less works, but there might still be rough edges left until we get closer to
+Currently in a developer preview mode with support for [Amazon EC2][ec2],
+[AWS Identity and Access Management][iam] and [Amazon Glacier][glacier]. As the library
+is still at an early stage, there may still be rough edges left until we get closer to
 GA. At this point we're mainly looking to start conversations about the design
 of the API while we simultaneously work on adding support for more AWS services
 and battle-hardening the implementation.
@@ -48,7 +48,7 @@ printing their DNS names and starting them (if they're currently stopped).
 
 ## Creating a Service object
 
-A Service object is your main point of entry into the Resources API. You can create
+A Service object is your main point of entry into the Resource APIs. You can create
 a service object for the service of your choice by using the [ServiceBuilder][servicebuilder]
 class:
 
@@ -64,13 +64,13 @@ service objects include [EC2][ec2service], [IdentityManagement][iamservice], and
 ## Identifying Resources
 
 At its core, a Resource object is a wrapper for a set of *identifiers* that uniquely
-name a particular cloud resource. To create a Resource object from scratch, you must
+name a particular AWS resource. To create a Resource object from scratch, you must
 provide values for these identifiers. For example, an EC2 instance is uniquely
-idenfified by its InstanceId.
+identified by its InstanceId.
 
     Instance instance = ec2.getInstance("i-xxxxxxxx");
 
-A Resource object will alway happily give you the values for its identifiers via
+A Resource object will always happily give you the values for its identifiers via
 handy getter methods:
 
     // Guaranteed not to require a remote service call, and will never block or
@@ -100,9 +100,9 @@ You can navigate to entire collections of resources:
     }
 
 And you can follow links from one resource to another via getter methods exposed
-on Resource objects. For example, an EC2 Instance may belong to a Vpc, in which
-case its `getVpc()` method will return you the corresponding Vpc resource.
-Likewise, a Vpc links to the collection of Instances that it contains via its
+on Resource objects. For example, an EC2 Instance may belong to a VPC, in which
+case its `getVpc()` method will return you the corresponding VPC resource.
+Likewise, a VPC links to the collection of Instances that it contains via its
 `getInstances` method.
 
     Instance instance = ec2.getInstance("i-xxxxxxxx");
@@ -206,9 +206,9 @@ Or for the most control you can manually step through the pages of the result se
 [ec2]: http://aws.amazon.com/ec2/
 [iam]: http://aws.amazon.com/iam/
 [glacier]: http://aws.amazon.com/glacier/
-[releases]: https://github.com/awslabs/aws-sdk-resources-java/releases
+[releases]: https://github.com/awslabs/aws-sdk-java-resources/releases
 [api-docs]: http://docs.aws.amazon.com/AWSJavaSDKResources/latest/
-[issues]: https://github.com/awslabs/aws-sdk-resources-java/issues
+[issues]: https://github.com/awslabs/aws-sdk-java-resources/issues
 [servicebuilder]: http://docs.aws.amazon.com/AWSJavaSDKResources/latest/com/amazonaws/resources/ServiceBuilder.html
 [ec2service]: http://docs.aws.amazon.com/AWSJavaSDKResources/latest/com/amazonaws/resources/ec2/EC2.html
 [iamservice]: http://docs.aws.amazon.com/AWSJavaSDKResources/latest/com/amazonaws/resources/identitymanagement/IdentityManagement.html
