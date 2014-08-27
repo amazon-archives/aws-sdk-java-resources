@@ -32,17 +32,19 @@ printing their DNS names and starting them (if they're currently stopped).
 
 ## Getting Started
 
-* Download the [latest preview release][releases] or pick it up from Maven at:
-
-`<dependency>
+* Download the [latest preview release][releases] or pick it up from Maven:
+```
+<dependency>
   <groupId>com.amazonaws.resources</groupId>
   <artifactId>aws-resources</artifactId>
   <version>0.0.1</version>
-</dependency>`
-
+</dependency>
+```
 * Read the introduction below.
 * Read the [API documentation][api-docs].
 * Give us [feedback][issues]!
+
+
 
 ## Creating a Service object
 
