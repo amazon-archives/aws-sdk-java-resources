@@ -8,7 +8,7 @@
   
   <name>AWS Resource APIs for Java Parent POM</name>
   <description>An object-oriented resource object abstraction on top of the AWS SDK for Java.</description>
-  <url>https://github.com/awslabs/aws-sdk-resources-java</url>
+  <url>https://github.com/awslabs/aws-sdk-java-resources</url>
 
   <licenses>
     <license>
