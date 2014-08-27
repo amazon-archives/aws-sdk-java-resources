@@ -35,7 +35,7 @@ for (Instance instance : vpc.getInstances()) {
 ## Getting Started
 
 * Download the [latest preview release][releases] or pick it up from Maven:
-```
+```xml
 <dependency>
   <groupId>com.amazonaws.resources</groupId>
   <artifactId>aws-resources</artifactId>
@@ -54,9 +54,11 @@ A Service object is your main point of entry into the Resource APIs. You can cre
 a service object for the service of your choice by using the [ServiceBuilder][servicebuilder]
 class:
 
-    EC2 ec2 = ServiceBuilder.forService(EC2.class)
-        .withRegion(Region.getRegion(Regions.US_WEST_2))
-        .build();
+```java
+EC2 ec2 = ServiceBuilder.forService(EC2.class)
+    .withRegion(Region.getRegion(Regions.US_WEST_2))
+    .build();
+```
 
 Service objects are immutable and threadsafe - typically you should share a single
 instance of this service object throughout your application. The currently-supported
@@ -70,14 +72,18 @@ name a particular AWS resource. To create a Resource object from scratch, you mu
 provide values for these identifiers. For example, an EC2 instance is uniquely
 identified by its InstanceId.
 
+```java
     Instance instance = ec2.getInstance("i-xxxxxxxx");
+```
 
 A Resource object will always happily give you the values for its identifiers via
 handy getter methods:
 
+```java
     // Guaranteed not to require a remote service call, and will never block or
     // throw an exception.
     System.out.println(instance.getId());
+```
 
 Resource objects are *lazy* - they can be created without a round-trip to the service.
 This means that if you create a Resource object with bogus identifiers, you won't find
