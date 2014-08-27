@@ -48,7 +48,7 @@ printing their DNS names and starting them (if they're currently stopped).
 
 ## Creating a Service object
 
-A Service object is your main point of entry into the Resource API. You can create
+A Service object is your main point of entry into the Resource APIs. You can create
 a service object for the service of your choice by using the [ServiceBuilder][servicebuilder]
 class:
 
