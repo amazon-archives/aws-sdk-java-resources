@@ -7,7 +7,7 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>resources</artifactId>
+  <artifactId>aws-resources</artifactId>
   <packaging>pom</packaging>
   
   <name>AWS Resource APIs for Java</name>
