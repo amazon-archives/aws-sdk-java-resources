@@ -23,24 +23,24 @@ For example, given an EC2 `Vpc` object, you can easily iterate through all of th
 printing their DNS names and starting them (if they're currently stopped).
 
 ```java
-Vpc myVpc = ec2.getVpc("vpc-xxxxxxx");
-for (Instance instance : vpc.getInstances()) {
-    System.out.println(instance.getPublicDnsName());
-    if (instance.getState().equals("STOPPED")) {
-        instance.start();
-    }
-}
+    Vpc myVpc = ec2.getVpc("vpc-xxxxxxx");
+    for (Instance instance : vpc.getInstances()) {
+        System.out.println(instance.getPublicDnsName());
+        if (instance.getState().equals("STOPPED")) {
+            instance.start();
+        }
+    }   
 ```
 
 ## Getting Started
 
 * Download the [latest preview release][releases] or pick it up from Maven:
 ```xml
-<dependency>
-  <groupId>com.amazonaws.resources</groupId>
-  <artifactId>aws-resources</artifactId>
-  <version>0.0.1</version>
-</dependency>
+    <dependency>
+      <groupId>com.amazonaws.resources</groupId>
+      <artifactId>aws-resources</artifactId>
+      <version>0.0.1</version>
+    </dependency>
 ```
 * Read the introduction below.
 * Read the [API documentation][api-docs].
@@ -55,9 +55,9 @@ a service object for the service of your choice by using the [ServiceBuilder][se
 class:
 
 ```java
-EC2 ec2 = ServiceBuilder.forService(EC2.class)
-    .withRegion(Region.getRegion(Regions.US_WEST_2))
-    .build();
+    EC2 ec2 = ServiceBuilder.forService(EC2.class)
+        .withRegion(Region.getRegion(Regions.US_WEST_2))
+        .build();
 ```
 Service objects are immutable and threadsafe - typically you should share a single
 instance of this service object throughout your application. The currently-supported
