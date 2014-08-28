@@ -20,7 +20,12 @@ import com.amazonaws.services.ec2.model.ReplaceRouteTableAssociationRequest;
 import com.amazonaws.services.ec2.model.ReplaceRouteTableAssociationResult;
 
 /**
- * The RouteTableAssociation resource.
+ * The <code>RouteTableAssociation</code> resource.
+ * Each <code>RouteTableAssociation</code> object is uniquely identified by
+ * these identifier(s):
+ * <ul>
+ *   <li>Id</li>
+ * </ul>
  */
 public interface RouteTableAssociation {
     /**

@@ -28,7 +28,12 @@ import com.amazonaws.services.identitymanagement.model.UpdateLoginProfileRequest
 ;
 
 /**
- * The LoginProfile resource.
+ * The <code>LoginProfile</code> resource.
+ * Each <code>LoginProfile</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>UserName</li>
+ * </ul>
  */
 public interface LoginProfile {
     /**
@@ -44,7 +49,7 @@ public interface LoginProfile {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(GetLoginProfileRequest)
      */
@@ -66,7 +71,7 @@ public interface LoginProfile {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see GetLoginProfileRequest
      */
@@ -89,7 +94,7 @@ public interface LoginProfile {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see GetLoginProfileRequest
      */

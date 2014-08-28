@@ -26,7 +26,12 @@ import com.amazonaws.services.identitymanagement.model.UpdateSAMLProviderRequest
 import com.amazonaws.services.identitymanagement.model.UpdateSAMLProviderResult;
 
 /**
- * The SamlProvider resource.
+ * The <code>SamlProvider</code> resource.
+ * Each <code>SamlProvider</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>Arn</li>
+ * </ul>
  */
 public interface SamlProvider {
     /**
@@ -42,7 +47,7 @@ public interface SamlProvider {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(GetSAMLProviderRequest)
      */
@@ -64,7 +69,7 @@ public interface SamlProvider {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see GetSAMLProviderRequest
      */
@@ -87,7 +92,7 @@ public interface SamlProvider {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see GetSAMLProviderRequest
      */

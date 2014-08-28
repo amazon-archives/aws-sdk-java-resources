@@ -23,7 +23,13 @@ import com.amazonaws.services.identitymanagement.model.EnableMFADeviceRequest;
 import com.amazonaws.services.identitymanagement.model.ResyncMFADeviceRequest;
 
 /**
- * The MfaDevice resource.
+ * The <code>MfaDevice</code> resource.
+ * Each <code>MfaDevice</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>SerialNumber</li>
+ *   <li>UserName</li>
+ * </ul>
  */
 public interface MfaDevice {
     /**

@@ -34,7 +34,11 @@ com.amazonaws.services.identitymanagement.model.RemoveUserFromGroupRequest;
 import com.amazonaws.services.identitymanagement.model.UpdateUserRequest;
 
 /**
- * The User resource.
+ * The <code>User</code> resource.
+ * Each <code>User</code> object is uniquely identified by these identifier(s):
+ * <ul>
+ *   <li>Name</li>
+ * </ul>
  */
 public interface User {
     /**
@@ -50,7 +54,7 @@ public interface User {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(GetUserRequest)
      */
@@ -72,7 +76,7 @@ public interface User {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see GetUserRequest
      */
@@ -95,7 +99,7 @@ public interface User {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see GetUserRequest
      */
@@ -476,6 +480,21 @@ public interface User {
     com.amazonaws.resources.identitymanagement.AccessKey createAccessKey(
             CreateAccessKeyRequest request, ResultCapture<CreateAccessKeyResult>
             extractor);
+
+    /**
+     * The convenient method form for the <code>CreateAccessKey</code> action.
+     *
+     * @see #createAccessKey(CreateAccessKeyRequest)
+     */
+    com.amazonaws.resources.identitymanagement.AccessKey createAccessKey();
+
+    /**
+     * The convenient method form for the <code>CreateAccessKey</code> action.
+     *
+     * @see #createAccessKey(CreateAccessKeyRequest, ResultCapture)
+     */
+    com.amazonaws.resources.identitymanagement.AccessKey createAccessKey(
+            ResultCapture<CreateAccessKeyResult> extractor);
 
     /**
      * Performs the <code>Delete</code> action.

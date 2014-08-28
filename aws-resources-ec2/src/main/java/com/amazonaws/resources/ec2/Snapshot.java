@@ -31,7 +31,12 @@ import com.amazonaws.services.ec2.model.ResetSnapshotAttributeRequest;
 import com.amazonaws.services.ec2.model.Tag;
 
 /**
- * The Snapshot resource.
+ * The <code>Snapshot</code> resource.
+ * Each <code>Snapshot</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>Id</li>
+ * </ul>
  */
 public interface Snapshot {
     /**
@@ -47,7 +52,7 @@ public interface Snapshot {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(DescribeSnapshotsRequest)
      */
@@ -61,7 +66,7 @@ public interface Snapshot {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>SnapshotIds[]</code></b>
+     *     <b><code>SnapshotIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -69,7 +74,7 @@ public interface Snapshot {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeSnapshotsRequest
      */
@@ -84,7 +89,7 @@ public interface Snapshot {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>SnapshotIds[]</code></b>
+     *     <b><code>SnapshotIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -92,7 +97,7 @@ public interface Snapshot {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeSnapshotsRequest
      */
@@ -419,7 +424,7 @@ public interface Snapshot {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[]</code></b>
+     *     <b><code>Resources[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -442,7 +447,7 @@ public interface Snapshot {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[]</code></b>
+     *     <b><code>Resources[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>

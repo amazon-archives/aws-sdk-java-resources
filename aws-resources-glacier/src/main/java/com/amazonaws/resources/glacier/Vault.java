@@ -32,7 +32,12 @@ import com.amazonaws.services.glacier.model.UploadArchiveRequest;
 import com.amazonaws.services.glacier.model.UploadArchiveResult;
 
 /**
- * The Vault resource.
+ * The <code>Vault</code> resource.
+ * Each <code>Vault</code> object is uniquely identified by these identifier(s):
+ * <ul>
+ *   <li>Name</li>
+ *   <li>AccountId</li>
+ * </ul>
  */
 public interface Vault {
     /**
@@ -48,7 +53,7 @@ public interface Vault {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(DescribeVaultRequest)
      */
@@ -74,7 +79,7 @@ public interface Vault {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeVaultRequest
      */
@@ -101,7 +106,7 @@ public interface Vault {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeVaultRequest
      */

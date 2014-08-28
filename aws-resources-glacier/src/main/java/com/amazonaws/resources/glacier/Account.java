@@ -20,7 +20,12 @@ import com.amazonaws.services.glacier.model.CreateVaultResult;
 import com.amazonaws.services.glacier.model.ListVaultsRequest;
 
 /**
- * The Account resource.
+ * The <code>Account</code> resource.
+ * Each <code>Account</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>Id</li>
+ * </ul>
  */
 public interface Account {
     /**
@@ -56,13 +61,6 @@ public interface Account {
      * Performs the <code>CreateVault</code> action.
      *
      * <p>
-     * The following request parameters will be populated from the data of this
-     * <code>Account</code> resource, and any conflicting parameter value set in
-     * the request will be overridden:
-     * <ul>
-     * </ul>
-     *
-     * <p>
      *
      * @return The <code>Vault</code> resource object associated with the result
      *         of this action.
@@ -74,13 +72,6 @@ public interface Account {
     /**
      * Performs the <code>CreateVault</code> action and use a ResultCapture to
      * retrieve the low-level client response.
-     *
-     * <p>
-     * The following request parameters will be populated from the data of this
-     * <code>Account</code> resource, and any conflicting parameter value set in
-     * the request will be overridden:
-     * <ul>
-     * </ul>
      *
      * <p>
      *

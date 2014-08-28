@@ -38,7 +38,12 @@ import com.amazonaws.services.ec2.model.Tag;
 import com.amazonaws.services.ec2.model.UnassignPrivateIpAddressesRequest;
 
 /**
- * The NetworkInterface resource.
+ * The <code>NetworkInterface</code> resource.
+ * Each <code>NetworkInterface</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>Id</li>
+ * </ul>
  */
 public interface NetworkInterface {
     /**
@@ -54,7 +59,7 @@ public interface NetworkInterface {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(DescribeNetworkInterfacesRequest)
      */
@@ -68,7 +73,7 @@ public interface NetworkInterface {
      * value set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>NetworkInterfaceIds[]</code></b>
+     *     <b><code>NetworkInterfaceIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -76,7 +81,7 @@ public interface NetworkInterface {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeNetworkInterfacesRequest
      */
@@ -91,7 +96,7 @@ public interface NetworkInterface {
      * value set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>NetworkInterfaceIds[]</code></b>
+     *     <b><code>NetworkInterfaceIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -99,7 +104,7 @@ public interface NetworkInterface {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeNetworkInterfacesRequest
      */
@@ -287,21 +292,6 @@ public interface NetworkInterface {
      * Performs the <code>Detach</code> action.
      *
      * <p>
-     * The following request parameters will be populated from the data of this
-     * <code>NetworkInterface</code> resource, and any conflicting parameter
-     * value set in the request will be overridden:
-     * <ul>
-     *   <li>
-     *     <b><code>AttachmentId</code></b>
-     *         - mapped from the <code>Attachment.AttachmentId</code> attribute
-     * (*).
-     *   </li>
-     * </ul>
-     *
-     * <p>
-     * NOTE(*): since one of the request parameter is sourced from the
-     * resource's data attribute, {@code load()} might be invoked prior to
-     * performing this action.
      *
      * @see DetachNetworkInterfaceRequest
      */
@@ -312,21 +302,6 @@ public interface NetworkInterface {
      * retrieve the low-level client response.
      *
      * <p>
-     * The following request parameters will be populated from the data of this
-     * <code>NetworkInterface</code> resource, and any conflicting parameter
-     * value set in the request will be overridden:
-     * <ul>
-     *   <li>
-     *     <b><code>AttachmentId</code></b>
-     *         - mapped from the <code>Attachment.AttachmentId</code> attribute
-     * (*).
-     *   </li>
-     * </ul>
-     *
-     * <p>
-     * NOTE(*): since one of the request parameter is sourced from the
-     * resource's data attribute, {@code load()} might be invoked prior to
-     * performing this action.
      *
      * @see DetachNetworkInterfaceRequest
      */
@@ -604,7 +579,7 @@ public interface NetworkInterface {
      * value set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[]</code></b>
+     *     <b><code>Resources[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -627,7 +602,7 @@ public interface NetworkInterface {
      * value set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[]</code></b>
+     *     <b><code>Resources[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>

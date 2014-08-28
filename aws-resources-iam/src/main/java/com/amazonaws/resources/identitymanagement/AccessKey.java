@@ -21,7 +21,13 @@ import com.amazonaws.services.identitymanagement.model.DeleteAccessKeyRequest;
 import com.amazonaws.services.identitymanagement.model.UpdateAccessKeyRequest;
 
 /**
- * The AccessKey resource.
+ * The <code>AccessKey</code> resource.
+ * Each <code>AccessKey</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>Id</li>
+ *   <li>UserName</li>
+ * </ul>
  */
 public interface AccessKey {
     /**
@@ -129,6 +135,20 @@ public interface AccessKey {
             extractor);
 
     /**
+     * The convenient method form for the <code>Deactivate</code> action.
+     *
+     * @see #deactivate(UpdateAccessKeyRequest)
+     */
+    void deactivate();
+
+    /**
+     * The convenient method form for the <code>Deactivate</code> action.
+     *
+     * @see #deactivate(UpdateAccessKeyRequest, ResultCapture)
+     */
+    void deactivate(ResultCapture<Void> extractor);
+
+    /**
      * Performs the <code>Activate</code> action.
      *
      * <p>
@@ -187,6 +207,20 @@ public interface AccessKey {
             ;
 
     /**
+     * The convenient method form for the <code>Activate</code> action.
+     *
+     * @see #activate(UpdateAccessKeyRequest)
+     */
+    void activate();
+
+    /**
+     * The convenient method form for the <code>Activate</code> action.
+     *
+     * @see #activate(UpdateAccessKeyRequest, ResultCapture)
+     */
+    void activate(ResultCapture<Void> extractor);
+
+    /**
      * Performs the <code>Delete</code> action.
      *
      * <p>
@@ -234,4 +268,18 @@ public interface AccessKey {
      * @see DeleteAccessKeyRequest
      */
     void delete(DeleteAccessKeyRequest request, ResultCapture<Void> extractor);
+
+    /**
+     * The convenient method form for the <code>Delete</code> action.
+     *
+     * @see #delete(DeleteAccessKeyRequest)
+     */
+    void delete();
+
+    /**
+     * The convenient method form for the <code>Delete</code> action.
+     *
+     * @see #delete(DeleteAccessKeyRequest, ResultCapture)
+     */
+    void delete(ResultCapture<Void> extractor);
 }

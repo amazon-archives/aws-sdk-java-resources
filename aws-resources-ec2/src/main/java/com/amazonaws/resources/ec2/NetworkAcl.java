@@ -31,7 +31,12 @@ import com.amazonaws.services.ec2.model.ReplaceNetworkAclEntryRequest;
 import com.amazonaws.services.ec2.model.Tag;
 
 /**
- * The NetworkAcl resource.
+ * The <code>NetworkAcl</code> resource.
+ * Each <code>NetworkAcl</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>Id</li>
+ * </ul>
  */
 public interface NetworkAcl {
     /**
@@ -47,7 +52,7 @@ public interface NetworkAcl {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(DescribeNetworkAclsRequest)
      */
@@ -61,7 +66,7 @@ public interface NetworkAcl {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>NetworkAclIds[]</code></b>
+     *     <b><code>NetworkAclIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -69,7 +74,7 @@ public interface NetworkAcl {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeNetworkAclsRequest
      */
@@ -84,7 +89,7 @@ public interface NetworkAcl {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>NetworkAclIds[]</code></b>
+     *     <b><code>NetworkAclIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -92,7 +97,7 @@ public interface NetworkAcl {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeNetworkAclsRequest
      */
@@ -278,7 +283,7 @@ public interface NetworkAcl {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[]</code></b>
+     *     <b><code>Resources[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -301,7 +306,7 @@ public interface NetworkAcl {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[]</code></b>
+     *     <b><code>Resources[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>

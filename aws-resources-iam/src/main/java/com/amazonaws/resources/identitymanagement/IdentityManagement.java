@@ -69,7 +69,25 @@ import
 com.amazonaws.services.identitymanagement.model.UploadSigningCertificateResult;
 
 /**
- * The IdentityManagement service.
+ * The <code>IdentityManagement</code> service.
+ * This is the entry point to interact with the following service resources:<ul>
+ *   <li>User</li>
+ *   <li>AccountPasswordPolicy</li>
+ *   <li>AccessKey</li>
+ *   <li>SamlProvider</li>
+ *   <li>LoginProfile</li>
+ *   <li>InstanceProfile</li>
+ *   <li>Group</li>
+ *   <li>UserPolicy</li>
+ *   <li>MfaDevice</li>
+ *   <li>SigningCertificate</li>
+ *   <li>VirtualMfaDevice</li>
+ *   <li>RolePolicy</li>
+ *   <li>Role</li>
+ *   <li>AccountAlias</li>
+ *   <li>GroupPolicy</li>
+ *   <li>ServerCertificate</li>
+ * </ul>
  */
 @V1ServiceInterface(model="model.json", impl=
         "com.amazonaws.resources.identitymanagement.internal.IdentityManagementImpl"
@@ -77,47 +95,51 @@ com.amazonaws.services.identitymanagement.model.UploadSigningCertificateResult;
 
 public interface IdentityManagement extends Service<AmazonIdentityManagement> {
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code User} resource by its identifier(s).
      */
     User getUser(String name);
 
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code SigningCertificate} resource by its
+     * identifier(s).
      */
     SigningCertificate getSigningCertificate(String id);
 
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code VirtualMfaDevice} resource by its
+     * identifier(s).
      */
     VirtualMfaDevice getVirtualMfaDevice(String serialNumber);
 
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code Role} resource by its identifier(s).
      */
     Role getRole(String name);
 
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code AccountAlias} resource by its identifier(s).
      */
     AccountAlias getAccountAlias(String name);
 
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code SamlProvider} resource by its identifier(s).
      */
     SamlProvider getSamlProvider(String arn);
 
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code InstanceProfile} resource by its
+     * identifier(s).
      */
     InstanceProfile getInstanceProfile(String name);
 
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code ServerCertificate} resource by its
+     * identifier(s).
      */
     ServerCertificate getServerCertificate(String name);
 
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code Group} resource by its identifier(s).
      */
     Group getGroup(String name);
 
@@ -216,149 +238,301 @@ public interface IdentityManagement extends Service<AmazonIdentityManagement> {
             request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateRole</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>Role</code> resource object associated with the result
+     *         of this action.
+     * @see CreateRoleRequest
      */
     com.amazonaws.resources.identitymanagement.Role createRole(CreateRoleRequest
             request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateRole</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>Role</code> resource object associated with the result
+     *         of this action.
+     * @see CreateRoleRequest
      */
     com.amazonaws.resources.identitymanagement.Role createRole(CreateRoleRequest
             request, ResultCapture<CreateRoleResult> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>ChangePassword</code> action.
+     *
+     * <p>
+     *
+     * @see ChangePasswordRequest
      */
     void changePassword(ChangePasswordRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>ChangePassword</code> action and use a ResultCapture
+     * to retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @see ChangePasswordRequest
      */
     void changePassword(ChangePasswordRequest request, ResultCapture<Void>
             extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateUser</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>User</code> resource object associated with the result
+     *         of this action.
+     * @see CreateUserRequest
      */
     com.amazonaws.resources.identitymanagement.User createUser(CreateUserRequest
             request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateUser</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>User</code> resource object associated with the result
+     *         of this action.
+     * @see CreateUserRequest
      */
     com.amazonaws.resources.identitymanagement.User createUser(CreateUserRequest
             request, ResultCapture<CreateUserResult> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateVirtualMfaDevice</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>VirtualMfaDevice</code> resource object associated with
+     *         the result of this action.
+     * @see CreateVirtualMFADeviceRequest
      */
     com.amazonaws.resources.identitymanagement.VirtualMfaDevice
             createVirtualMfaDevice(CreateVirtualMFADeviceRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateVirtualMfaDevice</code> action and use a
+     * ResultCapture to retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>VirtualMfaDevice</code> resource object associated with
+     *         the result of this action.
+     * @see CreateVirtualMFADeviceRequest
      */
     com.amazonaws.resources.identitymanagement.VirtualMfaDevice
             createVirtualMfaDevice(CreateVirtualMFADeviceRequest request,
             ResultCapture<CreateVirtualMFADeviceResult> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateGroup</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>Group</code> resource object associated with the result
+     *         of this action.
+     * @see CreateGroupRequest
      */
     com.amazonaws.resources.identitymanagement.Group createGroup(
             CreateGroupRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateGroup</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>Group</code> resource object associated with the result
+     *         of this action.
+     * @see CreateGroupRequest
      */
     com.amazonaws.resources.identitymanagement.Group createGroup(
             CreateGroupRequest request, ResultCapture<CreateGroupResult>
             extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>AccountSummary</code> action.
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see GetAccountSummaryRequest
      */
     Map<String, Integer> accountSummary(GetAccountSummaryRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>AccountSummary</code> action and use a ResultCapture
+     * to retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see GetAccountSummaryRequest
      */
     Map<String, Integer> accountSummary(GetAccountSummaryRequest request,
             ResultCapture<GetAccountSummaryResult> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateInstanceProfile</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>InstanceProfile</code> resource object associated with
+     *         the result of this action.
+     * @see CreateInstanceProfileRequest
      */
     com.amazonaws.resources.identitymanagement.InstanceProfile
             createInstanceProfile(CreateInstanceProfileRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateInstanceProfile</code> action and use a
+     * ResultCapture to retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>InstanceProfile</code> resource object associated with
+     *         the result of this action.
+     * @see CreateInstanceProfileRequest
      */
     com.amazonaws.resources.identitymanagement.InstanceProfile
             createInstanceProfile(CreateInstanceProfileRequest request,
             ResultCapture<CreateInstanceProfileResult> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateSamlProvider</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>SamlProvider</code> resource object associated with the
+     *         result of this action.
+     * @see CreateSAMLProviderRequest
      */
     com.amazonaws.resources.identitymanagement.SamlProvider createSamlProvider(
             CreateSAMLProviderRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateSamlProvider</code> action and use a
+     * ResultCapture to retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>SamlProvider</code> resource object associated with the
+     *         result of this action.
+     * @see CreateSAMLProviderRequest
      */
     com.amazonaws.resources.identitymanagement.SamlProvider createSamlProvider(
             CreateSAMLProviderRequest request,
             ResultCapture<CreateSAMLProviderResult> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateAccountPasswordPolicy</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>AccountPasswordPolicy</code> resource object associated
+     *         with the result of this action.
+     * @see UpdateAccountPasswordPolicyRequest
      */
     AccountPasswordPolicy createAccountPasswordPolicy(
             UpdateAccountPasswordPolicyRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateAccountPasswordPolicy</code> action and use a
+     * ResultCapture to retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>AccountPasswordPolicy</code> resource object associated
+     *         with the result of this action.
+     * @see UpdateAccountPasswordPolicyRequest
      */
     AccountPasswordPolicy createAccountPasswordPolicy(
             UpdateAccountPasswordPolicyRequest request, ResultCapture<Void>
             extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateAccountAlias</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>AccountAlias</code> resource object associated with the
+     *         result of this action.
+     * @see CreateAccountAliasRequest
      */
     com.amazonaws.resources.identitymanagement.AccountAlias createAccountAlias(
             CreateAccountAliasRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateAccountAlias</code> action and use a
+     * ResultCapture to retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>AccountAlias</code> resource object associated with the
+     *         result of this action.
+     * @see CreateAccountAliasRequest
      */
     com.amazonaws.resources.identitymanagement.AccountAlias createAccountAlias(
             CreateAccountAliasRequest request, ResultCapture<Void> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateServerCertificate</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>ServerCertificate</code> resource object associated
+     *         with the result of this action.
+     * @see UploadServerCertificateRequest
      */
     com.amazonaws.resources.identitymanagement.ServerCertificate
             createServerCertificate(UploadServerCertificateRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateServerCertificate</code> action and use a
+     * ResultCapture to retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>ServerCertificate</code> resource object associated
+     *         with the result of this action.
+     * @see UploadServerCertificateRequest
      */
     com.amazonaws.resources.identitymanagement.ServerCertificate
             createServerCertificate(UploadServerCertificateRequest request,
             ResultCapture<UploadServerCertificateResult> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateSigningCertificate</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>SigningCertificate</code> resource object associated
+     *         with the result of this action.
+     * @see UploadSigningCertificateRequest
      */
     com.amazonaws.resources.identitymanagement.SigningCertificate
             createSigningCertificate(UploadSigningCertificateRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateSigningCertificate</code> action and use a
+     * ResultCapture to retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>SigningCertificate</code> resource object associated
+     *         with the result of this action.
+     * @see UploadSigningCertificateRequest
      */
     com.amazonaws.resources.identitymanagement.SigningCertificate
             createSigningCertificate(UploadSigningCertificateRequest request,
