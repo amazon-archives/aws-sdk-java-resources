@@ -22,23 +22,25 @@ For example, given an EC2 `Vpc` object, you can easily iterate through all of th
 `Instance` objects representing the EC2 Instances you have provisioned in that VPC,
 printing their DNS names and starting them (if they're currently stopped).
 
+```java
     Vpc myVpc = ec2.getVpc("vpc-xxxxxxx");
     for (Instance instance : vpc.getInstances()) {
         System.out.println(instance.getPublicDnsName());
         if (instance.getState().equals("STOPPED")) {
             instance.start();
         }
-    }
+    }   
+```
 
 ## Getting Started
 
 * Download the [latest preview release][releases] or pick it up from Maven:
-```
-<dependency>
-  <groupId>com.amazonaws.resources</groupId>
-  <artifactId>aws-resources</artifactId>
-  <version>0.0.1</version>
-</dependency>
+```xml
+    <dependency>
+      <groupId>com.amazonaws.resources</groupId>
+      <artifactId>aws-resources</artifactId>
+      <version>0.0.1</version>
+    </dependency>
 ```
 * Read the introduction below.
 * Read the [API documentation][api-docs].
@@ -52,10 +54,11 @@ A Service object is your main point of entry into the Resource APIs. You can cre
 a service object for the service of your choice by using the [ServiceBuilder][servicebuilder]
 class:
 
+```java
     EC2 ec2 = ServiceBuilder.forService(EC2.class)
         .withRegion(Region.getRegion(Regions.US_WEST_2))
         .build();
-
+```
 Service objects are immutable and threadsafe - typically you should share a single
 instance of this service object throughout your application. The currently-supported
 service objects include [EC2][ec2service], [IdentityManagement][iamservice], and
@@ -68,14 +71,18 @@ name a particular AWS resource. To create a Resource object from scratch, you mu
 provide values for these identifiers. For example, an EC2 instance is uniquely
 identified by its InstanceId.
 
+```java
     Instance instance = ec2.getInstance("i-xxxxxxxx");
+```
 
 A Resource object will always happily give you the values for its identifiers via
 handy getter methods:
 
+```java
     // Guaranteed not to require a remote service call, and will never block or
     // throw an exception.
     System.out.println(instance.getId());
+```
 
 Resource objects are *lazy* - they can be created without a round-trip to the service.
 This means that if you create a Resource object with bogus identifiers, you won't find
@@ -87,17 +94,21 @@ From the Service object, you can navigate to all of the Resource objects exposed
 the service. As we saw above, you can directly navigate to a resource by providing
 its identifier(s):
 
+```java
     // Immediately returns an Instance object wrapping the given
     // instanceId; does not make a remote service call.
     Instance instance = ec2.getInstance("i-xxxxxxxx");
+```
 
 You can navigate to entire collections of resources:
 
+```java
     // Lazily calls EC2's DescribeInstances API as needed to
     // enumerate all the instances for this account.
     for (Instance instance : ec2.getInstances()) {
         ...        
     }
+```
 
 And you can follow links from one resource to another via getter methods exposed
 on Resource objects. For example, an EC2 Instance may belong to a VPC, in which
@@ -105,6 +116,7 @@ case its `getVpc()` method will return you the corresponding VPC resource.
 Likewise, a VPC links to the collection of Instances that it contains via its
 `getInstances` method.
 
+```java
     Instance instance = ec2.getInstance("i-xxxxxxxx");
 
     Vpc vpc = instance.getVpc();
@@ -113,7 +125,7 @@ Likewise, a VPC links to the collection of Instances that it contains via its
             ...
         }
     }
-
+```
 
 ## Describing Resources
 
@@ -121,11 +133,13 @@ One obvious use of a Resource object is to retrieve data from the service about 
 actual cloud resource it represents. Resource objects expose this data through getter
 methods:
 
+```java
     Instance instance = ec2.getInstance("i-xxxxxxxx");
     
     System.out.println("Public DNS Name: " + instance.getPublicDnsName());
     System.out.println("State: " + instance.getState());
     System.out.println("Launched at: " + instance.getLaunchTime());
+```
 
 Resource objects are lazily loaded the first time you access one of their data
 attributes. In the above example, the call to `getPublicDnsName` will make a
@@ -136,17 +150,20 @@ You can check whether an instance's data members have been loaded already by
 calling the `isLoaded` method, and you can proactively load an instance by calling
 the `load` method (optionally passing additional arguments for the service call):
 
+```java
     if (!instance.isLoaded()) {
         instance.load();
     }
+```
 
-## Acting on resources
+## Acting on Resources
 
 Other methods on a Resource object are *actions* that can be taken on the resource. Each
 action method will always result in a single call to the service. Parameters to the call
 which can be inferred from the identifiers or data attributes of the resource will be
 specified for you, so you don't need to explicitly specify them.
 
+```java
     Instance instance = ec2.getInstance("i-xxxxxxxx");
 
     // Call StopInstances, passing in the id of this instance and
@@ -156,13 +173,16 @@ specified for you, so you don't need to explicitly specify them.
 
     // Call TerminateInstances, passing in this instance's InstanceId.
     instance.terminate();
+```
 
 Some actions are exposed directly on the Service object, typically for creating new
 resources. These actions return a new resource object prepopulated with the identifiers
 of the created resource:
 
+```java
     Vpc newVpc = ec2.createVpc(new CreateVpcRequest("10.0.0.0/16"));
     System.out.println(newVpc.getState());
+```
 
 ## Working with Collections
 
@@ -170,28 +190,35 @@ References to collections of resources are represented by ResourceCollection obj
 Resource collections are, like resources themselves, lazy - they can be created without
 making any calls to the service.
 
+```java
     // No calls to the service have been made yet.
     InstanceCollection instances = ec2.getInstances();
+```
 
 Resource collections implement the `Iterable` interface, which is typically the easiest
 way to consume them. The returned iterator will lazily call the service to enumerate the
 collection of resources one page at a time as you read from it:
 
+```java
     // Will lazily call EC2's DescribeInstances API as needed.
     for (Instance instance : instances) {
         System.out.println(instance.getPublicDnsName());
     }
+```
 
 Alternatively, you can directly access the pages of the response by calling the `pages` method
 on the collection:
 
+```java
     // Each call to Iterator.next will make a call to the service
     for (List<Instance> page : instances.pages()) {
         System.out.println("There were " + page.size() + " instances in this page.");
     }
+```
 
 Or for the most control you can manually step through the pages of the result set:
 
+```java
     // Makes a call to retrieve the first page of instances.
     ResourcePage<Instance> firstPage = instances.firstPage();
     System.out.println("First page has " + firstPage.size() + " instances.");
@@ -201,6 +228,7 @@ Or for the most control you can manually step through the pages of the result se
         ResourcePage<Instance> nextPage = firstPage.nextPage();
         System.out.println("Second page has " + nextPage.size() + " instances.");
     }
+```
 
 [sdk]: https://github.com/aws/aws-sdk-java
 [ec2]: http://aws.amazon.com/ec2/
