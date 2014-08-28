@@ -24,7 +24,13 @@ import com.amazonaws.services.glacier.model.SetVaultNotificationsRequest;
 import com.amazonaws.services.glacier.model.VaultNotificationConfig;
 
 /**
- * The Notification resource.
+ * The <code>Notification</code> resource.
+ * Each <code>Notification</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>AccountId</li>
+ *   <li>VaultName</li>
+ * </ul>
  */
 public interface Notification {
     /**
@@ -40,7 +46,7 @@ public interface Notification {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(GetVaultNotificationsRequest)
      */
@@ -66,7 +72,7 @@ public interface Notification {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see GetVaultNotificationsRequest
      */
@@ -93,7 +99,7 @@ public interface Notification {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see GetVaultNotificationsRequest
      */

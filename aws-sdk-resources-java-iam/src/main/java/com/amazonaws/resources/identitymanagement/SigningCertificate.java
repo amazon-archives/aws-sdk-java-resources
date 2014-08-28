@@ -23,7 +23,12 @@ import
 com.amazonaws.services.identitymanagement.model.UpdateSigningCertificateRequest;
 
 /**
- * The SigningCertificate resource.
+ * The <code>SigningCertificate</code> resource.
+ * Each <code>SigningCertificate</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>Id</li>
+ * </ul>
  */
 public interface SigningCertificate {
     /**

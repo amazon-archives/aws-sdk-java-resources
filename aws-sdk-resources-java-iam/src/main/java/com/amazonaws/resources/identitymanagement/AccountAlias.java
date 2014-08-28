@@ -19,7 +19,12 @@ import com.amazonaws.services.identitymanagement.model.DeleteAccountAliasRequest
 ;
 
 /**
- * The AccountAlias resource.
+ * The <code>AccountAlias</code> resource.
+ * Each <code>AccountAlias</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>Name</li>
+ * </ul>
  */
 public interface AccountAlias {
     /**

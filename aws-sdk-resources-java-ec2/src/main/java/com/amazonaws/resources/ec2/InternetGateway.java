@@ -27,7 +27,12 @@ import com.amazonaws.services.ec2.model.InternetGatewayAttachment;
 import com.amazonaws.services.ec2.model.Tag;
 
 /**
- * The InternetGateway resource.
+ * The <code>InternetGateway</code> resource.
+ * Each <code>InternetGateway</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>Id</li>
+ * </ul>
  */
 public interface InternetGateway {
     /**
@@ -43,7 +48,7 @@ public interface InternetGateway {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(DescribeInternetGatewaysRequest)
      */
@@ -57,7 +62,7 @@ public interface InternetGateway {
      * value set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InternetGatewayIds[]</code></b>
+     *     <b><code>InternetGatewayIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -65,7 +70,7 @@ public interface InternetGateway {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeInternetGatewaysRequest
      */
@@ -80,7 +85,7 @@ public interface InternetGateway {
      * value set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InternetGatewayIds[]</code></b>
+     *     <b><code>InternetGatewayIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -88,7 +93,7 @@ public interface InternetGateway {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeInternetGatewaysRequest
      */
@@ -207,7 +212,7 @@ public interface InternetGateway {
      * value set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[]</code></b>
+     *     <b><code>Resources[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -230,7 +235,7 @@ public interface InternetGateway {
      * value set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[]</code></b>
+     *     <b><code>Resources[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>

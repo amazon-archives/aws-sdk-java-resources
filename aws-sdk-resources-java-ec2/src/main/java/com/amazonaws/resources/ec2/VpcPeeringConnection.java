@@ -31,7 +31,12 @@ import com.amazonaws.services.ec2.model.VpcPeeringConnectionStateReason;
 import com.amazonaws.services.ec2.model.VpcPeeringConnectionVpcInfo;
 
 /**
- * The VpcPeeringConnection resource.
+ * The <code>VpcPeeringConnection</code> resource.
+ * Each <code>VpcPeeringConnection</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>Id</li>
+ * </ul>
  */
 public interface VpcPeeringConnection {
     /**
@@ -47,7 +52,7 @@ public interface VpcPeeringConnection {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(DescribeVpcPeeringConnectionsRequest)
      */
@@ -61,7 +66,7 @@ public interface VpcPeeringConnection {
      * value set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>VpcPeeringConnectionIds[]</code></b>
+     *     <b><code>VpcPeeringConnectionIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -69,7 +74,7 @@ public interface VpcPeeringConnection {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeVpcPeeringConnectionsRequest
      */
@@ -84,7 +89,7 @@ public interface VpcPeeringConnection {
      * value set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>VpcPeeringConnectionIds[]</code></b>
+     *     <b><code>VpcPeeringConnectionIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -92,7 +97,7 @@ public interface VpcPeeringConnection {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeVpcPeeringConnectionsRequest
      */

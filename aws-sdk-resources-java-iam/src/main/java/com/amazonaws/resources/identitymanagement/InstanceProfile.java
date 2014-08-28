@@ -30,7 +30,12 @@ com.amazonaws.services.identitymanagement.model.RemoveRoleFromInstanceProfileReq
 ;
 
 /**
- * The InstanceProfile resource.
+ * The <code>InstanceProfile</code> resource.
+ * Each <code>InstanceProfile</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>Name</li>
+ * </ul>
  */
 public interface InstanceProfile {
     /**
@@ -46,7 +51,7 @@ public interface InstanceProfile {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(GetInstanceProfileRequest)
      */
@@ -68,7 +73,7 @@ public interface InstanceProfile {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see GetInstanceProfileRequest
      */
@@ -91,7 +96,7 @@ public interface InstanceProfile {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see GetInstanceProfileRequest
      */

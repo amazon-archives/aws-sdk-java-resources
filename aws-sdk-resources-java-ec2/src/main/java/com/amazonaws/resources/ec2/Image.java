@@ -31,7 +31,11 @@ import com.amazonaws.services.ec2.model.StateReason;
 import com.amazonaws.services.ec2.model.Tag;
 
 /**
- * The Image resource.
+ * The <code>Image</code> resource.
+ * Each <code>Image</code> object is uniquely identified by these identifier(s):
+ * <ul>
+ *   <li>Id</li>
+ * </ul>
  */
 public interface Image {
     /**
@@ -47,7 +51,7 @@ public interface Image {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(DescribeImagesRequest)
      */
@@ -61,7 +65,7 @@ public interface Image {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>ImageIds[]</code></b>
+     *     <b><code>ImageIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -69,7 +73,7 @@ public interface Image {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeImagesRequest
      */
@@ -84,7 +88,7 @@ public interface Image {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>ImageIds[]</code></b>
+     *     <b><code>ImageIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -92,7 +96,7 @@ public interface Image {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeImagesRequest
      */
@@ -489,7 +493,7 @@ public interface Image {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[]</code></b>
+     *     <b><code>Resources[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -512,7 +516,7 @@ public interface Image {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[]</code></b>
+     *     <b><code>Resources[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>

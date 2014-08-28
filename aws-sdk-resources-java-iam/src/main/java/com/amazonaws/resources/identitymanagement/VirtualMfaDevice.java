@@ -22,7 +22,12 @@ import
 com.amazonaws.services.identitymanagement.model.DeleteVirtualMFADeviceRequest;
 
 /**
- * The VirtualMfaDevice resource.
+ * The <code>VirtualMfaDevice</code> resource.
+ * Each <code>VirtualMfaDevice</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>SerialNumber</li>
+ * </ul>
  */
 public interface VirtualMfaDevice {
     /**

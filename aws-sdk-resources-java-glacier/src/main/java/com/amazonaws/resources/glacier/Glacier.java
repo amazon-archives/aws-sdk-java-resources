@@ -23,14 +23,22 @@ import com.amazonaws.services.glacier.model.CreateVaultResult;
 import com.amazonaws.services.glacier.model.ListVaultsRequest;
 
 /**
- * The Glacier service.
+ * The <code>Glacier</code> service.
+ * This is the entry point to interact with the following service resources:<ul>
+ *   <li>Job</li>
+ *   <li>Archive</li>
+ *   <li>Vault</li>
+ *   <li>Account</li>
+ *   <li>MultipartUpload</li>
+ *   <li>Notification</li>
+ * </ul>
  */
 @V1ServiceInterface(model="model.json", impl=
         "com.amazonaws.resources.glacier.internal.GlacierImpl")
 
 public interface Glacier extends Service<AmazonGlacier> {
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code Account} resource by its identifier(s).
      */
     Account getAccount(String id);
 
@@ -45,12 +53,25 @@ public interface Glacier extends Service<AmazonGlacier> {
     VaultCollection getVaults(ListVaultsRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateVault</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>Vault</code> resource object associated with the result
+     *         of this action.
+     * @see CreateVaultRequest
      */
     Vault createVault(CreateVaultRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateVault</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>Vault</code> resource object associated with the result
+     *         of this action.
+     * @see CreateVaultRequest
      */
     Vault createVault(CreateVaultRequest request,
             ResultCapture<CreateVaultResult> extractor);

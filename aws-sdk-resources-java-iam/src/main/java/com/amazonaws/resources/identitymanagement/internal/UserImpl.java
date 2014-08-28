@@ -315,6 +315,19 @@ class UserImpl implements User {
     }
 
     @Override
+    public AccessKey createAccessKey() {
+        return createAccessKey((ResultCapture<CreateAccessKeyResult>)null);
+    }
+
+    @Override
+    public AccessKey createAccessKey(ResultCapture<CreateAccessKeyResult>
+            extractor) {
+
+        CreateAccessKeyRequest request = new CreateAccessKeyRequest();
+        return createAccessKey(request, extractor);
+    }
+
+    @Override
     public void delete(DeleteUserRequest request) {
         delete(request, null);
     }

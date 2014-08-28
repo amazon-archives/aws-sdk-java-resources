@@ -29,7 +29,12 @@ import com.amazonaws.services.ec2.model.RevokeSecurityGroupIngressRequest;
 import com.amazonaws.services.ec2.model.Tag;
 
 /**
- * The SecurityGroup resource.
+ * The <code>SecurityGroup</code> resource.
+ * Each <code>SecurityGroup</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>Id</li>
+ * </ul>
  */
 public interface SecurityGroup {
     /**
@@ -45,7 +50,7 @@ public interface SecurityGroup {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(DescribeSecurityGroupsRequest)
      */
@@ -59,7 +64,7 @@ public interface SecurityGroup {
      * set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>GroupIds[]</code></b>
+     *     <b><code>GroupIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -67,7 +72,7 @@ public interface SecurityGroup {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeSecurityGroupsRequest
      */
@@ -82,7 +87,7 @@ public interface SecurityGroup {
      * set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>GroupIds[]</code></b>
+     *     <b><code>GroupIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -90,7 +95,7 @@ public interface SecurityGroup {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeSecurityGroupsRequest
      */
@@ -370,7 +375,7 @@ public interface SecurityGroup {
      * set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[]</code></b>
+     *     <b><code>Resources[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -393,7 +398,7 @@ public interface SecurityGroup {
      * set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[]</code></b>
+     *     <b><code>Resources[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>

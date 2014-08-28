@@ -26,7 +26,14 @@ import com.amazonaws.services.glacier.model.UploadMultipartPartRequest;
 import com.amazonaws.services.glacier.model.UploadMultipartPartResult;
 
 /**
- * The MultipartUpload resource.
+ * The <code>MultipartUpload</code> resource.
+ * Each <code>MultipartUpload</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>AccountId</li>
+ *   <li>Id</li>
+ *   <li>VaultName</li>
+ * </ul>
  */
 public interface MultipartUpload {
     /**

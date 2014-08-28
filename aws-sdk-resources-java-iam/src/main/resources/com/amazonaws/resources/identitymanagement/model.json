@@ -433,7 +433,9 @@
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
               "ConstantMappings" : [ ],
-              "ConvenientMethods" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -696,7 +698,9 @@
                 "Source" : "Inactive",
                 "Target" : [ "Status" ]
               } ],
-              "ConvenientMethods" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -720,7 +724,9 @@
                 "Source" : "Active",
                 "Target" : [ "Status" ]
               } ],
-              "ConvenientMethods" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -741,7 +747,9 @@
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
               "ConstantMappings" : [ ],
-              "ConvenientMethods" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },

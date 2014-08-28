@@ -48,7 +48,11 @@ import com.amazonaws.services.ec2.model.ModifyVpcAttributeRequest;
 import com.amazonaws.services.ec2.model.Tag;
 
 /**
- * The Vpc resource.
+ * The <code>Vpc</code> resource.
+ * Each <code>Vpc</code> object is uniquely identified by these identifier(s):
+ * <ul>
+ *   <li>Id</li>
+ * </ul>
  */
 public interface Vpc {
     /**
@@ -64,7 +68,7 @@ public interface Vpc {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(DescribeVpcsRequest)
      */
@@ -78,7 +82,7 @@ public interface Vpc {
      * request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>VpcIds[]</code></b>
+     *     <b><code>VpcIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -86,7 +90,7 @@ public interface Vpc {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeVpcsRequest
      */
@@ -101,7 +105,7 @@ public interface Vpc {
      * request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>VpcIds[]</code></b>
+     *     <b><code>VpcIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -109,7 +113,7 @@ public interface Vpc {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeVpcsRequest
      */
@@ -810,7 +814,7 @@ public interface Vpc {
      * request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[]</code></b>
+     *     <b><code>Resources[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -833,7 +837,7 @@ public interface Vpc {
      * request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[]</code></b>
+     *     <b><code>Resources[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>

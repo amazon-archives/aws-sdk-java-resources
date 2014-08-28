@@ -22,7 +22,13 @@ import com.amazonaws.services.glacier.model.GetJobOutputResult;
 import com.amazonaws.services.glacier.model.InventoryRetrievalJobDescription;
 
 /**
- * The Job resource.
+ * The <code>Job</code> resource.
+ * Each <code>Job</code> object is uniquely identified by these identifier(s):
+ * <ul>
+ *   <li>AccountId</li>
+ *   <li>Id</li>
+ *   <li>VaultName</li>
+ * </ul>
  */
 public interface Job {
     /**
@@ -38,7 +44,7 @@ public interface Job {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(DescribeJobRequest)
      */
@@ -68,7 +74,7 @@ public interface Job {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeJobRequest
      */
@@ -99,7 +105,7 @@ public interface Job {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeJobRequest
      */
