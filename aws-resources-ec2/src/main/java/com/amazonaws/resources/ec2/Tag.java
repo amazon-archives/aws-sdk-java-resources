@@ -20,7 +20,13 @@ import com.amazonaws.services.ec2.model.DescribeTagsRequest;
 import com.amazonaws.services.ec2.model.DescribeTagsResult;
 
 /**
- * The Tag resource.
+ * The <code>Tag</code> resource.
+ * Each <code>Tag</code> object is uniquely identified by these identifier(s):
+ * <ul>
+ *   <li>Value</li>
+ *   <li>Key</li>
+ *   <li>ResourceId</li>
+ * </ul>
  */
 public interface Tag {
     /**
@@ -36,7 +42,7 @@ public interface Tag {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(DescribeTagsRequest)
      */
@@ -50,11 +56,11 @@ public interface Tag {
      * request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Filters[0].Values[]</code></b>
+     *     <b><code>Filters[0].Values[*]</code></b>
      *         - mapped from the <code>Key</code> identifier.
      *   </li>
      *   <li>
-     *     <b><code>Filters[1].Values[]</code></b>
+     *     <b><code>Filters[1].Values[*]</code></b>
      *         - mapped from the <code>Value</code> identifier.
      *   </li>
      *   <li>
@@ -70,7 +76,7 @@ public interface Tag {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeTagsRequest
      */
@@ -85,11 +91,11 @@ public interface Tag {
      * request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Filters[0].Values[]</code></b>
+     *     <b><code>Filters[0].Values[*]</code></b>
      *         - mapped from the <code>Key</code> identifier.
      *   </li>
      *   <li>
-     *     <b><code>Filters[1].Values[]</code></b>
+     *     <b><code>Filters[1].Values[*]</code></b>
      *         - mapped from the <code>Value</code> identifier.
      *   </li>
      *   <li>
@@ -105,7 +111,7 @@ public interface Tag {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeTagsRequest
      */
@@ -146,7 +152,7 @@ public interface Tag {
      * request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[]</code></b>
+     *     <b><code>Resources[*]</code></b>
      *         - mapped from the <code>ResourceId</code> identifier.
      *   </li>
      *   <li>
@@ -175,7 +181,7 @@ public interface Tag {
      * request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[]</code></b>
+     *     <b><code>Resources[*]</code></b>
      *         - mapped from the <code>ResourceId</code> identifier.
      *   </li>
      *   <li>

@@ -28,7 +28,11 @@ import
 com.amazonaws.services.identitymanagement.model.UpdateAssumeRolePolicyRequest;
 
 /**
- * The Role resource.
+ * The <code>Role</code> resource.
+ * Each <code>Role</code> object is uniquely identified by these identifier(s):
+ * <ul>
+ *   <li>Name</li>
+ * </ul>
  */
 public interface Role {
     /**
@@ -44,7 +48,7 @@ public interface Role {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(GetRoleRequest)
      */
@@ -66,7 +70,7 @@ public interface Role {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see GetRoleRequest
      */
@@ -89,7 +93,7 @@ public interface Role {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see GetRoleRequest
      */

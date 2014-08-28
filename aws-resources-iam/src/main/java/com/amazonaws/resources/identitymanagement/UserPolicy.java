@@ -21,7 +21,13 @@ import com.amazonaws.services.identitymanagement.model.GetUserPolicyResult;
 import com.amazonaws.services.identitymanagement.model.PutUserPolicyRequest;
 
 /**
- * The UserPolicy resource.
+ * The <code>UserPolicy</code> resource.
+ * Each <code>UserPolicy</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>Name</li>
+ *   <li>UserName</li>
+ * </ul>
  */
 public interface UserPolicy {
     /**
@@ -37,7 +43,7 @@ public interface UserPolicy {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(GetUserPolicyRequest)
      */
@@ -63,7 +69,7 @@ public interface UserPolicy {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see GetUserPolicyRequest
      */
@@ -90,7 +96,7 @@ public interface UserPolicy {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see GetUserPolicyRequest
      */

@@ -30,7 +30,11 @@ com.amazonaws.services.identitymanagement.model.RemoveUserFromGroupRequest;
 import com.amazonaws.services.identitymanagement.model.UpdateGroupRequest;
 
 /**
- * The Group resource.
+ * The <code>Group</code> resource.
+ * Each <code>Group</code> object is uniquely identified by these identifier(s):
+ * <ul>
+ *   <li>Name</li>
+ * </ul>
  */
 public interface Group {
     /**
@@ -46,7 +50,7 @@ public interface Group {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(GetGroupRequest)
      */
@@ -68,7 +72,7 @@ public interface Group {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see GetGroupRequest
      */
@@ -91,7 +95,7 @@ public interface Group {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see GetGroupRequest
      */

@@ -21,7 +21,13 @@ import com.amazonaws.services.identitymanagement.model.GetGroupPolicyResult;
 import com.amazonaws.services.identitymanagement.model.PutGroupPolicyRequest;
 
 /**
- * The GroupPolicy resource.
+ * The <code>GroupPolicy</code> resource.
+ * Each <code>GroupPolicy</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>Name</li>
+ *   <li>GroupName</li>
+ * </ul>
  */
 public interface GroupPolicy {
     /**
@@ -37,7 +43,7 @@ public interface GroupPolicy {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(GetGroupPolicyRequest)
      */
@@ -63,7 +69,7 @@ public interface GroupPolicy {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see GetGroupPolicyRequest
      */
@@ -90,7 +96,7 @@ public interface GroupPolicy {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see GetGroupPolicyRequest
      */

@@ -70,89 +70,112 @@ import com.amazonaws.services.ec2.model.RunInstancesRequest;
 import com.amazonaws.services.ec2.model.RunInstancesResult;
 
 /**
- * The EC2 service.
+ * The <code>EC2</code> service.
+ * This is the entry point to interact with the following service resources:<ul>
+ *   <li>KeyPair</li>
+ *   <li>RouteTable</li>
+ *   <li>Instance</li>
+ *   <li>NetworkInterface</li>
+ *   <li>Volume</li>
+ *   <li>DhcpOptions</li>
+ *   <li>PlacementGroup</li>
+ *   <li>InternetGateway</li>
+ *   <li>RouteTableAssociation</li>
+ *   <li>Subnet</li>
+ *   <li>VpcPeeringConnection</li>
+ *   <li>Snapshot</li>
+ *   <li>Vpc</li>
+ *   <li>SecurityGroup</li>
+ *   <li>Tag</li>
+ *   <li>Image</li>
+ *   <li>NetworkAcl</li>
+ * </ul>
  */
 @V1ServiceInterface(model="model.json", impl=
         "com.amazonaws.resources.ec2.internal.EC2Impl")
 
 public interface EC2 extends Service<AmazonEC2> {
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code KeyPair} resource by its identifier(s).
      */
     KeyPair getKeyPair(String name);
 
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code RouteTable} resource by its identifier(s).
      */
     RouteTable getRouteTable(String id);
 
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code Instance} resource by its identifier(s).
      */
     Instance getInstance(String id);
 
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code NetworkInterface} resource by its
+     * identifier(s).
      */
     NetworkInterface getNetworkInterface(String id);
 
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code Volume} resource by its identifier(s).
      */
     Volume getVolume(String id);
 
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code DhcpOptions} resource by its identifier(s).
      */
     DhcpOptions getDhcpOptions(String id);
 
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code PlacementGroup} resource by its identifier(s).
      */
     PlacementGroup getPlacementGroup(String name);
 
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code InternetGateway} resource by its
+     * identifier(s).
      */
     InternetGateway getInternetGateway(String id);
 
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code RouteTableAssociation} resource by its
+     * identifier(s).
      */
     RouteTableAssociation getRouteTableAssociation(String id);
 
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code Subnet} resource by its identifier(s).
      */
     Subnet getSubnet(String id);
 
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code VpcPeeringConnection} resource by its
+     * identifier(s).
      */
     VpcPeeringConnection getVpcPeeringConnection(String id);
 
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code Snapshot} resource by its identifier(s).
      */
     Snapshot getSnapshot(String id);
 
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code Vpc} resource by its identifier(s).
      */
     Vpc getVpc(String id);
 
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code SecurityGroup} resource by its identifier(s).
      */
     SecurityGroup getSecurityGroup(String id);
 
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code Image} resource by its identifier(s).
      */
     Image getImage(String id);
 
     /**
-     * Gets a subresource.
+     * Gets an instance of {@code NetworkAcl} resource by its identifier(s).
      */
     NetworkAcl getNetworkAcl(String id);
 
@@ -315,221 +338,451 @@ public interface EC2 extends Service<AmazonEC2> {
     VolumeCollection getVolumes(DescribeVolumesRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateSecurityGroup</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>SecurityGroup</code> resource object associated with
+     *         the result of this action.
+     * @see CreateSecurityGroupRequest
      */
     com.amazonaws.resources.ec2.SecurityGroup createSecurityGroup(
             CreateSecurityGroupRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateSecurityGroup</code> action and use a
+     * ResultCapture to retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>SecurityGroup</code> resource object associated with
+     *         the result of this action.
+     * @see CreateSecurityGroupRequest
      */
     com.amazonaws.resources.ec2.SecurityGroup createSecurityGroup(
             CreateSecurityGroupRequest request,
             ResultCapture<CreateSecurityGroupResult> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateSubnet</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>Subnet</code> resource object associated with the
+     *         result of this action.
+     * @see CreateSubnetRequest
      */
     com.amazonaws.resources.ec2.Subnet createSubnet(CreateSubnetRequest request)
             ;
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateSubnet</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>Subnet</code> resource object associated with the
+     *         result of this action.
+     * @see CreateSubnetRequest
      */
     com.amazonaws.resources.ec2.Subnet createSubnet(CreateSubnetRequest request,
             ResultCapture<CreateSubnetResult> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateInternetGateway</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>InternetGateway</code> resource object associated with
+     *         the result of this action.
+     * @see CreateInternetGatewayRequest
      */
     com.amazonaws.resources.ec2.InternetGateway createInternetGateway(
             CreateInternetGatewayRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateInternetGateway</code> action and use a
+     * ResultCapture to retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>InternetGateway</code> resource object associated with
+     *         the result of this action.
+     * @see CreateInternetGatewayRequest
      */
     com.amazonaws.resources.ec2.InternetGateway createInternetGateway(
             CreateInternetGatewayRequest request,
             ResultCapture<CreateInternetGatewayResult> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateNetworkAcl</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>NetworkAcl</code> resource object associated with the
+     *         result of this action.
+     * @see CreateNetworkAclRequest
      */
     com.amazonaws.resources.ec2.NetworkAcl createNetworkAcl(
             CreateNetworkAclRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateNetworkAcl</code> action and use a ResultCapture
+     * to retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>NetworkAcl</code> resource object associated with the
+     *         result of this action.
+     * @see CreateNetworkAclRequest
      */
     com.amazonaws.resources.ec2.NetworkAcl createNetworkAcl(
             CreateNetworkAclRequest request,
             ResultCapture<CreateNetworkAclResult> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>ImportKeyPair</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>KeyPair</code> resource object associated with the
+     *         result of this action.
+     * @see ImportKeyPairRequest
      */
     com.amazonaws.resources.ec2.KeyPair importKeyPair(ImportKeyPairRequest
             request);
 
     /**
-     * Performs an action.
+     * Performs the <code>ImportKeyPair</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>KeyPair</code> resource object associated with the
+     *         result of this action.
+     * @see ImportKeyPairRequest
      */
     com.amazonaws.resources.ec2.KeyPair importKeyPair(ImportKeyPairRequest
             request, ResultCapture<ImportKeyPairResult> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateRouteTable</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>RouteTable</code> resource object associated with the
+     *         result of this action.
+     * @see CreateRouteTableRequest
      */
     com.amazonaws.resources.ec2.RouteTable createRouteTable(
             CreateRouteTableRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateRouteTable</code> action and use a ResultCapture
+     * to retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>RouteTable</code> resource object associated with the
+     *         result of this action.
+     * @see CreateRouteTableRequest
      */
     com.amazonaws.resources.ec2.RouteTable createRouteTable(
             CreateRouteTableRequest request,
             ResultCapture<CreateRouteTableResult> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreatePlacementGroup</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>PlacementGroup</code> resource object associated with
+     *         the result of this action.
+     * @see CreatePlacementGroupRequest
      */
     com.amazonaws.resources.ec2.PlacementGroup createPlacementGroup(
             CreatePlacementGroupRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreatePlacementGroup</code> action and use a
+     * ResultCapture to retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>PlacementGroup</code> resource object associated with
+     *         the result of this action.
+     * @see CreatePlacementGroupRequest
      */
     com.amazonaws.resources.ec2.PlacementGroup createPlacementGroup(
             CreatePlacementGroupRequest request, ResultCapture<Void> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateDhcpOptions</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>DhcpOptions</code> resource object associated with the
+     *         result of this action.
+     * @see CreateDhcpOptionsRequest
      */
     com.amazonaws.resources.ec2.DhcpOptions createDhcpOptions(
             CreateDhcpOptionsRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateDhcpOptions</code> action and use a
+     * ResultCapture to retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>DhcpOptions</code> resource object associated with the
+     *         result of this action.
+     * @see CreateDhcpOptionsRequest
      */
     com.amazonaws.resources.ec2.DhcpOptions createDhcpOptions(
             CreateDhcpOptionsRequest request,
             ResultCapture<CreateDhcpOptionsResult> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateInstances</code> action.
+     *
+     * <p>
+     *
+     * @return A list of <code>Instance</code> resource objects associated with
+     *         the result of this action.
+     * @see RunInstancesRequest
      */
     List<com.amazonaws.resources.ec2.Instance> createInstances(
             RunInstancesRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateInstances</code> action and use a ResultCapture
+     * to retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return A list of <code>Instance</code> resource objects associated with
+     *         the result of this action.
+     * @see RunInstancesRequest
      */
     List<com.amazonaws.resources.ec2.Instance> createInstances(
             RunInstancesRequest request, ResultCapture<RunInstancesResult>
             extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateVolume</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>Image</code> resource object associated with the result
+     *         of this action.
+     * @see CreateVolumeRequest
      */
     com.amazonaws.resources.ec2.Image createVolume(CreateVolumeRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateVolume</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>Image</code> resource object associated with the result
+     *         of this action.
+     * @see CreateVolumeRequest
      */
     com.amazonaws.resources.ec2.Image createVolume(CreateVolumeRequest request,
             ResultCapture<CreateVolumeResult> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>DisassociateRouteTable</code> action.
+     *
+     * <p>
+     *
+     * @see DisassociateRouteTableRequest
      */
     void disassociateRouteTable(DisassociateRouteTableRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>DisassociateRouteTable</code> action and use a
+     * ResultCapture to retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @see DisassociateRouteTableRequest
      */
     void disassociateRouteTable(DisassociateRouteTableRequest request,
             ResultCapture<Void> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateVpc</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>Vpc</code> resource object associated with the result
+     *         of this action.
+     * @see CreateVpcRequest
      */
     com.amazonaws.resources.ec2.Vpc createVpc(CreateVpcRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateVpc</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>Vpc</code> resource object associated with the result
+     *         of this action.
+     * @see CreateVpcRequest
      */
     com.amazonaws.resources.ec2.Vpc createVpc(CreateVpcRequest request,
             ResultCapture<CreateVpcResult> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateNetworkInterface</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>NetworkInterface</code> resource object associated with
+     *         the result of this action.
+     * @see CreateNetworkInterfaceRequest
      */
     com.amazonaws.resources.ec2.NetworkInterface createNetworkInterface(
             CreateNetworkInterfaceRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateNetworkInterface</code> action and use a
+     * ResultCapture to retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>NetworkInterface</code> resource object associated with
+     *         the result of this action.
+     * @see CreateNetworkInterfaceRequest
      */
     com.amazonaws.resources.ec2.NetworkInterface createNetworkInterface(
             CreateNetworkInterfaceRequest request,
             ResultCapture<CreateNetworkInterfaceResult> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateKeyPair</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>KeyPair</code> resource object associated with the
+     *         result of this action.
+     * @see CreateKeyPairRequest
      */
     com.amazonaws.resources.ec2.KeyPair createKeyPair(CreateKeyPairRequest
             request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateKeyPair</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>KeyPair</code> resource object associated with the
+     *         result of this action.
+     * @see CreateKeyPairRequest
      */
     com.amazonaws.resources.ec2.KeyPair createKeyPair(CreateKeyPairRequest
             request, ResultCapture<CreateKeyPairResult> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateVpcPeeringConnection</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>VpcPeeringConnection</code> resource object associated
+     *         with the result of this action.
+     * @see CreateVpcPeeringConnectionRequest
      */
     com.amazonaws.resources.ec2.VpcPeeringConnection createVpcPeeringConnection(
             CreateVpcPeeringConnectionRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateVpcPeeringConnection</code> action and use a
+     * ResultCapture to retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>VpcPeeringConnection</code> resource object associated
+     *         with the result of this action.
+     * @see CreateVpcPeeringConnectionRequest
      */
     com.amazonaws.resources.ec2.VpcPeeringConnection createVpcPeeringConnection(
             CreateVpcPeeringConnectionRequest request,
             ResultCapture<CreateVpcPeeringConnectionResult> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateTags</code> action.
+     *
+     * <p>
+     *
+     * @return A list of <code>Tag</code> resource objects associated with the
+     *         result of this action.
+     * @see CreateTagsRequest
      */
     List<Tag> createTags(CreateTagsRequest request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateTags</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return A list of <code>Tag</code> resource objects associated with the
+     *         result of this action.
+     * @see CreateTagsRequest
      */
     List<Tag> createTags(CreateTagsRequest request, ResultCapture<Void>
             extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>RegisterImage</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>Image</code> resource object associated with the result
+     *         of this action.
+     * @see RegisterImageRequest
      */
     com.amazonaws.resources.ec2.Image registerImage(RegisterImageRequest request
             );
 
     /**
-     * Performs an action.
+     * Performs the <code>RegisterImage</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>Image</code> resource object associated with the result
+     *         of this action.
+     * @see RegisterImageRequest
      */
     com.amazonaws.resources.ec2.Image registerImage(RegisterImageRequest request
             , ResultCapture<RegisterImageResult> extractor);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateSnapshot</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>Snapshot</code> resource object associated with the
+     *         result of this action.
+     * @see CreateSnapshotRequest
      */
     com.amazonaws.resources.ec2.Snapshot createSnapshot(CreateSnapshotRequest
             request);
 
     /**
-     * Performs an action.
+     * Performs the <code>CreateSnapshot</code> action and use a ResultCapture
+     * to retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>Snapshot</code> resource object associated with the
+     *         result of this action.
+     * @see CreateSnapshotRequest
      */
     com.amazonaws.resources.ec2.Snapshot createSnapshot(CreateSnapshotRequest
             request, ResultCapture<CreateSnapshotResult> extractor);

@@ -83,6 +83,17 @@ class AccessKeyImpl implements AccessKey {
     }
 
     @Override
+    public void deactivate() {
+        deactivate((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void deactivate(ResultCapture<Void> extractor) {
+        UpdateAccessKeyRequest request = new UpdateAccessKeyRequest();
+        deactivate(request, extractor);
+    }
+
+    @Override
     public void activate(UpdateAccessKeyRequest request) {
         activate(request, null);
     }
@@ -95,6 +106,17 @@ class AccessKeyImpl implements AccessKey {
     }
 
     @Override
+    public void activate() {
+        activate((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void activate(ResultCapture<Void> extractor) {
+        UpdateAccessKeyRequest request = new UpdateAccessKeyRequest();
+        activate(request, extractor);
+    }
+
+    @Override
     public void delete(DeleteAccessKeyRequest request) {
         delete(request, null);
     }
@@ -104,6 +126,17 @@ class AccessKeyImpl implements AccessKey {
             extractor) {
 
         resource.performAction("Delete", request, extractor);
+    }
+
+    @Override
+    public void delete() {
+        delete((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void delete(ResultCapture<Void> extractor) {
+        DeleteAccessKeyRequest request = new DeleteAccessKeyRequest();
+        delete(request, extractor);
     }
 
     private static class Codec implements ResourceCodec<AccessKey> {

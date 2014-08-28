@@ -20,7 +20,14 @@ import com.amazonaws.services.glacier.model.InitiateJobRequest;
 import com.amazonaws.services.glacier.model.InitiateJobResult;
 
 /**
- * The Archive resource.
+ * The <code>Archive</code> resource.
+ * Each <code>Archive</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>AccountId</li>
+ *   <li>Id</li>
+ *   <li>VaultName</li>
+ * </ul>
  */
 public interface Archive {
     /**

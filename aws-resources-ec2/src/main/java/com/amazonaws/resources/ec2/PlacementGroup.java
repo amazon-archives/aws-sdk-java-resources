@@ -21,7 +21,12 @@ import com.amazonaws.services.ec2.model.DescribePlacementGroupsRequest;
 import com.amazonaws.services.ec2.model.DescribePlacementGroupsResult;
 
 /**
- * The PlacementGroup resource.
+ * The <code>PlacementGroup</code> resource.
+ * Each <code>PlacementGroup</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>Name</li>
+ * </ul>
  */
 public interface PlacementGroup {
     /**
@@ -37,7 +42,7 @@ public interface PlacementGroup {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(DescribePlacementGroupsRequest)
      */
@@ -51,7 +56,7 @@ public interface PlacementGroup {
      * set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>GroupNames[]</code></b>
+     *     <b><code>GroupNames[*]</code></b>
      *         - mapped from the <code>Name</code> identifier.
      *   </li>
      * </ul>
@@ -59,7 +64,7 @@ public interface PlacementGroup {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribePlacementGroupsRequest
      */
@@ -74,7 +79,7 @@ public interface PlacementGroup {
      * set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>GroupNames[]</code></b>
+     *     <b><code>GroupNames[*]</code></b>
      *         - mapped from the <code>Name</code> identifier.
      *   </li>
      * </ul>
@@ -82,7 +87,7 @@ public interface PlacementGroup {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribePlacementGroupsRequest
      */

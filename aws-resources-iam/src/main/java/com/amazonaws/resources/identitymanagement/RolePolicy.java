@@ -21,7 +21,13 @@ import com.amazonaws.services.identitymanagement.model.GetRolePolicyResult;
 import com.amazonaws.services.identitymanagement.model.PutRolePolicyRequest;
 
 /**
- * The RolePolicy resource.
+ * The <code>RolePolicy</code> resource.
+ * Each <code>RolePolicy</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>Name</li>
+ *   <li>RoleName</li>
+ * </ul>
  */
 public interface RolePolicy {
     /**
@@ -37,7 +43,7 @@ public interface RolePolicy {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(GetRolePolicyRequest)
      */
@@ -63,7 +69,7 @@ public interface RolePolicy {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see GetRolePolicyRequest
      */
@@ -90,7 +96,7 @@ public interface RolePolicy {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see GetRolePolicyRequest
      */

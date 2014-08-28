@@ -28,7 +28,12 @@ import com.amazonaws.services.ec2.model.Route;
 import com.amazonaws.services.ec2.model.Tag;
 
 /**
- * The RouteTable resource.
+ * The <code>RouteTable</code> resource.
+ * Each <code>RouteTable</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>Id</li>
+ * </ul>
  */
 public interface RouteTable {
     /**
@@ -44,7 +49,7 @@ public interface RouteTable {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(DescribeRouteTablesRequest)
      */
@@ -58,7 +63,7 @@ public interface RouteTable {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>RouteTableIds[]</code></b>
+     *     <b><code>RouteTableIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -66,7 +71,7 @@ public interface RouteTable {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeRouteTablesRequest
      */
@@ -81,7 +86,7 @@ public interface RouteTable {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>RouteTableIds[]</code></b>
+     *     <b><code>RouteTableIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -89,7 +94,7 @@ public interface RouteTable {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeRouteTablesRequest
      */
@@ -242,7 +247,7 @@ public interface RouteTable {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[]</code></b>
+     *     <b><code>Resources[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -265,7 +270,7 @@ public interface RouteTable {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[]</code></b>
+     *     <b><code>Resources[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>

@@ -20,7 +20,12 @@ import com.amazonaws.services.ec2.model.DescribeKeyPairsRequest;
 import com.amazonaws.services.ec2.model.DescribeKeyPairsResult;
 
 /**
- * The KeyPair resource.
+ * The <code>KeyPair</code> resource.
+ * Each <code>KeyPair</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>Name</li>
+ * </ul>
  */
 public interface KeyPair {
     /**
@@ -36,7 +41,7 @@ public interface KeyPair {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(DescribeKeyPairsRequest)
      */
@@ -50,7 +55,7 @@ public interface KeyPair {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>KeyNames[]</code></b>
+     *     <b><code>KeyNames[*]</code></b>
      *         - mapped from the <code>Name</code> identifier.
      *   </li>
      * </ul>
@@ -58,7 +63,7 @@ public interface KeyPair {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeKeyPairsRequest
      */
@@ -73,7 +78,7 @@ public interface KeyPair {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>KeyNames[]</code></b>
+     *     <b><code>KeyNames[*]</code></b>
      *         - mapped from the <code>Name</code> identifier.
      *   </li>
      * </ul>
@@ -81,7 +86,7 @@ public interface KeyPair {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeKeyPairsRequest
      */

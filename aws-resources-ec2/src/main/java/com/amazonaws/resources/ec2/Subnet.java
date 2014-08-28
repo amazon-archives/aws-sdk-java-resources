@@ -30,7 +30,12 @@ import com.amazonaws.services.ec2.model.RunInstancesResult;
 import com.amazonaws.services.ec2.model.Tag;
 
 /**
- * The Subnet resource.
+ * The <code>Subnet</code> resource.
+ * Each <code>Subnet</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>Id</li>
+ * </ul>
  */
 public interface Subnet {
     /**
@@ -46,7 +51,7 @@ public interface Subnet {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(DescribeSubnetsRequest)
      */
@@ -60,7 +65,7 @@ public interface Subnet {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>SubnetIds[]</code></b>
+     *     <b><code>SubnetIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -68,7 +73,7 @@ public interface Subnet {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeSubnetsRequest
      */
@@ -83,7 +88,7 @@ public interface Subnet {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>SubnetIds[]</code></b>
+     *     <b><code>SubnetIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -91,7 +96,7 @@ public interface Subnet {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeSubnetsRequest
      */
@@ -296,7 +301,7 @@ public interface Subnet {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[]</code></b>
+     *     <b><code>Resources[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -319,7 +324,7 @@ public interface Subnet {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[]</code></b>
+     *     <b><code>Resources[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>

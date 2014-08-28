@@ -60,7 +60,12 @@ import com.amazonaws.services.ec2.model.UnmonitorInstancesRequest;
 import com.amazonaws.services.ec2.model.UnmonitorInstancesResult;
 
 /**
- * The Instance resource.
+ * The <code>Instance</code> resource.
+ * Each <code>Instance</code> object is uniquely identified by these
+ * identifier(s):
+ * <ul>
+ *   <li>Id</li>
+ * </ul>
  */
 public interface Instance {
     /**
@@ -76,7 +81,7 @@ public interface Instance {
      * are not loaded yet.
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see #load(DescribeInstancesRequest)
      */
@@ -90,7 +95,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InstanceIds[]</code></b>
+     *     <b><code>InstanceIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -98,7 +103,7 @@ public interface Instance {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeInstancesRequest
      */
@@ -113,7 +118,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InstanceIds[]</code></b>
+     *     <b><code>InstanceIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -121,7 +126,7 @@ public interface Instance {
      * <p>
      *
      * @return Returns {@code true} if the resource is not yet loaded when this
-     *         method is invoked, which indicates that a service call has been
+     *         method was invoked, which indicates that a service call has been
      *         made to retrieve the attributes.
      * @see DescribeInstancesRequest
      */
@@ -430,7 +435,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InstanceIds[]</code></b>
+     *     <b><code>InstanceIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -453,7 +458,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InstanceIds[]</code></b>
+     *     <b><code>InstanceIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -555,7 +560,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InstanceIds[]</code></b>
+     *     <b><code>InstanceIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -578,7 +583,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InstanceIds[]</code></b>
+     *     <b><code>InstanceIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -676,7 +681,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Instances[]</code></b>
+     *     <b><code>Instances[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -697,7 +702,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Instances[]</code></b>
+     *     <b><code>Instances[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -886,7 +891,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InstanceIds[]</code></b>
+     *     <b><code>InstanceIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -909,7 +914,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InstanceIds[]</code></b>
+     *     <b><code>InstanceIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -1063,7 +1068,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InstanceIds[]</code></b>
+     *     <b><code>InstanceIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -1086,7 +1091,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InstanceIds[]</code></b>
+     *     <b><code>InstanceIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -1124,7 +1129,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InstanceIds[]</code></b>
+     *     <b><code>InstanceIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -1145,7 +1150,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InstanceIds[]</code></b>
+     *     <b><code>InstanceIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -1245,7 +1250,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InstanceIds[]</code></b>
+     *     <b><code>InstanceIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -1268,7 +1273,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InstanceIds[]</code></b>
+     *     <b><code>InstanceIds[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -1425,7 +1430,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[]</code></b>
+     *     <b><code>Resources[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -1448,7 +1453,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[]</code></b>
+     *     <b><code>Resources[*]</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
