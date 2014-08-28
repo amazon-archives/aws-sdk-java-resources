@@ -37,13 +37,13 @@ public class IamIntegrationTest {
                 System.out.println("  Deleting: " + old.getId());
 
                 if (old.getStatus().equals(StatusType.Active.toString())) {
-                    old.deactivate(null);
+                    old.deactivate();
                 }
 
-                old.delete(null);
+                old.delete();
             }
 
-            AccessKey key = user.createAccessKey(null);
+            AccessKey key = user.createAccessKey();
             System.out.println("  Created: " + key.getId());
         }
     }
