@@ -3,7 +3,7 @@
   
   <groupId>com.amazonaws.resources</groupId>
   <artifactId>aws-resources-parent-pom</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2-SNAPSHOT</version>
   <packaging>pom</packaging>
   
   <name>AWS Resource APIs for Java Parent POM</name>
@@ -14,7 +14,7 @@
     <connection>scm:git:ssh://git@github.com/awslabs/aws-sdk-java-resources.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/awslabs/aws-sdk-java-resources.git</developerConnection>
     <url>https://github.com/awslabs/aws-sdk-java-resources</url>
-    <tag>v0.0.1</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <licenses>
