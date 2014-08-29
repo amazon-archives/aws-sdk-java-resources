@@ -40,6 +40,7 @@ printing their DNS names and starting them (if they're currently stopped).
       <groupId>com.amazonaws.resources</groupId>
       <artifactId>aws-resources</artifactId>
       <version>0.0.1</version>
+      <type>pom</type>
     </dependency>
 ```
 * Read the introduction below.
