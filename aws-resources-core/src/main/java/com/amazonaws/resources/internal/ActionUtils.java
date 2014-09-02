@@ -256,13 +256,14 @@ final class ActionUtils {
             AmazonWebServiceRequest request,
             Object result) {
 
-        // Identifier sourced from the parent's resource id can only have one
-        // value.
+        // Single-valued identifiers are shared by all resources we're going
+        // to return; for example, the BucketName when listing the objects in
+        // a bucket.
         Map<String, Object> ids =
-                extractParentIdentifiers(context, mapping, request);
+                extractSingleValuedIdentifiers(context, mapping, request);
 
-        // Identifier extracted from the request or response data could be
-        // multi-valued.
+        // Multi-valued identifiers are unique per resource; for example, the
+        // Key identifier when listing the objects in a bucket.
         Map<String, List<Object>> multiIds =
                 extractMultiValuedIdentifiers(mapping, request, result);
 
@@ -293,13 +294,16 @@ final class ActionUtils {
         return rval;
     }
 
-    private static Map<String, Object> extractParentIdentifiers(
+    private static Map<String, Object> extractSingleValuedIdentifiers(
             ActionContext context,
             ResourceMapping mapping,
             AmazonWebServiceRequest request) {
 
         Map<String, Object> ids = new HashMap<>();
 
+        // Handle identifiers inherited from the resource this method was
+        // called on; for example, the BucketName when listing the objects in
+        // a bucket.
         for (FlatMapping m : mapping.getParentIdentifierMappings()) {
             Object value = context.getIdentifier(m.getSource());
             if (value == null) {
@@ -310,6 +314,17 @@ final class ActionUtils {
                         + "name!");
             }
             ids.put(m.getTarget(), value);
+        }
+
+        // Handle single-valued request parameter mappings here; for example
+        // the BucketName when creating a bucket. Multi-valued request
+        // parameters are handled in extractMultiValuedIdentifiers.
+        for (PathSourceMapping m : mapping.getRequestParamMappings()) {
+            if (!m.isMultiValued()) {
+                Object value =
+                        ReflectionUtils.getByPath(request, m.getSource());
+                ids.put(m.getTarget(), value);
+            }
         }
 
         return ids;
@@ -324,6 +339,8 @@ final class ActionUtils {
 
         int listSize = -1;
 
+        // Handle response identifiers, like the list of Keys when listing the
+        // objects in a bucket.
         for (PathSourceMapping m : mapping.getResponseIdentifierMappings()) {
             List<Object> values =
                     ReflectionUtils.getAllByPath(result, m.getSource());
@@ -339,20 +356,11 @@ final class ActionUtils {
             ids.put(m.getTarget(), values);
         }
 
+        // Handle multi-valued request parameters such as the Key identifier
+        // when creating multiple tags on an EC2 Instance.
         for (PathSourceMapping m : mapping.getRequestParamMappings()) {
-            List<Object> values;
-
-            /*
-             * When the response contains multiple resources, the source of a
-             * request param mapping could be either single-valued (e.g. in
-             * Glacier.getVaults() action, the single-valued "AccountId" param
-             * is mapped to the "AccountId"s of all the returned vaults), or
-             * multi-valued (e.g. in EC2.Instance.createTags() action, multiple
-             * "Tag[].Key" parameters are mapped to the "Key"s of all the
-             * returned Tag resources.
-             */
             if (m.isMultiValued()) {
-                values =
+                List<Object> values =
                         ReflectionUtils.getAllByPath(request, m.getSource());
 
                 if (listSize == -1) {
@@ -362,20 +370,9 @@ final class ActionUtils {
                             "List size mismatch! " + listSize + " vs "
                             + values.size());
                 }
-            }
-            else {
-                // If single valued, augment the value into a list of ids, which
-                // match the length of the ids extracted from response.
-                Object singleValue =
-                        ReflectionUtils.getByPath(request, m.getSource());
 
-                values = new ArrayList<Object>(listSize);
-                for (int i = 0; i < listSize; i++ ) {
-                    values.add(singleValue);
-                }
+                ids.put(m.getTarget(), values);
             }
-
-            ids.put(m.getTarget(), values);
         }
 
         return ids;
