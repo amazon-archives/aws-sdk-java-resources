@@ -14,11 +14,14 @@
  */
 package com.amazonaws.resources.identitymanagement;
 
+import java.util.UUID;
+
 import org.junit.AfterClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import com.amazonaws.resources.ServiceBuilder;
+import com.amazonaws.services.identitymanagement.model.CreateUserRequest;
 import com.amazonaws.services.identitymanagement.model.StatusType;
 
 public class IamIntegrationTest {
@@ -48,6 +51,14 @@ public class IamIntegrationTest {
             AccessKey key = user.createAccessKey();
             System.out.println("  Created: " + key.getId());
         }
+    }
+
+    @Test
+    @Ignore
+    public void testCreate() {
+        String name = UUID.randomUUID().toString();
+        User user = iam.createUser(new CreateUserRequest(name));
+        user.delete();
     }
 
     @AfterClass
