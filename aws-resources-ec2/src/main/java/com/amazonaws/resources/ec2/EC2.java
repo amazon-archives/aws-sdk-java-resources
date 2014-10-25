@@ -61,6 +61,7 @@ import com.amazonaws.services.ec2.model.DescribeSubnetsRequest;
 import com.amazonaws.services.ec2.model.DescribeVolumesRequest;
 import com.amazonaws.services.ec2.model.DescribeVpcPeeringConnectionsRequest;
 import com.amazonaws.services.ec2.model.DescribeVpcsRequest;
+import com.amazonaws.services.ec2.model.DhcpConfiguration;
 import com.amazonaws.services.ec2.model.DisassociateRouteTableRequest;
 import com.amazonaws.services.ec2.model.ImportKeyPairRequest;
 import com.amazonaws.services.ec2.model.ImportKeyPairResult;
@@ -364,6 +365,25 @@ public interface EC2 extends Service<AmazonEC2> {
             ResultCapture<CreateSecurityGroupResult> extractor);
 
     /**
+     * The convenient method form for the <code>CreateSecurityGroup</code>
+     * action.
+     *
+     * @see #createSecurityGroup(CreateSecurityGroupRequest)
+     */
+    com.amazonaws.resources.ec2.SecurityGroup createSecurityGroup(String
+            description, String groupName);
+
+    /**
+     * The convenient method form for the <code>CreateSecurityGroup</code>
+     * action.
+     *
+     * @see #createSecurityGroup(CreateSecurityGroupRequest, ResultCapture)
+     */
+    com.amazonaws.resources.ec2.SecurityGroup createSecurityGroup(String
+            description, String groupName,
+            ResultCapture<CreateSecurityGroupResult> extractor);
+
+    /**
      * Performs the <code>CreateSubnet</code> action.
      *
      * <p>
@@ -387,6 +407,22 @@ public interface EC2 extends Service<AmazonEC2> {
      */
     com.amazonaws.resources.ec2.Subnet createSubnet(CreateSubnetRequest request,
             ResultCapture<CreateSubnetResult> extractor);
+
+    /**
+     * The convenient method form for the <code>CreateSubnet</code> action.
+     *
+     * @see #createSubnet(CreateSubnetRequest)
+     */
+    com.amazonaws.resources.ec2.Subnet createSubnet(String cidrBlock, String
+            vpcId);
+
+    /**
+     * The convenient method form for the <code>CreateSubnet</code> action.
+     *
+     * @see #createSubnet(CreateSubnetRequest, ResultCapture)
+     */
+    com.amazonaws.resources.ec2.Subnet createSubnet(String cidrBlock, String
+            vpcId, ResultCapture<CreateSubnetResult> extractor);
 
     /**
      * Performs the <code>CreateInternetGateway</code> action.
@@ -466,6 +502,22 @@ public interface EC2 extends Service<AmazonEC2> {
             request, ResultCapture<ImportKeyPairResult> extractor);
 
     /**
+     * The convenient method form for the <code>ImportKeyPair</code> action.
+     *
+     * @see #importKeyPair(ImportKeyPairRequest)
+     */
+    com.amazonaws.resources.ec2.KeyPair importKeyPair(String publicKeyMaterial,
+            String keyName);
+
+    /**
+     * The convenient method form for the <code>ImportKeyPair</code> action.
+     *
+     * @see #importKeyPair(ImportKeyPairRequest, ResultCapture)
+     */
+    com.amazonaws.resources.ec2.KeyPair importKeyPair(String publicKeyMaterial,
+            String keyName, ResultCapture<ImportKeyPairResult> extractor);
+
+    /**
      * Performs the <code>CreateRouteTable</code> action.
      *
      * <p>
@@ -517,6 +569,24 @@ public interface EC2 extends Service<AmazonEC2> {
             CreatePlacementGroupRequest request, ResultCapture<Void> extractor);
 
     /**
+     * The convenient method form for the <code>CreatePlacementGroup</code>
+     * action.
+     *
+     * @see #createPlacementGroup(CreatePlacementGroupRequest)
+     */
+    com.amazonaws.resources.ec2.PlacementGroup createPlacementGroup(String
+            groupName, String strategy);
+
+    /**
+     * The convenient method form for the <code>CreatePlacementGroup</code>
+     * action.
+     *
+     * @see #createPlacementGroup(CreatePlacementGroupRequest, ResultCapture)
+     */
+    com.amazonaws.resources.ec2.PlacementGroup createPlacementGroup(String
+            groupName, String strategy, ResultCapture<Void> extractor);
+
+    /**
      * Performs the <code>CreateDhcpOptions</code> action.
      *
      * <p>
@@ -540,6 +610,23 @@ public interface EC2 extends Service<AmazonEC2> {
      */
     com.amazonaws.resources.ec2.DhcpOptions createDhcpOptions(
             CreateDhcpOptionsRequest request,
+            ResultCapture<CreateDhcpOptionsResult> extractor);
+
+    /**
+     * The convenient method form for the <code>CreateDhcpOptions</code> action.
+     *
+     * @see #createDhcpOptions(CreateDhcpOptionsRequest)
+     */
+    com.amazonaws.resources.ec2.DhcpOptions createDhcpOptions(
+            List<DhcpConfiguration> dhcpConfigurations);
+
+    /**
+     * The convenient method form for the <code>CreateDhcpOptions</code> action.
+     *
+     * @see #createDhcpOptions(CreateDhcpOptionsRequest, ResultCapture)
+     */
+    com.amazonaws.resources.ec2.DhcpOptions createDhcpOptions(
+            List<DhcpConfiguration> dhcpConfigurations,
             ResultCapture<CreateDhcpOptionsResult> extractor);
 
     /**
@@ -569,6 +656,23 @@ public interface EC2 extends Service<AmazonEC2> {
             extractor);
 
     /**
+     * The convenient method form for the <code>CreateInstances</code> action.
+     *
+     * @see #createInstances(RunInstancesRequest)
+     */
+    List<com.amazonaws.resources.ec2.Instance> createInstances(String imageId,
+            Integer minCount, Integer maxCount);
+
+    /**
+     * The convenient method form for the <code>CreateInstances</code> action.
+     *
+     * @see #createInstances(RunInstancesRequest, ResultCapture)
+     */
+    List<com.amazonaws.resources.ec2.Instance> createInstances(String imageId,
+            Integer minCount, Integer maxCount,
+            ResultCapture<RunInstancesResult> extractor);
+
+    /**
      * Performs the <code>CreateVolume</code> action.
      *
      * <p>
@@ -591,6 +695,38 @@ public interface EC2 extends Service<AmazonEC2> {
      */
     com.amazonaws.resources.ec2.Image createVolume(CreateVolumeRequest request,
             ResultCapture<CreateVolumeResult> extractor);
+
+    /**
+     * The convenient method form for the <code>CreateVolume</code> action.
+     *
+     * @see #createVolume(CreateVolumeRequest)
+     */
+    com.amazonaws.resources.ec2.Image createVolume(String availabilityZone,
+            Integer size);
+
+    /**
+     * The convenient method form for the <code>CreateVolume</code> action.
+     *
+     * @see #createVolume(CreateVolumeRequest, ResultCapture)
+     */
+    com.amazonaws.resources.ec2.Image createVolume(String availabilityZone,
+            Integer size, ResultCapture<CreateVolumeResult> extractor);
+
+    /**
+     * The convenient method form for the <code>CreateVolume</code> action.
+     *
+     * @see #createVolume(CreateVolumeRequest)
+     */
+    com.amazonaws.resources.ec2.Image createVolume(String snapshotId, String
+            availabilityZone);
+
+    /**
+     * The convenient method form for the <code>CreateVolume</code> action.
+     *
+     * @see #createVolume(CreateVolumeRequest, ResultCapture)
+     */
+    com.amazonaws.resources.ec2.Image createVolume(String snapshotId, String
+            availabilityZone, ResultCapture<CreateVolumeResult> extractor);
 
     /**
      * Performs the <code>DisassociateRouteTable</code> action.
@@ -634,6 +770,21 @@ public interface EC2 extends Service<AmazonEC2> {
      * @see CreateVpcRequest
      */
     com.amazonaws.resources.ec2.Vpc createVpc(CreateVpcRequest request,
+            ResultCapture<CreateVpcResult> extractor);
+
+    /**
+     * The convenient method form for the <code>CreateVpc</code> action.
+     *
+     * @see #createVpc(CreateVpcRequest)
+     */
+    com.amazonaws.resources.ec2.Vpc createVpc(String cidrBlock);
+
+    /**
+     * The convenient method form for the <code>CreateVpc</code> action.
+     *
+     * @see #createVpc(CreateVpcRequest, ResultCapture)
+     */
+    com.amazonaws.resources.ec2.Vpc createVpc(String cidrBlock,
             ResultCapture<CreateVpcResult> extractor);
 
     /**
@@ -688,6 +839,21 @@ public interface EC2 extends Service<AmazonEC2> {
             request, ResultCapture<CreateKeyPairResult> extractor);
 
     /**
+     * The convenient method form for the <code>CreateKeyPair</code> action.
+     *
+     * @see #createKeyPair(CreateKeyPairRequest)
+     */
+    com.amazonaws.resources.ec2.KeyPair createKeyPair(String keyName);
+
+    /**
+     * The convenient method form for the <code>CreateKeyPair</code> action.
+     *
+     * @see #createKeyPair(CreateKeyPairRequest, ResultCapture)
+     */
+    com.amazonaws.resources.ec2.KeyPair createKeyPair(String keyName,
+            ResultCapture<CreateKeyPairResult> extractor);
+
+    /**
      * Performs the <code>CreateVpcPeeringConnection</code> action.
      *
      * <p>
@@ -738,6 +904,22 @@ public interface EC2 extends Service<AmazonEC2> {
             extractor);
 
     /**
+     * The convenient method form for the <code>CreateTags</code> action.
+     *
+     * @see #createTags(CreateTagsRequest)
+     */
+    List<Tag> createTags(List<com.amazonaws.services.ec2.model.Tag> tags,
+            List<String> resources);
+
+    /**
+     * The convenient method form for the <code>CreateTags</code> action.
+     *
+     * @see #createTags(CreateTagsRequest, ResultCapture)
+     */
+    List<Tag> createTags(List<com.amazonaws.services.ec2.model.Tag> tags,
+            List<String> resources, ResultCapture<Void> extractor);
+
+    /**
      * Performs the <code>RegisterImage</code> action.
      *
      * <p>
@@ -763,6 +945,21 @@ public interface EC2 extends Service<AmazonEC2> {
             , ResultCapture<RegisterImageResult> extractor);
 
     /**
+     * The convenient method form for the <code>RegisterImage</code> action.
+     *
+     * @see #registerImage(RegisterImageRequest)
+     */
+    com.amazonaws.resources.ec2.Image registerImage(String imageLocation);
+
+    /**
+     * The convenient method form for the <code>RegisterImage</code> action.
+     *
+     * @see #registerImage(RegisterImageRequest, ResultCapture)
+     */
+    com.amazonaws.resources.ec2.Image registerImage(String imageLocation,
+            ResultCapture<RegisterImageResult> extractor);
+
+    /**
      * Performs the <code>CreateSnapshot</code> action.
      *
      * <p>
@@ -786,4 +983,20 @@ public interface EC2 extends Service<AmazonEC2> {
      */
     com.amazonaws.resources.ec2.Snapshot createSnapshot(CreateSnapshotRequest
             request, ResultCapture<CreateSnapshotResult> extractor);
+
+    /**
+     * The convenient method form for the <code>CreateSnapshot</code> action.
+     *
+     * @see #createSnapshot(CreateSnapshotRequest)
+     */
+    com.amazonaws.resources.ec2.Snapshot createSnapshot(String description,
+            String volumeId);
+
+    /**
+     * The convenient method form for the <code>CreateSnapshot</code> action.
+     *
+     * @see #createSnapshot(CreateSnapshotRequest, ResultCapture)
+     */
+    com.amazonaws.resources.ec2.Snapshot createSnapshot(String description,
+            String volumeId, ResultCapture<CreateSnapshotResult> extractor);
 }
