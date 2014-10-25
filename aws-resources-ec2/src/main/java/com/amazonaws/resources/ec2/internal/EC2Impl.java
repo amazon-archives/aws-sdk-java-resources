@@ -97,6 +97,7 @@ import com.amazonaws.services.ec2.model.DescribeSubnetsRequest;
 import com.amazonaws.services.ec2.model.DescribeVolumesRequest;
 import com.amazonaws.services.ec2.model.DescribeVpcPeeringConnectionsRequest;
 import com.amazonaws.services.ec2.model.DescribeVpcsRequest;
+import com.amazonaws.services.ec2.model.DhcpConfiguration;
 import com.amazonaws.services.ec2.model.DisassociateRouteTableRequest;
 import com.amazonaws.services.ec2.model.ImportKeyPairRequest;
 import com.amazonaws.services.ec2.model.ImportKeyPairResult;
@@ -478,6 +479,24 @@ public class EC2Impl implements EC2 {
     }
 
     @Override
+    public SecurityGroup createSecurityGroup(String description, String
+            groupName) {
+
+        return createSecurityGroup(description, groupName,
+                (ResultCapture<CreateSecurityGroupResult>)null);
+    }
+
+    @Override
+    public SecurityGroup createSecurityGroup(String description, String
+            groupName, ResultCapture<CreateSecurityGroupResult> extractor) {
+
+        CreateSecurityGroupRequest request = new CreateSecurityGroupRequest()
+            .withDescription(description)
+            .withGroupName(groupName);
+        return createSecurityGroup(request, extractor);
+    }
+
+    @Override
     public Subnet createSubnet(CreateSubnetRequest request) {
         return createSubnet(request, null);
     }
@@ -491,6 +510,22 @@ public class EC2Impl implements EC2 {
 
         if (result == null) return null;
         return new SubnetImpl(result.getResource());
+    }
+
+    @Override
+    public Subnet createSubnet(String cidrBlock, String vpcId) {
+        return createSubnet(cidrBlock, vpcId,
+                (ResultCapture<CreateSubnetResult>)null);
+    }
+
+    @Override
+    public Subnet createSubnet(String cidrBlock, String vpcId,
+            ResultCapture<CreateSubnetResult> extractor) {
+
+        CreateSubnetRequest request = new CreateSubnetRequest()
+            .withCidrBlock(cidrBlock)
+            .withVpcId(vpcId);
+        return createSubnet(request, extractor);
     }
 
     @Override
@@ -544,6 +579,22 @@ public class EC2Impl implements EC2 {
     }
 
     @Override
+    public KeyPair importKeyPair(String publicKeyMaterial, String keyName) {
+        return importKeyPair(publicKeyMaterial, keyName,
+                (ResultCapture<ImportKeyPairResult>)null);
+    }
+
+    @Override
+    public KeyPair importKeyPair(String publicKeyMaterial, String keyName,
+            ResultCapture<ImportKeyPairResult> extractor) {
+
+        ImportKeyPairRequest request = new ImportKeyPairRequest()
+            .withPublicKeyMaterial(publicKeyMaterial)
+            .withKeyName(keyName);
+        return importKeyPair(request, extractor);
+    }
+
+    @Override
     public RouteTable createRouteTable(CreateRouteTableRequest request) {
         return createRouteTable(request, null);
     }
@@ -578,6 +629,24 @@ public class EC2Impl implements EC2 {
     }
 
     @Override
+    public PlacementGroup createPlacementGroup(String groupName, String strategy
+            ) {
+
+        return createPlacementGroup(groupName, strategy,
+                (ResultCapture<Void>)null);
+    }
+
+    @Override
+    public PlacementGroup createPlacementGroup(String groupName, String strategy
+            , ResultCapture<Void> extractor) {
+
+        CreatePlacementGroupRequest request = new CreatePlacementGroupRequest()
+            .withGroupName(groupName)
+            .withStrategy(strategy);
+        return createPlacementGroup(request, extractor);
+    }
+
+    @Override
     public DhcpOptions createDhcpOptions(CreateDhcpOptionsRequest request) {
         return createDhcpOptions(request, null);
     }
@@ -591,6 +660,24 @@ public class EC2Impl implements EC2 {
 
         if (result == null) return null;
         return new DhcpOptionsImpl(result.getResource());
+    }
+
+    @Override
+    public DhcpOptions createDhcpOptions(List<DhcpConfiguration>
+            dhcpConfigurations) {
+
+        return createDhcpOptions(dhcpConfigurations,
+                (ResultCapture<CreateDhcpOptionsResult>)null);
+    }
+
+    @Override
+    public DhcpOptions createDhcpOptions(List<DhcpConfiguration>
+            dhcpConfigurations, ResultCapture<CreateDhcpOptionsResult> extractor
+            ) {
+
+        CreateDhcpOptionsRequest request = new CreateDhcpOptionsRequest()
+            .withDhcpConfigurations(dhcpConfigurations);
+        return createDhcpOptions(request, extractor);
     }
 
     @Override
@@ -610,6 +697,25 @@ public class EC2Impl implements EC2 {
     }
 
     @Override
+    public List<Instance> createInstances(String imageId, Integer minCount,
+            Integer maxCount) {
+
+        return createInstances(imageId, minCount, maxCount,
+                (ResultCapture<RunInstancesResult>)null);
+    }
+
+    @Override
+    public List<Instance> createInstances(String imageId, Integer minCount,
+            Integer maxCount, ResultCapture<RunInstancesResult> extractor) {
+
+        RunInstancesRequest request = new RunInstancesRequest()
+            .withImageId(imageId)
+            .withMinCount(minCount)
+            .withMaxCount(maxCount);
+        return createInstances(request, extractor);
+    }
+
+    @Override
     public Image createVolume(CreateVolumeRequest request) {
         return createVolume(request, null);
     }
@@ -623,6 +729,38 @@ public class EC2Impl implements EC2 {
 
         if (result == null) return null;
         return new ImageImpl(result.getResource());
+    }
+
+    @Override
+    public Image createVolume(String availabilityZone, Integer size) {
+        return createVolume(availabilityZone, size,
+                (ResultCapture<CreateVolumeResult>)null);
+    }
+
+    @Override
+    public Image createVolume(String availabilityZone, Integer size,
+            ResultCapture<CreateVolumeResult> extractor) {
+
+        CreateVolumeRequest request = new CreateVolumeRequest()
+            .withAvailabilityZone(availabilityZone)
+            .withSize(size);
+        return createVolume(request, extractor);
+    }
+
+    @Override
+    public Image createVolume(String snapshotId, String availabilityZone) {
+        return createVolume(snapshotId, availabilityZone,
+                (ResultCapture<CreateVolumeResult>)null);
+    }
+
+    @Override
+    public Image createVolume(String snapshotId, String availabilityZone,
+            ResultCapture<CreateVolumeResult> extractor) {
+
+        CreateVolumeRequest request = new CreateVolumeRequest()
+            .withSnapshotId(snapshotId)
+            .withAvailabilityZone(availabilityZone);
+        return createVolume(request, extractor);
     }
 
     @Override
@@ -651,6 +789,20 @@ public class EC2Impl implements EC2 {
 
         if (result == null) return null;
         return new VpcImpl(result.getResource());
+    }
+
+    @Override
+    public Vpc createVpc(String cidrBlock) {
+        return createVpc(cidrBlock, (ResultCapture<CreateVpcResult>)null);
+    }
+
+    @Override
+    public Vpc createVpc(String cidrBlock, ResultCapture<CreateVpcResult>
+            extractor) {
+
+        CreateVpcRequest request = new CreateVpcRequest()
+            .withCidrBlock(cidrBlock);
+        return createVpc(request, extractor);
     }
 
     @Override
@@ -685,6 +837,20 @@ public class EC2Impl implements EC2 {
 
         if (result == null) return null;
         return new KeyPairImpl(result.getResource());
+    }
+
+    @Override
+    public KeyPair createKeyPair(String keyName) {
+        return createKeyPair(keyName, (ResultCapture<CreateKeyPairResult>)null);
+    }
+
+    @Override
+    public KeyPair createKeyPair(String keyName,
+            ResultCapture<CreateKeyPairResult> extractor) {
+
+        CreateKeyPairRequest request = new CreateKeyPairRequest()
+            .withKeyName(keyName);
+        return createKeyPair(request, extractor);
     }
 
     @Override
@@ -724,6 +890,23 @@ public class EC2Impl implements EC2 {
     }
 
     @Override
+    public List<Tag> createTags(List<com.amazonaws.services.ec2.model.Tag> tags,
+            List<String> resources) {
+
+        return createTags(tags, resources, (ResultCapture<Void>)null);
+    }
+
+    @Override
+    public List<Tag> createTags(List<com.amazonaws.services.ec2.model.Tag> tags,
+            List<String> resources, ResultCapture<Void> extractor) {
+
+        CreateTagsRequest request = new CreateTagsRequest()
+            .withTags(tags)
+            .withResources(resources);
+        return createTags(request, extractor);
+    }
+
+    @Override
     public Image registerImage(RegisterImageRequest request) {
         return registerImage(request, null);
     }
@@ -740,6 +923,21 @@ public class EC2Impl implements EC2 {
     }
 
     @Override
+    public Image registerImage(String imageLocation) {
+        return registerImage(imageLocation,
+                (ResultCapture<RegisterImageResult>)null);
+    }
+
+    @Override
+    public Image registerImage(String imageLocation,
+            ResultCapture<RegisterImageResult> extractor) {
+
+        RegisterImageRequest request = new RegisterImageRequest()
+            .withImageLocation(imageLocation);
+        return registerImage(request, extractor);
+    }
+
+    @Override
     public Snapshot createSnapshot(CreateSnapshotRequest request) {
         return createSnapshot(request, null);
     }
@@ -753,5 +951,21 @@ public class EC2Impl implements EC2 {
 
         if (result == null) return null;
         return new SnapshotImpl(result.getResource());
+    }
+
+    @Override
+    public Snapshot createSnapshot(String description, String volumeId) {
+        return createSnapshot(description, volumeId,
+                (ResultCapture<CreateSnapshotResult>)null);
+    }
+
+    @Override
+    public Snapshot createSnapshot(String description, String volumeId,
+            ResultCapture<CreateSnapshotResult> extractor) {
+
+        CreateSnapshotRequest request = new CreateSnapshotRequest()
+            .withDescription(description)
+            .withVolumeId(volumeId);
+        return createSnapshot(request, extractor);
     }
 }
