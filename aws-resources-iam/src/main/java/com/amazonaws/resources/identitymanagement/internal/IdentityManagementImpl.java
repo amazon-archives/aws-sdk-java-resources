@@ -16,6 +16,8 @@ package com.amazonaws.resources.identitymanagement.internal;
 
 import java.util.Map;
 
+import com.amazonaws.regions.Region;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.resources.ResultCapture;
 import com.amazonaws.resources.identitymanagement.AccountAlias;
 import com.amazonaws.resources.identitymanagement.AccountAliasCollection;
@@ -41,7 +43,11 @@ import com.amazonaws.resources.internal.ActionResult;
 import com.amazonaws.resources.internal.ResourceCollectionImpl;
 import com.amazonaws.resources.internal.ResourceImpl;
 import com.amazonaws.resources.internal.ServiceImpl;
+import com.amazonaws.resources.internal.V1ServiceInterface;
+import com.amazonaws.resources.internal.model.ServiceModel;
+import com.amazonaws.resources.internal.model.V1ModelLoader;
 import com.amazonaws.services.identitymanagement.AmazonIdentityManagement;
+import com.amazonaws.services.identitymanagement.AmazonIdentityManagementClient;
 import com.amazonaws.services.identitymanagement.model.ChangePasswordRequest;
 import com.amazonaws.services.identitymanagement.model.CreateAccountAliasRequest
 ;
@@ -93,6 +99,37 @@ com.amazonaws.services.identitymanagement.model.UploadSigningCertificateResult;
 public class IdentityManagementImpl implements IdentityManagement {
 
     private final ServiceImpl<AmazonIdentityManagement> service;
+
+    /**
+     * Construct a service implementation using the specified client object.
+     *
+     * @param client The low-level client which the service implementation will
+     *         use to make API calls.
+     */
+    public IdentityManagementImpl(AmazonIdentityManagementClient client) {
+        this(client, null);
+    }
+
+    /**
+     * Construct a service implementation using the specified client object and
+     * AWS region enum.
+     *
+     * @param client The low-level client which the service implementation will
+     *         use to make API calls.
+     * @param region The AWS region where the service API calls will be sent to.
+     */
+    public IdentityManagementImpl(AmazonIdentityManagementClient client, Regions
+            region) {
+
+        if (region != null) {
+            client.setRegion(Region.getRegion(region));
+        }
+
+        ServiceModel model = V1ModelLoader.load(IdentityManagement.class,
+                IdentityManagement.class.getAnnotation(V1ServiceInterface.class).model());
+
+        this.service = new ServiceImpl<AmazonIdentityManagement>(model, client);
+    }
 
     public IdentityManagementImpl(ServiceImpl<AmazonIdentityManagement> service)
             {
@@ -349,6 +386,20 @@ public class IdentityManagementImpl implements IdentityManagement {
     }
 
     @Override
+    public User createUser(String userName) {
+        return createUser(userName, (ResultCapture<CreateUserResult>)null);
+    }
+
+    @Override
+    public User createUser(String userName, ResultCapture<CreateUserResult>
+            extractor) {
+
+        CreateUserRequest request = new CreateUserRequest()
+            .withUserName(userName);
+        return createUser(request, extractor);
+    }
+
+    @Override
     public VirtualMfaDevice createVirtualMfaDevice(CreateVirtualMFADeviceRequest
             request) {
 
@@ -380,6 +431,20 @@ public class IdentityManagementImpl implements IdentityManagement {
 
         if (result == null) return null;
         return new GroupImpl(result.getResource());
+    }
+
+    @Override
+    public Group createGroup(String groupName) {
+        return createGroup(groupName, (ResultCapture<CreateGroupResult>)null);
+    }
+
+    @Override
+    public Group createGroup(String groupName, ResultCapture<CreateGroupResult>
+            extractor) {
+
+        CreateGroupRequest request = new CreateGroupRequest()
+            .withGroupName(groupName);
+        return createGroup(request, extractor);
     }
 
     @Override
@@ -471,6 +536,20 @@ public class IdentityManagementImpl implements IdentityManagement {
     }
 
     @Override
+    public AccountAlias createAccountAlias(String accountAlias) {
+        return createAccountAlias(accountAlias, (ResultCapture<Void>)null);
+    }
+
+    @Override
+    public AccountAlias createAccountAlias(String accountAlias,
+            ResultCapture<Void> extractor) {
+
+        CreateAccountAliasRequest request = new CreateAccountAliasRequest()
+            .withAccountAlias(accountAlias);
+        return createAccountAlias(request, extractor);
+    }
+
+    @Override
     public ServerCertificate createServerCertificate(
             UploadServerCertificateRequest request) {
 
@@ -490,6 +569,28 @@ public class IdentityManagementImpl implements IdentityManagement {
     }
 
     @Override
+    public ServerCertificate createServerCertificate(String certificateBody,
+            String serverCertificateName, String privateKey) {
+
+        return createServerCertificate(certificateBody, serverCertificateName,
+                privateKey, (ResultCapture<UploadServerCertificateResult>)null);
+    }
+
+    @Override
+    public ServerCertificate createServerCertificate(String certificateBody,
+            String serverCertificateName, String privateKey,
+            ResultCapture<UploadServerCertificateResult> extractor) {
+
+        UploadServerCertificateRequest request = new
+                UploadServerCertificateRequest()
+
+            .withCertificateBody(certificateBody)
+            .withServerCertificateName(serverCertificateName)
+            .withPrivateKey(privateKey);
+        return createServerCertificate(request, extractor);
+    }
+
+    @Override
     public SigningCertificate createSigningCertificate(
             UploadSigningCertificateRequest request) {
 
@@ -506,5 +607,22 @@ public class IdentityManagementImpl implements IdentityManagement {
 
         if (result == null) return null;
         return new SigningCertificateImpl(result.getResource());
+    }
+
+    @Override
+    public SigningCertificate createSigningCertificate(String certificateBody) {
+        return createSigningCertificate(certificateBody,
+                (ResultCapture<UploadSigningCertificateResult>)null);
+    }
+
+    @Override
+    public SigningCertificate createSigningCertificate(String certificateBody,
+            ResultCapture<UploadSigningCertificateResult> extractor) {
+
+        UploadSigningCertificateRequest request = new
+                UploadSigningCertificateRequest()
+
+            .withCertificateBody(certificateBody);
+        return createSigningCertificate(request, extractor);
     }
 }

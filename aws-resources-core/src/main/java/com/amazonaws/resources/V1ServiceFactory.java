@@ -14,9 +14,6 @@
  */
 package com.amazonaws.resources;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import com.amazonaws.resources.internal.ReflectionUtils;
 import com.amazonaws.resources.internal.ServiceImpl;
 import com.amazonaws.resources.internal.V1ServiceInterface;
@@ -40,16 +37,7 @@ class V1ServiceFactory<C,T extends Service<C>> implements ServiceFactory<C,T> {
         this.interfaceType = interfaceType;
         this.annotation = annotation;
 
-        try (InputStream stream =
-                interfaceType.getResourceAsStream(annotation.model())) {
-
-            this.model = V1ModelLoader.load(stream);
-
-        } catch (IOException exception) {
-            throw new IllegalStateException(
-                    "Unable to load service model " + annotation.model(),
-                    exception);
-        }
+        this.model = V1ModelLoader.load(interfaceType, annotation.model());
     }
 
     @Override

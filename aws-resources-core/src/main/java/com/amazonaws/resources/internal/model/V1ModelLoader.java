@@ -19,6 +19,19 @@ import java.io.InputStream;
 
 public final class V1ModelLoader {
 
+    public static ServiceModel load(Class<?> interfaceType, String filePath) {
+        try (InputStream stream =
+                interfaceType.getResourceAsStream(filePath)) {
+
+            return load(stream);
+
+        } catch (IOException exception) {
+            throw new IllegalStateException(
+                    "Unable to load service model " + filePath,
+                    exception);
+        }
+    }
+
     public static ServiceModel load(InputStream stream) {
         try {
 
