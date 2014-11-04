@@ -308,6 +308,21 @@ public interface IdentityManagement extends Service<AmazonIdentityManagement> {
             request, ResultCapture<CreateUserResult> extractor);
 
     /**
+     * The convenient method form for the <code>CreateUser</code> action.
+     *
+     * @see #createUser(CreateUserRequest)
+     */
+    com.amazonaws.resources.identitymanagement.User createUser(String userName);
+
+    /**
+     * The convenient method form for the <code>CreateUser</code> action.
+     *
+     * @see #createUser(CreateUserRequest, ResultCapture)
+     */
+    com.amazonaws.resources.identitymanagement.User createUser(String userName,
+            ResultCapture<CreateUserResult> extractor);
+
+    /**
      * Performs the <code>CreateVirtualMfaDevice</code> action.
      *
      * <p>
@@ -358,6 +373,22 @@ public interface IdentityManagement extends Service<AmazonIdentityManagement> {
     com.amazonaws.resources.identitymanagement.Group createGroup(
             CreateGroupRequest request, ResultCapture<CreateGroupResult>
             extractor);
+
+    /**
+     * The convenient method form for the <code>CreateGroup</code> action.
+     *
+     * @see #createGroup(CreateGroupRequest)
+     */
+    com.amazonaws.resources.identitymanagement.Group createGroup(String
+            groupName);
+
+    /**
+     * The convenient method form for the <code>CreateGroup</code> action.
+     *
+     * @see #createGroup(CreateGroupRequest, ResultCapture)
+     */
+    com.amazonaws.resources.identitymanagement.Group createGroup(String
+            groupName, ResultCapture<CreateGroupResult> extractor);
 
     /**
      * Performs the <code>AccountSummary</code> action.
@@ -487,6 +518,24 @@ public interface IdentityManagement extends Service<AmazonIdentityManagement> {
             CreateAccountAliasRequest request, ResultCapture<Void> extractor);
 
     /**
+     * The convenient method form for the <code>CreateAccountAlias</code>
+     * action.
+     *
+     * @see #createAccountAlias(CreateAccountAliasRequest)
+     */
+    com.amazonaws.resources.identitymanagement.AccountAlias createAccountAlias(
+            String accountAlias);
+
+    /**
+     * The convenient method form for the <code>CreateAccountAlias</code>
+     * action.
+     *
+     * @see #createAccountAlias(CreateAccountAliasRequest, ResultCapture)
+     */
+    com.amazonaws.resources.identitymanagement.AccountAlias createAccountAlias(
+            String accountAlias, ResultCapture<Void> extractor);
+
+    /**
      * Performs the <code>CreateServerCertificate</code> action.
      *
      * <p>
@@ -513,6 +562,28 @@ public interface IdentityManagement extends Service<AmazonIdentityManagement> {
             ResultCapture<UploadServerCertificateResult> extractor);
 
     /**
+     * The convenient method form for the <code>CreateServerCertificate</code>
+     * action.
+     *
+     * @see #createServerCertificate(UploadServerCertificateRequest)
+     */
+    com.amazonaws.resources.identitymanagement.ServerCertificate
+            createServerCertificate(String certificateBody, String
+            serverCertificateName, String privateKey);
+
+    /**
+     * The convenient method form for the <code>CreateServerCertificate</code>
+     * action.
+     *
+     * @see #createServerCertificate(UploadServerCertificateRequest,
+     *         ResultCapture)
+     */
+    com.amazonaws.resources.identitymanagement.ServerCertificate
+            createServerCertificate(String certificateBody, String
+            serverCertificateName, String privateKey,
+            ResultCapture<UploadServerCertificateResult> extractor);
+
+    /**
      * Performs the <code>CreateSigningCertificate</code> action.
      *
      * <p>
@@ -536,5 +607,25 @@ public interface IdentityManagement extends Service<AmazonIdentityManagement> {
      */
     com.amazonaws.resources.identitymanagement.SigningCertificate
             createSigningCertificate(UploadSigningCertificateRequest request,
+            ResultCapture<UploadSigningCertificateResult> extractor);
+
+    /**
+     * The convenient method form for the <code>CreateSigningCertificate</code>
+     * action.
+     *
+     * @see #createSigningCertificate(UploadSigningCertificateRequest)
+     */
+    com.amazonaws.resources.identitymanagement.SigningCertificate
+            createSigningCertificate(String certificateBody);
+
+    /**
+     * The convenient method form for the <code>CreateSigningCertificate</code>
+     * action.
+     *
+     * @see #createSigningCertificate(UploadSigningCertificateRequest,
+     *         ResultCapture)
+     */
+    com.amazonaws.resources.identitymanagement.SigningCertificate
+            createSigningCertificate(String certificateBody,
             ResultCapture<UploadSigningCertificateResult> extractor);
 }

@@ -75,4 +75,19 @@ public interface Glacier extends Service<AmazonGlacier> {
      */
     Vault createVault(CreateVaultRequest request,
             ResultCapture<CreateVaultResult> extractor);
+
+    /**
+     * The convenient method form for the <code>CreateVault</code> action.
+     *
+     * @see #createVault(CreateVaultRequest)
+     */
+    Vault createVault(String vaultName);
+
+    /**
+     * The convenient method form for the <code>CreateVault</code> action.
+     *
+     * @see #createVault(CreateVaultRequest, ResultCapture)
+     */
+    Vault createVault(String vaultName, ResultCapture<CreateVaultResult>
+            extractor);
 }

@@ -16,6 +16,8 @@ package com.amazonaws.resources.ec2.internal;
 
 import java.util.List;
 
+import com.amazonaws.regions.Region;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.resources.ResultCapture;
 import com.amazonaws.resources.ec2.DhcpOptions;
 import com.amazonaws.resources.ec2.DhcpOptionsCollection;
@@ -55,7 +57,11 @@ import com.amazonaws.resources.internal.CodecUtils;
 import com.amazonaws.resources.internal.ResourceCollectionImpl;
 import com.amazonaws.resources.internal.ResourceImpl;
 import com.amazonaws.resources.internal.ServiceImpl;
+import com.amazonaws.resources.internal.V1ServiceInterface;
+import com.amazonaws.resources.internal.model.ServiceModel;
+import com.amazonaws.resources.internal.model.V1ModelLoader;
 import com.amazonaws.services.ec2.AmazonEC2;
+import com.amazonaws.services.ec2.AmazonEC2Client;
 import com.amazonaws.services.ec2.model.CreateDhcpOptionsRequest;
 import com.amazonaws.services.ec2.model.CreateDhcpOptionsResult;
 import com.amazonaws.services.ec2.model.CreateInternetGatewayRequest;
@@ -109,6 +115,34 @@ import com.amazonaws.services.ec2.model.RunInstancesResult;
 public class EC2Impl implements EC2 {
 
     private final ServiceImpl<AmazonEC2> service;
+
+    /**
+     * Construct a service implementation that talks to the specified AWS
+     * region. The low-level client will be created via the default no-arg
+     * constructor, which means it will have all the default client
+     * configurations and it will use the default provider chain to retrieve AWS
+     * credentials. If you need more flexible control over the low-level client,
+     * use {@link #EC2Impl(AmazonEC2)} instead.
+     *
+     * @param region The AWS region where the service API calls will be sent to.
+     */
+    public EC2Impl(Regions region) {
+        this(new AmazonEC2Client());
+        this.client().setRegion(Region.getRegion(region));
+    }
+
+    /**
+     * Construct a service implementation using the specified client object.
+     *
+     * @param client The low-level client which the service implementation will
+     *         use to make API calls.
+     */
+    public EC2Impl(AmazonEC2 client) {
+        ServiceModel model = V1ModelLoader.load(EC2.class,
+                EC2.class.getAnnotation(V1ServiceInterface.class).model());
+
+        this.service = new ServiceImpl<AmazonEC2>(model, client);
+    }
 
     public EC2Impl(ServiceImpl<AmazonEC2> service) {
         this.service = service;

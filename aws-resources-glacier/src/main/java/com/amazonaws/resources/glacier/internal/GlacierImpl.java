@@ -14,6 +14,8 @@
  */
 package com.amazonaws.resources.glacier.internal;
 
+import com.amazonaws.regions.Region;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.resources.ResultCapture;
 import com.amazonaws.resources.glacier.Account;
 import com.amazonaws.resources.glacier.Glacier;
@@ -23,7 +25,11 @@ import com.amazonaws.resources.internal.ActionResult;
 import com.amazonaws.resources.internal.ResourceCollectionImpl;
 import com.amazonaws.resources.internal.ResourceImpl;
 import com.amazonaws.resources.internal.ServiceImpl;
+import com.amazonaws.resources.internal.V1ServiceInterface;
+import com.amazonaws.resources.internal.model.ServiceModel;
+import com.amazonaws.resources.internal.model.V1ModelLoader;
 import com.amazonaws.services.glacier.AmazonGlacier;
+import com.amazonaws.services.glacier.AmazonGlacierClient;
 import com.amazonaws.services.glacier.model.CreateVaultRequest;
 import com.amazonaws.services.glacier.model.CreateVaultResult;
 import com.amazonaws.services.glacier.model.ListVaultsRequest;
@@ -31,6 +37,34 @@ import com.amazonaws.services.glacier.model.ListVaultsRequest;
 public class GlacierImpl implements Glacier {
 
     private final ServiceImpl<AmazonGlacier> service;
+
+    /**
+     * Construct a service implementation that talks to the specified AWS
+     * region. The low-level client will be created via the default no-arg
+     * constructor, which means it will have all the default client
+     * configurations and it will use the default provider chain to retrieve AWS
+     * credentials. If you need more flexible control over the low-level client,
+     * use {@link #GlacierImpl(AmazonGlacier)} instead.
+     *
+     * @param region The AWS region where the service API calls will be sent to.
+     */
+    public GlacierImpl(Regions region) {
+        this(new AmazonGlacierClient());
+        this.client().setRegion(Region.getRegion(region));
+    }
+
+    /**
+     * Construct a service implementation using the specified client object.
+     *
+     * @param client The low-level client which the service implementation will
+     *         use to make API calls.
+     */
+    public GlacierImpl(AmazonGlacier client) {
+        ServiceModel model = V1ModelLoader.load(Glacier.class,
+                Glacier.class.getAnnotation(V1ServiceInterface.class).model());
+
+        this.service = new ServiceImpl<AmazonGlacier>(model, client);
+    }
 
     public GlacierImpl(ServiceImpl<AmazonGlacier> service) {
         this.service = service;
@@ -76,5 +110,19 @@ public class GlacierImpl implements Glacier {
 
         if (result == null) return null;
         return new VaultImpl(result.getResource());
+    }
+
+    @Override
+    public Vault createVault(String vaultName) {
+        return createVault(vaultName, (ResultCapture<CreateVaultResult>)null);
+    }
+
+    @Override
+    public Vault createVault(String vaultName, ResultCapture<CreateVaultResult>
+            extractor) {
+
+        CreateVaultRequest request = new CreateVaultRequest()
+            .withVaultName(vaultName);
+        return createVault(request, extractor);
     }
 }
