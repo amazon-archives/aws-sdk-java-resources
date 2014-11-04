@@ -39,28 +39,27 @@ public class GlacierImpl implements Glacier {
     private final ServiceImpl<AmazonGlacier> service;
 
     /**
+     * Construct a service implementation that talks to the specified AWS
+     * region. The low-level client will be created via the default no-arg
+     * constructor, which means it will have all the default client
+     * configurations and it will use the default provider chain to retrieve AWS
+     * credentials. If you need more flexible control over the low-level client,
+     * use {@link #GlacierImpl(AmazonGlacier)} instead.
+     *
+     * @param region The AWS region where the service API calls will be sent to.
+     */
+    public GlacierImpl(Regions region) {
+        this(new AmazonGlacierClient());
+        this.client().setRegion(Region.getRegion(region));
+    }
+
+    /**
      * Construct a service implementation using the specified client object.
      *
      * @param client The low-level client which the service implementation will
      *         use to make API calls.
      */
-    public GlacierImpl(AmazonGlacierClient client) {
-        this(client, null);
-    }
-
-    /**
-     * Construct a service implementation using the specified client object and
-     * AWS region enum.
-     *
-     * @param client The low-level client which the service implementation will
-     *         use to make API calls.
-     * @param region The AWS region where the service API calls will be sent to.
-     */
-    public GlacierImpl(AmazonGlacierClient client, Regions region) {
-        if (region != null) {
-            client.setRegion(Region.getRegion(region));
-        }
-
+    public GlacierImpl(AmazonGlacier client) {
         ServiceModel model = V1ModelLoader.load(Glacier.class,
                 Glacier.class.getAnnotation(V1ServiceInterface.class).model());
 
