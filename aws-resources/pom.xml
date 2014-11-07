@@ -8,7 +8,7 @@
   </parent>
 
   <artifactId>aws-resources</artifactId>
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
   
   <name>AWS Resource APIs for Java</name>
   <description>An object-oriented resource object abstraction on top of the AWS SDK for Java.</description>
