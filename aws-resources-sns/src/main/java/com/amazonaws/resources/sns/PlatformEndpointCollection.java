@@ -12,11 +12,13 @@
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package com.amazonaws.resources;
+package com.amazonaws.resources.sns;
+
+import com.amazonaws.resources.ResourceCollection;
 
 /**
- * Base interface for all request parameter types.
+ * A collection of PlatformEndpoint resources.
  */
-public interface Parameters {
-
+public interface PlatformEndpointCollection extends
+        ResourceCollection<PlatformEndpoint> {
 }

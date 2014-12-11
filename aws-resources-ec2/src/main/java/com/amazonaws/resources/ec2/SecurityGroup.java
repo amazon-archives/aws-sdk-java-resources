@@ -64,7 +64,7 @@ public interface SecurityGroup {
      * set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>GroupIds[*]</code></b>
+     *     <b><code>GroupIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -87,7 +87,7 @@ public interface SecurityGroup {
      * set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>GroupIds[*]</code></b>
+     *     <b><code>GroupIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -375,7 +375,7 @@ public interface SecurityGroup {
      * set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[*]</code></b>
+     *     <b><code>Resources.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -398,7 +398,7 @@ public interface SecurityGroup {
      * set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[*]</code></b>
+     *     <b><code>Resources.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>

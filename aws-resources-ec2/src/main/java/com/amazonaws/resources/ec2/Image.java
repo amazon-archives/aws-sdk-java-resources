@@ -65,7 +65,7 @@ public interface Image {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>ImageIds[*]</code></b>
+     *     <b><code>ImageIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -88,7 +88,7 @@ public interface Image {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>ImageIds[*]</code></b>
+     *     <b><code>ImageIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -493,7 +493,7 @@ public interface Image {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[*]</code></b>
+     *     <b><code>Resources.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -516,7 +516,7 @@ public interface Image {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[*]</code></b>
+     *     <b><code>Resources.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>

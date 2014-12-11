@@ -63,7 +63,7 @@ public interface RouteTable {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>RouteTableIds[*]</code></b>
+     *     <b><code>RouteTableIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -86,7 +86,7 @@ public interface RouteTable {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>RouteTableIds[*]</code></b>
+     *     <b><code>RouteTableIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -247,7 +247,7 @@ public interface RouteTable {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[*]</code></b>
+     *     <b><code>Resources.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -270,7 +270,7 @@ public interface RouteTable {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[*]</code></b>
+     *     <b><code>Resources.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>

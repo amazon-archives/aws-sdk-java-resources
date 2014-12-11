@@ -259,7 +259,7 @@
                   "Source" : [ "JobId" ],
                   "Target" : "Id"
                 } ],
-                "Path" : [ ]
+                "Path" : null
               },
               "DataMapping" : null,
               "NextTokenPath" : null
@@ -443,9 +443,7 @@
                   "Name" : "Completed"
                 } ],
                 "ConstantMappings" : [ ],
-                "ConvenientMethods" : [ {
-                  "Arguments" : [ ]
-                } ],
+                "ConvenientMethods" : [ ],
                 "TokenPath" : [ "Marker" ],
                 "LimitPath" : [ "Limit" ]
               },
@@ -659,9 +657,7 @@
                   "Name" : "Limit"
                 } ],
                 "ConstantMappings" : [ ],
-                "ConvenientMethods" : [ {
-                  "Arguments" : [ ]
-                } ],
+                "ConvenientMethods" : [ ],
                 "TokenPath" : [ "UploadIdMarker" ],
                 "LimitPath" : [ "Limit" ]
               },
@@ -758,7 +754,7 @@
                   "Source" : [ "JobId" ],
                   "Target" : "Id"
                 } ],
-                "Path" : [ ]
+                "Path" : null
               },
               "DataMapping" : null,
               "NextTokenPath" : null
@@ -821,7 +817,7 @@
                   "Source" : [ "ArchiveId" ],
                   "Target" : "Id"
                 } ],
-                "Path" : [ ]
+                "Path" : null
               },
               "DataMapping" : null,
               "NextTokenPath" : null
@@ -905,7 +901,7 @@
                   "Source" : [ "UploadId" ],
                   "Target" : "Id"
                 } ],
-                "Path" : [ ]
+                "Path" : null
               },
               "DataMapping" : null,
               "NextTokenPath" : null
@@ -978,25 +974,7 @@
                   "Name" : "Limit"
                 } ],
                 "ConstantMappings" : [ ],
-                "ConvenientMethods" : [ {
-                  "Arguments" : [ ]
-                }, {
-                  "Arguments" : [ {
-                    "Type" : "java.lang.String",
-                    "Name" : "AccountId"
-                  } ]
-                }, {
-                  "Arguments" : [ {
-                    "Type" : "java.lang.String",
-                    "Name" : "AccountId"
-                  }, {
-                    "Type" : "java.lang.String",
-                    "Name" : "Limit"
-                  }, {
-                    "Type" : "java.lang.String",
-                    "Name" : "Marker"
-                  } ]
-                } ],
+                "ConvenientMethods" : [ ],
                 "TokenPath" : [ "Marker" ],
                 "LimitPath" : [ "Limit" ]
               },
@@ -1146,8 +1124,8 @@
               "ConvenientMethods" : [ {
                 "Arguments" : [ ]
               } ],
-              "TokenPath" : [ "Marker" ],
-              "LimitPath" : [ "Limit" ]
+              "TokenPath" : null,
+              "LimitPath" : null
             },
             "Response" : {
               "ResourceMapping" : null,
@@ -1155,7 +1133,7 @@
                 "Type" : "com.amazonaws.services.glacier.model.ListPartsResult",
                 "Source" : [ ]
               },
-              "NextTokenPath" : [ "Marker" ]
+              "NextTokenPath" : null
             }
           },
           "Abort" : {
@@ -1345,29 +1323,6 @@
           }
         },
         "Actions" : {
-          "Delete" : {
-            "Request" : {
-              "Method" : "deleteVaultNotifications",
-              "ClientRequestType" : "com.amazonaws.services.glacier.model.DeleteVaultNotificationsRequest",
-              "ClientResponseType" : "Void",
-              "IdentifierMappings" : [ {
-                "Source" : "AccountId",
-                "Target" : [ "AccountId" ]
-              }, {
-                "Source" : "VaultName",
-                "Target" : [ "VaultName" ]
-              } ],
-              "AttributeMappings" : [ ],
-              "ParameterMappings" : [ ],
-              "ConstantMappings" : [ ],
-              "ConvenientMethods" : [ {
-                "Arguments" : [ ]
-              } ],
-              "TokenPath" : null,
-              "LimitPath" : null
-            },
-            "Response" : null
-          },
           "Set" : {
             "Request" : {
               "Method" : "setVaultNotifications",
@@ -1391,6 +1346,29 @@
                   "Type" : "com.amazonaws.services.glacier.model.VaultNotificationConfig",
                   "Name" : "VaultNotificationConfig"
                 } ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Delete" : {
+            "Request" : {
+              "Method" : "deleteVaultNotifications",
+              "ClientRequestType" : "com.amazonaws.services.glacier.model.DeleteVaultNotificationsRequest",
+              "ClientResponseType" : "Void",
+              "IdentifierMappings" : [ {
+                "Source" : "AccountId",
+                "Target" : [ "AccountId" ]
+              }, {
+                "Source" : "VaultName",
+                "Target" : [ "VaultName" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
               } ],
               "TokenPath" : null,
               "LimitPath" : null
@@ -1431,17 +1409,7 @@
               "Source" : "-",
               "Target" : [ "AccountId" ]
             } ],
-            "ConvenientMethods" : [ {
-              "Arguments" : [ ]
-            }, {
-              "Arguments" : [ {
-                "Type" : "java.lang.String",
-                "Name" : "Limit"
-              }, {
-                "Type" : "java.lang.String",
-                "Name" : "Marker"
-              } ]
-            } ],
+            "ConvenientMethods" : [ ],
             "TokenPath" : [ "Marker" ],
             "LimitPath" : [ "Limit" ]
           },

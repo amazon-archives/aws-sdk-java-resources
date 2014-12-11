@@ -74,15 +74,15 @@ import com.amazonaws.services.ec2.model.RunInstancesResult;
  * The <code>EC2</code> service.
  * This is the entry point to interact with the following service resources:<ul>
  *   <li>KeyPair</li>
- *   <li>RouteTable</li>
  *   <li>Instance</li>
+ *   <li>RouteTable</li>
  *   <li>NetworkInterface</li>
  *   <li>Volume</li>
  *   <li>DhcpOptions</li>
- *   <li>PlacementGroup</li>
  *   <li>InternetGateway</li>
- *   <li>RouteTableAssociation</li>
+ *   <li>PlacementGroup</li>
  *   <li>Subnet</li>
+ *   <li>RouteTableAssociation</li>
  *   <li>VpcPeeringConnection</li>
  *   <li>Snapshot</li>
  *   <li>Vpc</li>
@@ -102,14 +102,14 @@ public interface EC2 extends Service<AmazonEC2> {
     KeyPair getKeyPair(String name);
 
     /**
-     * Gets an instance of {@code RouteTable} resource by its identifier(s).
-     */
-    RouteTable getRouteTable(String id);
-
-    /**
      * Gets an instance of {@code Instance} resource by its identifier(s).
      */
     Instance getInstance(String id);
+
+    /**
+     * Gets an instance of {@code RouteTable} resource by its identifier(s).
+     */
+    RouteTable getRouteTable(String id);
 
     /**
      * Gets an instance of {@code NetworkInterface} resource by its
@@ -128,26 +128,26 @@ public interface EC2 extends Service<AmazonEC2> {
     DhcpOptions getDhcpOptions(String id);
 
     /**
-     * Gets an instance of {@code PlacementGroup} resource by its identifier(s).
-     */
-    PlacementGroup getPlacementGroup(String name);
-
-    /**
      * Gets an instance of {@code InternetGateway} resource by its
      * identifier(s).
      */
     InternetGateway getInternetGateway(String id);
 
     /**
-     * Gets an instance of {@code RouteTableAssociation} resource by its
-     * identifier(s).
+     * Gets an instance of {@code PlacementGroup} resource by its identifier(s).
      */
-    RouteTableAssociation getRouteTableAssociation(String id);
+    PlacementGroup getPlacementGroup(String name);
 
     /**
      * Gets an instance of {@code Subnet} resource by its identifier(s).
      */
     Subnet getSubnet(String id);
+
+    /**
+     * Gets an instance of {@code RouteTableAssociation} resource by its
+     * identifier(s).
+     */
+    RouteTableAssociation getRouteTableAssociation(String id);
 
     /**
      * Gets an instance of {@code VpcPeeringConnection} resource by its
@@ -278,16 +278,6 @@ public interface EC2 extends Service<AmazonEC2> {
     VpcCollection getVpcs(DescribeVpcsRequest request);
 
     /**
-     * Retrieves the Subnets collection referenced by this resource.
-     */
-    SubnetCollection getSubnets();
-
-    /**
-     * Retrieves the Subnets collection referenced by this resource.
-     */
-    SubnetCollection getSubnets(DescribeSubnetsRequest request);
-
-    /**
      * Retrieves the Snapshots collection referenced by this resource.
      */
     SnapshotCollection getSnapshots();
@@ -296,6 +286,16 @@ public interface EC2 extends Service<AmazonEC2> {
      * Retrieves the Snapshots collection referenced by this resource.
      */
     SnapshotCollection getSnapshots(DescribeSnapshotsRequest request);
+
+    /**
+     * Retrieves the Subnets collection referenced by this resource.
+     */
+    SubnetCollection getSubnets();
+
+    /**
+     * Retrieves the Subnets collection referenced by this resource.
+     */
+    SubnetCollection getSubnets(DescribeSubnetsRequest request);
 
     /**
      * Retrieves the PlacementGroups collection referenced by this resource.
@@ -309,16 +309,6 @@ public interface EC2 extends Service<AmazonEC2> {
             request);
 
     /**
-     * Retrieves the RouteTables collection referenced by this resource.
-     */
-    RouteTableCollection getRouteTables();
-
-    /**
-     * Retrieves the RouteTables collection referenced by this resource.
-     */
-    RouteTableCollection getRouteTables(DescribeRouteTablesRequest request);
-
-    /**
      * Retrieves the NetworkAcls collection referenced by this resource.
      */
     NetworkAclCollection getNetworkAcls();
@@ -327,6 +317,16 @@ public interface EC2 extends Service<AmazonEC2> {
      * Retrieves the NetworkAcls collection referenced by this resource.
      */
     NetworkAclCollection getNetworkAcls(DescribeNetworkAclsRequest request);
+
+    /**
+     * Retrieves the RouteTables collection referenced by this resource.
+     */
+    RouteTableCollection getRouteTables();
+
+    /**
+     * Retrieves the RouteTables collection referenced by this resource.
+     */
+    RouteTableCollection getRouteTables(DescribeRouteTablesRequest request);
 
     /**
      * Retrieves the Volumes collection referenced by this resource.
@@ -518,32 +518,6 @@ public interface EC2 extends Service<AmazonEC2> {
             String keyName, ResultCapture<ImportKeyPairResult> extractor);
 
     /**
-     * Performs the <code>CreateRouteTable</code> action.
-     *
-     * <p>
-     *
-     * @return The <code>RouteTable</code> resource object associated with the
-     *         result of this action.
-     * @see CreateRouteTableRequest
-     */
-    com.amazonaws.resources.ec2.RouteTable createRouteTable(
-            CreateRouteTableRequest request);
-
-    /**
-     * Performs the <code>CreateRouteTable</code> action and use a ResultCapture
-     * to retrieve the low-level client response.
-     *
-     * <p>
-     *
-     * @return The <code>RouteTable</code> resource object associated with the
-     *         result of this action.
-     * @see CreateRouteTableRequest
-     */
-    com.amazonaws.resources.ec2.RouteTable createRouteTable(
-            CreateRouteTableRequest request,
-            ResultCapture<CreateRouteTableResult> extractor);
-
-    /**
      * Performs the <code>CreatePlacementGroup</code> action.
      *
      * <p>
@@ -587,6 +561,32 @@ public interface EC2 extends Service<AmazonEC2> {
             groupName, String strategy, ResultCapture<Void> extractor);
 
     /**
+     * Performs the <code>CreateRouteTable</code> action.
+     *
+     * <p>
+     *
+     * @return The <code>RouteTable</code> resource object associated with the
+     *         result of this action.
+     * @see CreateRouteTableRequest
+     */
+    com.amazonaws.resources.ec2.RouteTable createRouteTable(
+            CreateRouteTableRequest request);
+
+    /**
+     * Performs the <code>CreateRouteTable</code> action and use a ResultCapture
+     * to retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return The <code>RouteTable</code> resource object associated with the
+     *         result of this action.
+     * @see CreateRouteTableRequest
+     */
+    com.amazonaws.resources.ec2.RouteTable createRouteTable(
+            CreateRouteTableRequest request,
+            ResultCapture<CreateRouteTableResult> extractor);
+
+    /**
      * Performs the <code>CreateDhcpOptions</code> action.
      *
      * <p>
@@ -628,49 +628,6 @@ public interface EC2 extends Service<AmazonEC2> {
     com.amazonaws.resources.ec2.DhcpOptions createDhcpOptions(
             List<DhcpConfiguration> dhcpConfigurations,
             ResultCapture<CreateDhcpOptionsResult> extractor);
-
-    /**
-     * Performs the <code>CreateInstances</code> action.
-     *
-     * <p>
-     *
-     * @return A list of <code>Instance</code> resource objects associated with
-     *         the result of this action.
-     * @see RunInstancesRequest
-     */
-    List<com.amazonaws.resources.ec2.Instance> createInstances(
-            RunInstancesRequest request);
-
-    /**
-     * Performs the <code>CreateInstances</code> action and use a ResultCapture
-     * to retrieve the low-level client response.
-     *
-     * <p>
-     *
-     * @return A list of <code>Instance</code> resource objects associated with
-     *         the result of this action.
-     * @see RunInstancesRequest
-     */
-    List<com.amazonaws.resources.ec2.Instance> createInstances(
-            RunInstancesRequest request, ResultCapture<RunInstancesResult>
-            extractor);
-
-    /**
-     * The convenient method form for the <code>CreateInstances</code> action.
-     *
-     * @see #createInstances(RunInstancesRequest)
-     */
-    List<com.amazonaws.resources.ec2.Instance> createInstances(String imageId,
-            Integer minCount, Integer maxCount);
-
-    /**
-     * The convenient method form for the <code>CreateInstances</code> action.
-     *
-     * @see #createInstances(RunInstancesRequest, ResultCapture)
-     */
-    List<com.amazonaws.resources.ec2.Instance> createInstances(String imageId,
-            Integer minCount, Integer maxCount,
-            ResultCapture<RunInstancesResult> extractor);
 
     /**
      * Performs the <code>CreateVolume</code> action.
@@ -727,6 +684,49 @@ public interface EC2 extends Service<AmazonEC2> {
      */
     com.amazonaws.resources.ec2.Image createVolume(String snapshotId, String
             availabilityZone, ResultCapture<CreateVolumeResult> extractor);
+
+    /**
+     * Performs the <code>CreateInstances</code> action.
+     *
+     * <p>
+     *
+     * @return A list of <code>Instance</code> resource objects associated with
+     *         the result of this action.
+     * @see RunInstancesRequest
+     */
+    List<com.amazonaws.resources.ec2.Instance> createInstances(
+            RunInstancesRequest request);
+
+    /**
+     * Performs the <code>CreateInstances</code> action and use a ResultCapture
+     * to retrieve the low-level client response.
+     *
+     * <p>
+     *
+     * @return A list of <code>Instance</code> resource objects associated with
+     *         the result of this action.
+     * @see RunInstancesRequest
+     */
+    List<com.amazonaws.resources.ec2.Instance> createInstances(
+            RunInstancesRequest request, ResultCapture<RunInstancesResult>
+            extractor);
+
+    /**
+     * The convenient method form for the <code>CreateInstances</code> action.
+     *
+     * @see #createInstances(RunInstancesRequest)
+     */
+    List<com.amazonaws.resources.ec2.Instance> createInstances(String imageId,
+            Integer minCount, Integer maxCount);
+
+    /**
+     * The convenient method form for the <code>CreateInstances</code> action.
+     *
+     * @see #createInstances(RunInstancesRequest, ResultCapture)
+     */
+    List<com.amazonaws.resources.ec2.Instance> createInstances(String imageId,
+            Integer minCount, Integer maxCount,
+            ResultCapture<RunInstancesResult> extractor);
 
     /**
      * Performs the <code>DisassociateRouteTable</code> action.

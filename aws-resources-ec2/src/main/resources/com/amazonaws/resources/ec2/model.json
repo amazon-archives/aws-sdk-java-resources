@@ -30,7 +30,7 @@
             "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeKeyPairsResult",
             "IdentifierMappings" : [ {
               "Source" : "Name",
-              "Target" : [ "KeyNames", "*" ]
+              "Target" : [ "KeyNames", "0" ]
             } ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
@@ -68,216 +68,6 @@
               "LimitPath" : null
             },
             "Response" : null
-          }
-        }
-      },
-      "RouteTable" : {
-        "Identifiers" : {
-          "Id" : {
-            "Type" : "java.lang.String"
-          }
-        },
-        "Attributes" : {
-          "Tags" : {
-            "Type" : "java.util.List<com.amazonaws.services.ec2.model.Tag>"
-          },
-          "PropagatingVgws" : {
-            "Type" : "java.util.List<com.amazonaws.services.ec2.model.PropagatingVgw>"
-          },
-          "Routes" : {
-            "Type" : "java.util.List<com.amazonaws.services.ec2.model.Route>"
-          },
-          "VpcId" : {
-            "Type" : "java.lang.String"
-          }
-        },
-        "References" : {
-          "Vpc" : {
-            "Type" : "Vpc",
-            "IdentifierMappings" : [ ],
-            "AttributeMappings" : [ {
-              "Source" : [ "VpcId" ],
-              "Target" : "Id"
-            } ]
-          }
-        },
-        "SubResourceGetters" : { },
-        "Collections" : {
-          "Associations" : {
-            "Type" : "RouteTableAssociation",
-            "ListAction" : {
-              "Request" : {
-                "Method" : "describeRouteTables",
-                "ClientRequestType" : "com.amazonaws.services.ec2.model.DescribeRouteTablesRequest",
-                "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeRouteTablesResult",
-                "IdentifierMappings" : [ {
-                  "Source" : "Id",
-                  "Target" : [ "RouteTableIds", "*" ]
-                } ],
-                "AttributeMappings" : [ ],
-                "ParameterMappings" : [ {
-                  "Type" : "java.util.List<com.amazonaws.services.ec2.model.Filter>",
-                  "Name" : "Filters"
-                } ],
-                "ConstantMappings" : [ ],
-                "ConvenientMethods" : [ ],
-                "TokenPath" : null,
-                "LimitPath" : null
-              },
-              "Response" : {
-                "ResourceMapping" : {
-                  "Type" : "RouteTableAssociation",
-                  "ParentIdentifierMappings" : [ ],
-                  "RequestParamMappings" : [ ],
-                  "ResponseIdentifierMappings" : [ {
-                    "Source" : [ "RouteTables", "0:com.amazonaws.services.ec2.model.RouteTable", "Associations", "*:com.amazonaws.services.ec2.model.RouteTableAssociation", "RouteTableAssociationId" ],
-                    "Target" : "Id"
-                  } ],
-                  "Path" : [ "RouteTables", "0:com.amazonaws.services.ec2.model.RouteTable", "Associations", "*:com.amazonaws.services.ec2.model.RouteTableAssociation" ]
-                },
-                "DataMapping" : null,
-                "NextTokenPath" : null
-              }
-            }
-          }
-        },
-        "LoadAction" : {
-          "Request" : {
-            "Method" : "describeRouteTables",
-            "ClientRequestType" : "com.amazonaws.services.ec2.model.DescribeRouteTablesRequest",
-            "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeRouteTablesResult",
-            "IdentifierMappings" : [ {
-              "Source" : "Id",
-              "Target" : [ "RouteTableIds", "*" ]
-            } ],
-            "AttributeMappings" : [ ],
-            "ParameterMappings" : [ ],
-            "ConstantMappings" : [ ],
-            "ConvenientMethods" : [ ],
-            "TokenPath" : null,
-            "LimitPath" : null
-          },
-          "Response" : {
-            "ResourceMapping" : null,
-            "DataMapping" : {
-              "Type" : "RouteTable",
-              "Source" : [ "RouteTables", "0:com.amazonaws.services.ec2.model.RouteTable" ]
-            },
-            "NextTokenPath" : null
-          }
-        },
-        "Actions" : {
-          "AssociateWithSubnet" : {
-            "Request" : {
-              "Method" : "associateRouteTable",
-              "ClientRequestType" : "com.amazonaws.services.ec2.model.AssociateRouteTableRequest",
-              "ClientResponseType" : "com.amazonaws.services.ec2.model.AssociateRouteTableResult",
-              "IdentifierMappings" : [ {
-                "Source" : "Id",
-                "Target" : [ "RouteTableId" ]
-              } ],
-              "AttributeMappings" : [ ],
-              "ParameterMappings" : [ {
-                "Type" : "java.lang.String",
-                "Name" : "SubnetId"
-              } ],
-              "ConstantMappings" : [ ],
-              "ConvenientMethods" : [ ],
-              "TokenPath" : null,
-              "LimitPath" : null
-            },
-            "Response" : {
-              "ResourceMapping" : {
-                "Type" : "RouteTableAssociation",
-                "ParentIdentifierMappings" : [ ],
-                "RequestParamMappings" : [ ],
-                "ResponseIdentifierMappings" : [ {
-                  "Source" : [ "AssociationId" ],
-                  "Target" : "Id"
-                } ],
-                "Path" : null
-              },
-              "DataMapping" : null,
-              "NextTokenPath" : null
-            }
-          },
-          "CreateRoute" : {
-            "Request" : {
-              "Method" : "createRoute",
-              "ClientRequestType" : "com.amazonaws.services.ec2.model.CreateRouteRequest",
-              "ClientResponseType" : "Void",
-              "IdentifierMappings" : [ {
-                "Source" : "Id",
-                "Target" : [ "RouteTableId" ]
-              } ],
-              "AttributeMappings" : [ ],
-              "ParameterMappings" : [ {
-                "Type" : "java.lang.String",
-                "Name" : "DestinationCidrBlock"
-              }, {
-                "Type" : "java.lang.String",
-                "Name" : "GatewayId"
-              }, {
-                "Type" : "java.lang.String",
-                "Name" : "InstanceId"
-              }, {
-                "Type" : "java.lang.String",
-                "Name" : "NetworkInterfaceId"
-              }, {
-                "Type" : "java.lang.String",
-                "Name" : "VpcPeeringConnectionId"
-              } ],
-              "ConstantMappings" : [ ],
-              "ConvenientMethods" : [ ],
-              "TokenPath" : null,
-              "LimitPath" : null
-            },
-            "Response" : null
-          },
-          "CreateTags" : {
-            "Request" : {
-              "Method" : "createTags",
-              "ClientRequestType" : "com.amazonaws.services.ec2.model.CreateTagsRequest",
-              "ClientResponseType" : "Void",
-              "IdentifierMappings" : [ {
-                "Source" : "Id",
-                "Target" : [ "Resources", "*" ]
-              } ],
-              "AttributeMappings" : [ ],
-              "ParameterMappings" : [ {
-                "Type" : "java.util.List<com.amazonaws.services.ec2.model.Tag>",
-                "Name" : "Tags"
-              } ],
-              "ConstantMappings" : [ ],
-              "ConvenientMethods" : [ {
-                "Arguments" : [ {
-                  "Type" : "java.util.List<com.amazonaws.services.ec2.model.Tag>",
-                  "Name" : "Tags"
-                } ]
-              } ],
-              "TokenPath" : null,
-              "LimitPath" : null
-            },
-            "Response" : {
-              "ResourceMapping" : {
-                "Type" : "Tag",
-                "ParentIdentifierMappings" : [ {
-                  "Source" : "Id",
-                  "Target" : "ResourceId"
-                } ],
-                "RequestParamMappings" : [ {
-                  "Source" : [ "Tags", "*:com.amazonaws.services.ec2.model.Tag", "Key" ],
-                  "Target" : "Key"
-                }, {
-                  "Source" : [ "Tags", "*:com.amazonaws.services.ec2.model.Tag", "Value" ],
-                  "Target" : "Value"
-                } ],
-                "ResponseIdentifierMappings" : [ ],
-                "Path" : null
-              },
-              "DataMapping" : null,
-              "NextTokenPath" : null
-            }
           }
         }
       },
@@ -450,20 +240,26 @@
                 "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeVolumesResult",
                 "IdentifierMappings" : [ {
                   "Source" : "Id",
-                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "*" ]
+                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "0" ]
                 } ],
                 "AttributeMappings" : [ ],
                 "ParameterMappings" : [ {
                   "Type" : "java.util.List<String>",
                   "Name" : "VolumeIds"
+                }, {
+                  "Type" : "java.lang.String",
+                  "Name" : "NextToken"
+                }, {
+                  "Type" : "java.lang.Integer",
+                  "Name" : "MaxResults"
                 } ],
                 "ConstantMappings" : [ {
                   "Source" : "attachment.instance-id",
                   "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Name" ]
                 } ],
                 "ConvenientMethods" : [ ],
-                "TokenPath" : null,
-                "LimitPath" : null
+                "TokenPath" : [ "NextToken" ],
+                "LimitPath" : [ "MaxResults" ]
               },
               "Response" : {
                 "ResourceMapping" : {
@@ -477,7 +273,7 @@
                   "Path" : [ "Volumes", "*:com.amazonaws.services.ec2.model.Volume" ]
                 },
                 "DataMapping" : null,
-                "NextTokenPath" : null
+                "NextTokenPath" : [ "NextToken" ]
               }
             }
           }
@@ -489,7 +285,7 @@
             "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeInstancesResult",
             "IdentifierMappings" : [ {
               "Source" : "Id",
-              "Target" : [ "InstanceIds", "*" ]
+              "Target" : [ "InstanceIds", "0" ]
             } ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
@@ -515,7 +311,7 @@
               "ClientResponseType" : "com.amazonaws.services.ec2.model.TerminateInstancesResult",
               "IdentifierMappings" : [ {
                 "Source" : "Id",
-                "Target" : [ "InstanceIds", "*" ]
+                "Target" : [ "InstanceIds", "0" ]
               } ],
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
@@ -530,6 +326,36 @@
               "ResourceMapping" : null,
               "DataMapping" : {
                 "Type" : "com.amazonaws.services.ec2.model.TerminateInstancesResult",
+                "Source" : [ ]
+              },
+              "NextTokenPath" : null
+            }
+          },
+          "Start" : {
+            "Request" : {
+              "Method" : "startInstances",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.StartInstancesRequest",
+              "ClientResponseType" : "com.amazonaws.services.ec2.model.StartInstancesResult",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "InstanceIds", "0" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "AdditionalInfo"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : null,
+              "DataMapping" : {
+                "Type" : "com.amazonaws.services.ec2.model.StartInstancesResult",
                 "Source" : [ ]
               },
               "NextTokenPath" : null
@@ -557,36 +383,6 @@
               "LimitPath" : null
             },
             "Response" : null
-          },
-          "Start" : {
-            "Request" : {
-              "Method" : "startInstances",
-              "ClientRequestType" : "com.amazonaws.services.ec2.model.StartInstancesRequest",
-              "ClientResponseType" : "com.amazonaws.services.ec2.model.StartInstancesResult",
-              "IdentifierMappings" : [ {
-                "Source" : "Id",
-                "Target" : [ "InstanceIds", "*" ]
-              } ],
-              "AttributeMappings" : [ ],
-              "ParameterMappings" : [ {
-                "Type" : "java.lang.String",
-                "Name" : "AdditionalInfo"
-              } ],
-              "ConstantMappings" : [ ],
-              "ConvenientMethods" : [ {
-                "Arguments" : [ ]
-              } ],
-              "TokenPath" : null,
-              "LimitPath" : null
-            },
-            "Response" : {
-              "ResourceMapping" : null,
-              "DataMapping" : {
-                "Type" : "com.amazonaws.services.ec2.model.StartInstancesResult",
-                "Source" : [ ]
-              },
-              "NextTokenPath" : null
-            }
           },
           "ConsoleOutput" : {
             "Request" : {
@@ -622,7 +418,7 @@
               "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Id",
-                "Target" : [ "Instances", "*" ]
+                "Target" : [ "Instances", "0" ]
               } ],
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ {
@@ -721,6 +517,36 @@
               "NextTokenPath" : null
             }
           },
+          "Stop" : {
+            "Request" : {
+              "Method" : "stopInstances",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.StopInstancesRequest",
+              "ClientResponseType" : "com.amazonaws.services.ec2.model.StopInstancesResult",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "InstanceIds", "0" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.Boolean",
+                "Name" : "Force"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : null,
+              "DataMapping" : {
+                "Type" : "com.amazonaws.services.ec2.model.StopInstancesResult",
+                "Source" : [ ]
+              },
+              "NextTokenPath" : null
+            }
+          },
           "CreateImage" : {
             "Request" : {
               "Method" : "createImage",
@@ -766,36 +592,6 @@
                 "Path" : null
               },
               "DataMapping" : null,
-              "NextTokenPath" : null
-            }
-          },
-          "Stop" : {
-            "Request" : {
-              "Method" : "stopInstances",
-              "ClientRequestType" : "com.amazonaws.services.ec2.model.StopInstancesRequest",
-              "ClientResponseType" : "com.amazonaws.services.ec2.model.StopInstancesResult",
-              "IdentifierMappings" : [ {
-                "Source" : "Id",
-                "Target" : [ "InstanceIds", "*" ]
-              } ],
-              "AttributeMappings" : [ ],
-              "ParameterMappings" : [ {
-                "Type" : "java.lang.Boolean",
-                "Name" : "Force"
-              } ],
-              "ConstantMappings" : [ ],
-              "ConvenientMethods" : [ {
-                "Arguments" : [ ]
-              } ],
-              "TokenPath" : null,
-              "LimitPath" : null
-            },
-            "Response" : {
-              "ResourceMapping" : null,
-              "DataMapping" : {
-                "Type" : "com.amazonaws.services.ec2.model.StopInstancesResult",
-                "Source" : [ ]
-              },
               "NextTokenPath" : null
             }
           },
@@ -859,7 +655,7 @@
               "ClientResponseType" : "com.amazonaws.services.ec2.model.MonitorInstancesResult",
               "IdentifierMappings" : [ {
                 "Source" : "Id",
-                "Target" : [ "InstanceIds", "*" ]
+                "Target" : [ "InstanceIds", "0" ]
               } ],
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
@@ -878,26 +674,6 @@
               },
               "NextTokenPath" : null
             }
-          },
-          "Reboot" : {
-            "Request" : {
-              "Method" : "rebootInstances",
-              "ClientRequestType" : "com.amazonaws.services.ec2.model.RebootInstancesRequest",
-              "ClientResponseType" : "Void",
-              "IdentifierMappings" : [ {
-                "Source" : "Id",
-                "Target" : [ "InstanceIds", "*" ]
-              } ],
-              "AttributeMappings" : [ ],
-              "ParameterMappings" : [ ],
-              "ConstantMappings" : [ ],
-              "ConvenientMethods" : [ {
-                "Arguments" : [ ]
-              } ],
-              "TokenPath" : null,
-              "LimitPath" : null
-            },
-            "Response" : null
           },
           "ResetSourceDestCheck" : {
             "Request" : {
@@ -922,6 +698,26 @@
             },
             "Response" : null
           },
+          "Reboot" : {
+            "Request" : {
+              "Method" : "rebootInstances",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.RebootInstancesRequest",
+              "ClientResponseType" : "Void",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "InstanceIds", "0" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
           "Unmonitor" : {
             "Request" : {
               "Method" : "unmonitorInstances",
@@ -929,7 +725,7 @@
               "ClientResponseType" : "com.amazonaws.services.ec2.model.UnmonitorInstancesResult",
               "IdentifierMappings" : [ {
                 "Source" : "Id",
-                "Target" : [ "InstanceIds", "*" ]
+                "Target" : [ "InstanceIds", "0" ]
               } ],
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
@@ -1044,6 +840,29 @@
               "NextTokenPath" : null
             }
           },
+          "ResetKernel" : {
+            "Request" : {
+              "Method" : "resetInstanceAttribute",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.ResetInstanceAttributeRequest",
+              "ClientResponseType" : "Void",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "InstanceId" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ {
+                "Source" : "kernel",
+                "Target" : [ "Attribute" ]
+              } ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
           "CreateTags" : {
             "Request" : {
               "Method" : "createTags",
@@ -1051,7 +870,7 @@
               "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Id",
-                "Target" : [ "Resources", "*" ]
+                "Target" : [ "Resources", "0" ]
               } ],
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ {
@@ -1088,29 +907,216 @@
               "DataMapping" : null,
               "NextTokenPath" : null
             }
+          }
+        }
+      },
+      "RouteTable" : {
+        "Identifiers" : {
+          "Id" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "Tags" : {
+            "Type" : "java.util.List<com.amazonaws.services.ec2.model.Tag>"
           },
-          "ResetKernel" : {
+          "PropagatingVgws" : {
+            "Type" : "java.util.List<com.amazonaws.services.ec2.model.PropagatingVgw>"
+          },
+          "Routes" : {
+            "Type" : "java.util.List<com.amazonaws.services.ec2.model.Route>"
+          },
+          "VpcId" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "References" : {
+          "Vpc" : {
+            "Type" : "Vpc",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ {
+              "Source" : [ "VpcId" ],
+              "Target" : "Id"
+            } ]
+          }
+        },
+        "SubResourceGetters" : { },
+        "Collections" : {
+          "Associations" : {
+            "Type" : "RouteTableAssociation",
+            "ListAction" : {
+              "Request" : {
+                "Method" : "describeRouteTables",
+                "ClientRequestType" : "com.amazonaws.services.ec2.model.DescribeRouteTablesRequest",
+                "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeRouteTablesResult",
+                "IdentifierMappings" : [ {
+                  "Source" : "Id",
+                  "Target" : [ "RouteTableIds", "0" ]
+                } ],
+                "AttributeMappings" : [ ],
+                "ParameterMappings" : [ {
+                  "Type" : "java.util.List<com.amazonaws.services.ec2.model.Filter>",
+                  "Name" : "Filters"
+                } ],
+                "ConstantMappings" : [ ],
+                "ConvenientMethods" : [ ],
+                "TokenPath" : null,
+                "LimitPath" : null
+              },
+              "Response" : {
+                "ResourceMapping" : {
+                  "Type" : "RouteTableAssociation",
+                  "ParentIdentifierMappings" : [ ],
+                  "RequestParamMappings" : [ ],
+                  "ResponseIdentifierMappings" : [ {
+                    "Source" : [ "RouteTables", "0:com.amazonaws.services.ec2.model.RouteTable", "Associations", "*:com.amazonaws.services.ec2.model.RouteTableAssociation", "RouteTableAssociationId" ],
+                    "Target" : "Id"
+                  } ],
+                  "Path" : [ "RouteTables", "0:com.amazonaws.services.ec2.model.RouteTable", "Associations", "*:com.amazonaws.services.ec2.model.RouteTableAssociation" ]
+                },
+                "DataMapping" : null,
+                "NextTokenPath" : null
+              }
+            }
+          }
+        },
+        "LoadAction" : {
+          "Request" : {
+            "Method" : "describeRouteTables",
+            "ClientRequestType" : "com.amazonaws.services.ec2.model.DescribeRouteTablesRequest",
+            "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeRouteTablesResult",
+            "IdentifierMappings" : [ {
+              "Source" : "Id",
+              "Target" : [ "RouteTableIds", "0" ]
+            } ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ ],
+            "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : null,
+            "DataMapping" : {
+              "Type" : "RouteTable",
+              "Source" : [ "RouteTables", "0:com.amazonaws.services.ec2.model.RouteTable" ]
+            },
+            "NextTokenPath" : null
+          }
+        },
+        "Actions" : {
+          "AssociateWithSubnet" : {
             "Request" : {
-              "Method" : "resetInstanceAttribute",
-              "ClientRequestType" : "com.amazonaws.services.ec2.model.ResetInstanceAttributeRequest",
+              "Method" : "associateRouteTable",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.AssociateRouteTableRequest",
+              "ClientResponseType" : "com.amazonaws.services.ec2.model.AssociateRouteTableResult",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "RouteTableId" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "SubnetId"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : {
+                "Type" : "RouteTableAssociation",
+                "ParentIdentifierMappings" : [ ],
+                "RequestParamMappings" : [ ],
+                "ResponseIdentifierMappings" : [ {
+                  "Source" : [ "AssociationId" ],
+                  "Target" : "Id"
+                } ],
+                "Path" : null
+              },
+              "DataMapping" : null,
+              "NextTokenPath" : null
+            }
+          },
+          "CreateRoute" : {
+            "Request" : {
+              "Method" : "createRoute",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.CreateRouteRequest",
               "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Id",
-                "Target" : [ "InstanceId" ]
+                "Target" : [ "RouteTableId" ]
               } ],
               "AttributeMappings" : [ ],
-              "ParameterMappings" : [ ],
-              "ConstantMappings" : [ {
-                "Source" : "kernel",
-                "Target" : [ "Attribute" ]
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "DestinationCidrBlock"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "GatewayId"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "InstanceId"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "NetworkInterfaceId"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "VpcPeeringConnectionId"
               } ],
-              "ConvenientMethods" : [ {
-                "Arguments" : [ ]
-              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ ],
               "TokenPath" : null,
               "LimitPath" : null
             },
             "Response" : null
+          },
+          "CreateTags" : {
+            "Request" : {
+              "Method" : "createTags",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.CreateTagsRequest",
+              "ClientResponseType" : "Void",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "Resources", "0" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.util.List<com.amazonaws.services.ec2.model.Tag>",
+                "Name" : "Tags"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.util.List<com.amazonaws.services.ec2.model.Tag>",
+                  "Name" : "Tags"
+                } ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : {
+                "Type" : "Tag",
+                "ParentIdentifierMappings" : [ {
+                  "Source" : "Id",
+                  "Target" : "ResourceId"
+                } ],
+                "RequestParamMappings" : [ {
+                  "Source" : [ "Tags", "*:com.amazonaws.services.ec2.model.Tag", "Key" ],
+                  "Target" : "Key"
+                }, {
+                  "Source" : [ "Tags", "*:com.amazonaws.services.ec2.model.Tag", "Value" ],
+                  "Target" : "Value"
+                } ],
+                "ResponseIdentifierMappings" : [ ],
+                "Path" : null
+              },
+              "DataMapping" : null,
+              "NextTokenPath" : null
+            }
           }
         }
       },
@@ -1200,7 +1206,7 @@
             "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeNetworkInterfacesResult",
             "IdentifierMappings" : [ {
               "Source" : "Id",
-              "Target" : [ "NetworkInterfaceIds", "*" ]
+              "Target" : [ "NetworkInterfaceIds", "0" ]
             } ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
@@ -1324,16 +1330,7 @@
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ {
                 "Type" : "java.lang.String",
-                "Name" : "Description"
-              }, {
-                "Type" : "java.lang.String",
-                "Name" : "SourceDestCheck"
-              }, {
-                "Type" : "java.lang.String",
-                "Name" : "Groups"
-              }, {
-                "Type" : "java.lang.String",
-                "Name" : "Attachment"
+                "Name" : "Attribute"
               } ],
               "ConstantMappings" : [ ],
               "ConvenientMethods" : [ ],
@@ -1432,7 +1429,7 @@
               "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Id",
-                "Target" : [ "Resources", "*" ]
+                "Target" : [ "Resources", "0" ]
               } ],
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ {
@@ -1488,6 +1485,9 @@
           "VolumeType" : {
             "Type" : "java.lang.String"
           },
+          "KmsKeyId" : {
+            "Type" : "java.lang.String"
+          },
           "Iops" : {
             "Type" : "java.lang.Integer"
           },
@@ -1522,7 +1522,7 @@
                 "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeSnapshotsResult",
                 "IdentifierMappings" : [ {
                   "Source" : "Id",
-                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "*" ]
+                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "0" ]
                 } ],
                 "AttributeMappings" : [ ],
                 "ParameterMappings" : [ {
@@ -1567,7 +1567,7 @@
             "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeVolumesResult",
             "IdentifierMappings" : [ {
               "Source" : "Id",
-              "Target" : [ "VolumeIds", "*" ]
+              "Target" : [ "VolumeIds", "0" ]
             } ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
@@ -1719,7 +1719,7 @@
               "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeVolumeStatusResult",
               "IdentifierMappings" : [ {
                 "Source" : "Id",
-                "Target" : [ "VolumeIds", "*" ]
+                "Target" : [ "VolumeIds", "0" ]
               } ],
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ {
@@ -1734,8 +1734,8 @@
               } ],
               "ConstantMappings" : [ ],
               "ConvenientMethods" : [ ],
-              "TokenPath" : [ "NextToken" ],
-              "LimitPath" : [ "MaxResults" ]
+              "TokenPath" : null,
+              "LimitPath" : null
             },
             "Response" : {
               "ResourceMapping" : null,
@@ -1743,7 +1743,7 @@
                 "Type" : "com.amazonaws.services.ec2.model.DescribeVolumeStatusResult",
                 "Source" : [ ]
               },
-              "NextTokenPath" : [ "NextToken" ]
+              "NextTokenPath" : null
             }
           },
           "EnableIo" : {
@@ -1771,7 +1771,7 @@
               "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Id",
-                "Target" : [ "Resources", "*" ]
+                "Target" : [ "Resources", "0" ]
               } ],
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ {
@@ -1874,7 +1874,7 @@
             "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeDhcpOptionsResult",
             "IdentifierMappings" : [ {
               "Source" : "Id",
-              "Target" : [ "DhcpOptionsIds", "*" ]
+              "Target" : [ "DhcpOptionsIds", "0" ]
             } ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
@@ -1920,7 +1920,7 @@
               "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Id",
-                "Target" : [ "Resources", "*" ]
+                "Target" : [ "Resources", "0" ]
               } ],
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ {
@@ -1981,118 +1981,6 @@
           }
         }
       },
-      "PlacementGroup" : {
-        "Identifiers" : {
-          "Name" : {
-            "Type" : "java.lang.String"
-          }
-        },
-        "Attributes" : {
-          "State" : {
-            "Type" : "java.lang.String"
-          },
-          "Strategy" : {
-            "Type" : "java.lang.String"
-          }
-        },
-        "References" : { },
-        "SubResourceGetters" : { },
-        "Collections" : {
-          "Instances" : {
-            "Type" : "Instance",
-            "ListAction" : {
-              "Request" : {
-                "Method" : "describeInstances",
-                "ClientRequestType" : "com.amazonaws.services.ec2.model.DescribeInstancesRequest",
-                "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeInstancesResult",
-                "IdentifierMappings" : [ {
-                  "Source" : "Name",
-                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "*" ]
-                } ],
-                "AttributeMappings" : [ ],
-                "ParameterMappings" : [ {
-                  "Type" : "java.util.List<String>",
-                  "Name" : "InstanceIds"
-                }, {
-                  "Type" : "java.lang.String",
-                  "Name" : "NextToken"
-                }, {
-                  "Type" : "java.lang.Integer",
-                  "Name" : "MaxResults"
-                } ],
-                "ConstantMappings" : [ {
-                  "Source" : "placement-group-name",
-                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Name" ]
-                } ],
-                "ConvenientMethods" : [ ],
-                "TokenPath" : null,
-                "LimitPath" : null
-              },
-              "Response" : {
-                "ResourceMapping" : {
-                  "Type" : "Instance",
-                  "ParentIdentifierMappings" : [ ],
-                  "RequestParamMappings" : [ ],
-                  "ResponseIdentifierMappings" : [ {
-                    "Source" : [ "Reservations", "*:com.amazonaws.services.ec2.model.Reservation", "Instances", "*:com.amazonaws.services.ec2.model.Instance", "InstanceId" ],
-                    "Target" : "Id"
-                  } ],
-                  "Path" : [ "Reservations", "*:com.amazonaws.services.ec2.model.Reservation", "Instances", "*:com.amazonaws.services.ec2.model.Instance" ]
-                },
-                "DataMapping" : null,
-                "NextTokenPath" : null
-              }
-            }
-          }
-        },
-        "LoadAction" : {
-          "Request" : {
-            "Method" : "describePlacementGroups",
-            "ClientRequestType" : "com.amazonaws.services.ec2.model.DescribePlacementGroupsRequest",
-            "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribePlacementGroupsResult",
-            "IdentifierMappings" : [ {
-              "Source" : "Name",
-              "Target" : [ "GroupNames", "*" ]
-            } ],
-            "AttributeMappings" : [ ],
-            "ParameterMappings" : [ ],
-            "ConstantMappings" : [ ],
-            "ConvenientMethods" : [ ],
-            "TokenPath" : null,
-            "LimitPath" : null
-          },
-          "Response" : {
-            "ResourceMapping" : null,
-            "DataMapping" : {
-              "Type" : "PlacementGroup",
-              "Source" : [ "PlacementGroups", "0:com.amazonaws.services.ec2.model.PlacementGroup" ]
-            },
-            "NextTokenPath" : null
-          }
-        },
-        "Actions" : {
-          "Delete" : {
-            "Request" : {
-              "Method" : "deletePlacementGroup",
-              "ClientRequestType" : "com.amazonaws.services.ec2.model.DeletePlacementGroupRequest",
-              "ClientResponseType" : "Void",
-              "IdentifierMappings" : [ {
-                "Source" : "Name",
-                "Target" : [ "GroupName" ]
-              } ],
-              "AttributeMappings" : [ ],
-              "ParameterMappings" : [ ],
-              "ConstantMappings" : [ ],
-              "ConvenientMethods" : [ {
-                "Arguments" : [ ]
-              } ],
-              "TokenPath" : null,
-              "LimitPath" : null
-            },
-            "Response" : null
-          }
-        }
-      },
       "InternetGateway" : {
         "Identifiers" : {
           "Id" : {
@@ -2117,7 +2005,7 @@
             "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeInternetGatewaysResult",
             "IdentifierMappings" : [ {
               "Source" : "Id",
-              "Target" : [ "InternetGatewayIds", "*" ]
+              "Target" : [ "InternetGatewayIds", "0" ]
             } ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
@@ -2182,7 +2070,7 @@
               "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Id",
-                "Target" : [ "Resources", "*" ]
+                "Target" : [ "Resources", "0" ]
               } ],
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ {
@@ -2243,92 +2131,111 @@
           }
         }
       },
-      "RouteTableAssociation" : {
+      "PlacementGroup" : {
         "Identifiers" : {
-          "Id" : {
+          "Name" : {
             "Type" : "java.lang.String"
           }
         },
         "Attributes" : {
-          "Main" : {
-            "Type" : "java.lang.Boolean"
-          },
-          "SubnetId" : {
+          "State" : {
             "Type" : "java.lang.String"
           },
-          "RouteTableId" : {
+          "Strategy" : {
             "Type" : "java.lang.String"
           }
         },
-        "References" : {
-          "RouteTable" : {
-            "Type" : "RouteTable",
-            "IdentifierMappings" : [ ],
-            "AttributeMappings" : [ {
-              "Source" : [ "RouteTableId" ],
-              "Target" : "Id"
-            } ]
-          },
-          "Subnet" : {
-            "Type" : "Subnet",
-            "IdentifierMappings" : [ ],
-            "AttributeMappings" : [ {
-              "Source" : [ "SubnetId" ],
-              "Target" : "Id"
-            } ]
-          }
-        },
+        "References" : { },
         "SubResourceGetters" : { },
-        "Collections" : { },
-        "LoadAction" : null,
-        "Actions" : {
-          "ReplaceSubnet" : {
-            "Request" : {
-              "Method" : "replaceRouteTableAssociation",
-              "ClientRequestType" : "com.amazonaws.services.ec2.model.ReplaceRouteTableAssociationRequest",
-              "ClientResponseType" : "com.amazonaws.services.ec2.model.ReplaceRouteTableAssociationResult",
-              "IdentifierMappings" : [ {
-                "Source" : "Id",
-                "Target" : [ "AssociationId" ]
-              } ],
-              "AttributeMappings" : [ ],
-              "ParameterMappings" : [ {
-                "Type" : "java.lang.String",
-                "Name" : "RouteTableId"
-              } ],
-              "ConstantMappings" : [ ],
-              "ConvenientMethods" : [ ],
-              "TokenPath" : null,
-              "LimitPath" : null
-            },
-            "Response" : {
-              "ResourceMapping" : {
-                "Type" : "RouteTableAssociation",
-                "ParentIdentifierMappings" : [ ],
-                "RequestParamMappings" : [ ],
-                "ResponseIdentifierMappings" : [ {
-                  "Source" : [ "NewAssociationId" ],
-                  "Target" : "Id"
+        "Collections" : {
+          "Instances" : {
+            "Type" : "Instance",
+            "ListAction" : {
+              "Request" : {
+                "Method" : "describeInstances",
+                "ClientRequestType" : "com.amazonaws.services.ec2.model.DescribeInstancesRequest",
+                "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeInstancesResult",
+                "IdentifierMappings" : [ {
+                  "Source" : "Name",
+                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "0" ]
                 } ],
-                "Path" : null
+                "AttributeMappings" : [ ],
+                "ParameterMappings" : [ {
+                  "Type" : "java.util.List<String>",
+                  "Name" : "InstanceIds"
+                }, {
+                  "Type" : "java.lang.String",
+                  "Name" : "NextToken"
+                }, {
+                  "Type" : "java.lang.Integer",
+                  "Name" : "MaxResults"
+                } ],
+                "ConstantMappings" : [ {
+                  "Source" : "placement-group-name",
+                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Name" ]
+                } ],
+                "ConvenientMethods" : [ ],
+                "TokenPath" : null,
+                "LimitPath" : null
               },
-              "DataMapping" : null,
-              "NextTokenPath" : null
+              "Response" : {
+                "ResourceMapping" : {
+                  "Type" : "Instance",
+                  "ParentIdentifierMappings" : [ ],
+                  "RequestParamMappings" : [ ],
+                  "ResponseIdentifierMappings" : [ {
+                    "Source" : [ "Reservations", "*:com.amazonaws.services.ec2.model.Reservation", "Instances", "*:com.amazonaws.services.ec2.model.Instance", "InstanceId" ],
+                    "Target" : "Id"
+                  } ],
+                  "Path" : [ "Reservations", "*:com.amazonaws.services.ec2.model.Reservation", "Instances", "*:com.amazonaws.services.ec2.model.Instance" ]
+                },
+                "DataMapping" : null,
+                "NextTokenPath" : null
+              }
             }
+          }
+        },
+        "LoadAction" : {
+          "Request" : {
+            "Method" : "describePlacementGroups",
+            "ClientRequestType" : "com.amazonaws.services.ec2.model.DescribePlacementGroupsRequest",
+            "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribePlacementGroupsResult",
+            "IdentifierMappings" : [ {
+              "Source" : "Name",
+              "Target" : [ "GroupNames", "0" ]
+            } ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ ],
+            "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
           },
+          "Response" : {
+            "ResourceMapping" : null,
+            "DataMapping" : {
+              "Type" : "PlacementGroup",
+              "Source" : [ "PlacementGroups", "0:com.amazonaws.services.ec2.model.PlacementGroup" ]
+            },
+            "NextTokenPath" : null
+          }
+        },
+        "Actions" : {
           "Delete" : {
             "Request" : {
-              "Method" : "disassociateRouteTable",
-              "ClientRequestType" : "com.amazonaws.services.ec2.model.DisassociateRouteTableRequest",
+              "Method" : "deletePlacementGroup",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.DeletePlacementGroupRequest",
               "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
-                "Source" : "Id",
-                "Target" : [ "AssociationId" ]
+                "Source" : "Name",
+                "Target" : [ "GroupName" ]
               } ],
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ ],
               "ConstantMappings" : [ ],
-              "ConvenientMethods" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -2389,7 +2296,7 @@
                 "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeNetworkInterfacesResult",
                 "IdentifierMappings" : [ {
                   "Source" : "Id",
-                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "*" ]
+                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "0" ]
                 } ],
                 "AttributeMappings" : [ ],
                 "ParameterMappings" : [ {
@@ -2429,7 +2336,7 @@
                 "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeInstancesResult",
                 "IdentifierMappings" : [ {
                   "Source" : "Id",
-                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "*" ]
+                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "0" ]
                 } ],
                 "AttributeMappings" : [ ],
                 "ParameterMappings" : [ {
@@ -2474,7 +2381,7 @@
             "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeSubnetsResult",
             "IdentifierMappings" : [ {
               "Source" : "Id",
-              "Target" : [ "SubnetIds", "*" ]
+              "Target" : [ "SubnetIds", "0" ]
             } ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
@@ -2566,7 +2473,7 @@
               "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Id",
-                "Target" : [ "Resources", "*" ]
+                "Target" : [ "Resources", "0" ]
               } ],
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ {
@@ -2700,6 +2607,99 @@
           }
         }
       },
+      "RouteTableAssociation" : {
+        "Identifiers" : {
+          "Id" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "Main" : {
+            "Type" : "java.lang.Boolean"
+          },
+          "SubnetId" : {
+            "Type" : "java.lang.String"
+          },
+          "RouteTableId" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "References" : {
+          "RouteTable" : {
+            "Type" : "RouteTable",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ {
+              "Source" : [ "RouteTableId" ],
+              "Target" : "Id"
+            } ]
+          },
+          "Subnet" : {
+            "Type" : "Subnet",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ {
+              "Source" : [ "SubnetId" ],
+              "Target" : "Id"
+            } ]
+          }
+        },
+        "SubResourceGetters" : { },
+        "Collections" : { },
+        "LoadAction" : null,
+        "Actions" : {
+          "ReplaceSubnet" : {
+            "Request" : {
+              "Method" : "replaceRouteTableAssociation",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.ReplaceRouteTableAssociationRequest",
+              "ClientResponseType" : "com.amazonaws.services.ec2.model.ReplaceRouteTableAssociationResult",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "AssociationId" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "RouteTableId"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : {
+                "Type" : "RouteTableAssociation",
+                "ParentIdentifierMappings" : [ ],
+                "RequestParamMappings" : [ ],
+                "ResponseIdentifierMappings" : [ {
+                  "Source" : [ "NewAssociationId" ],
+                  "Target" : "Id"
+                } ],
+                "Path" : null
+              },
+              "DataMapping" : null,
+              "NextTokenPath" : null
+            }
+          },
+          "Delete" : {
+            "Request" : {
+              "Method" : "disassociateRouteTable",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.DisassociateRouteTableRequest",
+              "ClientResponseType" : "Void",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "AssociationId" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      },
       "VpcPeeringConnection" : {
         "Identifiers" : {
           "Id" : {
@@ -2750,7 +2750,7 @@
             "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeVpcPeeringConnectionsResult",
             "IdentifierMappings" : [ {
               "Source" : "Id",
-              "Target" : [ "VpcPeeringConnectionIds", "*" ]
+              "Target" : [ "VpcPeeringConnectionIds", "0" ]
             } ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
@@ -2871,6 +2871,9 @@
           "VolumeSize" : {
             "Type" : "java.lang.Integer"
           },
+          "KmsKeyId" : {
+            "Type" : "java.lang.String"
+          },
           "OwnerId" : {
             "Type" : "java.lang.String"
           },
@@ -2903,7 +2906,7 @@
             "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeSnapshotsResult",
             "IdentifierMappings" : [ {
               "Source" : "Id",
-              "Target" : [ "SnapshotIds", "*" ]
+              "Target" : [ "SnapshotIds", "0" ]
             } ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
@@ -3049,7 +3052,7 @@
               "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Id",
-                "Target" : [ "Resources", "*" ]
+                "Target" : [ "Resources", "0" ]
               } ],
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ {
@@ -3164,46 +3167,6 @@
         },
         "SubResourceGetters" : { },
         "Collections" : {
-          "AcceptedVpcPeeringConnections" : {
-            "Type" : "VpcPeeringConnection",
-            "ListAction" : {
-              "Request" : {
-                "Method" : "describeVpcPeeringConnections",
-                "ClientRequestType" : "com.amazonaws.services.ec2.model.DescribeVpcPeeringConnectionsRequest",
-                "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeVpcPeeringConnectionsResult",
-                "IdentifierMappings" : [ {
-                  "Source" : "Id",
-                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "*" ]
-                } ],
-                "AttributeMappings" : [ ],
-                "ParameterMappings" : [ {
-                  "Type" : "java.util.List<String>",
-                  "Name" : "VpcPeeringConnectionIds"
-                } ],
-                "ConstantMappings" : [ {
-                  "Source" : "accepter-vpc-info.vpc-id",
-                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Name" ]
-                } ],
-                "ConvenientMethods" : [ ],
-                "TokenPath" : null,
-                "LimitPath" : null
-              },
-              "Response" : {
-                "ResourceMapping" : {
-                  "Type" : "VpcPeeringConnection",
-                  "ParentIdentifierMappings" : [ ],
-                  "RequestParamMappings" : [ ],
-                  "ResponseIdentifierMappings" : [ {
-                    "Source" : [ "VpcPeeringConnections", "*:com.amazonaws.services.ec2.model.VpcPeeringConnection", "VpcPeeringConnectionId" ],
-                    "Target" : "Id"
-                  } ],
-                  "Path" : [ "VpcPeeringConnections", "*:com.amazonaws.services.ec2.model.VpcPeeringConnection" ]
-                },
-                "DataMapping" : null,
-                "NextTokenPath" : null
-              }
-            }
-          },
           "InternetGateways" : {
             "Type" : "InternetGateway",
             "ListAction" : {
@@ -3213,7 +3176,7 @@
                 "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeInternetGatewaysResult",
                 "IdentifierMappings" : [ {
                   "Source" : "Id",
-                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "*" ]
+                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "0" ]
                 } ],
                 "AttributeMappings" : [ ],
                 "ParameterMappings" : [ {
@@ -3244,6 +3207,46 @@
               }
             }
           },
+          "AcceptedVpcPeeringConnections" : {
+            "Type" : "VpcPeeringConnection",
+            "ListAction" : {
+              "Request" : {
+                "Method" : "describeVpcPeeringConnections",
+                "ClientRequestType" : "com.amazonaws.services.ec2.model.DescribeVpcPeeringConnectionsRequest",
+                "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeVpcPeeringConnectionsResult",
+                "IdentifierMappings" : [ {
+                  "Source" : "Id",
+                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "0" ]
+                } ],
+                "AttributeMappings" : [ ],
+                "ParameterMappings" : [ {
+                  "Type" : "java.util.List<String>",
+                  "Name" : "VpcPeeringConnectionIds"
+                } ],
+                "ConstantMappings" : [ {
+                  "Source" : "accepter-vpc-info.vpc-id",
+                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Name" ]
+                } ],
+                "ConvenientMethods" : [ ],
+                "TokenPath" : null,
+                "LimitPath" : null
+              },
+              "Response" : {
+                "ResourceMapping" : {
+                  "Type" : "VpcPeeringConnection",
+                  "ParentIdentifierMappings" : [ ],
+                  "RequestParamMappings" : [ ],
+                  "ResponseIdentifierMappings" : [ {
+                    "Source" : [ "VpcPeeringConnections", "*:com.amazonaws.services.ec2.model.VpcPeeringConnection", "VpcPeeringConnectionId" ],
+                    "Target" : "Id"
+                  } ],
+                  "Path" : [ "VpcPeeringConnections", "*:com.amazonaws.services.ec2.model.VpcPeeringConnection" ]
+                },
+                "DataMapping" : null,
+                "NextTokenPath" : null
+              }
+            }
+          },
           "NetworkInterfaces" : {
             "Type" : "NetworkInterface",
             "ListAction" : {
@@ -3253,7 +3256,7 @@
                 "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeNetworkInterfacesResult",
                 "IdentifierMappings" : [ {
                   "Source" : "Id",
-                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "*" ]
+                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "0" ]
                 } ],
                 "AttributeMappings" : [ ],
                 "ParameterMappings" : [ {
@@ -3293,7 +3296,7 @@
                 "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeSubnetsResult",
                 "IdentifierMappings" : [ {
                   "Source" : "Id",
-                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "*" ]
+                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "0" ]
                 } ],
                 "AttributeMappings" : [ ],
                 "ParameterMappings" : [ {
@@ -3333,7 +3336,7 @@
                 "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeInstancesResult",
                 "IdentifierMappings" : [ {
                   "Source" : "Id",
-                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "*" ]
+                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "0" ]
                 } ],
                 "AttributeMappings" : [ ],
                 "ParameterMappings" : [ {
@@ -3379,7 +3382,7 @@
                 "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeSecurityGroupsResult",
                 "IdentifierMappings" : [ {
                   "Source" : "Id",
-                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "*" ]
+                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "0" ]
                 } ],
                 "AttributeMappings" : [ ],
                 "ParameterMappings" : [ {
@@ -3422,7 +3425,7 @@
                 "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeRouteTablesResult",
                 "IdentifierMappings" : [ {
                   "Source" : "Id",
-                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "*" ]
+                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "0" ]
                 } ],
                 "AttributeMappings" : [ ],
                 "ParameterMappings" : [ {
@@ -3462,7 +3465,7 @@
                 "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeNetworkAclsResult",
                 "IdentifierMappings" : [ {
                   "Source" : "Id",
-                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "*" ]
+                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "0" ]
                 } ],
                 "AttributeMappings" : [ ],
                 "ParameterMappings" : [ {
@@ -3502,7 +3505,7 @@
                 "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeVpcPeeringConnectionsResult",
                 "IdentifierMappings" : [ {
                   "Source" : "Id",
-                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "*" ]
+                  "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "0" ]
                 } ],
                 "AttributeMappings" : [ ],
                 "ParameterMappings" : [ {
@@ -3541,7 +3544,7 @@
             "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeVpcsResult",
             "IdentifierMappings" : [ {
               "Source" : "Id",
-              "Target" : [ "VpcIds", "*" ]
+              "Target" : [ "VpcIds", "0" ]
             } ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
@@ -3803,6 +3806,26 @@
             },
             "Response" : null
           },
+          "Delete" : {
+            "Request" : {
+              "Method" : "deleteVpc",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.DeleteVpcRequest",
+              "ClientResponseType" : "Void",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "VpcId" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
           "AttachInternetGateway" : {
             "Request" : {
               "Method" : "attachInternetGateway",
@@ -3819,26 +3842,6 @@
               } ],
               "ConstantMappings" : [ ],
               "ConvenientMethods" : [ ],
-              "TokenPath" : null,
-              "LimitPath" : null
-            },
-            "Response" : null
-          },
-          "Delete" : {
-            "Request" : {
-              "Method" : "deleteVpc",
-              "ClientRequestType" : "com.amazonaws.services.ec2.model.DeleteVpcRequest",
-              "ClientResponseType" : "Void",
-              "IdentifierMappings" : [ {
-                "Source" : "Id",
-                "Target" : [ "VpcId" ]
-              } ],
-              "AttributeMappings" : [ ],
-              "ParameterMappings" : [ ],
-              "ConstantMappings" : [ ],
-              "ConvenientMethods" : [ {
-                "Arguments" : [ ]
-              } ],
               "TokenPath" : null,
               "LimitPath" : null
             },
@@ -3882,7 +3885,7 @@
               "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Id",
-                "Target" : [ "Resources", "*" ]
+                "Target" : [ "Resources", "0" ]
               } ],
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ {
@@ -3961,7 +3964,7 @@
             "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeSecurityGroupsResult",
             "IdentifierMappings" : [ {
               "Source" : "Id",
-              "Target" : [ "GroupIds", "*" ]
+              "Target" : [ "GroupIds", "0" ]
             } ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
@@ -4170,7 +4173,7 @@
               "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Id",
-                "Target" : [ "Resources", "*" ]
+                "Target" : [ "Resources", "0" ]
               } ],
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ {
@@ -4237,10 +4240,10 @@
             "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeTagsResult",
             "IdentifierMappings" : [ {
               "Source" : "Key",
-              "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "*" ]
+              "Target" : [ "Filters", "0:com.amazonaws.services.ec2.model.Filter", "Values", "0" ]
             }, {
               "Source" : "Value",
-              "Target" : [ "Filters", "1:com.amazonaws.services.ec2.model.Filter", "Values", "*" ]
+              "Target" : [ "Filters", "1:com.amazonaws.services.ec2.model.Filter", "Values", "0" ]
             } ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
@@ -4274,7 +4277,7 @@
               "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "ResourceId",
-                "Target" : [ "Resources", "*" ]
+                "Target" : [ "Resources", "0" ]
               }, {
                 "Source" : "Key",
                 "Target" : [ "Tags", "0:com.amazonaws.services.ec2.model.Tag", "Key" ]
@@ -4374,7 +4377,7 @@
             "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeImagesResult",
             "IdentifierMappings" : [ {
               "Source" : "Id",
-              "Target" : [ "ImageIds", "*" ]
+              "Target" : [ "ImageIds", "0" ]
             } ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
@@ -4526,7 +4529,7 @@
               "ClientResponseType" : "Void",
               "IdentifierMappings" : [ {
                 "Source" : "Id",
-                "Target" : [ "Resources", "*" ]
+                "Target" : [ "Resources", "0" ]
               } ],
               "AttributeMappings" : [ ],
               "ParameterMappings" : [ {
@@ -4608,7 +4611,7 @@
             "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeNetworkAclsResult",
             "IdentifierMappings" : [ {
               "Source" : "Id",
-              "Target" : [ "NetworkAclIds", "*" ]
+              "Target" : [ "NetworkAclIds", "0" ]
             } ],
             "AttributeMappings" : [ ],
             "ParameterMappings" : [ ],
@@ -4723,51 +4726,6 @@
             },
             "Response" : null
           },
-          "CreateTags" : {
-            "Request" : {
-              "Method" : "createTags",
-              "ClientRequestType" : "com.amazonaws.services.ec2.model.CreateTagsRequest",
-              "ClientResponseType" : "Void",
-              "IdentifierMappings" : [ {
-                "Source" : "Id",
-                "Target" : [ "Resources", "*" ]
-              } ],
-              "AttributeMappings" : [ ],
-              "ParameterMappings" : [ {
-                "Type" : "java.util.List<com.amazonaws.services.ec2.model.Tag>",
-                "Name" : "Tags"
-              } ],
-              "ConstantMappings" : [ ],
-              "ConvenientMethods" : [ {
-                "Arguments" : [ {
-                  "Type" : "java.util.List<com.amazonaws.services.ec2.model.Tag>",
-                  "Name" : "Tags"
-                } ]
-              } ],
-              "TokenPath" : null,
-              "LimitPath" : null
-            },
-            "Response" : {
-              "ResourceMapping" : {
-                "Type" : "Tag",
-                "ParentIdentifierMappings" : [ {
-                  "Source" : "Id",
-                  "Target" : "ResourceId"
-                } ],
-                "RequestParamMappings" : [ {
-                  "Source" : [ "Tags", "*:com.amazonaws.services.ec2.model.Tag", "Key" ],
-                  "Target" : "Key"
-                }, {
-                  "Source" : [ "Tags", "*:com.amazonaws.services.ec2.model.Tag", "Value" ],
-                  "Target" : "Value"
-                } ],
-                "ResponseIdentifierMappings" : [ ],
-                "Path" : null
-              },
-              "DataMapping" : null,
-              "NextTokenPath" : null
-            }
-          },
           "ReplaceAssociation" : {
             "Request" : {
               "Method" : "replaceNetworkAclAssociation",
@@ -4819,6 +4777,51 @@
               "LimitPath" : null
             },
             "Response" : null
+          },
+          "CreateTags" : {
+            "Request" : {
+              "Method" : "createTags",
+              "ClientRequestType" : "com.amazonaws.services.ec2.model.CreateTagsRequest",
+              "ClientResponseType" : "Void",
+              "IdentifierMappings" : [ {
+                "Source" : "Id",
+                "Target" : [ "Resources", "0" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.util.List<com.amazonaws.services.ec2.model.Tag>",
+                "Name" : "Tags"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.util.List<com.amazonaws.services.ec2.model.Tag>",
+                  "Name" : "Tags"
+                } ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : {
+                "Type" : "Tag",
+                "ParentIdentifierMappings" : [ {
+                  "Source" : "Id",
+                  "Target" : "ResourceId"
+                } ],
+                "RequestParamMappings" : [ {
+                  "Source" : [ "Tags", "*:com.amazonaws.services.ec2.model.Tag", "Key" ],
+                  "Target" : "Key"
+                }, {
+                  "Source" : [ "Tags", "*:com.amazonaws.services.ec2.model.Tag", "Value" ],
+                  "Target" : "Value"
+                } ],
+                "ResponseIdentifierMappings" : [ ],
+                "Path" : null
+              },
+              "DataMapping" : null,
+              "NextTokenPath" : null
+            }
           }
         }
       }
@@ -4832,7 +4835,7 @@
         },
         "IdentifierMappings" : [ ]
       },
-      "RouteTable" : {
+      "Instance" : {
         "ParameterType" : "java.lang.String",
         "ParameterMapping" : {
           "Source" : "Id",
@@ -4840,7 +4843,7 @@
         },
         "IdentifierMappings" : [ ]
       },
-      "Instance" : {
+      "RouteTable" : {
         "ParameterType" : "java.lang.String",
         "ParameterMapping" : {
           "Source" : "Id",
@@ -4872,14 +4875,6 @@
         },
         "IdentifierMappings" : [ ]
       },
-      "PlacementGroup" : {
-        "ParameterType" : "java.lang.String",
-        "ParameterMapping" : {
-          "Source" : "Name",
-          "Target" : "Name"
-        },
-        "IdentifierMappings" : [ ]
-      },
       "InternetGateway" : {
         "ParameterType" : "java.lang.String",
         "ParameterMapping" : {
@@ -4888,7 +4883,15 @@
         },
         "IdentifierMappings" : [ ]
       },
-      "RouteTableAssociation" : {
+      "PlacementGroup" : {
+        "ParameterType" : "java.lang.String",
+        "ParameterMapping" : {
+          "Source" : "Name",
+          "Target" : "Name"
+        },
+        "IdentifierMappings" : [ ]
+      },
+      "Subnet" : {
         "ParameterType" : "java.lang.String",
         "ParameterMapping" : {
           "Source" : "Id",
@@ -4896,7 +4899,7 @@
         },
         "IdentifierMappings" : [ ]
       },
-      "Subnet" : {
+      "RouteTableAssociation" : {
         "ParameterType" : "java.lang.String",
         "ParameterMapping" : {
           "Source" : "Id",
@@ -5302,43 +5305,6 @@
           }
         }
       },
-      "Subnets" : {
-        "Type" : "Subnet",
-        "ListAction" : {
-          "Request" : {
-            "Method" : "describeSubnets",
-            "ClientRequestType" : "com.amazonaws.services.ec2.model.DescribeSubnetsRequest",
-            "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeSubnetsResult",
-            "IdentifierMappings" : [ ],
-            "AttributeMappings" : [ ],
-            "ParameterMappings" : [ {
-              "Type" : "java.util.List<String>",
-              "Name" : "SubnetIds"
-            }, {
-              "Type" : "java.util.List<com.amazonaws.services.ec2.model.Filter>",
-              "Name" : "Filters"
-            } ],
-            "ConstantMappings" : [ ],
-            "ConvenientMethods" : [ ],
-            "TokenPath" : null,
-            "LimitPath" : null
-          },
-          "Response" : {
-            "ResourceMapping" : {
-              "Type" : "Subnet",
-              "ParentIdentifierMappings" : [ ],
-              "RequestParamMappings" : [ ],
-              "ResponseIdentifierMappings" : [ {
-                "Source" : [ "Subnets", "*:com.amazonaws.services.ec2.model.Subnet", "SubnetId" ],
-                "Target" : "Id"
-              } ],
-              "Path" : [ "Subnets", "*:com.amazonaws.services.ec2.model.Subnet" ]
-            },
-            "DataMapping" : null,
-            "NextTokenPath" : null
-          }
-        }
-      },
       "Snapshots" : {
         "Type" : "Snapshot",
         "ListAction" : {
@@ -5382,6 +5348,43 @@
           }
         }
       },
+      "Subnets" : {
+        "Type" : "Subnet",
+        "ListAction" : {
+          "Request" : {
+            "Method" : "describeSubnets",
+            "ClientRequestType" : "com.amazonaws.services.ec2.model.DescribeSubnetsRequest",
+            "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeSubnetsResult",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ {
+              "Type" : "java.util.List<String>",
+              "Name" : "SubnetIds"
+            }, {
+              "Type" : "java.util.List<com.amazonaws.services.ec2.model.Filter>",
+              "Name" : "Filters"
+            } ],
+            "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : {
+              "Type" : "Subnet",
+              "ParentIdentifierMappings" : [ ],
+              "RequestParamMappings" : [ ],
+              "ResponseIdentifierMappings" : [ {
+                "Source" : [ "Subnets", "*:com.amazonaws.services.ec2.model.Subnet", "SubnetId" ],
+                "Target" : "Id"
+              } ],
+              "Path" : [ "Subnets", "*:com.amazonaws.services.ec2.model.Subnet" ]
+            },
+            "DataMapping" : null,
+            "NextTokenPath" : null
+          }
+        }
+      },
       "PlacementGroups" : {
         "Type" : "PlacementGroup",
         "ListAction" : {
@@ -5413,43 +5416,6 @@
                 "Target" : "Name"
               } ],
               "Path" : [ "PlacementGroups", "*:com.amazonaws.services.ec2.model.PlacementGroup" ]
-            },
-            "DataMapping" : null,
-            "NextTokenPath" : null
-          }
-        }
-      },
-      "RouteTables" : {
-        "Type" : "RouteTable",
-        "ListAction" : {
-          "Request" : {
-            "Method" : "describeRouteTables",
-            "ClientRequestType" : "com.amazonaws.services.ec2.model.DescribeRouteTablesRequest",
-            "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeRouteTablesResult",
-            "IdentifierMappings" : [ ],
-            "AttributeMappings" : [ ],
-            "ParameterMappings" : [ {
-              "Type" : "java.util.List<String>",
-              "Name" : "RouteTableIds"
-            }, {
-              "Type" : "java.util.List<com.amazonaws.services.ec2.model.Filter>",
-              "Name" : "Filters"
-            } ],
-            "ConstantMappings" : [ ],
-            "ConvenientMethods" : [ ],
-            "TokenPath" : null,
-            "LimitPath" : null
-          },
-          "Response" : {
-            "ResourceMapping" : {
-              "Type" : "RouteTable",
-              "ParentIdentifierMappings" : [ ],
-              "RequestParamMappings" : [ ],
-              "ResponseIdentifierMappings" : [ {
-                "Source" : [ "RouteTables", "*:com.amazonaws.services.ec2.model.RouteTable", "RouteTableId" ],
-                "Target" : "Id"
-              } ],
-              "Path" : [ "RouteTables", "*:com.amazonaws.services.ec2.model.RouteTable" ]
             },
             "DataMapping" : null,
             "NextTokenPath" : null
@@ -5493,6 +5459,43 @@
           }
         }
       },
+      "RouteTables" : {
+        "Type" : "RouteTable",
+        "ListAction" : {
+          "Request" : {
+            "Method" : "describeRouteTables",
+            "ClientRequestType" : "com.amazonaws.services.ec2.model.DescribeRouteTablesRequest",
+            "ClientResponseType" : "com.amazonaws.services.ec2.model.DescribeRouteTablesResult",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ {
+              "Type" : "java.util.List<String>",
+              "Name" : "RouteTableIds"
+            }, {
+              "Type" : "java.util.List<com.amazonaws.services.ec2.model.Filter>",
+              "Name" : "Filters"
+            } ],
+            "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : {
+              "Type" : "RouteTable",
+              "ParentIdentifierMappings" : [ ],
+              "RequestParamMappings" : [ ],
+              "ResponseIdentifierMappings" : [ {
+                "Source" : [ "RouteTables", "*:com.amazonaws.services.ec2.model.RouteTable", "RouteTableId" ],
+                "Target" : "Id"
+              } ],
+              "Path" : [ "RouteTables", "*:com.amazonaws.services.ec2.model.RouteTable" ]
+            },
+            "DataMapping" : null,
+            "NextTokenPath" : null
+          }
+        }
+      },
       "Volumes" : {
         "Type" : "Volume",
         "ListAction" : {
@@ -5508,18 +5511,17 @@
             }, {
               "Type" : "java.util.List<com.amazonaws.services.ec2.model.Filter>",
               "Name" : "Filters"
+            }, {
+              "Type" : "java.lang.String",
+              "Name" : "NextToken"
+            }, {
+              "Type" : "java.lang.Integer",
+              "Name" : "MaxResults"
             } ],
             "ConstantMappings" : [ ],
-            "ConvenientMethods" : [ {
-              "Arguments" : [ ]
-            }, {
-              "Arguments" : [ {
-                "Type" : "java.util.List<String>",
-                "Name" : "VolumeIds"
-              } ]
-            } ],
-            "TokenPath" : null,
-            "LimitPath" : null
+            "ConvenientMethods" : [ ],
+            "TokenPath" : [ "NextToken" ],
+            "LimitPath" : [ "MaxResults" ]
           },
           "Response" : {
             "ResourceMapping" : {
@@ -5533,7 +5535,7 @@
               "Path" : [ "Volumes", "*:com.amazonaws.services.ec2.model.Volume" ]
             },
             "DataMapping" : null,
-            "NextTokenPath" : null
+            "NextTokenPath" : [ "NextToken" ]
           }
         }
       }
@@ -5736,37 +5738,6 @@
           "NextTokenPath" : null
         }
       },
-      "CreateRouteTable" : {
-        "Request" : {
-          "Method" : "createRouteTable",
-          "ClientRequestType" : "com.amazonaws.services.ec2.model.CreateRouteTableRequest",
-          "ClientResponseType" : "com.amazonaws.services.ec2.model.CreateRouteTableResult",
-          "IdentifierMappings" : [ ],
-          "AttributeMappings" : [ ],
-          "ParameterMappings" : [ {
-            "Type" : "java.lang.String",
-            "Name" : "VpcId"
-          } ],
-          "ConstantMappings" : [ ],
-          "ConvenientMethods" : [ ],
-          "TokenPath" : null,
-          "LimitPath" : null
-        },
-        "Response" : {
-          "ResourceMapping" : {
-            "Type" : "RouteTable",
-            "ParentIdentifierMappings" : [ ],
-            "RequestParamMappings" : [ ],
-            "ResponseIdentifierMappings" : [ {
-              "Source" : [ "RouteTable", "RouteTableId" ],
-              "Target" : "Id"
-            } ],
-            "Path" : [ "RouteTable" ]
-          },
-          "DataMapping" : null,
-          "NextTokenPath" : null
-        }
-      },
       "CreatePlacementGroup" : {
         "Request" : {
           "Method" : "createPlacementGroup",
@@ -5811,6 +5782,37 @@
           "NextTokenPath" : null
         }
       },
+      "CreateRouteTable" : {
+        "Request" : {
+          "Method" : "createRouteTable",
+          "ClientRequestType" : "com.amazonaws.services.ec2.model.CreateRouteTableRequest",
+          "ClientResponseType" : "com.amazonaws.services.ec2.model.CreateRouteTableResult",
+          "IdentifierMappings" : [ ],
+          "AttributeMappings" : [ ],
+          "ParameterMappings" : [ {
+            "Type" : "java.lang.String",
+            "Name" : "VpcId"
+          } ],
+          "ConstantMappings" : [ ],
+          "ConvenientMethods" : [ ],
+          "TokenPath" : null,
+          "LimitPath" : null
+        },
+        "Response" : {
+          "ResourceMapping" : {
+            "Type" : "RouteTable",
+            "ParentIdentifierMappings" : [ ],
+            "RequestParamMappings" : [ ],
+            "ResponseIdentifierMappings" : [ {
+              "Source" : [ "RouteTable", "RouteTableId" ],
+              "Target" : "Id"
+            } ],
+            "Path" : [ "RouteTable" ]
+          },
+          "DataMapping" : null,
+          "NextTokenPath" : null
+        }
+      },
       "CreateDhcpOptions" : {
         "Request" : {
           "Method" : "createDhcpOptions",
@@ -5844,6 +5846,73 @@
               "Target" : "Id"
             } ],
             "Path" : [ "DhcpOptions" ]
+          },
+          "DataMapping" : null,
+          "NextTokenPath" : null
+        }
+      },
+      "CreateVolume" : {
+        "Request" : {
+          "Method" : "createVolume",
+          "ClientRequestType" : "com.amazonaws.services.ec2.model.CreateVolumeRequest",
+          "ClientResponseType" : "com.amazonaws.services.ec2.model.CreateVolumeResult",
+          "IdentifierMappings" : [ ],
+          "AttributeMappings" : [ ],
+          "ParameterMappings" : [ {
+            "Type" : "java.lang.Integer",
+            "Name" : "Size"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "SnapshotId"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "AvailabilityZone"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "VolumeType"
+          }, {
+            "Type" : "java.lang.Integer",
+            "Name" : "Iops"
+          }, {
+            "Type" : "java.lang.Boolean",
+            "Name" : "Encrypted"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "KmsKeyId"
+          } ],
+          "ConstantMappings" : [ ],
+          "ConvenientMethods" : [ {
+            "Arguments" : [ ]
+          }, {
+            "Arguments" : [ {
+              "Type" : "java.lang.String",
+              "Name" : "AvailabilityZone"
+            }, {
+              "Type" : "java.lang.Integer",
+              "Name" : "Size"
+            } ]
+          }, {
+            "Arguments" : [ {
+              "Type" : "java.lang.String",
+              "Name" : "SnapshotId"
+            }, {
+              "Type" : "java.lang.String",
+              "Name" : "AvailabilityZone"
+            } ]
+          } ],
+          "TokenPath" : null,
+          "LimitPath" : null
+        },
+        "Response" : {
+          "ResourceMapping" : {
+            "Type" : "Image",
+            "ParentIdentifierMappings" : [ ],
+            "RequestParamMappings" : [ ],
+            "ResponseIdentifierMappings" : [ {
+              "Source" : [ "Volume", "VolumeId" ],
+              "Target" : "Id"
+            } ],
+            "Path" : [ "Volume" ]
           },
           "DataMapping" : null,
           "NextTokenPath" : null
@@ -5951,70 +6020,6 @@
               "Target" : "Id"
             } ],
             "Path" : [ "Reservation", "Instances", "*:com.amazonaws.services.ec2.model.Instance" ]
-          },
-          "DataMapping" : null,
-          "NextTokenPath" : null
-        }
-      },
-      "CreateVolume" : {
-        "Request" : {
-          "Method" : "createVolume",
-          "ClientRequestType" : "com.amazonaws.services.ec2.model.CreateVolumeRequest",
-          "ClientResponseType" : "com.amazonaws.services.ec2.model.CreateVolumeResult",
-          "IdentifierMappings" : [ ],
-          "AttributeMappings" : [ ],
-          "ParameterMappings" : [ {
-            "Type" : "java.lang.Integer",
-            "Name" : "Size"
-          }, {
-            "Type" : "java.lang.String",
-            "Name" : "SnapshotId"
-          }, {
-            "Type" : "java.lang.String",
-            "Name" : "AvailabilityZone"
-          }, {
-            "Type" : "java.lang.String",
-            "Name" : "VolumeType"
-          }, {
-            "Type" : "java.lang.Integer",
-            "Name" : "Iops"
-          }, {
-            "Type" : "java.lang.Boolean",
-            "Name" : "Encrypted"
-          } ],
-          "ConstantMappings" : [ ],
-          "ConvenientMethods" : [ {
-            "Arguments" : [ ]
-          }, {
-            "Arguments" : [ {
-              "Type" : "java.lang.String",
-              "Name" : "AvailabilityZone"
-            }, {
-              "Type" : "java.lang.Integer",
-              "Name" : "Size"
-            } ]
-          }, {
-            "Arguments" : [ {
-              "Type" : "java.lang.String",
-              "Name" : "SnapshotId"
-            }, {
-              "Type" : "java.lang.String",
-              "Name" : "AvailabilityZone"
-            } ]
-          } ],
-          "TokenPath" : null,
-          "LimitPath" : null
-        },
-        "Response" : {
-          "ResourceMapping" : {
-            "Type" : "Image",
-            "ParentIdentifierMappings" : [ ],
-            "RequestParamMappings" : [ ],
-            "ResponseIdentifierMappings" : [ {
-              "Source" : [ "Volume", "VolumeId" ],
-              "Target" : "Id"
-            } ],
-            "Path" : [ "Volume" ]
           },
           "DataMapping" : null,
           "NextTokenPath" : null

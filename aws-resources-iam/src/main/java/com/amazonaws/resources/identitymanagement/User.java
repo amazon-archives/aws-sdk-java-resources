@@ -113,6 +113,13 @@ public interface User {
     String getName();
 
     /**
+     * Gets the value of the PasswordLastUsed attribute. If this resource is not
+     * yet loaded, a call to {@code load()} is made to retrieve the value of the
+     * attribute.
+     */
+    Date getPasswordLastUsed();
+
+    /**
      * Gets the value of the Arn attribute. If this resource is not yet loaded,
      * a call to {@code load()} is made to retrieve the value of the attribute.
      */

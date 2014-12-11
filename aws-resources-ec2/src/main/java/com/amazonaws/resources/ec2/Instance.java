@@ -95,7 +95,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InstanceIds[*]</code></b>
+     *     <b><code>InstanceIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -118,7 +118,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InstanceIds[*]</code></b>
+     *     <b><code>InstanceIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -435,7 +435,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InstanceIds[*]</code></b>
+     *     <b><code>InstanceIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -458,7 +458,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InstanceIds[*]</code></b>
+     *     <b><code>InstanceIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -486,6 +486,66 @@ public interface Instance {
      */
     TerminateInstancesResult terminate(ResultCapture<TerminateInstancesResult>
             extractor);
+
+    /**
+     * Performs the <code>Start</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceIds.0</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see StartInstancesRequest
+     */
+    StartInstancesResult start(StartInstancesRequest request);
+
+    /**
+     * Performs the <code>Start</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceIds.0</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see StartInstancesRequest
+     */
+    StartInstancesResult start(StartInstancesRequest request,
+            ResultCapture<StartInstancesResult> extractor);
+
+    /**
+     * The convenient method form for the <code>Start</code> action.
+     *
+     * @see #start(StartInstancesRequest)
+     */
+    StartInstancesResult start();
+
+    /**
+     * The convenient method form for the <code>Start</code> action.
+     *
+     * @see #start(StartInstancesRequest, ResultCapture)
+     */
+    StartInstancesResult start(ResultCapture<StartInstancesResult> extractor);
 
     /**
      * Performs the <code>ResetRamdisk</code> action.
@@ -550,66 +610,6 @@ public interface Instance {
      * @see #resetRamdisk(ResetInstanceAttributeRequest, ResultCapture)
      */
     void resetRamdisk(ResultCapture<Void> extractor);
-
-    /**
-     * Performs the <code>Start</code> action.
-     *
-     * <p>
-     * The following request parameters will be populated from the data of this
-     * <code>Instance</code> resource, and any conflicting parameter value set
-     * in the request will be overridden:
-     * <ul>
-     *   <li>
-     *     <b><code>InstanceIds[*]</code></b>
-     *         - mapped from the <code>Id</code> identifier.
-     *   </li>
-     * </ul>
-     *
-     * <p>
-     *
-     * @return The response of the low-level client operation associated with
-     *         this resource action.
-     * @see StartInstancesRequest
-     */
-    StartInstancesResult start(StartInstancesRequest request);
-
-    /**
-     * Performs the <code>Start</code> action and use a ResultCapture to
-     * retrieve the low-level client response.
-     *
-     * <p>
-     * The following request parameters will be populated from the data of this
-     * <code>Instance</code> resource, and any conflicting parameter value set
-     * in the request will be overridden:
-     * <ul>
-     *   <li>
-     *     <b><code>InstanceIds[*]</code></b>
-     *         - mapped from the <code>Id</code> identifier.
-     *   </li>
-     * </ul>
-     *
-     * <p>
-     *
-     * @return The response of the low-level client operation associated with
-     *         this resource action.
-     * @see StartInstancesRequest
-     */
-    StartInstancesResult start(StartInstancesRequest request,
-            ResultCapture<StartInstancesResult> extractor);
-
-    /**
-     * The convenient method form for the <code>Start</code> action.
-     *
-     * @see #start(StartInstancesRequest)
-     */
-    StartInstancesResult start();
-
-    /**
-     * The convenient method form for the <code>Start</code> action.
-     *
-     * @see #start(StartInstancesRequest, ResultCapture)
-     */
-    StartInstancesResult start(ResultCapture<StartInstancesResult> extractor);
 
     /**
      * Performs the <code>ConsoleOutput</code> action.
@@ -681,7 +681,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Instances[*]</code></b>
+     *     <b><code>Instances.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -702,7 +702,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Instances[*]</code></b>
+     *     <b><code>Instances.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -822,6 +822,66 @@ public interface Instance {
             ResultCapture<AttachVolumeResult> extractor);
 
     /**
+     * Performs the <code>Stop</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceIds.0</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see StopInstancesRequest
+     */
+    StopInstancesResult stop(StopInstancesRequest request);
+
+    /**
+     * Performs the <code>Stop</code> action and use a ResultCapture to retrieve
+     * the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceIds.0</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return The response of the low-level client operation associated with
+     *         this resource action.
+     * @see StopInstancesRequest
+     */
+    StopInstancesResult stop(StopInstancesRequest request,
+            ResultCapture<StopInstancesResult> extractor);
+
+    /**
+     * The convenient method form for the <code>Stop</code> action.
+     *
+     * @see #stop(StopInstancesRequest)
+     */
+    StopInstancesResult stop();
+
+    /**
+     * The convenient method form for the <code>Stop</code> action.
+     *
+     * @see #stop(StopInstancesRequest, ResultCapture)
+     */
+    StopInstancesResult stop(ResultCapture<StopInstancesResult> extractor);
+
+    /**
      * Performs the <code>CreateImage</code> action.
      *
      * <p>
@@ -881,66 +941,6 @@ public interface Instance {
      */
     com.amazonaws.resources.ec2.Image createImage(String name,
             ResultCapture<CreateImageResult> extractor);
-
-    /**
-     * Performs the <code>Stop</code> action.
-     *
-     * <p>
-     * The following request parameters will be populated from the data of this
-     * <code>Instance</code> resource, and any conflicting parameter value set
-     * in the request will be overridden:
-     * <ul>
-     *   <li>
-     *     <b><code>InstanceIds[*]</code></b>
-     *         - mapped from the <code>Id</code> identifier.
-     *   </li>
-     * </ul>
-     *
-     * <p>
-     *
-     * @return The response of the low-level client operation associated with
-     *         this resource action.
-     * @see StopInstancesRequest
-     */
-    StopInstancesResult stop(StopInstancesRequest request);
-
-    /**
-     * Performs the <code>Stop</code> action and use a ResultCapture to retrieve
-     * the low-level client response.
-     *
-     * <p>
-     * The following request parameters will be populated from the data of this
-     * <code>Instance</code> resource, and any conflicting parameter value set
-     * in the request will be overridden:
-     * <ul>
-     *   <li>
-     *     <b><code>InstanceIds[*]</code></b>
-     *         - mapped from the <code>Id</code> identifier.
-     *   </li>
-     * </ul>
-     *
-     * <p>
-     *
-     * @return The response of the low-level client operation associated with
-     *         this resource action.
-     * @see StopInstancesRequest
-     */
-    StopInstancesResult stop(StopInstancesRequest request,
-            ResultCapture<StopInstancesResult> extractor);
-
-    /**
-     * The convenient method form for the <code>Stop</code> action.
-     *
-     * @see #stop(StopInstancesRequest)
-     */
-    StopInstancesResult stop();
-
-    /**
-     * The convenient method form for the <code>Stop</code> action.
-     *
-     * @see #stop(StopInstancesRequest, ResultCapture)
-     */
-    StopInstancesResult stop(ResultCapture<StopInstancesResult> extractor);
 
     /**
      * Performs the <code>PasswordData</code> action.
@@ -1068,7 +1068,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InstanceIds[*]</code></b>
+     *     <b><code>InstanceIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -1091,7 +1091,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InstanceIds[*]</code></b>
+     *     <b><code>InstanceIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -1119,61 +1119,6 @@ public interface Instance {
      */
     MonitorInstancesResult monitor(ResultCapture<MonitorInstancesResult>
             extractor);
-
-    /**
-     * Performs the <code>Reboot</code> action.
-     *
-     * <p>
-     * The following request parameters will be populated from the data of this
-     * <code>Instance</code> resource, and any conflicting parameter value set
-     * in the request will be overridden:
-     * <ul>
-     *   <li>
-     *     <b><code>InstanceIds[*]</code></b>
-     *         - mapped from the <code>Id</code> identifier.
-     *   </li>
-     * </ul>
-     *
-     * <p>
-     *
-     * @see RebootInstancesRequest
-     */
-    void reboot(RebootInstancesRequest request);
-
-    /**
-     * Performs the <code>Reboot</code> action and use a ResultCapture to
-     * retrieve the low-level client response.
-     *
-     * <p>
-     * The following request parameters will be populated from the data of this
-     * <code>Instance</code> resource, and any conflicting parameter value set
-     * in the request will be overridden:
-     * <ul>
-     *   <li>
-     *     <b><code>InstanceIds[*]</code></b>
-     *         - mapped from the <code>Id</code> identifier.
-     *   </li>
-     * </ul>
-     *
-     * <p>
-     *
-     * @see RebootInstancesRequest
-     */
-    void reboot(RebootInstancesRequest request, ResultCapture<Void> extractor);
-
-    /**
-     * The convenient method form for the <code>Reboot</code> action.
-     *
-     * @see #reboot(RebootInstancesRequest)
-     */
-    void reboot();
-
-    /**
-     * The convenient method form for the <code>Reboot</code> action.
-     *
-     * @see #reboot(RebootInstancesRequest, ResultCapture)
-     */
-    void reboot(ResultCapture<Void> extractor);
 
     /**
      * Performs the <code>ResetSourceDestCheck</code> action.
@@ -1242,6 +1187,61 @@ public interface Instance {
     void resetSourceDestCheck(ResultCapture<Void> extractor);
 
     /**
+     * Performs the <code>Reboot</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceIds.0</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see RebootInstancesRequest
+     */
+    void reboot(RebootInstancesRequest request);
+
+    /**
+     * Performs the <code>Reboot</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>InstanceIds.0</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see RebootInstancesRequest
+     */
+    void reboot(RebootInstancesRequest request, ResultCapture<Void> extractor);
+
+    /**
+     * The convenient method form for the <code>Reboot</code> action.
+     *
+     * @see #reboot(RebootInstancesRequest)
+     */
+    void reboot();
+
+    /**
+     * The convenient method form for the <code>Reboot</code> action.
+     *
+     * @see #reboot(RebootInstancesRequest, ResultCapture)
+     */
+    void reboot(ResultCapture<Void> extractor);
+
+    /**
      * Performs the <code>Unmonitor</code> action.
      *
      * <p>
@@ -1250,7 +1250,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InstanceIds[*]</code></b>
+     *     <b><code>InstanceIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -1273,7 +1273,7 @@ public interface Instance {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InstanceIds[*]</code></b>
+     *     <b><code>InstanceIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -1422,67 +1422,6 @@ public interface Instance {
             ResultCapture<DescribeInstanceAttributeResult> extractor);
 
     /**
-     * Performs the <code>CreateTags</code> action.
-     *
-     * <p>
-     * The following request parameters will be populated from the data of this
-     * <code>Instance</code> resource, and any conflicting parameter value set
-     * in the request will be overridden:
-     * <ul>
-     *   <li>
-     *     <b><code>Resources[*]</code></b>
-     *         - mapped from the <code>Id</code> identifier.
-     *   </li>
-     * </ul>
-     *
-     * <p>
-     *
-     * @return A list of <code>Tag</code> resource objects associated with the
-     *         result of this action.
-     * @see CreateTagsRequest
-     */
-    List<com.amazonaws.resources.ec2.Tag> createTags(CreateTagsRequest request);
-
-    /**
-     * Performs the <code>CreateTags</code> action and use a ResultCapture to
-     * retrieve the low-level client response.
-     *
-     * <p>
-     * The following request parameters will be populated from the data of this
-     * <code>Instance</code> resource, and any conflicting parameter value set
-     * in the request will be overridden:
-     * <ul>
-     *   <li>
-     *     <b><code>Resources[*]</code></b>
-     *         - mapped from the <code>Id</code> identifier.
-     *   </li>
-     * </ul>
-     *
-     * <p>
-     *
-     * @return A list of <code>Tag</code> resource objects associated with the
-     *         result of this action.
-     * @see CreateTagsRequest
-     */
-    List<com.amazonaws.resources.ec2.Tag> createTags(CreateTagsRequest request,
-            ResultCapture<Void> extractor);
-
-    /**
-     * The convenient method form for the <code>CreateTags</code> action.
-     *
-     * @see #createTags(CreateTagsRequest)
-     */
-    List<com.amazonaws.resources.ec2.Tag> createTags(List<Tag> tags);
-
-    /**
-     * The convenient method form for the <code>CreateTags</code> action.
-     *
-     * @see #createTags(CreateTagsRequest, ResultCapture)
-     */
-    List<com.amazonaws.resources.ec2.Tag> createTags(List<Tag> tags,
-            ResultCapture<Void> extractor);
-
-    /**
      * Performs the <code>ResetKernel</code> action.
      *
      * <p>
@@ -1545,4 +1484,65 @@ public interface Instance {
      * @see #resetKernel(ResetInstanceAttributeRequest, ResultCapture)
      */
     void resetKernel(ResultCapture<Void> extractor);
+
+    /**
+     * Performs the <code>CreateTags</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>Resources.0</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return A list of <code>Tag</code> resource objects associated with the
+     *         result of this action.
+     * @see CreateTagsRequest
+     */
+    List<com.amazonaws.resources.ec2.Tag> createTags(CreateTagsRequest request);
+
+    /**
+     * Performs the <code>CreateTags</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Instance</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>Resources.0</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return A list of <code>Tag</code> resource objects associated with the
+     *         result of this action.
+     * @see CreateTagsRequest
+     */
+    List<com.amazonaws.resources.ec2.Tag> createTags(CreateTagsRequest request,
+            ResultCapture<Void> extractor);
+
+    /**
+     * The convenient method form for the <code>CreateTags</code> action.
+     *
+     * @see #createTags(CreateTagsRequest)
+     */
+    List<com.amazonaws.resources.ec2.Tag> createTags(List<Tag> tags);
+
+    /**
+     * The convenient method form for the <code>CreateTags</code> action.
+     *
+     * @see #createTags(CreateTagsRequest, ResultCapture)
+     */
+    List<com.amazonaws.resources.ec2.Tag> createTags(List<Tag> tags,
+            ResultCapture<Void> extractor);
 }

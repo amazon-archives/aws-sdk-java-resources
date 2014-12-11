@@ -86,31 +86,6 @@ class NotificationImpl implements Notification {
     }
 
     @Override
-    public void delete(DeleteVaultNotificationsRequest request) {
-        delete(request, null);
-    }
-
-    @Override
-    public void delete(DeleteVaultNotificationsRequest request,
-            ResultCapture<Void> extractor) {
-
-        resource.performAction("Delete", request, extractor);
-    }
-
-    @Override
-    public void delete() {
-        delete((ResultCapture<Void>)null);
-    }
-
-    @Override
-    public void delete(ResultCapture<Void> extractor) {
-        DeleteVaultNotificationsRequest request = new
-                DeleteVaultNotificationsRequest();
-
-        delete(request, extractor);
-    }
-
-    @Override
     public void set(SetVaultNotificationsRequest request) {
         set(request, null);
     }
@@ -136,6 +111,31 @@ class NotificationImpl implements Notification {
 
             .withVaultNotificationConfig(vaultNotificationConfig);
         set(request, extractor);
+    }
+
+    @Override
+    public void delete(DeleteVaultNotificationsRequest request) {
+        delete(request, null);
+    }
+
+    @Override
+    public void delete(DeleteVaultNotificationsRequest request,
+            ResultCapture<Void> extractor) {
+
+        resource.performAction("Delete", request, extractor);
+    }
+
+    @Override
+    public void delete() {
+        delete((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void delete(ResultCapture<Void> extractor) {
+        DeleteVaultNotificationsRequest request = new
+                DeleteVaultNotificationsRequest();
+
+        delete(request, extractor);
     }
 
     private static class Codec implements ResourceCodec<Notification> {

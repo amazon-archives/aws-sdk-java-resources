@@ -62,7 +62,7 @@ public interface InternetGateway {
      * value set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InternetGatewayIds[*]</code></b>
+     *     <b><code>InternetGatewayIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -85,7 +85,7 @@ public interface InternetGateway {
      * value set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>InternetGatewayIds[*]</code></b>
+     *     <b><code>InternetGatewayIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -212,7 +212,7 @@ public interface InternetGateway {
      * value set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[*]</code></b>
+     *     <b><code>Resources.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -235,7 +235,7 @@ public interface InternetGateway {
      * value set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[*]</code></b>
+     *     <b><code>Resources.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>

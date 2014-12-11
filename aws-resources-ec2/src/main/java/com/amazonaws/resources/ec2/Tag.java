@@ -56,11 +56,11 @@ public interface Tag {
      * request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Filters[0].Values[*]</code></b>
+     *     <b><code>Filters[0].Values.0</code></b>
      *         - mapped from the <code>Key</code> identifier.
      *   </li>
      *   <li>
-     *     <b><code>Filters[1].Values[*]</code></b>
+     *     <b><code>Filters[1].Values.0</code></b>
      *         - mapped from the <code>Value</code> identifier.
      *   </li>
      *   <li>
@@ -91,11 +91,11 @@ public interface Tag {
      * request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Filters[0].Values[*]</code></b>
+     *     <b><code>Filters[0].Values.0</code></b>
      *         - mapped from the <code>Key</code> identifier.
      *   </li>
      *   <li>
-     *     <b><code>Filters[1].Values[*]</code></b>
+     *     <b><code>Filters[1].Values.0</code></b>
      *         - mapped from the <code>Value</code> identifier.
      *   </li>
      *   <li>
@@ -152,7 +152,7 @@ public interface Tag {
      * request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[*]</code></b>
+     *     <b><code>Resources.0</code></b>
      *         - mapped from the <code>ResourceId</code> identifier.
      *   </li>
      *   <li>
@@ -181,7 +181,7 @@ public interface Tag {
      * request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[*]</code></b>
+     *     <b><code>Resources.0</code></b>
      *         - mapped from the <code>ResourceId</code> identifier.
      *   </li>
      *   <li>

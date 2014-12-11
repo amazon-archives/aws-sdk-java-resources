@@ -73,7 +73,7 @@ public interface Volume {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>VolumeIds[*]</code></b>
+     *     <b><code>VolumeIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -96,7 +96,7 @@ public interface Volume {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>VolumeIds[*]</code></b>
+     *     <b><code>VolumeIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -136,6 +136,13 @@ public interface Volume {
      * attribute.
      */
     String getVolumeType();
+
+    /**
+     * Gets the value of the KmsKeyId attribute. If this resource is not yet
+     * loaded, a call to {@code load()} is made to retrieve the value of the
+     * attribute.
+     */
+    String getKmsKeyId();
 
     /**
      * Gets the value of the Iops attribute. If this resource is not yet loaded,
@@ -417,7 +424,7 @@ public interface Volume {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>VolumeIds[*]</code></b>
+     *     <b><code>VolumeIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -441,7 +448,7 @@ public interface Volume {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>VolumeIds[*]</code></b>
+     *     <b><code>VolumeIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -505,7 +512,7 @@ public interface Volume {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[*]</code></b>
+     *     <b><code>Resources.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -528,7 +535,7 @@ public interface Volume {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[*]</code></b>
+     *     <b><code>Resources.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>

@@ -141,6 +141,22 @@ class VpcImpl implements Vpc {
     }
 
     @Override
+    public InternetGatewayCollection getInternetGateways() {
+        return getInternetGateways(null);
+    }
+
+    @Override
+    public InternetGatewayCollection getInternetGateways(
+            DescribeInternetGatewaysRequest request) {
+
+        ResourceCollectionImpl result =
+                resource.getCollection("InternetGateways", request);
+
+        if (result == null) return null;
+        return new InternetGatewayCollectionImpl(result);
+    }
+
+    @Override
     public VpcPeeringConnectionCollection getAcceptedVpcPeeringConnections() {
         return getAcceptedVpcPeeringConnections(null);
     }
@@ -155,22 +171,6 @@ class VpcImpl implements Vpc {
 
         if (result == null) return null;
         return new VpcPeeringConnectionCollectionImpl(result);
-    }
-
-    @Override
-    public InternetGatewayCollection getInternetGateways() {
-        return getInternetGateways(null);
-    }
-
-    @Override
-    public InternetGatewayCollection getInternetGateways(
-            DescribeInternetGatewaysRequest request) {
-
-        ResourceCollectionImpl result =
-                resource.getCollection("InternetGateways", request);
-
-        if (result == null) return null;
-        return new InternetGatewayCollectionImpl(result);
     }
 
     @Override
@@ -433,18 +433,6 @@ class VpcImpl implements Vpc {
     }
 
     @Override
-    public void attachInternetGateway(AttachInternetGatewayRequest request) {
-        attachInternetGateway(request, null);
-    }
-
-    @Override
-    public void attachInternetGateway(AttachInternetGatewayRequest request,
-            ResultCapture<Void> extractor) {
-
-        resource.performAction("AttachInternetGateway", request, extractor);
-    }
-
-    @Override
     public void delete(DeleteVpcRequest request) {
         delete(request, null);
     }
@@ -465,6 +453,18 @@ class VpcImpl implements Vpc {
     public void delete(ResultCapture<Void> extractor) {
         DeleteVpcRequest request = new DeleteVpcRequest();
         delete(request, extractor);
+    }
+
+    @Override
+    public void attachInternetGateway(AttachInternetGatewayRequest request) {
+        attachInternetGateway(request, null);
+    }
+
+    @Override
+    public void attachInternetGateway(AttachInternetGatewayRequest request,
+            ResultCapture<Void> extractor) {
+
+        resource.performAction("AttachInternetGateway", request, extractor);
     }
 
     @Override

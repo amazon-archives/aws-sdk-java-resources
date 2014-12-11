@@ -14,14 +14,13 @@
  */
 package com.amazonaws.resources.identitymanagement.internal;
 
-import java.util.Map;
-
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.resources.ResultCapture;
 import com.amazonaws.resources.identitymanagement.AccountAlias;
 import com.amazonaws.resources.identitymanagement.AccountAliasCollection;
 import com.amazonaws.resources.identitymanagement.AccountPasswordPolicy;
+import com.amazonaws.resources.identitymanagement.AccountSummary;
 import com.amazonaws.resources.identitymanagement.Group;
 import com.amazonaws.resources.identitymanagement.GroupCollection;
 import com.amazonaws.resources.identitymanagement.IdentityManagement;
@@ -68,8 +67,6 @@ import
 com.amazonaws.services.identitymanagement.model.CreateVirtualMFADeviceRequest;
 import
 com.amazonaws.services.identitymanagement.model.CreateVirtualMFADeviceResult;
-import com.amazonaws.services.identitymanagement.model.GetAccountSummaryRequest;
-import com.amazonaws.services.identitymanagement.model.GetAccountSummaryResult;
 import com.amazonaws.services.identitymanagement.model.ListAccountAliasesRequest
 ;
 import com.amazonaws.services.identitymanagement.model.ListGroupsRequest;
@@ -140,6 +137,15 @@ public class IdentityManagementImpl implements IdentityManagement {
     }
 
     @Override
+    public AccountPasswordPolicy getAccountPasswordPolicy() {
+        ResourceImpl result = service.getSubResource("AccountPasswordPolicy",
+                null);
+
+        if (result == null) return null;
+        return new AccountPasswordPolicyImpl(result);
+    }
+
+    @Override
     public User getUser(String name) {
         ResourceImpl result = service.getSubResource("User", name);
         if (result == null) return null;
@@ -160,6 +166,13 @@ public class IdentityManagementImpl implements IdentityManagement {
 
         if (result == null) return null;
         return new VirtualMfaDeviceImpl(result);
+    }
+
+    @Override
+    public AccountSummary getAccountSummary() {
+        ResourceImpl result = service.getSubResource("AccountSummary", null);
+        if (result == null) return null;
+        return new AccountSummaryImpl(result);
     }
 
     @Override
@@ -442,24 +455,6 @@ public class IdentityManagementImpl implements IdentityManagement {
         CreateGroupRequest request = new CreateGroupRequest()
             .withGroupName(groupName);
         return createGroup(request, extractor);
-    }
-
-    @Override
-    public Map<String, Integer> accountSummary(GetAccountSummaryRequest request)
-            {
-
-        return accountSummary(request, null);
-    }
-
-    @Override
-    public Map<String, Integer> accountSummary(GetAccountSummaryRequest request,
-            ResultCapture<GetAccountSummaryResult> extractor) {
-
-        ActionResult result = service.performAction("AccountSummary", request,
-                extractor);
-
-        if (result == null) return null;
-        return (Map<String, Integer>) result.getData();
     }
 
     @Override

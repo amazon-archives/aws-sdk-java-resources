@@ -66,7 +66,7 @@ public interface NetworkAcl {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>NetworkAclIds[*]</code></b>
+     *     <b><code>NetworkAclIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -89,7 +89,7 @@ public interface NetworkAcl {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>NetworkAclIds[*]</code></b>
+     *     <b><code>NetworkAclIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -275,67 +275,6 @@ public interface NetworkAcl {
     void delete(DeleteNetworkAclRequest request, ResultCapture<Void> extractor);
 
     /**
-     * Performs the <code>CreateTags</code> action.
-     *
-     * <p>
-     * The following request parameters will be populated from the data of this
-     * <code>NetworkAcl</code> resource, and any conflicting parameter value set
-     * in the request will be overridden:
-     * <ul>
-     *   <li>
-     *     <b><code>Resources[*]</code></b>
-     *         - mapped from the <code>Id</code> identifier.
-     *   </li>
-     * </ul>
-     *
-     * <p>
-     *
-     * @return A list of <code>Tag</code> resource objects associated with the
-     *         result of this action.
-     * @see CreateTagsRequest
-     */
-    List<com.amazonaws.resources.ec2.Tag> createTags(CreateTagsRequest request);
-
-    /**
-     * Performs the <code>CreateTags</code> action and use a ResultCapture to
-     * retrieve the low-level client response.
-     *
-     * <p>
-     * The following request parameters will be populated from the data of this
-     * <code>NetworkAcl</code> resource, and any conflicting parameter value set
-     * in the request will be overridden:
-     * <ul>
-     *   <li>
-     *     <b><code>Resources[*]</code></b>
-     *         - mapped from the <code>Id</code> identifier.
-     *   </li>
-     * </ul>
-     *
-     * <p>
-     *
-     * @return A list of <code>Tag</code> resource objects associated with the
-     *         result of this action.
-     * @see CreateTagsRequest
-     */
-    List<com.amazonaws.resources.ec2.Tag> createTags(CreateTagsRequest request,
-            ResultCapture<Void> extractor);
-
-    /**
-     * The convenient method form for the <code>CreateTags</code> action.
-     *
-     * @see #createTags(CreateTagsRequest)
-     */
-    List<com.amazonaws.resources.ec2.Tag> createTags(List<Tag> tags);
-
-    /**
-     * The convenient method form for the <code>CreateTags</code> action.
-     *
-     * @see #createTags(CreateTagsRequest, ResultCapture)
-     */
-    List<com.amazonaws.resources.ec2.Tag> createTags(List<Tag> tags,
-            ResultCapture<Void> extractor);
-
-    /**
      * Performs the <code>ReplaceAssociation</code> action.
      *
      * <p>
@@ -424,4 +363,65 @@ public interface NetworkAcl {
      */
     void deleteEntry(DeleteNetworkAclEntryRequest request, ResultCapture<Void>
             extractor);
+
+    /**
+     * Performs the <code>CreateTags</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>NetworkAcl</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>Resources.0</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return A list of <code>Tag</code> resource objects associated with the
+     *         result of this action.
+     * @see CreateTagsRequest
+     */
+    List<com.amazonaws.resources.ec2.Tag> createTags(CreateTagsRequest request);
+
+    /**
+     * Performs the <code>CreateTags</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>NetworkAcl</code> resource, and any conflicting parameter value set
+     * in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>Resources.0</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @return A list of <code>Tag</code> resource objects associated with the
+     *         result of this action.
+     * @see CreateTagsRequest
+     */
+    List<com.amazonaws.resources.ec2.Tag> createTags(CreateTagsRequest request,
+            ResultCapture<Void> extractor);
+
+    /**
+     * The convenient method form for the <code>CreateTags</code> action.
+     *
+     * @see #createTags(CreateTagsRequest)
+     */
+    List<com.amazonaws.resources.ec2.Tag> createTags(List<Tag> tags);
+
+    /**
+     * The convenient method form for the <code>CreateTags</code> action.
+     *
+     * @see #createTags(CreateTagsRequest, ResultCapture)
+     */
+    List<com.amazonaws.resources.ec2.Tag> createTags(List<Tag> tags,
+            ResultCapture<Void> extractor);
 }

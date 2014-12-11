@@ -12,19 +12,13 @@
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package com.amazonaws.resources;
+package com.amazonaws.resources.sns;
+
+import com.amazonaws.resources.ResourceCollection;
 
 /**
- * Base interface for all Resource types, compile-time binding them to the
- * appropriate client interface.
- *
- * @param <C> the low-level client interface for this resource
+ * A collection of PlatformApplication resources.
  */
-public interface Resource<C> {
-    /**
-     * Returns the low-level SDK client this resource uses.
-     *
-     * @return the low-level SDK client this resource uses
-     */
-    C client();
+public interface PlatformApplicationCollection extends
+        ResourceCollection<PlatformApplication> {
 }

@@ -61,7 +61,7 @@ public interface DhcpOptions {
      * set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>DhcpOptionsIds[*]</code></b>
+     *     <b><code>DhcpOptionsIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -84,7 +84,7 @@ public interface DhcpOptions {
      * set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>DhcpOptionsIds[*]</code></b>
+     *     <b><code>DhcpOptionsIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -183,7 +183,7 @@ public interface DhcpOptions {
      * set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[*]</code></b>
+     *     <b><code>Resources.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -206,7 +206,7 @@ public interface DhcpOptions {
      * set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[*]</code></b>
+     *     <b><code>Resources.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>

@@ -103,6 +103,11 @@ class SnapshotImpl implements Snapshot {
     }
 
     @Override
+    public String getKmsKeyId() {
+        return (String) resource.getAttribute("KmsKeyId");
+    }
+
+    @Override
     public String getOwnerId() {
         return (String) resource.getAttribute("OwnerId");
     }

@@ -370,31 +370,6 @@ class InstanceImpl implements Instance {
     }
 
     @Override
-    public void resetRamdisk(ResetInstanceAttributeRequest request) {
-        resetRamdisk(request, null);
-    }
-
-    @Override
-    public void resetRamdisk(ResetInstanceAttributeRequest request,
-            ResultCapture<Void> extractor) {
-
-        resource.performAction("ResetRamdisk", request, extractor);
-    }
-
-    @Override
-    public void resetRamdisk() {
-        resetRamdisk((ResultCapture<Void>)null);
-    }
-
-    @Override
-    public void resetRamdisk(ResultCapture<Void> extractor) {
-        ResetInstanceAttributeRequest request = new
-                ResetInstanceAttributeRequest();
-
-        resetRamdisk(request, extractor);
-    }
-
-    @Override
     public StartInstancesResult start(StartInstancesRequest request) {
         return start(request, null);
     }
@@ -421,6 +396,31 @@ class InstanceImpl implements Instance {
 
         StartInstancesRequest request = new StartInstancesRequest();
         return start(request, extractor);
+    }
+
+    @Override
+    public void resetRamdisk(ResetInstanceAttributeRequest request) {
+        resetRamdisk(request, null);
+    }
+
+    @Override
+    public void resetRamdisk(ResetInstanceAttributeRequest request,
+            ResultCapture<Void> extractor) {
+
+        resource.performAction("ResetRamdisk", request, extractor);
+    }
+
+    @Override
+    public void resetRamdisk() {
+        resetRamdisk((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void resetRamdisk(ResultCapture<Void> extractor) {
+        ResetInstanceAttributeRequest request = new
+                ResetInstanceAttributeRequest();
+
+        resetRamdisk(request, extractor);
     }
 
     @Override
@@ -515,6 +515,35 @@ class InstanceImpl implements Instance {
     }
 
     @Override
+    public StopInstancesResult stop(StopInstancesRequest request) {
+        return stop(request, null);
+    }
+
+    @Override
+    public StopInstancesResult stop(StopInstancesRequest request,
+            ResultCapture<StopInstancesResult> extractor) {
+
+        ActionResult result = resource.performAction("Stop", request,
+                extractor);
+
+        if (result == null) return null;
+        return (StopInstancesResult) result.getData();
+    }
+
+    @Override
+    public StopInstancesResult stop() {
+        return stop((ResultCapture<StopInstancesResult>)null);
+    }
+
+    @Override
+    public StopInstancesResult stop(ResultCapture<StopInstancesResult> extractor
+            ) {
+
+        StopInstancesRequest request = new StopInstancesRequest();
+        return stop(request, extractor);
+    }
+
+    @Override
     public Image createImage(CreateImageRequest request) {
         return createImage(request, null);
     }
@@ -542,35 +571,6 @@ class InstanceImpl implements Instance {
         CreateImageRequest request = new CreateImageRequest()
             .withName(name);
         return createImage(request, extractor);
-    }
-
-    @Override
-    public StopInstancesResult stop(StopInstancesRequest request) {
-        return stop(request, null);
-    }
-
-    @Override
-    public StopInstancesResult stop(StopInstancesRequest request,
-            ResultCapture<StopInstancesResult> extractor) {
-
-        ActionResult result = resource.performAction("Stop", request,
-                extractor);
-
-        if (result == null) return null;
-        return (StopInstancesResult) result.getData();
-    }
-
-    @Override
-    public StopInstancesResult stop() {
-        return stop((ResultCapture<StopInstancesResult>)null);
-    }
-
-    @Override
-    public StopInstancesResult stop(ResultCapture<StopInstancesResult> extractor
-            ) {
-
-        StopInstancesRequest request = new StopInstancesRequest();
-        return stop(request, extractor);
     }
 
     @Override
@@ -660,29 +660,6 @@ class InstanceImpl implements Instance {
     }
 
     @Override
-    public void reboot(RebootInstancesRequest request) {
-        reboot(request, null);
-    }
-
-    @Override
-    public void reboot(RebootInstancesRequest request, ResultCapture<Void>
-            extractor) {
-
-        resource.performAction("Reboot", request, extractor);
-    }
-
-    @Override
-    public void reboot() {
-        reboot((ResultCapture<Void>)null);
-    }
-
-    @Override
-    public void reboot(ResultCapture<Void> extractor) {
-        RebootInstancesRequest request = new RebootInstancesRequest();
-        reboot(request, extractor);
-    }
-
-    @Override
     public void resetSourceDestCheck(ResetInstanceAttributeRequest request) {
         resetSourceDestCheck(request, null);
     }
@@ -705,6 +682,29 @@ class InstanceImpl implements Instance {
                 ResetInstanceAttributeRequest();
 
         resetSourceDestCheck(request, extractor);
+    }
+
+    @Override
+    public void reboot(RebootInstancesRequest request) {
+        reboot(request, null);
+    }
+
+    @Override
+    public void reboot(RebootInstancesRequest request, ResultCapture<Void>
+            extractor) {
+
+        resource.performAction("Reboot", request, extractor);
+    }
+
+    @Override
+    public void reboot() {
+        reboot((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void reboot(ResultCapture<Void> extractor) {
+        RebootInstancesRequest request = new RebootInstancesRequest();
+        reboot(request, extractor);
     }
 
     @Override
@@ -803,6 +803,31 @@ class InstanceImpl implements Instance {
     }
 
     @Override
+    public void resetKernel(ResetInstanceAttributeRequest request) {
+        resetKernel(request, null);
+    }
+
+    @Override
+    public void resetKernel(ResetInstanceAttributeRequest request,
+            ResultCapture<Void> extractor) {
+
+        resource.performAction("ResetKernel", request, extractor);
+    }
+
+    @Override
+    public void resetKernel() {
+        resetKernel((ResultCapture<Void>)null);
+    }
+
+    @Override
+    public void resetKernel(ResultCapture<Void> extractor) {
+        ResetInstanceAttributeRequest request = new
+                ResetInstanceAttributeRequest();
+
+        resetKernel(request, extractor);
+    }
+
+    @Override
     public List<com.amazonaws.resources.ec2.Tag> createTags(CreateTagsRequest
             request) {
 
@@ -832,31 +857,6 @@ class InstanceImpl implements Instance {
         CreateTagsRequest request = new CreateTagsRequest()
             .withTags(tags);
         return createTags(request, extractor);
-    }
-
-    @Override
-    public void resetKernel(ResetInstanceAttributeRequest request) {
-        resetKernel(request, null);
-    }
-
-    @Override
-    public void resetKernel(ResetInstanceAttributeRequest request,
-            ResultCapture<Void> extractor) {
-
-        resource.performAction("ResetKernel", request, extractor);
-    }
-
-    @Override
-    public void resetKernel() {
-        resetKernel((ResultCapture<Void>)null);
-    }
-
-    @Override
-    public void resetKernel(ResultCapture<Void> extractor) {
-        ResetInstanceAttributeRequest request = new
-                ResetInstanceAttributeRequest();
-
-        resetKernel(request, extractor);
     }
 
     private static class Codec implements ResourceCodec<Instance> {
