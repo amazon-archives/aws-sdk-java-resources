@@ -6,6 +6,7 @@ import java.util.Arrays;
 import junit.framework.Assert;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.amazonaws.AmazonServiceException;
@@ -18,7 +19,7 @@ public class TopicIntegrationTest extends SNSIntegrationTestBase {
     private static final String DISPLAY_NAME = "DisplayName";
     private static final String MY_FANCY_TOPIC_NAME = "foooooooooooooooo";
 
-    @BeforeClass
+//    @BeforeClass
     public static void setUp() throws IOException {
         setUpSNS();
         topic = getOrCreateTopic();
@@ -41,6 +42,7 @@ public class TopicIntegrationTest extends SNSIntegrationTestBase {
     }
 
     @Test
+    @Ignore
     public void testAll() {
 
         for (Topic topic : sns.getTopics()) {
@@ -67,6 +69,7 @@ public class TopicIntegrationTest extends SNSIntegrationTestBase {
     }
 
     @Test
+    @Ignore
     public void testActions() throws InterruptedException {
 
         // publish

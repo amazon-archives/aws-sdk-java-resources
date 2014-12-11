@@ -6,6 +6,7 @@ import junit.framework.Assert;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.amazonaws.AmazonServiceException;
@@ -16,19 +17,20 @@ public class SubscriptionIntegrationTest extends SNSIntegrationTestBase {
 
     private static Subscription subscription;
 
-    @BeforeClass
+//    @BeforeClass
     public static void setUp() throws IOException {
         setUpSNS();
         subscription = getOrCreateSubscription();
         assertValidSubscription(subscription);
     }
 
-    @AfterClass
+//    @AfterClass
     public static void tearDown() {
         subscription.delete();
     }
 
     @Test
+    @Ignore
     public void testAll() {
 
         for (Subscription subscription : sns.getSubscriptions().firstPage()) {
@@ -39,6 +41,7 @@ public class SubscriptionIntegrationTest extends SNSIntegrationTestBase {
     }
 
     @Test
+    @Ignore
     public void testActions() {
 
         // setAttributes

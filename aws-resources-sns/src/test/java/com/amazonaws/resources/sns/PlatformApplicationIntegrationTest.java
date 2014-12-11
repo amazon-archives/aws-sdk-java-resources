@@ -6,6 +6,7 @@ import junit.framework.Assert;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.amazonaws.AmazonServiceException;
@@ -23,20 +24,21 @@ public class PlatformApplicationIntegrationTest extends SNSIntegrationTestBase {
 
     private static PlatformApplication application;
 
-    @BeforeClass
+//    @BeforeClass
     public static void setUp() throws IOException {
         setUpSNS();
         application = getOrCreateApplication();
         assertValidApplication(application);
     }
 
-    @AfterClass
+//    @AfterClass
     public static void tearDown() {
         // delete
         application.delete(new DeletePlatformApplicationRequest());
     }
 
     @Test
+    @Ignore
     public void testAll() {
 
         for (PlatformApplication application : sns.getPlatformApplications()) {
@@ -47,6 +49,7 @@ public class PlatformApplicationIntegrationTest extends SNSIntegrationTestBase {
     }
 
     @Test
+    @Ignore
     public void testActions() throws InterruptedException {
 
         String topicArn = TopicIntegrationTest.getOrCreateTopic().getArn();
@@ -123,3 +126,4 @@ public class PlatformApplicationIntegrationTest extends SNSIntegrationTestBase {
     }
 
 }
+

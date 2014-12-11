@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
@@ -70,7 +71,7 @@ public class SQSResourcesIntegrationTest {
      * Asserts that the queue created is loaded and has an Arn associated with
      * it.
      */
-    @BeforeClass
+//    @BeforeClass
     public static void setUp() {
 
         sqs = ServiceBuilder.forService(SQS.class)
@@ -82,7 +83,7 @@ public class SQSResourcesIntegrationTest {
     /**
      * Deletes the queue.
      */
-    @AfterClass
+//    @AfterClass
     public static void tearDown() {
         if (queue != null) {
             queue.delete();
@@ -111,6 +112,7 @@ public class SQSResourcesIntegrationTest {
      * service builder.
      */
     @Test
+    @Ignore
     public void testSQSResource() {
         QueueCollection queues = sqs.getQueues();
         assertNotNull(queues);
@@ -145,6 +147,7 @@ public class SQSResourcesIntegrationTest {
      * resource. Asserts the message contents and its associated attributes.
      */
     @Test
+    @Ignore
     public void testSendReceiveDelete() throws InterruptedException {
         SendMessageResult sendMessageResult = queue.sendMessage(TEST_MESSAGE);
         assertNotNull(sendMessageResult);
@@ -170,6 +173,7 @@ public class SQSResourcesIntegrationTest {
      * message to the delete it from the queue.
      */
     @Test
+    @Ignore
     public void testSendReceiveMessageAttributes() throws InterruptedException {
 
         SendMessageResult sendMessageResult = queue
@@ -209,6 +213,7 @@ public class SQSResourcesIntegrationTest {
      * tests setting the queue attributes and retrieving them.
      */
     @Test
+    @Ignore
     public void testQueueSubResourceAndAttributes() throws InterruptedException {
 
         /**

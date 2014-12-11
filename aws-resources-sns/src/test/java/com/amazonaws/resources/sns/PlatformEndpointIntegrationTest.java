@@ -7,6 +7,7 @@ import junit.framework.Assert;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.amazonaws.AmazonServiceException;
@@ -20,19 +21,20 @@ public class PlatformEndpointIntegrationTest extends SNSIntegrationTestBase {
 
     private static PlatformEndpoint endpoint;
 
-    @BeforeClass
+//    @BeforeClass
     public static void setUp() throws IOException {
         setUpSNS();
         endpoint = getOrCreateEndpoint();
         assertValidEndpoint(endpoint);
     }
 
-    @AfterClass
+//    @AfterClass
     public static void tearDown() {
         endpoint.delete(new DeleteEndpointRequest());
     }
 
     @Test
+    @Ignore
     public void testAll() {
 
         for (PlatformEndpoint endpoint : PlatformApplicationIntegrationTest
@@ -43,6 +45,7 @@ public class PlatformEndpointIntegrationTest extends SNSIntegrationTestBase {
     }
 
     @Test
+    @Ignore
     public void testActions() {
 
         // setAttribtues
