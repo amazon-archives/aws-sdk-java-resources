@@ -4,7 +4,7 @@
   <parent>
     <groupId>com.amazonaws.resources</groupId>
     <artifactId>aws-resources-parent-pom</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.3</version>
   </parent>
   
   <artifactId>aws-resources-core</artifactId>
