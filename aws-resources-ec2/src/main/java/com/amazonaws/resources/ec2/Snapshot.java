@@ -66,7 +66,7 @@ public interface Snapshot {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>SnapshotIds[*]</code></b>
+     *     <b><code>SnapshotIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -89,7 +89,7 @@ public interface Snapshot {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>SnapshotIds[*]</code></b>
+     *     <b><code>SnapshotIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -150,6 +150,13 @@ public interface Snapshot {
      * attribute.
      */
     Integer getVolumeSize();
+
+    /**
+     * Gets the value of the KmsKeyId attribute. If this resource is not yet
+     * loaded, a call to {@code load()} is made to retrieve the value of the
+     * attribute.
+     */
+    String getKmsKeyId();
 
     /**
      * Gets the value of the OwnerId attribute. If this resource is not yet
@@ -424,7 +431,7 @@ public interface Snapshot {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[*]</code></b>
+     *     <b><code>Resources.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -447,7 +454,7 @@ public interface Snapshot {
      * in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[*]</code></b>
+     *     <b><code>Resources.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>

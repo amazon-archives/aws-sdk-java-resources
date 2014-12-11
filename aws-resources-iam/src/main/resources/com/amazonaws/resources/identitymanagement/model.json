@@ -16,6 +16,9 @@
           }
         },
         "Attributes" : {
+          "PasswordLastUsed" : {
+            "Type" : "java.util.Date"
+          },
           "Arn" : {
             "Type" : "java.lang.String"
           },
@@ -94,9 +97,7 @@
                   "Name" : "MaxItems"
                 } ],
                 "ConstantMappings" : [ ],
-                "ConvenientMethods" : [ {
-                  "Arguments" : [ ]
-                } ],
+                "ConvenientMethods" : [ ],
                 "TokenPath" : [ "Marker" ],
                 "LimitPath" : [ "MaxItems" ]
               },
@@ -136,9 +137,7 @@
                   "Name" : "MaxItems"
                 } ],
                 "ConstantMappings" : [ ],
-                "ConvenientMethods" : [ {
-                  "Arguments" : [ ]
-                } ],
+                "ConvenientMethods" : [ ],
                 "TokenPath" : [ "Marker" ],
                 "LimitPath" : [ "MaxItems" ]
               },
@@ -181,9 +180,7 @@
                   "Name" : "MaxItems"
                 } ],
                 "ConstantMappings" : [ ],
-                "ConvenientMethods" : [ {
-                  "Arguments" : [ ]
-                } ],
+                "ConvenientMethods" : [ ],
                 "TokenPath" : [ "Marker" ],
                 "LimitPath" : [ "MaxItems" ]
               },
@@ -1164,9 +1161,7 @@
                   "Name" : "MaxItems"
                 } ],
                 "ConstantMappings" : [ ],
-                "ConvenientMethods" : [ {
-                  "Arguments" : [ ]
-                } ],
+                "ConvenientMethods" : [ ],
                 "TokenPath" : [ "Marker" ],
                 "LimitPath" : [ "MaxItems" ]
               },
@@ -1206,9 +1201,7 @@
                   "Name" : "MaxItems"
                 } ],
                 "ConstantMappings" : [ ],
-                "ConvenientMethods" : [ {
-                  "Arguments" : [ ]
-                } ],
+                "ConvenientMethods" : [ ],
                 "TokenPath" : [ "Marker" ],
                 "LimitPath" : [ "MaxItems" ]
               },
@@ -2129,6 +2122,40 @@
           }
         }
       },
+      "AccountSummary" : {
+        "Identifiers" : { },
+        "Attributes" : {
+          "SummaryMap" : {
+            "Type" : "java.util.Map<String, Integer>"
+          }
+        },
+        "References" : { },
+        "SubResourceGetters" : { },
+        "Collections" : { },
+        "LoadAction" : {
+          "Request" : {
+            "Method" : "getAccountSummary",
+            "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetAccountSummaryRequest",
+            "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.GetAccountSummaryResult",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ ],
+            "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : null,
+            "DataMapping" : {
+              "Type" : "GetAccountSummaryResponse",
+              "Source" : [ ]
+            },
+            "NextTokenPath" : null
+          }
+        },
+        "Actions" : { }
+      },
       "AccountAlias" : {
         "Identifiers" : {
           "Name" : {
@@ -2385,6 +2412,11 @@
       }
     },
     "SubResourceGetters" : {
+      "AccountPasswordPolicy" : {
+        "ParameterType" : null,
+        "ParameterMapping" : null,
+        "IdentifierMappings" : [ ]
+      },
       "User" : {
         "ParameterType" : "java.lang.String",
         "ParameterMapping" : {
@@ -2407,6 +2439,11 @@
           "Source" : "SerialNumber",
           "Target" : "SerialNumber"
         },
+        "IdentifierMappings" : [ ]
+      },
+      "AccountSummary" : {
+        "ParameterType" : null,
+        "ParameterMapping" : null,
         "IdentifierMappings" : [ ]
       },
       "Role" : {
@@ -2479,9 +2516,7 @@
               "Name" : "MaxItems"
             } ],
             "ConstantMappings" : [ ],
-            "ConvenientMethods" : [ {
-              "Arguments" : [ ]
-            } ],
+            "ConvenientMethods" : [ ],
             "TokenPath" : [ "Marker" ],
             "LimitPath" : [ "MaxItems" ]
           },
@@ -2521,9 +2556,7 @@
               "Name" : "MaxItems"
             } ],
             "ConstantMappings" : [ ],
-            "ConvenientMethods" : [ {
-              "Arguments" : [ ]
-            } ],
+            "ConvenientMethods" : [ ],
             "TokenPath" : [ "Marker" ],
             "LimitPath" : [ "MaxItems" ]
           },
@@ -2594,9 +2627,7 @@
               "Name" : "MaxItems"
             } ],
             "ConstantMappings" : [ ],
-            "ConvenientMethods" : [ {
-              "Arguments" : [ ]
-            } ],
+            "ConvenientMethods" : [ ],
             "TokenPath" : [ "Marker" ],
             "LimitPath" : [ "MaxItems" ]
           },
@@ -2636,9 +2667,7 @@
               "Name" : "MaxItems"
             } ],
             "ConstantMappings" : [ ],
-            "ConvenientMethods" : [ {
-              "Arguments" : [ ]
-            } ],
+            "ConvenientMethods" : [ ],
             "TokenPath" : [ "Marker" ],
             "LimitPath" : [ "MaxItems" ]
           },
@@ -2755,9 +2784,7 @@
               "Name" : "MaxItems"
             } ],
             "ConstantMappings" : [ ],
-            "ConvenientMethods" : [ {
-              "Arguments" : [ ]
-            } ],
+            "ConvenientMethods" : [ ],
             "TokenPath" : [ "Marker" ],
             "LimitPath" : [ "MaxItems" ]
           },
@@ -2990,28 +3017,6 @@
             "Path" : [ "Group" ]
           },
           "DataMapping" : null,
-          "NextTokenPath" : null
-        }
-      },
-      "AccountSummary" : {
-        "Request" : {
-          "Method" : "getAccountSummary",
-          "ClientRequestType" : "com.amazonaws.services.identitymanagement.model.GetAccountSummaryRequest",
-          "ClientResponseType" : "com.amazonaws.services.identitymanagement.model.GetAccountSummaryResult",
-          "IdentifierMappings" : [ ],
-          "AttributeMappings" : [ ],
-          "ParameterMappings" : [ ],
-          "ConstantMappings" : [ ],
-          "ConvenientMethods" : [ ],
-          "TokenPath" : null,
-          "LimitPath" : null
-        },
-        "Response" : {
-          "ResourceMapping" : null,
-          "DataMapping" : {
-            "Type" : "java.util.Map<String, Integer>",
-            "Source" : [ "SummaryMap" ]
-          },
           "NextTokenPath" : null
         }
       },

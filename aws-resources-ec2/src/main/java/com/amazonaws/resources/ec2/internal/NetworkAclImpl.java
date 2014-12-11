@@ -142,6 +142,37 @@ class NetworkAclImpl implements NetworkAcl {
     }
 
     @Override
+    public ReplaceNetworkAclAssociationResult replaceAssociation(
+            ReplaceNetworkAclAssociationRequest request) {
+
+        return replaceAssociation(request, null);
+    }
+
+    @Override
+    public ReplaceNetworkAclAssociationResult replaceAssociation(
+            ReplaceNetworkAclAssociationRequest request,
+            ResultCapture<ReplaceNetworkAclAssociationResult> extractor) {
+
+        ActionResult result = resource.performAction("ReplaceAssociation",
+                request, extractor);
+
+        if (result == null) return null;
+        return (ReplaceNetworkAclAssociationResult) result.getData();
+    }
+
+    @Override
+    public void deleteEntry(DeleteNetworkAclEntryRequest request) {
+        deleteEntry(request, null);
+    }
+
+    @Override
+    public void deleteEntry(DeleteNetworkAclEntryRequest request,
+            ResultCapture<Void> extractor) {
+
+        resource.performAction("DeleteEntry", request, extractor);
+    }
+
+    @Override
     public List<com.amazonaws.resources.ec2.Tag> createTags(CreateTagsRequest
             request) {
 
@@ -171,37 +202,6 @@ class NetworkAclImpl implements NetworkAcl {
         CreateTagsRequest request = new CreateTagsRequest()
             .withTags(tags);
         return createTags(request, extractor);
-    }
-
-    @Override
-    public ReplaceNetworkAclAssociationResult replaceAssociation(
-            ReplaceNetworkAclAssociationRequest request) {
-
-        return replaceAssociation(request, null);
-    }
-
-    @Override
-    public ReplaceNetworkAclAssociationResult replaceAssociation(
-            ReplaceNetworkAclAssociationRequest request,
-            ResultCapture<ReplaceNetworkAclAssociationResult> extractor) {
-
-        ActionResult result = resource.performAction("ReplaceAssociation",
-                request, extractor);
-
-        if (result == null) return null;
-        return (ReplaceNetworkAclAssociationResult) result.getData();
-    }
-
-    @Override
-    public void deleteEntry(DeleteNetworkAclEntryRequest request) {
-        deleteEntry(request, null);
-    }
-
-    @Override
-    public void deleteEntry(DeleteNetworkAclEntryRequest request,
-            ResultCapture<Void> extractor) {
-
-        resource.performAction("DeleteEntry", request, extractor);
     }
 
     private static class Codec implements ResourceCodec<NetworkAcl> {

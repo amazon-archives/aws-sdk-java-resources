@@ -65,7 +65,7 @@ public interface Subnet {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>SubnetIds[*]</code></b>
+     *     <b><code>SubnetIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -88,7 +88,7 @@ public interface Subnet {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>SubnetIds[*]</code></b>
+     *     <b><code>SubnetIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -301,7 +301,7 @@ public interface Subnet {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[*]</code></b>
+     *     <b><code>Resources.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -324,7 +324,7 @@ public interface Subnet {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[*]</code></b>
+     *     <b><code>Resources.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>

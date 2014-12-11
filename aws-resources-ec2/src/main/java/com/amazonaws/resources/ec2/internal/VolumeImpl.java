@@ -97,6 +97,11 @@ class VolumeImpl implements Volume {
     }
 
     @Override
+    public String getKmsKeyId() {
+        return (String) resource.getAttribute("KmsKeyId");
+    }
+
+    @Override
     public Integer getIops() {
         return (Integer) resource.getAttribute("Iops");
     }

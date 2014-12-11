@@ -66,7 +66,7 @@ public interface VpcPeeringConnection {
      * value set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>VpcPeeringConnectionIds[*]</code></b>
+     *     <b><code>VpcPeeringConnectionIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -89,7 +89,7 @@ public interface VpcPeeringConnection {
      * value set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>VpcPeeringConnectionIds[*]</code></b>
+     *     <b><code>VpcPeeringConnectionIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>

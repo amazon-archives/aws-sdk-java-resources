@@ -414,11 +414,12 @@ public final class ReflectionUtils {
      * @param value the new value of the property
      */
     private static void setValue(Object target, String field, Object value) {
-        if ("*".equals(field)) {
+        // TODO: Should we do this for all numbers, not just '0'?
+        if ("0".equals(field)) {
 
             if (!(target instanceof Collection)) {
                 throw new IllegalArgumentException(
-                        "Cannot evaluate '*' on object " + target);
+                        "Cannot evaluate '0' on object " + target);
             }
 
             @SuppressWarnings("unchecked")

@@ -138,70 +138,6 @@ public interface Notification {
     Vault getVault();
 
     /**
-     * Performs the <code>Delete</code> action.
-     *
-     * <p>
-     * The following request parameters will be populated from the data of this
-     * <code>Notification</code> resource, and any conflicting parameter value
-     * set in the request will be overridden:
-     * <ul>
-     *   <li>
-     *     <b><code>AccountId</code></b>
-     *         - mapped from the <code>AccountId</code> identifier.
-     *   </li>
-     *   <li>
-     *     <b><code>VaultName</code></b>
-     *         - mapped from the <code>VaultName</code> identifier.
-     *   </li>
-     * </ul>
-     *
-     * <p>
-     *
-     * @see DeleteVaultNotificationsRequest
-     */
-    void delete(DeleteVaultNotificationsRequest request);
-
-    /**
-     * Performs the <code>Delete</code> action and use a ResultCapture to
-     * retrieve the low-level client response.
-     *
-     * <p>
-     * The following request parameters will be populated from the data of this
-     * <code>Notification</code> resource, and any conflicting parameter value
-     * set in the request will be overridden:
-     * <ul>
-     *   <li>
-     *     <b><code>AccountId</code></b>
-     *         - mapped from the <code>AccountId</code> identifier.
-     *   </li>
-     *   <li>
-     *     <b><code>VaultName</code></b>
-     *         - mapped from the <code>VaultName</code> identifier.
-     *   </li>
-     * </ul>
-     *
-     * <p>
-     *
-     * @see DeleteVaultNotificationsRequest
-     */
-    void delete(DeleteVaultNotificationsRequest request, ResultCapture<Void>
-            extractor);
-
-    /**
-     * The convenient method form for the <code>Delete</code> action.
-     *
-     * @see #delete(DeleteVaultNotificationsRequest)
-     */
-    void delete();
-
-    /**
-     * The convenient method form for the <code>Delete</code> action.
-     *
-     * @see #delete(DeleteVaultNotificationsRequest, ResultCapture)
-     */
-    void delete(ResultCapture<Void> extractor);
-
-    /**
      * Performs the <code>Set</code> action.
      *
      * <p>
@@ -265,4 +201,68 @@ public interface Notification {
      */
     void set(VaultNotificationConfig vaultNotificationConfig,
             ResultCapture<Void> extractor);
+
+    /**
+     * Performs the <code>Delete</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Notification</code> resource, and any conflicting parameter value
+     * set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>VaultName</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see DeleteVaultNotificationsRequest
+     */
+    void delete(DeleteVaultNotificationsRequest request);
+
+    /**
+     * Performs the <code>Delete</code> action and use a ResultCapture to
+     * retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Notification</code> resource, and any conflicting parameter value
+     * set in the request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>AccountId</code></b>
+     *         - mapped from the <code>AccountId</code> identifier.
+     *   </li>
+     *   <li>
+     *     <b><code>VaultName</code></b>
+     *         - mapped from the <code>VaultName</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see DeleteVaultNotificationsRequest
+     */
+    void delete(DeleteVaultNotificationsRequest request, ResultCapture<Void>
+            extractor);
+
+    /**
+     * The convenient method form for the <code>Delete</code> action.
+     *
+     * @see #delete(DeleteVaultNotificationsRequest)
+     */
+    void delete();
+
+    /**
+     * The convenient method form for the <code>Delete</code> action.
+     *
+     * @see #delete(DeleteVaultNotificationsRequest, ResultCapture)
+     */
+    void delete(ResultCapture<Void> extractor);
 }

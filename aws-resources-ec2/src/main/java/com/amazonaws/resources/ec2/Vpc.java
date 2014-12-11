@@ -82,7 +82,7 @@ public interface Vpc {
      * request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>VpcIds[*]</code></b>
+     *     <b><code>VpcIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -105,7 +105,7 @@ public interface Vpc {
      * request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>VpcIds[*]</code></b>
+     *     <b><code>VpcIds.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -174,6 +174,17 @@ public interface Vpc {
     DhcpOptions getDhcpOptions();
 
     /**
+     * Retrieves the InternetGateways collection referenced by this resource.
+     */
+    InternetGatewayCollection getInternetGateways();
+
+    /**
+     * Retrieves the InternetGateways collection referenced by this resource.
+     */
+    InternetGatewayCollection getInternetGateways(
+            DescribeInternetGatewaysRequest request);
+
+    /**
      * Retrieves the AcceptedVpcPeeringConnections collection referenced by this
      * resource.
      */
@@ -185,17 +196,6 @@ public interface Vpc {
      */
     VpcPeeringConnectionCollection getAcceptedVpcPeeringConnections(
             DescribeVpcPeeringConnectionsRequest request);
-
-    /**
-     * Retrieves the InternetGateways collection referenced by this resource.
-     */
-    InternetGatewayCollection getInternetGateways();
-
-    /**
-     * Retrieves the InternetGateways collection referenced by this resource.
-     */
-    InternetGatewayCollection getInternetGateways(
-            DescribeInternetGatewaysRequest request);
 
     /**
      * Retrieves the NetworkInterfaces collection referenced by this resource.
@@ -663,48 +663,6 @@ public interface Vpc {
             ResultCapture<Void> extractor);
 
     /**
-     * Performs the <code>AttachInternetGateway</code> action.
-     *
-     * <p>
-     * The following request parameters will be populated from the data of this
-     * <code>Vpc</code> resource, and any conflicting parameter value set in the
-     * request will be overridden:
-     * <ul>
-     *   <li>
-     *     <b><code>VpcId</code></b>
-     *         - mapped from the <code>Id</code> identifier.
-     *   </li>
-     * </ul>
-     *
-     * <p>
-     *
-     * @see AttachInternetGatewayRequest
-     */
-    void attachInternetGateway(AttachInternetGatewayRequest request);
-
-    /**
-     * Performs the <code>AttachInternetGateway</code> action and use a
-     * ResultCapture to retrieve the low-level client response.
-     *
-     * <p>
-     * The following request parameters will be populated from the data of this
-     * <code>Vpc</code> resource, and any conflicting parameter value set in the
-     * request will be overridden:
-     * <ul>
-     *   <li>
-     *     <b><code>VpcId</code></b>
-     *         - mapped from the <code>Id</code> identifier.
-     *   </li>
-     * </ul>
-     *
-     * <p>
-     *
-     * @see AttachInternetGatewayRequest
-     */
-    void attachInternetGateway(AttachInternetGatewayRequest request,
-            ResultCapture<Void> extractor);
-
-    /**
      * Performs the <code>Delete</code> action.
      *
      * <p>
@@ -758,6 +716,48 @@ public interface Vpc {
      * @see #delete(DeleteVpcRequest, ResultCapture)
      */
     void delete(ResultCapture<Void> extractor);
+
+    /**
+     * Performs the <code>AttachInternetGateway</code> action.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Vpc</code> resource, and any conflicting parameter value set in the
+     * request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>VpcId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see AttachInternetGatewayRequest
+     */
+    void attachInternetGateway(AttachInternetGatewayRequest request);
+
+    /**
+     * Performs the <code>AttachInternetGateway</code> action and use a
+     * ResultCapture to retrieve the low-level client response.
+     *
+     * <p>
+     * The following request parameters will be populated from the data of this
+     * <code>Vpc</code> resource, and any conflicting parameter value set in the
+     * request will be overridden:
+     * <ul>
+     *   <li>
+     *     <b><code>VpcId</code></b>
+     *         - mapped from the <code>Id</code> identifier.
+     *   </li>
+     * </ul>
+     *
+     * <p>
+     *
+     * @see AttachInternetGatewayRequest
+     */
+    void attachInternetGateway(AttachInternetGatewayRequest request,
+            ResultCapture<Void> extractor);
 
     /**
      * Performs the <code>CreateRouteTable</code> action.
@@ -814,7 +814,7 @@ public interface Vpc {
      * request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[*]</code></b>
+     *     <b><code>Resources.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>
@@ -837,7 +837,7 @@ public interface Vpc {
      * request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>Resources[*]</code></b>
+     *     <b><code>Resources.0</code></b>
      *         - mapped from the <code>Id</code> identifier.
      *   </li>
      * </ul>

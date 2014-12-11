@@ -55,7 +55,7 @@ public interface KeyPair {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>KeyNames[*]</code></b>
+     *     <b><code>KeyNames.0</code></b>
      *         - mapped from the <code>Name</code> identifier.
      *   </li>
      * </ul>
@@ -78,7 +78,7 @@ public interface KeyPair {
      * the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>KeyNames[*]</code></b>
+     *     <b><code>KeyNames.0</code></b>
      *         - mapped from the <code>Name</code> identifier.
      *   </li>
      * </ul>

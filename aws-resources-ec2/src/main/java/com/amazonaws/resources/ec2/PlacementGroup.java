@@ -56,7 +56,7 @@ public interface PlacementGroup {
      * set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>GroupNames[*]</code></b>
+     *     <b><code>GroupNames.0</code></b>
      *         - mapped from the <code>Name</code> identifier.
      *   </li>
      * </ul>
@@ -79,7 +79,7 @@ public interface PlacementGroup {
      * set in the request will be overridden:
      * <ul>
      *   <li>
-     *     <b><code>GroupNames[*]</code></b>
+     *     <b><code>GroupNames.0</code></b>
      *         - mapped from the <code>Name</code> identifier.
      *   </li>
      * </ul>

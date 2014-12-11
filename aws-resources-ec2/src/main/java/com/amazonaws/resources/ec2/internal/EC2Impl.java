@@ -161,17 +161,17 @@ public class EC2Impl implements EC2 {
     }
 
     @Override
-    public RouteTable getRouteTable(String id) {
-        ResourceImpl result = service.getSubResource("RouteTable", id);
-        if (result == null) return null;
-        return new RouteTableImpl(result);
-    }
-
-    @Override
     public Instance getInstance(String id) {
         ResourceImpl result = service.getSubResource("Instance", id);
         if (result == null) return null;
         return new InstanceImpl(result);
+    }
+
+    @Override
+    public RouteTable getRouteTable(String id) {
+        ResourceImpl result = service.getSubResource("RouteTable", id);
+        if (result == null) return null;
+        return new RouteTableImpl(result);
     }
 
     @Override
@@ -196,6 +196,13 @@ public class EC2Impl implements EC2 {
     }
 
     @Override
+    public InternetGateway getInternetGateway(String id) {
+        ResourceImpl result = service.getSubResource("InternetGateway", id);
+        if (result == null) return null;
+        return new InternetGatewayImpl(result);
+    }
+
+    @Override
     public PlacementGroup getPlacementGroup(String name) {
         ResourceImpl result = service.getSubResource("PlacementGroup", name);
         if (result == null) return null;
@@ -203,10 +210,10 @@ public class EC2Impl implements EC2 {
     }
 
     @Override
-    public InternetGateway getInternetGateway(String id) {
-        ResourceImpl result = service.getSubResource("InternetGateway", id);
+    public Subnet getSubnet(String id) {
+        ResourceImpl result = service.getSubResource("Subnet", id);
         if (result == null) return null;
-        return new InternetGatewayImpl(result);
+        return new SubnetImpl(result);
     }
 
     @Override
@@ -216,13 +223,6 @@ public class EC2Impl implements EC2 {
 
         if (result == null) return null;
         return new RouteTableAssociationImpl(result);
-    }
-
-    @Override
-    public Subnet getSubnet(String id) {
-        ResourceImpl result = service.getSubResource("Subnet", id);
-        if (result == null) return null;
-        return new SubnetImpl(result);
     }
 
     @Override
@@ -405,20 +405,6 @@ public class EC2Impl implements EC2 {
     }
 
     @Override
-    public SubnetCollection getSubnets() {
-        return getSubnets((DescribeSubnetsRequest)null);
-    }
-
-    @Override
-    public SubnetCollection getSubnets(DescribeSubnetsRequest request) {
-        ResourceCollectionImpl result = service.getCollection("Subnets",
-                request);
-
-        if (result == null) return null;
-        return new SubnetCollectionImpl(result);
-    }
-
-    @Override
     public SnapshotCollection getSnapshots() {
         return getSnapshots((DescribeSnapshotsRequest)null);
     }
@@ -430,6 +416,20 @@ public class EC2Impl implements EC2 {
 
         if (result == null) return null;
         return new SnapshotCollectionImpl(result);
+    }
+
+    @Override
+    public SubnetCollection getSubnets() {
+        return getSubnets((DescribeSubnetsRequest)null);
+    }
+
+    @Override
+    public SubnetCollection getSubnets(DescribeSubnetsRequest request) {
+        ResourceCollectionImpl result = service.getCollection("Subnets",
+                request);
+
+        if (result == null) return null;
+        return new SubnetCollectionImpl(result);
     }
 
     @Override
@@ -449,22 +449,6 @@ public class EC2Impl implements EC2 {
     }
 
     @Override
-    public RouteTableCollection getRouteTables() {
-        return getRouteTables((DescribeRouteTablesRequest)null);
-    }
-
-    @Override
-    public RouteTableCollection getRouteTables(DescribeRouteTablesRequest
-            request) {
-
-        ResourceCollectionImpl result = service.getCollection("RouteTables",
-                request);
-
-        if (result == null) return null;
-        return new RouteTableCollectionImpl(result);
-    }
-
-    @Override
     public NetworkAclCollection getNetworkAcls() {
         return getNetworkAcls((DescribeNetworkAclsRequest)null);
     }
@@ -478,6 +462,22 @@ public class EC2Impl implements EC2 {
 
         if (result == null) return null;
         return new NetworkAclCollectionImpl(result);
+    }
+
+    @Override
+    public RouteTableCollection getRouteTables() {
+        return getRouteTables((DescribeRouteTablesRequest)null);
+    }
+
+    @Override
+    public RouteTableCollection getRouteTables(DescribeRouteTablesRequest
+            request) {
+
+        ResourceCollectionImpl result = service.getCollection("RouteTables",
+                request);
+
+        if (result == null) return null;
+        return new RouteTableCollectionImpl(result);
     }
 
     @Override
@@ -629,22 +629,6 @@ public class EC2Impl implements EC2 {
     }
 
     @Override
-    public RouteTable createRouteTable(CreateRouteTableRequest request) {
-        return createRouteTable(request, null);
-    }
-
-    @Override
-    public RouteTable createRouteTable(CreateRouteTableRequest request,
-            ResultCapture<CreateRouteTableResult> extractor) {
-
-        ActionResult result = service.performAction("CreateRouteTable", request,
-                extractor);
-
-        if (result == null) return null;
-        return new RouteTableImpl(result.getResource());
-    }
-
-    @Override
     public PlacementGroup createPlacementGroup(CreatePlacementGroupRequest
             request) {
 
@@ -681,6 +665,22 @@ public class EC2Impl implements EC2 {
     }
 
     @Override
+    public RouteTable createRouteTable(CreateRouteTableRequest request) {
+        return createRouteTable(request, null);
+    }
+
+    @Override
+    public RouteTable createRouteTable(CreateRouteTableRequest request,
+            ResultCapture<CreateRouteTableResult> extractor) {
+
+        ActionResult result = service.performAction("CreateRouteTable", request,
+                extractor);
+
+        if (result == null) return null;
+        return new RouteTableImpl(result.getResource());
+    }
+
+    @Override
     public DhcpOptions createDhcpOptions(CreateDhcpOptionsRequest request) {
         return createDhcpOptions(request, null);
     }
@@ -712,41 +712,6 @@ public class EC2Impl implements EC2 {
         CreateDhcpOptionsRequest request = new CreateDhcpOptionsRequest()
             .withDhcpConfigurations(dhcpConfigurations);
         return createDhcpOptions(request, extractor);
-    }
-
-    @Override
-    public List<Instance> createInstances(RunInstancesRequest request) {
-        return createInstances(request, null);
-    }
-
-    @Override
-    public List<Instance> createInstances(RunInstancesRequest request,
-            ResultCapture<RunInstancesResult> extractor) {
-
-        ActionResult result = service.performAction("CreateInstances", request,
-                extractor);
-
-        if (result == null) return null;
-        return CodecUtils.transform(result.getResources(), InstanceImpl.CODEC);
-    }
-
-    @Override
-    public List<Instance> createInstances(String imageId, Integer minCount,
-            Integer maxCount) {
-
-        return createInstances(imageId, minCount, maxCount,
-                (ResultCapture<RunInstancesResult>)null);
-    }
-
-    @Override
-    public List<Instance> createInstances(String imageId, Integer minCount,
-            Integer maxCount, ResultCapture<RunInstancesResult> extractor) {
-
-        RunInstancesRequest request = new RunInstancesRequest()
-            .withImageId(imageId)
-            .withMinCount(minCount)
-            .withMaxCount(maxCount);
-        return createInstances(request, extractor);
     }
 
     @Override
@@ -795,6 +760,41 @@ public class EC2Impl implements EC2 {
             .withSnapshotId(snapshotId)
             .withAvailabilityZone(availabilityZone);
         return createVolume(request, extractor);
+    }
+
+    @Override
+    public List<Instance> createInstances(RunInstancesRequest request) {
+        return createInstances(request, null);
+    }
+
+    @Override
+    public List<Instance> createInstances(RunInstancesRequest request,
+            ResultCapture<RunInstancesResult> extractor) {
+
+        ActionResult result = service.performAction("CreateInstances", request,
+                extractor);
+
+        if (result == null) return null;
+        return CodecUtils.transform(result.getResources(), InstanceImpl.CODEC);
+    }
+
+    @Override
+    public List<Instance> createInstances(String imageId, Integer minCount,
+            Integer maxCount) {
+
+        return createInstances(imageId, minCount, maxCount,
+                (ResultCapture<RunInstancesResult>)null);
+    }
+
+    @Override
+    public List<Instance> createInstances(String imageId, Integer minCount,
+            Integer maxCount, ResultCapture<RunInstancesResult> extractor) {
+
+        RunInstancesRequest request = new RunInstancesRequest()
+            .withImageId(imageId)
+            .withMinCount(minCount)
+            .withMaxCount(maxCount);
+        return createInstances(request, extractor);
     }
 
     @Override

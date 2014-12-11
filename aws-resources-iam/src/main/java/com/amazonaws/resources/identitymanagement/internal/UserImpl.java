@@ -83,6 +83,11 @@ class UserImpl implements User {
     }
 
     @Override
+    public Date getPasswordLastUsed() {
+        return (Date) resource.getAttribute("PasswordLastUsed");
+    }
+
+    @Override
     public String getArn() {
         return (String) resource.getAttribute("Arn");
     }

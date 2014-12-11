@@ -14,8 +14,6 @@
  */
 package com.amazonaws.resources.identitymanagement;
 
-import java.util.Map;
-
 import com.amazonaws.resources.ResultCapture;
 import com.amazonaws.resources.Service;
 import com.amazonaws.resources.internal.V1ServiceInterface;
@@ -40,8 +38,6 @@ import
 com.amazonaws.services.identitymanagement.model.CreateVirtualMFADeviceRequest;
 import
 com.amazonaws.services.identitymanagement.model.CreateVirtualMFADeviceResult;
-import com.amazonaws.services.identitymanagement.model.GetAccountSummaryRequest;
-import com.amazonaws.services.identitymanagement.model.GetAccountSummaryResult;
 import com.amazonaws.services.identitymanagement.model.ListAccountAliasesRequest
 ;
 import com.amazonaws.services.identitymanagement.model.ListGroupsRequest;
@@ -84,6 +80,7 @@ com.amazonaws.services.identitymanagement.model.UploadSigningCertificateResult;
  *   <li>VirtualMfaDevice</li>
  *   <li>RolePolicy</li>
  *   <li>Role</li>
+ *   <li>AccountSummary</li>
  *   <li>AccountAlias</li>
  *   <li>GroupPolicy</li>
  *   <li>ServerCertificate</li>
@@ -94,6 +91,12 @@ com.amazonaws.services.identitymanagement.model.UploadSigningCertificateResult;
         )
 
 public interface IdentityManagement extends Service<AmazonIdentityManagement> {
+    /**
+     * Gets an instance of {@code AccountPasswordPolicy} resource by its
+     * identifier(s).
+     */
+    AccountPasswordPolicy getAccountPasswordPolicy();
+
     /**
      * Gets an instance of {@code User} resource by its identifier(s).
      */
@@ -110,6 +113,11 @@ public interface IdentityManagement extends Service<AmazonIdentityManagement> {
      * identifier(s).
      */
     VirtualMfaDevice getVirtualMfaDevice(String serialNumber);
+
+    /**
+     * Gets an instance of {@code AccountSummary} resource by its identifier(s).
+     */
+    AccountSummary getAccountSummary();
 
     /**
      * Gets an instance of {@code Role} resource by its identifier(s).
@@ -391,30 +399,6 @@ public interface IdentityManagement extends Service<AmazonIdentityManagement> {
             groupName, ResultCapture<CreateGroupResult> extractor);
 
     /**
-     * Performs the <code>AccountSummary</code> action.
-     *
-     * <p>
-     *
-     * @return The response of the low-level client operation associated with
-     *         this resource action.
-     * @see GetAccountSummaryRequest
-     */
-    Map<String, Integer> accountSummary(GetAccountSummaryRequest request);
-
-    /**
-     * Performs the <code>AccountSummary</code> action and use a ResultCapture
-     * to retrieve the low-level client response.
-     *
-     * <p>
-     *
-     * @return The response of the low-level client operation associated with
-     *         this resource action.
-     * @see GetAccountSummaryRequest
-     */
-    Map<String, Integer> accountSummary(GetAccountSummaryRequest request,
-            ResultCapture<GetAccountSummaryResult> extractor);
-
-    /**
      * Performs the <code>CreateInstanceProfile</code> action.
      *
      * <p>
@@ -475,8 +459,9 @@ public interface IdentityManagement extends Service<AmazonIdentityManagement> {
      *         with the result of this action.
      * @see UpdateAccountPasswordPolicyRequest
      */
-    AccountPasswordPolicy createAccountPasswordPolicy(
-            UpdateAccountPasswordPolicyRequest request);
+    com.amazonaws.resources.identitymanagement.AccountPasswordPolicy
+            createAccountPasswordPolicy(UpdateAccountPasswordPolicyRequest
+            request);
 
     /**
      * Performs the <code>CreateAccountPasswordPolicy</code> action and use a
@@ -488,9 +473,9 @@ public interface IdentityManagement extends Service<AmazonIdentityManagement> {
      *         with the result of this action.
      * @see UpdateAccountPasswordPolicyRequest
      */
-    AccountPasswordPolicy createAccountPasswordPolicy(
-            UpdateAccountPasswordPolicyRequest request, ResultCapture<Void>
-            extractor);
+    com.amazonaws.resources.identitymanagement.AccountPasswordPolicy
+            createAccountPasswordPolicy(UpdateAccountPasswordPolicyRequest
+            request, ResultCapture<Void> extractor);
 
     /**
      * Performs the <code>CreateAccountAlias</code> action.
