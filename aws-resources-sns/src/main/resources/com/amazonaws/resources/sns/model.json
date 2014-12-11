@@ -1,0 +1,988 @@
+{
+  "FormatVersion" : {
+    "Major" : 1,
+    "Minor" : 0
+  },
+  "Service" : {
+    "Name" : "SNS",
+    "Abbreviation" : "sns",
+    "ClientInterface" : "com.amazonaws.services.sns.AmazonSNS",
+    "ClientImplementation" : "com.amazonaws.services.sns.AmazonSNSClient",
+    "Resources" : {
+      "PlatformApplication" : {
+        "Identifiers" : {
+          "Arn" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "Attributes" : {
+            "Type" : "java.util.Map<String, String>"
+          }
+        },
+        "References" : { },
+        "SubResourceGetters" : { },
+        "Collections" : {
+          "Endpoints" : {
+            "Type" : "PlatformEndpoint",
+            "ListAction" : {
+              "Request" : {
+                "Method" : "listEndpointsByPlatformApplication",
+                "ClientRequestType" : "com.amazonaws.services.sns.model.ListEndpointsByPlatformApplicationRequest",
+                "ClientResponseType" : "com.amazonaws.services.sns.model.ListEndpointsByPlatformApplicationResult",
+                "IdentifierMappings" : [ {
+                  "Source" : "Arn",
+                  "Target" : [ "PlatformApplicationArn" ]
+                } ],
+                "AttributeMappings" : [ ],
+                "ParameterMappings" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "NextToken"
+                } ],
+                "ConstantMappings" : [ ],
+                "ConvenientMethods" : [ ],
+                "TokenPath" : [ "NextToken" ],
+                "LimitPath" : null
+              },
+              "Response" : {
+                "ResourceMapping" : {
+                  "Type" : "PlatformEndpoint",
+                  "ParentIdentifierMappings" : [ ],
+                  "RequestParamMappings" : [ ],
+                  "ResponseIdentifierMappings" : [ {
+                    "Source" : [ "Endpoints", "*:com.amazonaws.services.sns.model.Endpoint", "EndpointArn" ],
+                    "Target" : "Arn"
+                  } ],
+                  "Path" : null
+                },
+                "DataMapping" : null,
+                "NextTokenPath" : [ "NextToken" ]
+              }
+            }
+          }
+        },
+        "LoadAction" : {
+          "Request" : {
+            "Method" : "getPlatformApplicationAttributes",
+            "ClientRequestType" : "com.amazonaws.services.sns.model.GetPlatformApplicationAttributesRequest",
+            "ClientResponseType" : "com.amazonaws.services.sns.model.GetPlatformApplicationAttributesResult",
+            "IdentifierMappings" : [ {
+              "Source" : "Arn",
+              "Target" : [ "PlatformApplicationArn" ]
+            } ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ ],
+            "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : null,
+            "DataMapping" : {
+              "Type" : "GetPlatformApplicationAttributesResponse",
+              "Source" : [ ]
+            },
+            "NextTokenPath" : null
+          }
+        },
+        "Actions" : {
+          "CreatePlatformEndpoint" : {
+            "Request" : {
+              "Method" : "createPlatformEndpoint",
+              "ClientRequestType" : "com.amazonaws.services.sns.model.CreatePlatformEndpointRequest",
+              "ClientResponseType" : "com.amazonaws.services.sns.model.CreatePlatformEndpointResult",
+              "IdentifierMappings" : [ {
+                "Source" : "Arn",
+                "Target" : [ "PlatformApplicationArn" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "Token"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "CustomUserData"
+              }, {
+                "Type" : "java.util.Map<String, String>",
+                "Name" : "Attributes"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : {
+                "Type" : "PlatformEndpoint",
+                "ParentIdentifierMappings" : [ {
+                  "Source" : "Arn",
+                  "Target" : "PlatformApplicationArn"
+                } ],
+                "RequestParamMappings" : [ ],
+                "ResponseIdentifierMappings" : [ {
+                  "Source" : [ "EndpointArn" ],
+                  "Target" : "Arn"
+                } ],
+                "Path" : null
+              },
+              "DataMapping" : null,
+              "NextTokenPath" : null
+            }
+          },
+          "SetAttributes" : {
+            "Request" : {
+              "Method" : "setPlatformApplicationAttributes",
+              "ClientRequestType" : "com.amazonaws.services.sns.model.SetPlatformApplicationAttributesRequest",
+              "ClientResponseType" : "Void",
+              "IdentifierMappings" : [ {
+                "Source" : "Arn",
+                "Target" : [ "PlatformApplicationArn" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.util.Map<String, String>",
+                "Name" : "Attributes"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Delete" : {
+            "Request" : {
+              "Method" : "deletePlatformApplication",
+              "ClientRequestType" : "com.amazonaws.services.sns.model.DeletePlatformApplicationRequest",
+              "ClientResponseType" : "Void",
+              "IdentifierMappings" : [ {
+                "Source" : "Arn",
+                "Target" : [ "PlatformApplicationArn" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      },
+      "PlatformEndpoint" : {
+        "Identifiers" : {
+          "Arn" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "Attributes" : {
+            "Type" : "java.util.Map<String, String>"
+          }
+        },
+        "References" : { },
+        "SubResourceGetters" : { },
+        "Collections" : { },
+        "LoadAction" : {
+          "Request" : {
+            "Method" : "getEndpointAttributes",
+            "ClientRequestType" : "com.amazonaws.services.sns.model.GetEndpointAttributesRequest",
+            "ClientResponseType" : "com.amazonaws.services.sns.model.GetEndpointAttributesResult",
+            "IdentifierMappings" : [ {
+              "Source" : "Arn",
+              "Target" : [ "EndpointArn" ]
+            } ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ ],
+            "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : null,
+            "DataMapping" : {
+              "Type" : "GetEndpointAttributesResponse",
+              "Source" : [ ]
+            },
+            "NextTokenPath" : null
+          }
+        },
+        "Actions" : {
+          "Publish" : {
+            "Request" : {
+              "Method" : "publish",
+              "ClientRequestType" : "com.amazonaws.services.sns.model.PublishRequest",
+              "ClientResponseType" : "com.amazonaws.services.sns.model.PublishResult",
+              "IdentifierMappings" : [ {
+                "Source" : "Arn",
+                "Target" : [ "TargetArn" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "TopicArn"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "Message"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "Subject"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "MessageStructure"
+              }, {
+                "Type" : "java.util.Map<String, com.amazonaws.services.sns.model.MessageAttributeValue>",
+                "Name" : "MessageAttributes"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : null,
+              "DataMapping" : {
+                "Type" : "com.amazonaws.services.sns.model.PublishResult",
+                "Source" : [ ]
+              },
+              "NextTokenPath" : null
+            }
+          },
+          "SetAttributes" : {
+            "Request" : {
+              "Method" : "setEndpointAttributes",
+              "ClientRequestType" : "com.amazonaws.services.sns.model.SetEndpointAttributesRequest",
+              "ClientResponseType" : "Void",
+              "IdentifierMappings" : [ {
+                "Source" : "Arn",
+                "Target" : [ "EndpointArn" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.util.Map<String, String>",
+                "Name" : "Attributes"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Delete" : {
+            "Request" : {
+              "Method" : "deleteEndpoint",
+              "ClientRequestType" : "com.amazonaws.services.sns.model.DeleteEndpointRequest",
+              "ClientResponseType" : "Void",
+              "IdentifierMappings" : [ {
+                "Source" : "Arn",
+                "Target" : [ "EndpointArn" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      },
+      "Subscription" : {
+        "Identifiers" : {
+          "Arn" : {
+            "Type" : "java.lang.String"
+          },
+          "TopicArn" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "Attributes" : {
+            "Type" : "java.util.Map<String, String>"
+          }
+        },
+        "References" : {
+          "Topic" : {
+            "Type" : "Topic",
+            "IdentifierMappings" : [ {
+              "Source" : "TopicArn",
+              "Target" : "Arn"
+            } ],
+            "AttributeMappings" : [ ]
+          }
+        },
+        "SubResourceGetters" : { },
+        "Collections" : { },
+        "LoadAction" : {
+          "Request" : {
+            "Method" : "getSubscriptionAttributes",
+            "ClientRequestType" : "com.amazonaws.services.sns.model.GetSubscriptionAttributesRequest",
+            "ClientResponseType" : "com.amazonaws.services.sns.model.GetSubscriptionAttributesResult",
+            "IdentifierMappings" : [ {
+              "Source" : "Arn",
+              "Target" : [ "SubscriptionArn" ]
+            } ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ ],
+            "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ {
+              "Arguments" : [ ]
+            } ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : null,
+            "DataMapping" : {
+              "Type" : "GetSubscriptionAttributesResponse",
+              "Source" : [ ]
+            },
+            "NextTokenPath" : null
+          }
+        },
+        "Actions" : {
+          "SetAttributes" : {
+            "Request" : {
+              "Method" : "setSubscriptionAttributes",
+              "ClientRequestType" : "com.amazonaws.services.sns.model.SetSubscriptionAttributesRequest",
+              "ClientResponseType" : "Void",
+              "IdentifierMappings" : [ {
+                "Source" : "Arn",
+                "Target" : [ "SubscriptionArn" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "AttributeName"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "AttributeValue"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "AttributeName"
+                }, {
+                  "Type" : "java.lang.String",
+                  "Name" : "AttributeValue"
+                } ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Delete" : {
+            "Request" : {
+              "Method" : "unsubscribe",
+              "ClientRequestType" : "com.amazonaws.services.sns.model.UnsubscribeRequest",
+              "ClientResponseType" : "Void",
+              "IdentifierMappings" : [ {
+                "Source" : "Arn",
+                "Target" : [ "SubscriptionArn" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      },
+      "Topic" : {
+        "Identifiers" : {
+          "Arn" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "Attributes" : {
+            "Type" : "java.util.Map<String, String>"
+          }
+        },
+        "References" : { },
+        "SubResourceGetters" : {
+          "Subscription" : {
+            "ParameterType" : "java.lang.String",
+            "ParameterMapping" : {
+              "Source" : "Arn",
+              "Target" : "Arn"
+            },
+            "IdentifierMappings" : [ {
+              "Source" : "Arn",
+              "Target" : "TopicArn"
+            } ]
+          }
+        },
+        "Collections" : {
+          "Subscriptions" : {
+            "Type" : "Subscription",
+            "ListAction" : {
+              "Request" : {
+                "Method" : "listSubscriptionsByTopic",
+                "ClientRequestType" : "com.amazonaws.services.sns.model.ListSubscriptionsByTopicRequest",
+                "ClientResponseType" : "com.amazonaws.services.sns.model.ListSubscriptionsByTopicResult",
+                "IdentifierMappings" : [ {
+                  "Source" : "Arn",
+                  "Target" : [ "TopicArn" ]
+                } ],
+                "AttributeMappings" : [ ],
+                "ParameterMappings" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "NextToken"
+                } ],
+                "ConstantMappings" : [ ],
+                "ConvenientMethods" : [ {
+                  "Arguments" : [ ]
+                } ],
+                "TokenPath" : [ "NextToken" ],
+                "LimitPath" : null
+              },
+              "Response" : {
+                "ResourceMapping" : {
+                  "Type" : "Subscription",
+                  "ParentIdentifierMappings" : [ {
+                    "Source" : "Arn",
+                    "Target" : "TopicArn"
+                  } ],
+                  "RequestParamMappings" : [ ],
+                  "ResponseIdentifierMappings" : [ {
+                    "Source" : [ "Subscriptions", "*:com.amazonaws.services.sns.model.Subscription", "SubscriptionArn" ],
+                    "Target" : "Arn"
+                  } ],
+                  "Path" : null
+                },
+                "DataMapping" : null,
+                "NextTokenPath" : [ "NextToken" ]
+              }
+            }
+          }
+        },
+        "LoadAction" : {
+          "Request" : {
+            "Method" : "getTopicAttributes",
+            "ClientRequestType" : "com.amazonaws.services.sns.model.GetTopicAttributesRequest",
+            "ClientResponseType" : "com.amazonaws.services.sns.model.GetTopicAttributesResult",
+            "IdentifierMappings" : [ {
+              "Source" : "Arn",
+              "Target" : [ "TopicArn" ]
+            } ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ ],
+            "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ {
+              "Arguments" : [ ]
+            } ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : null,
+            "DataMapping" : {
+              "Type" : "GetTopicAttributesResponse",
+              "Source" : [ ]
+            },
+            "NextTokenPath" : null
+          }
+        },
+        "Actions" : {
+          "Publish" : {
+            "Request" : {
+              "Method" : "publish",
+              "ClientRequestType" : "com.amazonaws.services.sns.model.PublishRequest",
+              "ClientResponseType" : "com.amazonaws.services.sns.model.PublishResult",
+              "IdentifierMappings" : [ {
+                "Source" : "Arn",
+                "Target" : [ "TopicArn" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "TargetArn"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "Message"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "Subject"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "MessageStructure"
+              }, {
+                "Type" : "java.util.Map<String, com.amazonaws.services.sns.model.MessageAttributeValue>",
+                "Name" : "MessageAttributes"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "Message"
+                } ]
+              }, {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "Subject"
+                }, {
+                  "Type" : "java.lang.String",
+                  "Name" : "Message"
+                } ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : null,
+              "DataMapping" : {
+                "Type" : "com.amazonaws.services.sns.model.PublishResult",
+                "Source" : [ ]
+              },
+              "NextTokenPath" : null
+            }
+          },
+          "SetAttributes" : {
+            "Request" : {
+              "Method" : "setTopicAttributes",
+              "ClientRequestType" : "com.amazonaws.services.sns.model.SetTopicAttributesRequest",
+              "ClientResponseType" : "Void",
+              "IdentifierMappings" : [ {
+                "Source" : "Arn",
+                "Target" : [ "TopicArn" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "AttributeName"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "AttributeValue"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "AttributeName"
+                }, {
+                  "Type" : "java.lang.String",
+                  "Name" : "AttributeValue"
+                } ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "AddPermission" : {
+            "Request" : {
+              "Method" : "addPermission",
+              "ClientRequestType" : "com.amazonaws.services.sns.model.AddPermissionRequest",
+              "ClientResponseType" : "Void",
+              "IdentifierMappings" : [ {
+                "Source" : "Arn",
+                "Target" : [ "TopicArn" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "Label"
+              }, {
+                "Type" : "java.util.List<String>",
+                "Name" : "AWSAccountIds"
+              }, {
+                "Type" : "java.util.List<String>",
+                "Name" : "ActionNames"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "Label"
+                }, {
+                  "Type" : "java.util.List<String>",
+                  "Name" : "AWSAccountIds"
+                }, {
+                  "Type" : "java.util.List<String>",
+                  "Name" : "ActionNames"
+                } ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Delete" : {
+            "Request" : {
+              "Method" : "deleteTopic",
+              "ClientRequestType" : "com.amazonaws.services.sns.model.DeleteTopicRequest",
+              "ClientResponseType" : "Void",
+              "IdentifierMappings" : [ {
+                "Source" : "Arn",
+                "Target" : [ "TopicArn" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "ConfirmSubscription" : {
+            "Request" : {
+              "Method" : "confirmSubscription",
+              "ClientRequestType" : "com.amazonaws.services.sns.model.ConfirmSubscriptionRequest",
+              "ClientResponseType" : "com.amazonaws.services.sns.model.ConfirmSubscriptionResult",
+              "IdentifierMappings" : [ {
+                "Source" : "Arn",
+                "Target" : [ "TopicArn" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "Token"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "AuthenticateOnUnsubscribe"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "Token"
+                } ]
+              }, {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "AuthenticateOnUnsubscribe"
+                }, {
+                  "Type" : "java.lang.String",
+                  "Name" : "Token"
+                } ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : {
+                "Type" : "Subscription",
+                "ParentIdentifierMappings" : [ {
+                  "Source" : "Arn",
+                  "Target" : "TopicArn"
+                } ],
+                "RequestParamMappings" : [ ],
+                "ResponseIdentifierMappings" : [ {
+                  "Source" : [ "SubscriptionArn" ],
+                  "Target" : "Arn"
+                } ],
+                "Path" : null
+              },
+              "DataMapping" : null,
+              "NextTokenPath" : null
+            }
+          },
+          "Subscribe" : {
+            "Request" : {
+              "Method" : "subscribe",
+              "ClientRequestType" : "com.amazonaws.services.sns.model.SubscribeRequest",
+              "ClientResponseType" : "com.amazonaws.services.sns.model.SubscribeResult",
+              "IdentifierMappings" : [ {
+                "Source" : "Arn",
+                "Target" : [ "TopicArn" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "Protocol"
+              }, {
+                "Type" : "java.lang.String",
+                "Name" : "Endpoint"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "Endpoint"
+                }, {
+                  "Type" : "java.lang.String",
+                  "Name" : "Protocol"
+                } ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : {
+                "Type" : "Subscription",
+                "ParentIdentifierMappings" : [ {
+                  "Source" : "Arn",
+                  "Target" : "TopicArn"
+                } ],
+                "RequestParamMappings" : [ ],
+                "ResponseIdentifierMappings" : [ {
+                  "Source" : [ "SubscriptionArn" ],
+                  "Target" : "Arn"
+                } ],
+                "Path" : null
+              },
+              "DataMapping" : null,
+              "NextTokenPath" : null
+            }
+          },
+          "RemovePermission" : {
+            "Request" : {
+              "Method" : "removePermission",
+              "ClientRequestType" : "com.amazonaws.services.sns.model.RemovePermissionRequest",
+              "ClientResponseType" : "Void",
+              "IdentifierMappings" : [ {
+                "Source" : "Arn",
+                "Target" : [ "TopicArn" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "Label"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "Label"
+                } ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      }
+    },
+    "SubResourceGetters" : {
+      "PlatformEndpoint" : {
+        "ParameterType" : "java.lang.String",
+        "ParameterMapping" : {
+          "Source" : "Arn",
+          "Target" : "Arn"
+        },
+        "IdentifierMappings" : [ ]
+      },
+      "PlatformApplication" : {
+        "ParameterType" : "java.lang.String",
+        "ParameterMapping" : {
+          "Source" : "Arn",
+          "Target" : "Arn"
+        },
+        "IdentifierMappings" : [ ]
+      },
+      "Topic" : {
+        "ParameterType" : "java.lang.String",
+        "ParameterMapping" : {
+          "Source" : "Arn",
+          "Target" : "Arn"
+        },
+        "IdentifierMappings" : [ ]
+      }
+    },
+    "Collections" : {
+      "PlatformApplications" : {
+        "Type" : "PlatformApplication",
+        "ListAction" : {
+          "Request" : {
+            "Method" : "listPlatformApplications",
+            "ClientRequestType" : "com.amazonaws.services.sns.model.ListPlatformApplicationsRequest",
+            "ClientResponseType" : "com.amazonaws.services.sns.model.ListPlatformApplicationsResult",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ {
+              "Type" : "java.lang.String",
+              "Name" : "NextToken"
+            } ],
+            "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ ],
+            "TokenPath" : [ "NextToken" ],
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : {
+              "Type" : "PlatformApplication",
+              "ParentIdentifierMappings" : [ ],
+              "RequestParamMappings" : [ ],
+              "ResponseIdentifierMappings" : [ {
+                "Source" : [ "PlatformApplications", "*:com.amazonaws.services.sns.model.PlatformApplication", "PlatformApplicationArn" ],
+                "Target" : "Arn"
+              } ],
+              "Path" : null
+            },
+            "DataMapping" : null,
+            "NextTokenPath" : [ "NextToken" ]
+          }
+        }
+      },
+      "Subscriptions" : {
+        "Type" : "Subscription",
+        "ListAction" : {
+          "Request" : {
+            "Method" : "listSubscriptions",
+            "ClientRequestType" : "com.amazonaws.services.sns.model.ListSubscriptionsRequest",
+            "ClientResponseType" : "com.amazonaws.services.sns.model.ListSubscriptionsResult",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ {
+              "Type" : "java.lang.String",
+              "Name" : "NextToken"
+            } ],
+            "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ {
+              "Arguments" : [ ]
+            } ],
+            "TokenPath" : [ "NextToken" ],
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : {
+              "Type" : "Subscription",
+              "ParentIdentifierMappings" : [ ],
+              "RequestParamMappings" : [ ],
+              "ResponseIdentifierMappings" : [ {
+                "Source" : [ "Subscriptions", "*:com.amazonaws.services.sns.model.Subscription", "TopicArn" ],
+                "Target" : "TopicArn"
+              }, {
+                "Source" : [ "Subscriptions", "*:com.amazonaws.services.sns.model.Subscription", "SubscriptionArn" ],
+                "Target" : "Arn"
+              } ],
+              "Path" : null
+            },
+            "DataMapping" : null,
+            "NextTokenPath" : [ "NextToken" ]
+          }
+        }
+      },
+      "Topics" : {
+        "Type" : "Topic",
+        "ListAction" : {
+          "Request" : {
+            "Method" : "listTopics",
+            "ClientRequestType" : "com.amazonaws.services.sns.model.ListTopicsRequest",
+            "ClientResponseType" : "com.amazonaws.services.sns.model.ListTopicsResult",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ {
+              "Type" : "java.lang.String",
+              "Name" : "NextToken"
+            } ],
+            "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ {
+              "Arguments" : [ ]
+            } ],
+            "TokenPath" : [ "NextToken" ],
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : {
+              "Type" : "Topic",
+              "ParentIdentifierMappings" : [ ],
+              "RequestParamMappings" : [ ],
+              "ResponseIdentifierMappings" : [ {
+                "Source" : [ "Topics", "*:com.amazonaws.services.sns.model.Topic", "TopicArn" ],
+                "Target" : "Arn"
+              } ],
+              "Path" : null
+            },
+            "DataMapping" : null,
+            "NextTokenPath" : [ "NextToken" ]
+          }
+        }
+      }
+    },
+    "Actions" : {
+      "CreateTopic" : {
+        "Request" : {
+          "Method" : "createTopic",
+          "ClientRequestType" : "com.amazonaws.services.sns.model.CreateTopicRequest",
+          "ClientResponseType" : "com.amazonaws.services.sns.model.CreateTopicResult",
+          "IdentifierMappings" : [ ],
+          "AttributeMappings" : [ ],
+          "ParameterMappings" : [ {
+            "Type" : "java.lang.String",
+            "Name" : "Name"
+          } ],
+          "ConstantMappings" : [ ],
+          "ConvenientMethods" : [ {
+            "Arguments" : [ ]
+          }, {
+            "Arguments" : [ {
+              "Type" : "java.lang.String",
+              "Name" : "Name"
+            } ]
+          } ],
+          "TokenPath" : null,
+          "LimitPath" : null
+        },
+        "Response" : {
+          "ResourceMapping" : {
+            "Type" : "Topic",
+            "ParentIdentifierMappings" : [ ],
+            "RequestParamMappings" : [ ],
+            "ResponseIdentifierMappings" : [ {
+              "Source" : [ "TopicArn" ],
+              "Target" : "Arn"
+            } ],
+            "Path" : null
+          },
+          "DataMapping" : null,
+          "NextTokenPath" : null
+        }
+      },
+      "CreatePlatformApplication" : {
+        "Request" : {
+          "Method" : "createPlatformApplication",
+          "ClientRequestType" : "com.amazonaws.services.sns.model.CreatePlatformApplicationRequest",
+          "ClientResponseType" : "com.amazonaws.services.sns.model.CreatePlatformApplicationResult",
+          "IdentifierMappings" : [ ],
+          "AttributeMappings" : [ ],
+          "ParameterMappings" : [ {
+            "Type" : "java.lang.String",
+            "Name" : "Name"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "Platform"
+          }, {
+            "Type" : "java.util.Map<String, String>",
+            "Name" : "Attributes"
+          } ],
+          "ConstantMappings" : [ ],
+          "ConvenientMethods" : [ ],
+          "TokenPath" : null,
+          "LimitPath" : null
+        },
+        "Response" : {
+          "ResourceMapping" : {
+            "Type" : "PlatformApplication",
+            "ParentIdentifierMappings" : [ ],
+            "RequestParamMappings" : [ ],
+            "ResponseIdentifierMappings" : [ {
+              "Source" : [ "PlatformApplicationArn" ],
+              "Target" : "Arn"
+            } ],
+            "Path" : null
+          },
+          "DataMapping" : null,
+          "NextTokenPath" : null
+        }
+      }
+    }
+  }
+}

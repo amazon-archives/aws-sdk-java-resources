@@ -45,6 +45,7 @@
     <module>aws-resources-iam</module>
     <module>aws-resources-glacier</module>
     <module>aws-resources-ec2</module>
+    <module>aws-resources-sns</module>
     <module>aws-resources</module>
   </modules>
 
