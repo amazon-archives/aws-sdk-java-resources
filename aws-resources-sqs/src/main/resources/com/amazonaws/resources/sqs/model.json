@@ -1,0 +1,645 @@
+{
+  "FormatVersion" : {
+    "Major" : 1,
+    "Minor" : 0
+  },
+  "Service" : {
+    "Name" : "SQS",
+    "Abbreviation" : "sqs",
+    "ClientInterface" : "com.amazonaws.services.sqs.AmazonSQS",
+    "ClientImplementation" : "com.amazonaws.services.sqs.AmazonSQSClient",
+    "Resources" : {
+      "Message" : {
+        "Identifiers" : {
+          "ReceiptHandle" : {
+            "Type" : "java.lang.String"
+          },
+          "QueueUrl" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "Attributes" : {
+            "Type" : "java.util.Map<String, String>"
+          },
+          "Body" : {
+            "Type" : "java.lang.String"
+          },
+          "MD5OfMessageAttributes" : {
+            "Type" : "java.lang.String"
+          },
+          "MessageAttributes" : {
+            "Type" : "java.util.Map<String, com.amazonaws.services.sqs.model.MessageAttributeValue>"
+          },
+          "MessageId" : {
+            "Type" : "java.lang.String"
+          },
+          "MD5OfBody" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "References" : {
+          "Queue" : {
+            "Type" : "Queue",
+            "IdentifierMappings" : [ {
+              "Source" : "QueueUrl",
+              "Target" : "Url"
+            } ],
+            "AttributeMappings" : [ ]
+          }
+        },
+        "SubResourceGetters" : { },
+        "Collections" : { },
+        "LoadAction" : null,
+        "Actions" : {
+          "ChangeVisibility" : {
+            "Request" : {
+              "Method" : "changeMessageVisibility",
+              "ClientRequestType" : "com.amazonaws.services.sqs.model.ChangeMessageVisibilityRequest",
+              "ClientResponseType" : "Void",
+              "IdentifierMappings" : [ {
+                "Source" : "QueueUrl",
+                "Target" : [ "QueueUrl" ]
+              }, {
+                "Source" : "ReceiptHandle",
+                "Target" : [ "ReceiptHandle" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.Integer",
+                "Name" : "VisibilityTimeout"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.Integer",
+                  "Name" : "VisibilityTimeout"
+                } ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "Delete" : {
+            "Request" : {
+              "Method" : "deleteMessage",
+              "ClientRequestType" : "com.amazonaws.services.sqs.model.DeleteMessageRequest",
+              "ClientResponseType" : "Void",
+              "IdentifierMappings" : [ {
+                "Source" : "QueueUrl",
+                "Target" : [ "QueueUrl" ]
+              }, {
+                "Source" : "ReceiptHandle",
+                "Target" : [ "ReceiptHandle" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      },
+      "Queue" : {
+        "Identifiers" : {
+          "Url" : {
+            "Type" : "java.lang.String"
+          }
+        },
+        "Attributes" : {
+          "Attributes" : {
+            "Type" : "java.util.Map<String, String>"
+          }
+        },
+        "References" : { },
+        "SubResourceGetters" : {
+          "Message" : {
+            "ParameterType" : "java.lang.String",
+            "ParameterMapping" : {
+              "Source" : "ReceiptHandle",
+              "Target" : "ReceiptHandle"
+            },
+            "IdentifierMappings" : [ {
+              "Source" : "Url",
+              "Target" : "QueueUrl"
+            } ]
+          }
+        },
+        "Collections" : {
+          "DeadLetterSourceQueues" : {
+            "Type" : "Queue",
+            "ListAction" : {
+              "Request" : {
+                "Method" : "listDeadLetterSourceQueues",
+                "ClientRequestType" : "com.amazonaws.services.sqs.model.ListDeadLetterSourceQueuesRequest",
+                "ClientResponseType" : "com.amazonaws.services.sqs.model.ListDeadLetterSourceQueuesResult",
+                "IdentifierMappings" : [ {
+                  "Source" : "Url",
+                  "Target" : [ "QueueUrl" ]
+                } ],
+                "AttributeMappings" : [ ],
+                "ParameterMappings" : [ ],
+                "ConstantMappings" : [ ],
+                "ConvenientMethods" : [ ],
+                "TokenPath" : null,
+                "LimitPath" : null
+              },
+              "Response" : {
+                "ResourceMapping" : {
+                  "Type" : "Queue",
+                  "ParentIdentifierMappings" : [ ],
+                  "RequestParamMappings" : [ ],
+                  "ResponseIdentifierMappings" : [ {
+                    "Source" : [ "QueueUrls", "*" ],
+                    "Target" : "Url"
+                  } ],
+                  "Path" : null
+                },
+                "DataMapping" : null,
+                "NextTokenPath" : null
+              }
+            }
+          }
+        },
+        "LoadAction" : {
+          "Request" : {
+            "Method" : "getQueueAttributes",
+            "ClientRequestType" : "com.amazonaws.services.sqs.model.GetQueueAttributesRequest",
+            "ClientResponseType" : "com.amazonaws.services.sqs.model.GetQueueAttributesResult",
+            "IdentifierMappings" : [ {
+              "Source" : "Url",
+              "Target" : [ "QueueUrl" ]
+            } ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ ],
+            "ConstantMappings" : [ {
+              "Source" : "All",
+              "Target" : [ "AttributeNames", "0" ]
+            } ],
+            "ConvenientMethods" : [ {
+              "Arguments" : [ ]
+            } ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : null,
+            "DataMapping" : {
+              "Type" : "GetQueueAttributesResult",
+              "Source" : [ ]
+            },
+            "NextTokenPath" : null
+          }
+        },
+        "Actions" : {
+          "SetAttributes" : {
+            "Request" : {
+              "Method" : "setQueueAttributes",
+              "ClientRequestType" : "com.amazonaws.services.sqs.model.SetQueueAttributesRequest",
+              "ClientResponseType" : "Void",
+              "IdentifierMappings" : [ {
+                "Source" : "Url",
+                "Target" : [ "QueueUrl" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.util.Map<String, String>",
+                "Name" : "Attributes"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.util.Map<String, String>",
+                  "Name" : "Attributes"
+                } ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "AddPermission" : {
+            "Request" : {
+              "Method" : "addPermission",
+              "ClientRequestType" : "com.amazonaws.services.sqs.model.AddPermissionRequest",
+              "ClientResponseType" : "Void",
+              "IdentifierMappings" : [ {
+                "Source" : "Url",
+                "Target" : [ "QueueUrl" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "Label"
+              }, {
+                "Type" : "java.util.List<String>",
+                "Name" : "AWSAccountIds"
+              }, {
+                "Type" : "java.util.List<String>",
+                "Name" : "Actions"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.util.List<String>",
+                  "Name" : "Actions"
+                }, {
+                  "Type" : "java.lang.String",
+                  "Name" : "Label"
+                }, {
+                  "Type" : "java.util.List<String>",
+                  "Name" : "AWSAccountIds"
+                } ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "SendMessage" : {
+            "Request" : {
+              "Method" : "sendMessage",
+              "ClientRequestType" : "com.amazonaws.services.sqs.model.SendMessageRequest",
+              "ClientResponseType" : "com.amazonaws.services.sqs.model.SendMessageResult",
+              "IdentifierMappings" : [ {
+                "Source" : "Url",
+                "Target" : [ "QueueUrl" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "MessageBody"
+              }, {
+                "Type" : "java.lang.Integer",
+                "Name" : "DelaySeconds"
+              }, {
+                "Type" : "java.util.Map<String, com.amazonaws.services.sqs.model.MessageAttributeValue>",
+                "Name" : "MessageAttributes"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "MessageBody"
+                } ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : null,
+              "DataMapping" : {
+                "Type" : "com.amazonaws.services.sqs.model.SendMessageResult",
+                "Source" : [ ]
+              },
+              "NextTokenPath" : null
+            }
+          },
+          "DeleteMessages" : {
+            "Request" : {
+              "Method" : "deleteMessageBatch",
+              "ClientRequestType" : "com.amazonaws.services.sqs.model.DeleteMessageBatchRequest",
+              "ClientResponseType" : "com.amazonaws.services.sqs.model.DeleteMessageBatchResult",
+              "IdentifierMappings" : [ {
+                "Source" : "Url",
+                "Target" : [ "QueueUrl" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.util.List<com.amazonaws.services.sqs.model.DeleteMessageBatchRequestEntry>",
+                "Name" : "Entries"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              }, {
+                "Arguments" : [ {
+                  "Type" : "java.util.List<com.amazonaws.services.sqs.model.DeleteMessageBatchRequestEntry>",
+                  "Name" : "Entries"
+                } ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : null,
+              "DataMapping" : {
+                "Type" : "com.amazonaws.services.sqs.model.DeleteMessageBatchResult",
+                "Source" : [ ]
+              },
+              "NextTokenPath" : null
+            }
+          },
+          "ReceiveMessages" : {
+            "Request" : {
+              "Method" : "receiveMessage",
+              "ClientRequestType" : "com.amazonaws.services.sqs.model.ReceiveMessageRequest",
+              "ClientResponseType" : "com.amazonaws.services.sqs.model.ReceiveMessageResult",
+              "IdentifierMappings" : [ {
+                "Source" : "Url",
+                "Target" : [ "QueueUrl" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.util.List<String>",
+                "Name" : "AttributeNames"
+              }, {
+                "Type" : "java.util.List<String>",
+                "Name" : "MessageAttributeNames"
+              }, {
+                "Type" : "java.lang.Integer",
+                "Name" : "MaxNumberOfMessages"
+              }, {
+                "Type" : "java.lang.Integer",
+                "Name" : "VisibilityTimeout"
+              }, {
+                "Type" : "java.lang.Integer",
+                "Name" : "WaitTimeSeconds"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : {
+                "Type" : "Message",
+                "ParentIdentifierMappings" : [ {
+                  "Source" : "Url",
+                  "Target" : "QueueUrl"
+                } ],
+                "RequestParamMappings" : [ ],
+                "ResponseIdentifierMappings" : [ {
+                  "Source" : [ "Messages", "*:com.amazonaws.services.sqs.model.Message", "ReceiptHandle" ],
+                  "Target" : "ReceiptHandle"
+                } ],
+                "Path" : [ "Messages", "*:com.amazonaws.services.sqs.model.Message" ]
+              },
+              "DataMapping" : null,
+              "NextTokenPath" : null
+            }
+          },
+          "Delete" : {
+            "Request" : {
+              "Method" : "deleteQueue",
+              "ClientRequestType" : "com.amazonaws.services.sqs.model.DeleteQueueRequest",
+              "ClientResponseType" : "Void",
+              "IdentifierMappings" : [ {
+                "Source" : "Url",
+                "Target" : [ "QueueUrl" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          },
+          "ChangeMessageVisibilityBatch" : {
+            "Request" : {
+              "Method" : "changeMessageVisibilityBatch",
+              "ClientRequestType" : "com.amazonaws.services.sqs.model.ChangeMessageVisibilityBatchRequest",
+              "ClientResponseType" : "com.amazonaws.services.sqs.model.ChangeMessageVisibilityBatchResult",
+              "IdentifierMappings" : [ {
+                "Source" : "Url",
+                "Target" : [ "QueueUrl" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.util.List<com.amazonaws.services.sqs.model.ChangeMessageVisibilityBatchRequestEntry>",
+                "Name" : "Entries"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.util.List<com.amazonaws.services.sqs.model.ChangeMessageVisibilityBatchRequestEntry>",
+                  "Name" : "Entries"
+                } ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : null,
+              "DataMapping" : {
+                "Type" : "com.amazonaws.services.sqs.model.ChangeMessageVisibilityBatchResult",
+                "Source" : [ ]
+              },
+              "NextTokenPath" : null
+            }
+          },
+          "SendMessages" : {
+            "Request" : {
+              "Method" : "sendMessageBatch",
+              "ClientRequestType" : "com.amazonaws.services.sqs.model.SendMessageBatchRequest",
+              "ClientResponseType" : "com.amazonaws.services.sqs.model.SendMessageBatchResult",
+              "IdentifierMappings" : [ {
+                "Source" : "Url",
+                "Target" : [ "QueueUrl" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.util.List<com.amazonaws.services.sqs.model.SendMessageBatchRequestEntry>",
+                "Name" : "Entries"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ ]
+              }, {
+                "Arguments" : [ {
+                  "Type" : "java.util.List<com.amazonaws.services.sqs.model.SendMessageBatchRequestEntry>",
+                  "Name" : "Entries"
+                } ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : {
+              "ResourceMapping" : null,
+              "DataMapping" : {
+                "Type" : "com.amazonaws.services.sqs.model.SendMessageBatchResult",
+                "Source" : [ ]
+              },
+              "NextTokenPath" : null
+            }
+          },
+          "RemovePermission" : {
+            "Request" : {
+              "Method" : "removePermission",
+              "ClientRequestType" : "com.amazonaws.services.sqs.model.RemovePermissionRequest",
+              "ClientResponseType" : "Void",
+              "IdentifierMappings" : [ {
+                "Source" : "Url",
+                "Target" : [ "QueueUrl" ]
+              } ],
+              "AttributeMappings" : [ ],
+              "ParameterMappings" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "Label"
+              } ],
+              "ConstantMappings" : [ ],
+              "ConvenientMethods" : [ {
+                "Arguments" : [ {
+                  "Type" : "java.lang.String",
+                  "Name" : "Label"
+                } ]
+              } ],
+              "TokenPath" : null,
+              "LimitPath" : null
+            },
+            "Response" : null
+          }
+        }
+      }
+    },
+    "SubResourceGetters" : {
+      "Queue" : {
+        "ParameterType" : "java.lang.String",
+        "ParameterMapping" : {
+          "Source" : "Url",
+          "Target" : "Url"
+        },
+        "IdentifierMappings" : [ ]
+      }
+    },
+    "Collections" : {
+      "Queues" : {
+        "Type" : "Queue",
+        "ListAction" : {
+          "Request" : {
+            "Method" : "listQueues",
+            "ClientRequestType" : "com.amazonaws.services.sqs.model.ListQueuesRequest",
+            "ClientResponseType" : "com.amazonaws.services.sqs.model.ListQueuesResult",
+            "IdentifierMappings" : [ ],
+            "AttributeMappings" : [ ],
+            "ParameterMappings" : [ {
+              "Type" : "java.lang.String",
+              "Name" : "QueueNamePrefix"
+            } ],
+            "ConstantMappings" : [ ],
+            "ConvenientMethods" : [ {
+              "Arguments" : [ ]
+            }, {
+              "Arguments" : [ {
+                "Type" : "java.lang.String",
+                "Name" : "QueueNamePrefix"
+              } ]
+            } ],
+            "TokenPath" : null,
+            "LimitPath" : null
+          },
+          "Response" : {
+            "ResourceMapping" : {
+              "Type" : "Queue",
+              "ParentIdentifierMappings" : [ ],
+              "RequestParamMappings" : [ ],
+              "ResponseIdentifierMappings" : [ {
+                "Source" : [ "QueueUrls", "*" ],
+                "Target" : "Url"
+              } ],
+              "Path" : null
+            },
+            "DataMapping" : null,
+            "NextTokenPath" : null
+          }
+        }
+      }
+    },
+    "Actions" : {
+      "GetQueueByName" : {
+        "Request" : {
+          "Method" : "getQueueUrl",
+          "ClientRequestType" : "com.amazonaws.services.sqs.model.GetQueueUrlRequest",
+          "ClientResponseType" : "com.amazonaws.services.sqs.model.GetQueueUrlResult",
+          "IdentifierMappings" : [ ],
+          "AttributeMappings" : [ ],
+          "ParameterMappings" : [ {
+            "Type" : "java.lang.String",
+            "Name" : "QueueName"
+          }, {
+            "Type" : "java.lang.String",
+            "Name" : "QueueOwnerAWSAccountId"
+          } ],
+          "ConstantMappings" : [ ],
+          "ConvenientMethods" : [ {
+            "Arguments" : [ ]
+          }, {
+            "Arguments" : [ {
+              "Type" : "java.lang.String",
+              "Name" : "QueueName"
+            } ]
+          } ],
+          "TokenPath" : null,
+          "LimitPath" : null
+        },
+        "Response" : {
+          "ResourceMapping" : {
+            "Type" : "Queue",
+            "ParentIdentifierMappings" : [ ],
+            "RequestParamMappings" : [ ],
+            "ResponseIdentifierMappings" : [ {
+              "Source" : [ "QueueUrl" ],
+              "Target" : "Url"
+            } ],
+            "Path" : null
+          },
+          "DataMapping" : null,
+          "NextTokenPath" : null
+        }
+      },
+      "CreateQueue" : {
+        "Request" : {
+          "Method" : "createQueue",
+          "ClientRequestType" : "com.amazonaws.services.sqs.model.CreateQueueRequest",
+          "ClientResponseType" : "com.amazonaws.services.sqs.model.CreateQueueResult",
+          "IdentifierMappings" : [ ],
+          "AttributeMappings" : [ ],
+          "ParameterMappings" : [ {
+            "Type" : "java.lang.String",
+            "Name" : "QueueName"
+          }, {
+            "Type" : "java.util.Map<String, String>",
+            "Name" : "Attributes"
+          } ],
+          "ConstantMappings" : [ ],
+          "ConvenientMethods" : [ {
+            "Arguments" : [ ]
+          }, {
+            "Arguments" : [ {
+              "Type" : "java.lang.String",
+              "Name" : "QueueName"
+            } ]
+          } ],
+          "TokenPath" : null,
+          "LimitPath" : null
+        },
+        "Response" : {
+          "ResourceMapping" : {
+            "Type" : "Queue",
+            "ParentIdentifierMappings" : [ ],
+            "RequestParamMappings" : [ ],
+            "ResponseIdentifierMappings" : [ {
+              "Source" : [ "QueueUrl" ],
+              "Target" : "Url"
+            } ],
+            "Path" : null
+          },
+          "DataMapping" : null,
+          "NextTokenPath" : null
+        }
+      }
+    }
+  }
+}

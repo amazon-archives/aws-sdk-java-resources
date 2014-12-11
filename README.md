@@ -3,7 +3,9 @@
 An object-oriented abstraction over the clients from the [AWS SDK for Java][sdk].
 
 Currently in a developer preview mode with support for [Amazon EC2][ec2],
-[AWS Identity and Access Management][iam], [Amazon Glacier][glacier], and [Amazon SNS][sns].
+[AWS Identity and Access Management][iam], [Amazon Glacier][glacier], [Amazon SNS][sns],
+and [Amazon SQS][sqs].
+
 As the library is still at an early stage, there may still be rough edges left until we
 get closer to GA. At this point we're mainly looking to start conversations about the design
 of the API while we simultaneously work on adding support for more AWS services
@@ -236,6 +238,7 @@ Or for the most control you can manually step through the pages of the result se
 [iam]: http://aws.amazon.com/iam/
 [glacier]: http://aws.amazon.com/glacier/
 [sns]: http://aws.amazon.com/sns/
+[sqs]: http://aws.amazon.com/sqs/
 [releases]: https://github.com/awslabs/aws-sdk-java-resources/releases
 [api-docs]: http://docs.aws.amazon.com/AWSJavaSDKResources/latest/
 [issues]: https://github.com/awslabs/aws-sdk-java-resources/issues

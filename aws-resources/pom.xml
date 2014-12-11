@@ -39,6 +39,12 @@
       <version>${project.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>com.amazonaws.resources</groupId>
+      <artifactId>aws-resources-sqs</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
   </dependencies>
   
 </project>
